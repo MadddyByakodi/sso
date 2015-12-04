@@ -1,6 +1,7 @@
 /* eslint no-console: 0*/
 const gulp = require('gulp');
 const del = require('del');
+const runSequence = require('run-sequence');
 const plugin = require('gulp-load-plugins')();
 
 gulp.task('develop', function develop() {
@@ -9,7 +10,7 @@ gulp.task('develop', function develop() {
     ext: 'js',
 
     // tasks: plugin.livereload.changed,
-    ignore: ['node_modules/**', 'bower_components/**', 'src/**'],
+    ignore: ['node_modules/**', 'bower_components/**', 'src/**', 'dist/**'],
     nodeArgs: ['--debug'],
     env: {NODE_ENV: 'development' },
   });
@@ -18,6 +19,7 @@ gulp.task('develop', function develop() {
 // Jade Templates
 gulp.task('html', function html() {
   return gulp.src('src/jade/**/*.jade')
+    .pipe(plugin.changed('dist/html', {extension: '.html'}))
     .pipe(
       plugin.jade({
         pretty: true,
@@ -26,13 +28,14 @@ gulp.task('html', function html() {
         message: 'Jade Error: <%= error.message %>',
       }))
     )
-    .pipe(gulp.dest('dist/html/'))
+    .pipe(gulp.dest('dist/html'))
     .pipe(plugin.notify({ message: 'Jade Compilation complete' }));
 });
 
 // Images
 gulp.task('images', function images() {
   return gulp.src('src/images/**/*')
+    .pipe(plugin.changed('dist/images', {extension: '.svg'}))
     .pipe(plugin.cache(plugin.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/images'))
     .pipe(plugin.notify({ message: 'Images task complete' }));
@@ -55,10 +58,6 @@ gulp.task('styles', function styles() {
 // Scripts
 gulp.task('scripts', function scripts() {
   return gulp.src('src/scripts/**/*.js')
-    .pipe(plugin.eslint())
-    .pipe(plugin.eslint.format())
-    .pipe(plugin.jscs())
-    .pipe(plugin.jscs.reporter())
     .pipe(plugin.sourcemaps.init())
     .pipe(plugin.concat('app.js'))
     .pipe(plugin.babel({
@@ -80,7 +79,7 @@ gulp.task('scripts', function scripts() {
 
 // Scripts
 gulp.task('lint', function lint() {
-  return gulp.src(['app/**/*.js', '*.js'])
+  return gulp.src(['app/**/*.js', '*.js', 'src/scripts/**/*.js'])
     .pipe(plugin.eslint())
     .pipe(plugin.eslint.format())
     .pipe(plugin.jscs())
@@ -108,7 +107,7 @@ gulp.task('watch', function watch() {
   gulp.watch('src/scripts/**/*.js', ['scripts']);
 
   // Watch node server files
-  gulp.watch(['app/**/*.js', '*.js'], ['lint']);
+  gulp.watch(['app/**/*.js', '*.js', 'src/scripts/**/*.js'], ['lint']);
 
   // Create LiveReload server
   plugin.livereload.listen();
@@ -117,5 +116,10 @@ gulp.task('watch', function watch() {
   gulp.watch('dist/**').on('change', plugin.livereload.changed);
 });
 
-gulp.task('build:dev', ['html', 'styles', 'scripts', 'images']);
-gulp.task('default', ['develop', 'build:dev', 'watch']);
+gulp.task('build:dev', function buildSeq(cb) {
+  runSequence('lint', 'clean', ['styles', 'scripts', 'images'], 'html', cb);
+});
+
+gulp.task('default', function dev(cb) {
+  runSequence('develop', 'build:dev', 'watch', cb);
+});
