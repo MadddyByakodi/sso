@@ -29,7 +29,11 @@ gulp.task('html', function html() {
       }))
     )
     .pipe(gulp.dest('dist/html'))
-    .pipe(plugin.notify({ message: 'Jade Compilation complete' }));
+    .pipe(plugin.notify({
+      onLast: true,
+      title: 'Jade Compilation',
+      message: 'all jade files compiled',
+    }));
 });
 
 // Images
@@ -38,7 +42,11 @@ gulp.task('images', function images() {
     .pipe(plugin.changed('dist/images', {extension: '.svg'}))
     .pipe(plugin.cache(plugin.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/images'))
-    .pipe(plugin.notify({ message: 'Images task complete' }));
+    .pipe(plugin.notify({
+      onLast: true,
+      title: 'Image Minification',
+      message: 'Image minification done!',
+    }));
 });
 
 // Styles
@@ -52,7 +60,11 @@ gulp.task('styles', function styles() {
     .pipe(plugin.minifyCss())
     .pipe(plugin.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/styles'))
-    .pipe(plugin.notify({ message: 'Styles task complete' }));
+    .pipe(plugin.notify({
+      onLast: true,
+      title: 'SASS Compilation',
+      message: 'style build complete',
+    }));
 });
 
 // Scripts
@@ -74,7 +86,11 @@ gulp.task('scripts', function scripts() {
     }))
     .pipe(plugin.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/scripts'))
-    .pipe(plugin.notify({ message: 'Scripts task complete' }));
+    .pipe(plugin.notify({
+      onLast: true,
+      title: 'Scripts Compilation',
+      message: 'script build completed',
+    }));
 });
 
 // Scripts
@@ -84,7 +100,11 @@ gulp.task('lint', function lint() {
     .pipe(plugin.eslint.format())
     .pipe(plugin.jscs())
     .pipe(plugin.jscs.reporter())
-    .pipe(plugin.notify({ message: 'Lint server code task complete' }));
+    .pipe(plugin.notify({
+      onLast: true,
+      title: 'Lint Notification',
+      message: 'code linting for error completed',
+    }));
 });
 
 // Clean

@@ -2,8 +2,8 @@ const config = {
   development: {
     OAUTH_SERVER: process.env.OAUTH_SERVER || 'http://localhost:3001',
     OAUTH_ENDPOINT: process.env.OAUTH_ENDPOINT || '/token',
-    OAUTH_CLIENT: process.env.OAUTH_CLIENT || 'fmQniRjBba0smlKKcrNoHPXA7UidmYhL.quetzalapp',
-    OAUTH_SECRET: process.env.OAUTH_SECRET || 'qpOENjMwsK7nN0Ib336zTjLxcerEeitn48h7unVwmzvEBbMRrGsFS4Tq7g2ktE49',
+    OAUTH_CLIENT: process.env.OAUTH_CLIENT || 'L13j99oJx6a5I2073m3Me98bt1BOJaUq.quetzalapp',
+    OAUTH_SECRET: process.env.OAUTH_SECRET || '6bh8cD2Ox9MUBQMlLHSB3taxxZspUVZZZKfdzjjyhCb9YVqib2dxHFBlUtlgpnNp',
   },
   production: {
     OAUTH_SERVER: process.env.OAUTH_SERVER || 'testapi.quezx.com',
