@@ -1,0 +1,62 @@
+{
+  "name": "qui",
+  "version": "0.0.1",
+  "description": "Front end Web app to consume quarc api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint .",
+    "validate": "npm ls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/quezx/qui.git"
+  },
+  "keywords": [
+    "webapp",
+    "angular-app",
+    "frontend",
+    "oauth2"
+  ],
+  "author": "Yogesh Choudhary <yogesum@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quezx/qui/issues"
+  },
+  "homepage": "https://github.com/quezx/qui#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.18",
+    "del": "^2.1.0",
+    "eslint-config-airbnb": "^1.0.2",
+    "eslint-config-angular": "^0.4.0",
+    "eslint-plugin-angular": "^0.14.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-cache": "^0.4.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^1.1.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-jscs": "^3.0.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "precommit-hook": "^3.0.0"
+  },
+  "pre-commit": [
+    "lint",
+    "validate",
+    "test"
+  ]
+}

@@ -1,0 +1,10 @@
+//- navbar
+.app-header.navbar(ng-include="'html/blocks/header.html'")
+//- menu
+.app-aside.hidden-xs.b-r(ng-include="'html/blocks/aside.html'", class='{{App.app.settings.asideColor}}')
+
+content
+  .app-content
+    div(ui-butterbar='')
+    a.off-screen-toggle.hide(href='', ui-toggle-class='off-screen', data-target='.app-aside')
+    .app-content-body.fade-in-up(ui-view='')

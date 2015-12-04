@@ -1,0 +1,19 @@
+.container.w-xl.w-auto-xs(ng-init='app.settings.container = false;')
+  a.navbar-brand.block.m-t(href='')
+    img(src='/images/logo.svg', alt='{{App.app.name}}')
+  .m-b-xs
+    .wrapper.text-center: strong Input your email to reset your password
+
+    form(name='reset' ng-init='isCollapsed=true')
+      .list-group.list-group-sm.m-b-md
+        .list-group-item
+          input.form-control.no-border(type='email' placeholder='Email' ng-model='email' required)
+
+      button.btn.btn-lg.btn-primary.btn-block(type='submit' ng-disabled='reset.$invalid' ng-click='isCollapsed = !isCollapsed') Send
+
+    .m-t(collapse='isCollapsed')
+      .alert.alert-success
+        p A reset link sent to your email address
+          a.btn.btn-sm.btn-success(ui-sref='access.signin') Sign in
+
+  .text-center(ng-include="'html/blocks/footer.html'")

@@ -1,0 +1,36 @@
+//- navbar header
+.navbar-header(class='{{App.app.settings.navbarHeaderColor}}')
+  button.pull-right.visible-xs.dk(ui-toggle-class='show', data-target='.navbar-collapse')
+    i.fa.fa-cog
+  button.pull-right.visible-xs(ui-toggle-class='off-screen', data-target='.app-aside', ui-scroll='app')
+    i.fa.fa-align-justify
+  //- brand
+  a.navbar-brand.text-lt(href='/')
+    img.w-sm(src='/images/logo-white.svg', alt='{{App.app.name}}')
+    span.hide.hidden-folded.m-l-xs {{App.app.name}}
+//- navbar collapse
+.collapse.pos-rlt.navbar-collapse.box-shadow(class='{{App.app.settings.navbarCollapseColor}}')
+  //- buttons
+  .nav.navbar-nav.hidden-xs
+    a.btn.no-shadow.navbar-btn(href='', ng-click='App.app.settings.asideFolded = !App.app.settings.asideFolded')
+      i.fa.fa-fw(class="{{App.app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}}")
+    a.btn.no-shadow.navbar-btn(href='', ui-toggle-class='show', target='#aside-user')
+      i.icon-user.fa-fw
+  ul.nav.navbar-nav.navbar-right
+    li: a: i.fa.fa-lg.fa-comments
+
+    li.dropdown(dropdown='')
+      a.dropdown-toggle.clear(href='', dropdown-toggle='')
+        span.hidden-sm.hidden-md {{App.userinfo().name}}
+        b.caret.m-r-xs.m-l-xs
+        i.fa.fa-lg.fa-user
+
+      //- dropdown
+      ul.dropdown-menu.animated.fadeInRight.w
+        li
+          a(ui-sref='app.help')
+            span.label.bg-info.pull-right new
+            | Help
+        li.divider
+        li
+          a(ui-sref='access.signin') Logout

@@ -1,0 +1,15 @@
+.container.w-xxl.w-auto-xs(ng-init='app.settings.container = false;')
+
+  .text-center.m-b-lg
+    h1.text-shadow.text-white 404
+
+  .list-group.bg-info.auto.m-b-sm.m-b-lg
+    a.list-group-item(href="/")
+      i.fa.fa-chevron-right.text-muted
+      i.fa.fa-fw.fa-mail-forward.m-r-xs Goto application
+
+    a.list-group-item(ui-sref='access.signin')
+      i.fa.fa-chevron-right.text-muted
+      i.fa.fa-fw.fa-sign-in.m-r-xs Sign in
+
+  .text-center(ng-include="'html/blocks/footer.html'")

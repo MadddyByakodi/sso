@@ -1,0 +1,34 @@
+{
+  "name": "qui",
+  "version": "0.0.1",
+  "authors": [
+    "Yogesh Choudhary <yogesum@gmail.com>"
+  ],
+  "description": "node angular front-end web app for quarc project",
+  "keywords": [
+    "webapp",
+    "angular-app",
+    "frontend",
+    "oauth2"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/quezx/qui#readme",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "animate.css": "animate-css#~3.4.0",
+    "bootstrap-sass": "~3.3.6"
+  },
+  "dependencies": {
+    "font-awesome": "fontawesome#~4.5.0",
+    "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release"
+  }
+}

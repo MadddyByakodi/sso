@@ -1,0 +1,9 @@
+{
+  "preset": "airbnb",
+  "safeContextKeyword": ["_this", "vm"],
+  "requireCamelCaseOrUpperCaseIdentifiers": {
+    "ignoreProperties": true,
+    "strict": false
+  },
+  "excludeFiles": ["node_modules/**", "bower_components/**"]
+}
