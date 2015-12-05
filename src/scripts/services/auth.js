@@ -46,6 +46,23 @@ angular.module('qui')
           });
       };
 
+      authService.logout = function logout() {
+        const url = '/api/logout';
+        return $http
+          .post(url, {access_token: Session.getAccessToken()})
+          .then(
+            function logoutSuccess(response) {
+              // Destroy Session data
+              Session.destroy();
+              return response.data;
+            },
+
+            function logoutError(response) {
+              return $q.reject(response.data);
+            }
+          );
+      };
+
       authService.setSessionData = function getUserInfo() {
         return $http
           .get(APP.apiServer + '/userinfo')

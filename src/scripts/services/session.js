@@ -13,7 +13,7 @@ angular.module('qui')
       };
 
       sessionService.destroy = function destroy() {
-        $window.sessionStorage.oauth = null;
+        $window.sessionStorage.clear();
       };
 
       sessionService.isAuthenticated = function isAuthenticated() {

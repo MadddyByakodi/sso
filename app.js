@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.post('/api/login', function login(req, res) {
   const options = {
-    url: config.OAUTH_SERVER + config.OAUTH_ENDPOINT,
+    url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     json: true,
     auth: {
       user: config.OAUTH_CLIENT,
@@ -34,7 +34,7 @@ app.post('/api/login', function login(req, res) {
 
 app.post('/api/refresh', function login(req, res) {
   const options = {
-    url: config.OAUTH_SERVER + config.OAUTH_ENDPOINT,
+    url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     json: true,
     auth: {
       user: config.OAUTH_CLIENT,
@@ -47,6 +47,22 @@ app.post('/api/refresh', function login(req, res) {
   };
 
   request.post(options, function handleRes(err, apires, body) {
+    if (err) return res.status(500).json(err);
+    return res.status(apires.statusCode).json(body);
+  });
+});
+
+app.post('/api/logout', function login(req, res) {
+  const options = {
+    url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}/${req.body.access_token}`,
+    json: true,
+    auth: {
+      user: config.OAUTH_CLIENT,
+      pass: config.OAUTH_SECRET,
+    },
+  };
+
+  request.del(options, function handleRes(err, apires, body) {
     if (err) return res.status(500).json(err);
     return res.status(apires.statusCode).json(body);
   });
