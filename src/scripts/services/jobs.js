@@ -8,9 +8,10 @@ angular.module('qui')
     function Jobs($http, $q, $log, APP, Session) {
       const jobsService = {};
 
-      jobsService.get = function getJobs() {
+      jobsService.get = function getJobs(params) {
+        const url = `${APP.apiServer}/quarc/client/${Session.read('userinfo').id}/postedjobs`;
         return $http
-          .get(APP.apiServer + '/quarc/client/' + Session.read('userinfo').id + '/postedjobs')
+          .get(url, {params: params})
           .then(
             function successJobs(response) {
               $log.info(response);

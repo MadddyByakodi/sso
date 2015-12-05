@@ -1,4 +1,4 @@
-div(ng-controller='JobsController as Job')
+div(ng-controller='JobsController as Job' before-bottom='Job.loadJobs()')
       .wrapper-md.bg-light.b-b
         button.btn.btn-primary.btn-addon.pull-right.m-t-n-xs(type='button', tooltip='Create new job Position', ng-click='Job.add()')
           i.fa.fa-plus
@@ -14,5 +14,16 @@ div(ng-controller='JobsController as Job')
           tbody
             tr.bg-white(ng-repeat='job in Job.jobs')
               td.wrapper-md {{job.role}}
-              td.wrapper-md(class="text-{{color[job.JobStatus.name]}}-dker") {{job.JobStatus.name}}
-              td.wrapper-md {{job.JobApplications[0].num_appls}}
+              td.wrapper-md(class="text-{{color[job.job_status]}}-dker") {{job.job_status}}
+              td.wrapper-md {{job.total_applicants}}
+          tfoot
+            tr
+              td
+                button.pull-right.btn.active.m-t-xs(ng-if="Job.ui.loading")
+                  i.fa.fa-circle-o-notch.fa-spin
+                  strong &nbsp;Loading
+                button.pull-right.btn.btn-primary.m-t-xs(ng-if="Job.ui.lazyLoad" ng-click="Job.loadJobs()")
+                  i.fa.fa-circle-o-notch
+                  strong &nbsp;Load More
+              td
+              td
