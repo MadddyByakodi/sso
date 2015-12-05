@@ -4,6 +4,15 @@ div(ng-controller='JobsController as Job')
           i.fa.fa-plus
           | Add
         h1.m-n.font-thin.h3 Positions
-      .hbox.hbox-auto-xs.hbox-auto-sm
-        .col.wrapper-md
-          .clearfix.m-b
+      .col-lg-10.col-lg-offset-1.wrapper-md
+        table.table.m-b-none(ng-init="color={'High Priority':'success','Open': 'info', 'Hold': 'warning', 'Closed': 'danger'}")
+          thead
+            tr
+              th Positions
+              th(style='width:20%;') Status
+              th(style='width:20%;') CVs in Pipeline
+          tbody
+            tr.bg-white(ng-repeat='job in Job.jobs')
+              td.wrapper-md {{job.role}}
+              td.wrapper-md(class="text-{{color[job.JobStatus.name]}}-dker") {{job.JobStatus.name}}
+              td.wrapper-md {{job.JobApplications[0].num_appls}}

@@ -32,6 +32,26 @@ app.post('/api/login', function login(req, res) {
   });
 });
 
+app.post('/api/refresh', function login(req, res) {
+  const options = {
+    url: config.OAUTH_SERVER + config.OAUTH_ENDPOINT,
+    json: true,
+    auth: {
+      user: config.OAUTH_CLIENT,
+      pass: config.OAUTH_SECRET,
+    },
+    body: {
+      grant_type: 'refresh_token',
+      refresh_token: req.body.refresh_token,
+    },
+  };
+
+  request.post(options, function handleRes(err, apires, body) {
+    if (err) return res.status(500).json(err);
+    return res.status(apires.statusCode).json(body);
+  });
+});
+
 app.get('/*', function serveApp(req, res) {
   res.sendFile('index.html', {root: __dirname + '/dist/html'});
 });

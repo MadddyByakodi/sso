@@ -33,7 +33,6 @@ angular.module('qui')
       };
 
       authService.refreshToken = function refreshToken() {
-        Session.destroy('oauth');
         return $http
           .post('/api/refresh', {refresh_token: Session.read('oauth').refresh_token})
           .then(function tokenRefreshed(response) {
@@ -42,6 +41,7 @@ angular.module('qui')
           },
 
           function tokenRefreshError(response) {
+            Session.destroy('oauth');
             return $q.reject(response.data);
           });
       };
