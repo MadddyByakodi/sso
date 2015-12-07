@@ -22,33 +22,33 @@
 	}
 }
 
-.btn-primary{
-	@include button-variant(#fff, $brand-primary, $brand-primary);
-}
+// .btn-primary{
+// 	@include button-variant(#fff, $brand-primary, $brand-primary);
+// }
 
-.btn-success{
-	@include button-variant(#fff, $brand-success, $brand-success);
-}
+// .btn-success{
+// 	@include button-variant(#fff, $brand-success, $brand-success);
+// }
 
-.btn-info{
-	@include button-variant(#fff, $brand-info, $brand-info);
-}
+// .btn-info{
+// 	@include button-variant(#fff, $brand-info, $brand-info);
+// }
 
-.btn-warning{
-	@include button-variant(#fff, $brand-warning, $brand-warning);
-}
+// .btn-warning{
+// 	@include button-variant(#fff, $brand-warning, $brand-warning);
+// }
 
-.btn-danger{
-	@include button-variant(#fff, $brand-danger, $brand-danger);
-}
+// .btn-danger{
+// 	@include button-variant(#fff, $brand-danger, $brand-danger);
+// }
 
-.btn-dark{
-	@include button-variant(#fff, $brand-dark, $brand-dark);
-}
+// .btn-dark{
+// 	@include button-variant(#fff, $brand-dark, $brand-dark);
+// }
 
-.btn-black{
-	@include button-variant(#fff, $brand-black, $brand-black);
-}
+// .btn-black{
+// 	@include button-variant(#fff, $brand-black, $brand-black);
+// }
 
 .btn-icon{
 	padding: 0 !important;
@@ -59,7 +59,7 @@
 		top: -1px;
 		position: relative;
 		line-height: 34px;
-	}	
+	}
 	&.btn-sm{
 		width: 30px;
 		height: 30px;

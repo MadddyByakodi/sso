@@ -5,7 +5,7 @@ angular.module('qui')
     '$q',
     'Auth',
     'AUTH_EVENTS',
-    function signinCtrl($rootScope, $state, $q, Auth, AUTH_EVENTS) {
+    function SigninCtrl($rootScope, $state, $q, Auth, AUTH_EVENTS) {
       const vm = this;
       vm.user = {};
       vm.authError = null;
@@ -29,7 +29,7 @@ angular.module('qui')
           .then(function setSession() {
             return Auth.setSessionData()
               .then(function openApp() {
-                return $state.go('app.jobs');
+                return $state.go('app.jobs.list');
               });
           });
       };

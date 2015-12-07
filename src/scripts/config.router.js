@@ -42,8 +42,21 @@ angular.module('qui')
           templateUrl: 'html/dashboard.html',
         })
         .state('app.jobs', {
+          abstract: true,
           url: '/jobs',
           templateUrl: 'html/jobs.html',
+        })
+        .state('app.jobs.list', {
+          url: '/',
+          templateUrl: 'html/jobs.list.html',
+        })
+        .state('app.jobs.manage', {
+          url: '/manage/{jobId}',
+          templateUrl: 'html/jobs.manage.html',
+        })
+        .state('app.jobs.view', {
+          url: '/{jobId: [0-9]{1,5}}',
+          templateUrl: 'html/jobs.view.html',
         });
     },
   ]);

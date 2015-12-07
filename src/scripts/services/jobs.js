@@ -25,6 +25,23 @@ angular.module('qui')
           );
       };
 
+      jobsService.getApplicants = function getJobs(jobId, params) {
+        const url = `${APP.apiServer}/quarc/client/${Session.read('userinfo').id}/postedjobs/${jobId}/appliedapplicants`;
+        return $http
+          .get(url, {params: params})
+          .then(
+            function successJobs(response) {
+              $log.info(response);
+              return response.data;
+            },
+
+            function errorJobs(response) {
+              $log.error(response);
+              return $q.reject(response.data);
+            }
+          );
+      };
+
       return jobsService;
     },
   ]);

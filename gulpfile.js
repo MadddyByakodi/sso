@@ -57,7 +57,6 @@ gulp.task('styles', function styles() {
     .pipe(plugin.autoprefixer('last 2 version'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(plugin.rename({ suffix: '.min' }))
-    .pipe(plugin.minifyCss())
     .pipe(plugin.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(plugin.notify({
@@ -80,7 +79,6 @@ gulp.task('scripts', function scripts() {
     }))
     .pipe(gulp.dest('dist/scripts'))
     .pipe(plugin.rename({ suffix: '.min' }))
-    .pipe(plugin.uglify())
     .on('error', plugin.notify.onError({
       message: 'Uglify Error: <%= error.message %>',
     }))

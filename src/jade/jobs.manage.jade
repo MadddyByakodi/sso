@@ -1,0 +1,24 @@
+div(ng-controller='JobsManageController as Applicants' before-bottom='Applicants.loadApplicants()')
+  .wrapper-md.bg-light.b-b
+    h1.m-n.font-thin.h3
+      | Positions /
+      a(ui-sref='app.jobs.view({jobId: Applicants.applicants[0].id})')  {{Applicants.applicants[0].role}}
+      |  / Manage
+  .col-lg-10.col-lg-offset-1.wrapper-md
+    .m-b-md.hbox(ng-repeat='applicant in Applicants.applicants' ng-if='$index > 0')
+      .col.bg-white
+        .col-md-9.no-padder
+          .tl-content.panel.padder.b-r.w-full.w-auto-xs
+            .m-b-sm: a(ui-sref='app.applicants.view({applicantId: applicant.id})'): strong.text-primary-lt {{applicant.name}}
+            .panel-body.pull-in.b-t
+              .col-xs-4: i.fa.fa-bookmark  {{applicant.exp_designation}}
+              .col-xs-4: i.fa.fa-graduation-cap  {{applicant.edu_degree}}
+              .col-xs-4: i.fa.fa-inr  {{applicant.exp_salary}}&nbsp;Lakhs
+              .col-xs-4: i.fa.fa-briefcase  {{applicant.exp_employer}}
+              .col-xs-4: i.fa.fa-line-chart  {{applicant.total_exp}}&nbsp;Years
+              .col-xs-4: i.fa.fa-map-marker  {{applicant.exp_location}}
+        .col-md-3
+          .col-xs-3.col-md-12.wrapper-xs: span.pull-right.m-t-xs {{applicant.created_on | date: 'h:mm a'}}
+          .col-xs-6.col-md-12.wrapper-xs: button.pull-right.btn.btn-info {{applicant.state_name}}
+          .col-xs-3.col-md-12.wrapper-xs: i.btn.pull-right.text-success-dker.fa.fa-lg.fa-download
+
