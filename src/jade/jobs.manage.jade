@@ -9,17 +9,18 @@ div(ng-controller='JobsManageController as Applicants' before-bottom='Applicants
         .col-xs-6.col-md-9.no-padder
           .padder.w-full.w-auto-xs
               label.i-checks.m-b-none
-                input(type='checkbox' ng-model='applicant.download')
+                input(type='checkbox' ng-click='Applicants.setChecked(Applicants.checkAll)' ng-model='Applicants.checkAll')
                 i
-                | Check All
-        .col-xs-6.col-md-3.no-padder: button.pull-right.btn.btn-success.m-t-n-sm Download CV(s)
+                | {{Applicants.checkAll ? 'Des':'S'}}elect All
+        .col-xs-6.col-md-3.no-padder
+          button.pull-right.btn.btn-success.m-t-n-sm(ng-if='Applicants.getApplicants(Applicants.applicants, {checked: true}, "id").length>0') Download CV(s)
     .m-b-md.hbox(ng-repeat='applicant in Applicants.applicants' ng-if='$index > 0')
       .col.bg-white
         .col-xs-12.col-md-9.no-padder
           .tl-content.panel.padder.b-r.w-full.w-auto-xs
             .m-b-sm
               label.i-checks.m-b-none
-                input(type='checkbox' ng-model='applicant.download')
+                input(type='checkbox' ng-model='applicant.checked')
                 i
               a(ui-sref='app.applicants.view({applicantId: applicant.id})')
                 strong.text-primary-lt  {{applicant.name}}
