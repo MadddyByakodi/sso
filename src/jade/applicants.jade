@@ -15,11 +15,11 @@
     tfoot
       tr
         td
-          button.pull-right.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
+        td
+          button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
             i.fa.fa-circle-o-notch.fa-spin
             strong &nbsp;Loading
-          button.pull-right.btn.btn-primary.m-t-xs(ng-if="Applicant.ui.lazyLoad" ng-click="Applicant.loadApplicants()")
-            i.fa.fa-circle-o-notch
+          button.pull-left.btn.btn-primary.m-t-xs(ng-if="Applicant.ui.lazyLoad" ng-click="Applicant.loadApplicants()")
+            i.fa.fa-plus-circle
             strong &nbsp;Load More
-        td
         td
