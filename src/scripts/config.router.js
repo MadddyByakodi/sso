@@ -57,6 +57,10 @@ angular.module('qui')
         .state('app.jobs.view', {
           url: '/{jobId: [0-9]{1,5}}',
           templateUrl: 'html/jobs.view.html',
+        })
+        .state('app.applicants', {
+          url: '/applicants',
+          templateUrl: 'html/applicants.html',
         });
     },
   ]);
