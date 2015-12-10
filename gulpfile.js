@@ -55,6 +55,7 @@ gulp.task('styles', function styles() {
     .pipe(plugin.sourcemaps.init())
     .pipe(plugin.sass().on('error', plugin.sass.logError))
     .pipe(plugin.autoprefixer('last 2 version'))
+    .pipe(plugin.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(plugin.rename({ suffix: '.min' }))
     .pipe(plugin.sourcemaps.write('.'))
@@ -77,11 +78,9 @@ gulp.task('scripts', function scripts() {
     .on('error', plugin.notify.onError({
       message: 'Babel Error: <%= error.message %>',
     }))
+    .pipe(plugin.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/scripts'))
     .pipe(plugin.rename({ suffix: '.min' }))
-    .on('error', plugin.notify.onError({
-      message: 'Uglify Error: <%= error.message %>',
-    }))
     .pipe(plugin.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/scripts'))
     .pipe(plugin.notify({

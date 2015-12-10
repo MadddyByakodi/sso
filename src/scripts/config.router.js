@@ -62,9 +62,9 @@ angular.module('qui')
           url: '/applicants',
           templateUrl: 'html/applicants.html',
         })
-        .state('app.interviews', {
-          url: '/interviews',
-          templateUrl: 'html/interviews.html',
+        .state('app.calendar', {
+          url: '/calendar',
+          templateUrl: 'html/calendar.html',
         });
     },
   ]);

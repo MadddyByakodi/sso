@@ -26,7 +26,9 @@
     "angular-ui-router": "~0.2.15",
     "animate.css": "animate-css#~3.4.0",
     "bootstrap-sass": "~3.3.6",
-    "angular-bootstrap": "~0.14.3"
+    "angular-bootstrap": "~0.14.3",
+    "angular-bootstrap-calendar": "~0.17.6",
+    "moment": "~2.10.6"
   },
   "dependencies": {
     "font-awesome": "fontawesome#~4.5.0",
