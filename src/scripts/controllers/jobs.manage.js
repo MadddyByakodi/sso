@@ -3,8 +3,7 @@ angular.module('qui')
     'Jobs',
     '$stateParams',
     '$filter',
-    '$uibModal',
-    function JobsManageCtrl(Jobs, $stateParams, $filter, $uibModal) {
+    function JobsManageCtrl(Jobs, $stateParams, $filter) {
       const vm = this;
       vm.applicants = []; // collection of applicants
       vm.ui = {lazyLoad: true, loading: false}; // ui states
@@ -42,25 +41,6 @@ angular.module('qui')
       vm.setChecked = function setChecked(state) {
         angular.forEach(vm.applicants, function checked(value, key) {
           vm.applicants[key].checked = state;
-        });
-      };
-
-      vm.download = function download(ids) {
-        // ApplicantIds is array contatining applicant id to download cvs
-        const modalInstance = $uibModal.open({
-          templateUrl: 'html/modal.download.cv.html',
-          controller: 'DownloadCVController',
-          controllerAs: 'DownloadCV',
-          size: 'sm',
-          resolve: {
-            ApplicantIds: function ApplicantIds() {
-              return ids;
-            },
-          },
-        });
-
-        modalInstance.result.then(function success() {
-          // console.log(type);
         });
       };
     },

@@ -1,9 +1,10 @@
 angular.module('qui')
   .controller('AppController', [
-    '$scope',
     '$window',
+    '$uibModal',
     'Session',
-    function AppCtrl($scope, $window, Session) {
+    'User',
+    function AppCtrl($window, $uibModal, Session, User) {
       const vm = this;
 
       // add 'ie' classes to html
@@ -28,8 +29,45 @@ angular.module('qui')
         },
       };
 
-      vm.userinfo = function userinfo() {
-        return Session.read('userinfo');
+      vm.userinfo = User.userinfo;
+      vm.states = User.states;
+
+      vm.downloadApplicant = function downloadApplicant(ids) {
+        // ApplicantIds is array contatining applicant id to download cvs
+        const modalInstance = $uibModal.open({
+          templateUrl: 'html/modal.download.cv.html',
+          controller: 'DownloadCVController',
+          controllerAs: 'DownloadCV',
+          size: 'sm',
+          resolve: {
+            ApplicantIds: function ApplicantIds() {
+              return ids;
+            },
+          },
+        });
+
+        modalInstance.result.then(function success() {
+          // console.log(type);
+        });
+      };
+
+      vm.changeState = function changeState(applicant, stateId) {
+        // ApplicantIds is array contatining applicant id to download cvs
+        const modalInstance = $uibModal.open({
+          templateUrl: 'html/modal.change.state.html',
+          controller: 'ChangeStateController',
+          controllerAs: 'ChangeState',
+          bindToController: 'true',
+          size: 'md',
+          resolve: {
+            applicant: applicant,
+            state_id: stateId,
+          },
+        });
+
+        modalInstance.result.then(function success() {
+          // console.log(type);
+        });
       };
 
       function isSmartDevice() {

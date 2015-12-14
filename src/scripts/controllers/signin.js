@@ -2,10 +2,11 @@ angular.module('qui')
   .controller('SigninFormController', [
     '$rootScope',
     '$state',
+    '$window',
     '$q',
     'Auth',
     'AUTH_EVENTS',
-    function SigninCtrl($rootScope, $state, $q, Auth, AUTH_EVENTS) {
+    function SigninCtrl($rootScope, $state, $window, $q, Auth, AUTH_EVENTS) {
       const vm = this;
       vm.user = {};
       vm.authError = null;
@@ -29,7 +30,8 @@ angular.module('qui')
           .then(function setSession() {
             return Auth.setSessionData()
               .then(function openApp() {
-                return $state.go('app.jobs.list');
+                $window.location.href = $state.href('app.jobs.list', {}, {absolute: true});
+                return;
               });
           });
       };

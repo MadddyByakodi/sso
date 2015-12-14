@@ -63,12 +63,20 @@ angular.module('qui')
           );
       };
 
-      authService.setSessionData = function getUserInfo() {
-        return $http
-          .get(APP.apiServer + '/userinfo')
-          .then(function userinfoSuccess(response) {
-            return Session.create('userinfo', response.data);
-          });
+      authService.setSessionData = function gInfo() {
+        return $q.all([
+          $http
+            .get(APP.apiServer + '/userinfo')
+            .then(function userinfoSuccess(response) {
+              return Session.create('userinfo', response.data);
+            }),
+
+          $http
+            .get(APP.apiServer + '/quarc/state')
+            .then(function statesSuccess(response) {
+              return Session.create('states', response.data.data);
+            }),
+        ]);
       };
 
       return authService;

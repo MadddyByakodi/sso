@@ -6,7 +6,7 @@ angular.module('qui')
     '$state',
     function JobsCtrl($scope, Applicants, moment, $state) {
       const vm = this;
-      vm.colors = {5: 'success', 8: 'info', 17: 'info'};
+      vm.colors = {5: 'success', 8: 'warning', 17: 'info'};
       vm.applicants = []; // collection of applicants
       vm.ui = {lazyLoad: true, loading: false}; // ui states
 

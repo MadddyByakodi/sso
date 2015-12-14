@@ -13,7 +13,7 @@ div(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.l
                 i
                 | {{Applicant.checkAll ? 'Uns':'S'}}elect All
         .col-xs-6.col-md-3.no-padder
-          button.pull-right.btn.btn-success.m-t-n-sm(ng-if='Applicant.getApplicants({checked: true}, "id").length>0' ng-click='Applicant.download(Applicant.getApplicants({checked: true}, "id"))') Download CV(s)
+          button.pull-right.btn.btn-success.m-t-n-sm(ng-if='Applicant.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(Applicant.getApplicants({checked: true}, "id"))') Download CV(s)
     .m-b-md.hbox(ng-repeat='applicant in Applicant.applicants' ng-if='$index > 0')
       .col.bg-white
         .col-xs-12.col-md-9.no-padder
@@ -47,9 +47,17 @@ div(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.l
             .col-xs-3.col-md-12.wrapper-xs: span.pull-right.m-t-xs {{applicant.created_on | date: 'h:mm a'}}
             .col-xs-6.col-md-12.wrapper-xs
               .col-xs-3.item.text-info.h1.pull-left.no-padder.font-thin  {{applicant.applicant_score}}
-              button.col-xs-9.pull-right.btn.btn-info {{applicant.state_name}}
+
+
+              .btn-group.col-xs-9.pull-right(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
+                button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='')
+                  | {{applicant.state_name}}&nbsp;
+                  span.caret
+                ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
+                  li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
+                    a(href='' ng-click='App.changeState(applicant, state_id)') {{App.states[state_id].name}}
             .col-xs-3.col-md-12.wrapper-xs
-              i.btn.pull-right.text-success-dker.fa.fa-lg.fa-download(ng-click='Applicant.download([applicant.id])')
+              i.btn.pull-right.text-success-dker.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
     .col-xs-2.col-xs-offset-5
       button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
         i.fa.fa-circle-o-notch.fa-spin

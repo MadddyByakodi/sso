@@ -1,0 +1,40 @@
+.modal-header
+  .modal-title
+    .h4.text-info Change Status of {{ChangeState.applicant.name}}
+      .close(ng-click='ChangeState.cancel()') ×
+form.form-validation(name="form")
+  .modal-body
+    //- by default angular doesn't set value to module
+    label.input-group(ng-init='ChangeState.data.state_id = ChangeState.states[ChangeState.stateId].actions[0]')
+      strong {{ChangeState.states[ChangeState.stateId].config.state_id}}
+      select.form.form-control(ng-model='ChangeState.data.state_id' ng-disabled='ChangeState.states[ChangeState.stateId].actions.length===1')
+        option(ng-repeat='state_id in ChangeState.states[ChangeState.stateId].actions' ng-value='state_id' ng-selected='$first') {{ChangeState.states[state_id].name}}
+    label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on')
+      strong {{ChangeState.states[ChangeState.stateId].config.scheduled_on}}
+      .input-group.date
+        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.data.offer_date' is-open='ChangeState.ui.offerDate' close-text='Close' ng-click='ChangeState.ui.offerDate = true' required)
+    label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.suggested_join_date')
+      strong {{ChangeState.states[ChangeState.stateId].config.suggested_join_date}}
+      .input-group.date
+        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.data.suggested_join_date' is-open='ChangeState.ui.suggestedJoinDate' close-text='Close' ng-click='ChangeState.ui.suggestedJoinDate = true' required)
+
+    label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.currency')
+      strong {{ChangeState.states[ChangeState.stateId].config.currency}}
+      select.form.form-control(ng-model='ChangeState.data.currency' required)
+        option(ng-repeat='(currencyKey, currency) in ChangeState.currency' ng-value='currencyKey') {{currency}}
+    .input-group
+      label(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc_raw')
+        strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc_raw}}
+        br
+        input.form.form-control(ng-model='ChangeState.data.offered_ctc_raw' step='0.1' min='0.1' type='number' ng-change='ChangeState.data.offered_ctc = (ChangeState.data.offered_ctc_raw/100000).toFixed(2)')
+      label(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc')
+        strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc}}
+        br
+        input.form.form-control(readonly='' ng-model='ChangeState.data.offered_ctc')
+    label.input-group
+      strong Instructions and Comments
+      br
+      textarea.form.form-control(name='textarea' placeholder='{{ChangeState.states[ChangeState.stateId].config.comments}}' rows='7' cols='50' ng-model='ChangeState.data.comments')
+
+  .modal-footer
+    a.btn.btn-primary(type='submit' ng-disabled='form.$invalid' ng-click='ChangeState.ok()') Submit
