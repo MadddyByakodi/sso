@@ -11,11 +11,15 @@ form.form-validation(name="form")
         option(ng-repeat='state_id in ChangeState.states[ChangeState.stateId].actions' ng-value='state_id' ng-selected='$first') {{ChangeState.states[state_id].name}}
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on')
       strong {{ChangeState.states[ChangeState.stateId].config.scheduled_on}}
-      .input-group.date
-        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.data.offer_date' is-open='ChangeState.ui.offerDate' close-text='Close' ng-click='ChangeState.ui.offerDate = true' required)
+      .input-group
+        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.exData.scheduled_on_date' ng-change='ChangeState.setScheduledOn()' is-open='ChangeState.ui.scheduledOn' close-text='Close' ng-click='ChangeState.ui.scheduledOn = true' min-date='ChangeState.today' required)
+    label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on')
+      strong Time
+      .input-group
+        uib-timepicker(ng-model='ChangeState.exData.scheduled_on_time' ng-change='ChangeState.setScheduledOn()' hour-step='1' minute-step='15' show-meridian='true')
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.suggested_join_date')
       strong {{ChangeState.states[ChangeState.stateId].config.suggested_join_date}}
-      .input-group.date
+      .input-group
         input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.data.suggested_join_date' is-open='ChangeState.ui.suggestedJoinDate' close-text='Close' ng-click='ChangeState.ui.suggestedJoinDate = true' required)
 
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.currency')

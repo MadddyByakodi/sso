@@ -12,7 +12,7 @@
         td
           a(ui-sref='app.jobs.manage({jobId: applicant._root_.id })') {{applicant._root_.role}}
         td: .w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-          button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;')
+          button.btn.w-full(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;')
             | {{applicant.state_name}}&nbsp;
             span.caret
           ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
