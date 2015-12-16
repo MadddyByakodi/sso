@@ -3,4 +3,6 @@ angular.module('qui', [
   'ui.router',
   'ui.bootstrap',
   'mwl.calendar',
+  'ui.select',
+  'ngSanitize',
 ]);

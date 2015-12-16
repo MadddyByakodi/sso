@@ -45,17 +45,17 @@ div(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.l
                 |  {{applicant.exp_location}}
         .col-xs-12.col-md-3
             .col-xs-3.col-md-12.wrapper-xs: span.pull-right.m-t-xs {{applicant.created_on | date: 'h:mm a'}}
-            .col-xs-6.col-md-12.wrapper-xs
+            .col-xs-6.col-md-12.wrapper-xs.no-padder
               .col-xs-3.item.text-info.h1.pull-left.no-padder.font-thin  {{applicant.applicant_score}}
 
-
-              .btn-group.col-xs-9.pull-right(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-                button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='')
-                  | {{applicant.state_name}}&nbsp;
-                  span.caret
-                ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-                  li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
-                    a(href='' ng-click='App.changeState(applicant, state_id)') {{App.states[state_id].name}}
+              .col-xs-9.pull-right.no-padder
+                .btn-group.w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
+                  button.w-full.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='')
+                    | {{applicant.state_name}}&nbsp;
+                    span.caret
+                  ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
+                    li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
+                      a(href='' ng-click='App.changeState(applicant, state_id)') {{App.states[state_id].name}}
             .col-xs-3.col-md-12.wrapper-xs
               i.btn.pull-right.text-success-dker.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
     .col-xs-2.col-xs-offset-5

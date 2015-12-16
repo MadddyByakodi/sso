@@ -46,6 +46,10 @@ angular.module('qui')
           url: '/jobs',
           templateUrl: 'html/jobs.html',
         })
+        .state('app.jobs.new', {
+          url: '/new',
+          templateUrl: 'html/jobs.new.html',
+        })
         .state('app.jobs.list', {
           url: '/',
           templateUrl: 'html/jobs.list.html',
