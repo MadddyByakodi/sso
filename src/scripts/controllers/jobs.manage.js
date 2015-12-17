@@ -6,6 +6,7 @@ angular.module('qui')
     function JobsManageCtrl(Jobs, $stateParams, $filter) {
       const vm = this;
       vm.applicants = []; // collection of applicants
+      vm.job = {}; // Job applied by applicant initialized
       vm.ui = {lazyLoad: true, loading: false}; // ui states
       vm.params = {start: 0, rows: 15}; // GET query params
       vm.loadApplicants = function loadApplicants() {
@@ -27,7 +28,15 @@ angular.module('qui')
         });
       };
 
-      vm.loadApplicants();
+      vm.loadApplicants(); // get applicants
+
+      vm.loadJob = function loadJob() {
+        Jobs.getOne($stateParams.jobId, {fl: 'id,role'}).then(function getJob(response) {
+          vm.job = response.data;
+        });
+      };
+
+      vm.loadJob(); // get job details
 
       // returns array containing resultkey of search result
       vm.getApplicants = function getApplicant(criteria = {}, returnkey = 'id') {
