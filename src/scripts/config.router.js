@@ -58,13 +58,27 @@ angular.module('qui')
           url: '/manage/{jobId}',
           templateUrl: 'html/jobs.manage.html',
         })
-        .state('app.jobs.view', {
-          url: '/{jobId: [0-9]{1,5}}',
-          templateUrl: 'html/jobs.view.html',
+        .state('app.job', {
+          abstract: true,
+          url: '/job',
+          template: '<div ui-view class="fade-in-right-big smooth"></div>',
+        })
+        .state('app.job.view', {
+          url: '/{jobId: [0-9]{1-5}}',
+          templateUrl: 'html/job.view.html',
         })
         .state('app.applicants', {
           url: '/applicants',
           templateUrl: 'html/applicants.html',
+        })
+        .state('app.applicant', {
+          abstract: true,
+          url: '/applicant',
+          template: '<div ui-view class="fade-in-right-big smooth"></div>',
+        })
+        .state('app.applicant.view', {
+          url: '/{applicantId}',
+          templateUrl: 'html/applicant.view.html',
         })
         .state('app.calendar', {
           url: '/calendar',

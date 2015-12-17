@@ -8,7 +8,7 @@
     tbody
       tr.bg-white(ng-repeat='applicant in Applicant.applicants')
         td
-          a(ui-sref='app.applicants.view({jobId: applicant._root_.id })') {{applicant.name}}
+          a(ui-sref='app.applicant.view({applicantId: applicant.id })') {{applicant.name}}
         td
           a(ui-sref='app.jobs.manage({jobId: applicant._root_.id })') {{applicant._root_.role}}
         td: .w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)

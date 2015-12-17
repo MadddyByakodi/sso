@@ -1,0 +1,73 @@
+div(ng-controller='ApplicantViewController as Applicant')
+  .wrapper-md.bg-light.b-b
+    h1.m-n.font-thin.h3
+      | Positions /
+      a(ui-sref='app.applicant.view({applicantId: Applicant.data.id})')  CV
+  .col-sm-9
+    //- Applicant top cover container
+    .col-sm-12.bg-info.dker.no-padder
+      .col-sm-7.wrapper.clearfix
+        .pull-left.thumb-lg: i.fa.fa-user.fa-4x.text-info-dker.wrapper.bg-white(style='padding-bottom: 0 !important;border-radius: 50px;')
+        .pull-left.text-white
+          .h4
+            | {{Applicant.data.name}}
+            i.btn.text-white.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])')
+          .h5.m-t-xs {{Applicant.data.exp_designation}}, {{Applicant.data.exp_employer}}
+          .h5.m-t-xs.list-group
+            i.fa.fa-md.fa-graduation-cap
+            |  {{Applicant.data.edu_degree}}
+          .h5.m-t-xs
+            i.fa.fa-lg.fa-map-marker
+            |  &nbsp; {{Applicant.data.exp_location}}
+      .col-sm-4.clearfix.m-t-xs
+        .pull-right
+          .btn-group.w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
+            button.btn.rounded(class='btn-{{App.states[Applicant.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[Applicant.data.state_id].view.length===0')
+              | {{Applicant.data.state_name}}&nbsp;
+              span(ng-if='App.states[Applicant.data.state_id].view.length>0').caret
+            ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
+              li(role='menuitem' ng-repeat='state_id in App.states[Applicant.data.state_id].view')
+                a(href='' ng-click='App.changeState(Applicant.data, state_id)') {{App.states[state_id].name}}
+          .wrapper
+            .h5
+              i.fa.fa-lg.fa-inr
+              |  &nbsp;&nbsp; {{Applicant.data.exp_salary}} Lacs
+            .h5.m-t-xs
+              i.fa.fa-xs.fa-line-chart
+              |  &nbsp;{{Applicant.data.total_exp | number: 0}} Years
+      .col-md-1.clearfix
+        .thumb-xs.pull-right.m-t-xs.m-b-xs
+          .h2 {{Applicant.data.applicant_score}}
+          .h6 Score
+
+    //- Applicant Details
+    .col-sm-8.wrapper-xs.bg-white.m-t-xs
+      .m-xs.clearfix
+        .h4.text-info-dker.m-t-xs Short Summary
+        .line.line-dashed.b-b.line-lg.pull-in
+        .h5.font-bold.m-t-xs.m-b-xs Skills
+        .h6.clearfix
+          .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in Applicant.data.skills' style='padding: 2px;' ng-if='Applicant.showAllSkill || $index < 6') {{skill}}
+          a.pull-left(ng-click='Applicant.showAllSkill = !Applicant.showAllSkill')
+            span.font-bold.text-info-dker(ng-if='Applicant.showAllSkill') – Less
+            span.font-bold.text-info-dker(ng-if='!Applicant.showAllSkill') + More
+        .line.line-dashed.b-b.line-lg.pull-in
+        .col-xs-6.no-padder.m-t-xs.m-b-xs
+          .h5 CTC Expected: {{Applicant.data.exp_salary}}Lacs Above
+        .col-xs-6.m-t-xs.m-b-xs
+          .h5 Notice Period: {{Applicant.data.notice_period}} Days
+    .col-sm-4.no-padder.m-t-xs
+      .bg-white.m-l-xs.wrapper-xs
+        .h4.text-info-dker.m-xs Contact Details
+        .h4.m-xs.m-t-md
+          i.fa.fa-lg.fa-phone.text-success-dker.wrapper-xs.b-a
+          |  &nbsp; {{Applicant.data.mobile}}
+        .h4.m-xs.m-t-md
+          i.fa.fa-lg.fa-envelope.text-info-dker.wrapper-xs.b-a
+          |  &nbsp; {{Applicant.data.email}}
+
+    //- Resume container
+    .col-sm-12.wrapper-xs.bg-white.m-t-xs
+      .h4.font-bold RESUME
+
+  .col-sm-3.no-padder comment

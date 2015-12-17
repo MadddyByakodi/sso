@@ -22,7 +22,7 @@ div(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.l
               label.i-checks.m-b-none
                 input(type='checkbox' ng-model='applicant.checked')
                 i
-              a(ui-sref='app.applicants.view({applicantId: applicant.id})')
+              a(ui-sref='app.applicant.view({applicantId: applicant.id})')
                 strong.text-primary-lt  {{applicant.name}}
             .panel-body.pull-in.b-t
               .col-xs-4

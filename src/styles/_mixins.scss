@@ -2,19 +2,19 @@
 	background-color: $bg-color;
 	&.lt,
 	.lt {
-		@include color-schema($bg-color, $lt-percent, 2.5%);
+		background-color: lighten($bg-color, 5%);
 	}
 	&.lter,
 	.lter {
-		@include color-schema($bg-color, $lter-percent, 5%);
+		background-color: lighten($bg-color, 10%);
 	}
 	&.dk,
 	.dk {
-		@include color-schema($bg-color, $dk-percent, 2.5%);
+		background-color: darken($bg-color, 5%);
 	}
 	&.dker,
 	.dker {
-		@include color-schema($bg-color, $dker-percent, 5%);
+		background-color: darken($bg-color, 10%);
 	}
   &.bg,
   .bg{
