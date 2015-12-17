@@ -11,6 +11,7 @@ angular.module('qui')
           .getOne($stateParams.applicantId)
           .then(function gotApplicant(result) {
             vm.data = result.data;
+
             // data has been loaded
             vm.ui.loading = false;
           });

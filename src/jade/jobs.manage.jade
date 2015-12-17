@@ -2,7 +2,7 @@ div(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.l
   .wrapper-md.bg-light.b-b
     h1.m-n.font-thin.h3
       | Positions /
-      a(ui-sref='app.jobs.view({jobId: Applicant.job.id})')  {{Applicant.job.role}}
+      a(ui-sref='app.job.view({jobId: Applicant.job.id})')  {{Applicant.job.role}}
       |  / Manage
   .col-lg-10.col-lg-offset-1.wrapper-md
     .m-b-xs.hbox: .col

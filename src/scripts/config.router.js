@@ -64,7 +64,7 @@ angular.module('qui')
           template: '<div ui-view class="fade-in-right-big smooth"></div>',
         })
         .state('app.job.view', {
-          url: '/{jobId: [0-9]{1-5}}',
+          url: '/{jobId}',
           templateUrl: 'html/job.view.html',
         })
         .state('app.applicants', {
