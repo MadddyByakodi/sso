@@ -12,9 +12,9 @@
         td
           a(ui-sref='app.jobs.manage({jobId: applicant._root_.id })') {{applicant._root_.role}}
         td: .w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-          button.btn.w-full(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;')
+          button.btn.w-full(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;' ng-disabled='App.states[applicant.state_id].view.length===0')
             | {{applicant.state_name}}&nbsp;
-            span.caret
+            span(ng-if='App.states[applicant.state_id].view.length>0').caret
           ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
             li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
               a(href='' ng-click='App.changeState(applicant, state_id)') {{App.states[state_id].name}}
