@@ -35,7 +35,7 @@ div(ng-controller='ApplicantViewController as Applicant')
             .h5.m-t-xs
               i.fa.fa-xs.fa-line-chart
               |  &nbsp;{{Applicant.data.total_exp | number: 0}} Years
-      .col-md-1.clearfix
+      .col-sm-1.clearfix
         .thumb-xs.pull-right.m-t-xs.m-b-xs
           .h2 {{Applicant.data.applicant_score}}
 
@@ -69,4 +69,21 @@ div(ng-controller='ApplicantViewController as Applicant')
     .col-sm-12.wrapper-xs.bg-white.m-t-xs
       .h4.font-bold RESUME
 
-  .col-sm-3.no-padder comment
+  .col-md-3.no-padder.m-t-xs(ng-controller='ApplicantCommentsController as Comments')
+    .col-xs-12(style='max-height: 650px;overflow-x: hidden;overflow-y: scroll;background-color: #fff;')
+      .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')
+        .col.text-center.thumb-sm
+          .img-circle.bg-primary.dker.wrapper-xs.h3 {{comment.name[0].toUpperCase()}}
+        .col.clearfix
+          .col-xs-12
+            .text-info-dker {{comment.name}}
+            .text-danger-dker {{App.states[comment.state_id].name}}
+            .text-success.dk {{comment.scheduled_on | date: 'MMM d, yyyy h:mm a'}}
+            .text-muted {{comment.comment}}
+            .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_on | date: 'd MMM, h:mm a'}}
+    form.form.form-validation.col-xs-12.wrapper-xs.bg-white
+      .input-group
+        input.form-control(type='text' name='comment' placeholder='enter to comment' required)
+        span.input-group-btn
+          button.btn.btn-default(type='sumbit' ng-submit='Comments.post()')
+            i.fa.fa-plus
