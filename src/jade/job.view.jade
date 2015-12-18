@@ -93,19 +93,19 @@ div(ng-controller='JobViewController as Job')
           .h4.text-info-dker Interview Address
 
   .col-md-3.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
-    .col-xs-12(style='max-height: 650px;overflow-x: hidden;overflow-y: scroll;background-color: #fff;')
-      .hbox.b-b.padder-v(ng-repeat='comment in Comments.data')
+    .col-xs-12(style='max-height: 650px;overflow-x: hidden;overflow-y: scroll;background-color: #fff;overflow-wrap: break-word;')
+      .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "timestamp"')
         .col.text-center.thumb-sm
           .img-circle.bg-primary.dker.wrapper-xs.h3 {{comment.name[0].toUpperCase()}}
         .col.clearfix
           .col-xs-12
             .text-info-dker {{comment.name}}
-            .text-muted {{comment.comment}}
+            p {{comment.comment}}
             .text-muted.pull-right(title='{{comment.timestamp | date: "medium"}}') {{comment.timestamp | date: 'd MMM, h:mm a'}}
-    form.form.form-validation.col-xs-12.wrapper-xs.bg-white
+    form.form.form-validation.col-xs-12.wrapper-xs.bg-white(ng-submit='Comments.insert()' name='commentForm')
       .input-group
-        input.form-control(type='text' name='comment' placeholder='enter to comment' required)
+        input.form-control(type='text' name='comment' placeholder='enter to comment' required ng-model='Comments.post.comment')
         span.input-group-btn
-          button.btn.btn-default(type='sumbit' ng-submit='Comments.post()')
+          button.btn.btn-default(type='sumbit' ng-disabled='commentForm.$invalid')
             i.fa.fa-plus
 
