@@ -33,14 +33,23 @@ div(ng-controller='DashboardController as Dash')
           .h4.text-black.wrapper-xs.b-b  &nbsp; CV Status
           .hbox.wrapper-md
             .col
-              .fa-4x.h1 Chart
+              .labeled-chart-container
+                .canvas-holder
+                  canvas.chart.chart-doughnut(chart-data='Dash.chart.data' chart-colours='["#5B90BF", "#96b5b4", "#ab7967"]' chart-labels='Dash.chart.labels' width='190', height='190', style='width: 190px; height: 190px;')
             .col.wrapper-xs
-              div Awaiting Interviews
-              div Awaiting Feedback on CV
-              div Awaiting Feedback on Interview
+                ul.doughnut-legend
+                  li.pull-left
+                    span(style='background-color:#5B90BF')
+                    | Awaiting Interviews
+                  li.pull-left
+                    span(style='background-color:#96b5b4')
+                    | Awaiting Feedback on CV
+                  li.pull-left
+                    span(style='background-color:#ab7967')
+                    | Awaiting Feedback on Interview
 
       .col-xs-6.no-padder
-        .m-xs IN FUTURE
+        .m-xs.hide IN FUTURE
       .col-xs-12.no-padder
         .m-xs.wrapper-xs.bg-white-only
           .h4.text-black.wrapper-xs.b-b  &nbsp; Upcoming Interviews

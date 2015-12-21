@@ -34,6 +34,11 @@ angular.module('qui')
                 return Number(a) + Number(b);
               }),
             };
+
+            vm.chart = {
+              labels: ['Awaiting Interviews', 'AF on CV', 'AF on Interview'],
+              data: [vm.summary.await_interview, vm.summary.cv, vm.summary.interview],
+            };
           });
       };
 
