@@ -59,7 +59,7 @@ div(ng-controller='DashboardController as Dash')
           .hbox.wrapper-sm.b-b(ng-repeat='applicant in Dash.interviews')
             .col: a(ui-sref='app.applicant.view({applicantId: applicant.id})') {{applicant.name}}
             .col
-              i.fa(class='text-{{Dash.interviewUI[applicant.interview_type].color}} fa-{{Dash.interviewUI[applicant.interview_type].icon}}')
+              i.fa(class='text-{{Dash.interviewUI[applicant.interview_type].color}}-dker fa-{{Dash.interviewUI[applicant.interview_type].icon}}')
               |  {{App.states[applicant.interview_type].name}}
             .col {{applicant.interview_time | date : 'd MMM, h:mm a'}}
 

@@ -5,15 +5,15 @@ angular.module('qui')
       const sessionService = {};
 
       sessionService.create = function create(key, value) {
-        $window.sessionStorage[key] = angular.toJson(value);
+        $window.localStorage[key] = angular.toJson(value);
       };
 
       sessionService.read = function read(key) {
-        return angular.fromJson($window.sessionStorage[key]);
+        return angular.fromJson($window.localStorage[key]);
       };
 
       sessionService.destroy = function destroy() {
-        $window.sessionStorage.clear();
+        $window.localStorage.clear();
       };
 
       sessionService.isAuthenticated = function isAuthenticated() {
