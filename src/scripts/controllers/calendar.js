@@ -46,7 +46,7 @@ angular.module('qui')
                 <a href="${$state.href('app.jobs.manage', {jobId: applicant._root_.id})}">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant._root_.role}</span>
                 </a> –
-                <a href="${$state.href('app.applicants.view', {applicantId: applicant.id})}">
+                <a href="${$state.href('app.applicant.view', {applicantId: applicant.id})}">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant.name}</span>
                 </a>
                 <div class="label label-${vm.colors[applicant.interview_type]}">${applicant.state_name}</div>

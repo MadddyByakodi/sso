@@ -3,8 +3,13 @@ angular.module('qui')
     'Jobs',
     '$stateParams',
     '$filter',
-    function JobsManageCtrl(Jobs, $stateParams, $filter) {
+    'moment',
+    function JobsManageCtrl(Jobs, $stateParams, $filter, moment) {
       const vm = this;
+      vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
+
+      // Set default bucket to ALL
+      if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
       vm.applicants = []; // collection of applicants
       vm.job = {}; // Job applied by applicant initialized
       vm.ui = {lazyLoad: true, loading: false}; // ui states
@@ -12,6 +17,16 @@ angular.module('qui')
       vm.loadApplicants = function loadApplicants() {
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
         vm.ui = {lazyLoad: false, loading: true};
+
+        if ($stateParams.bucket === 'Interview') {
+          vm.params.interview_time = [
+            moment().startOf('day').toISOString(),
+            moment().startOf('day').add(1, 'months').toISOString(),
+          ].join(',');
+        } else {
+          vm.params.state_id = $stateParams.bucket.replace(' ', '_').toUpperCase();
+        }
+
         Jobs.getApplicants($stateParams.jobId, vm.params).then(function applicantsList(result) {
           angular.forEach(result.data, function iterateApplicants(applicant) {
             vm.applicants.push(applicant);

@@ -55,7 +55,7 @@ angular.module('qui')
           templateUrl: 'html/jobs.list.html',
         })
         .state('app.jobs.manage', {
-          url: '/manage/{jobId}',
+          url: '/manage/{bucket}/{jobId}',
           templateUrl: 'html/jobs.manage.html',
         })
         .state('app.job', {
