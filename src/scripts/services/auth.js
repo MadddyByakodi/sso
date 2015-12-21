@@ -63,6 +63,21 @@ angular.module('qui')
           );
       };
 
+      authService.forgotpass = function forgotpass(username) {
+        const url = '/api/forgotpass';
+        return $http
+          .post(url, {username: username})
+          .then(
+            function forgotpassSuccess(response) {
+              return response.data;
+            },
+
+            function forgotpassError(response) {
+              return $q.reject(response.data);
+            }
+          );
+      };
+
       authService.setSessionData = function gInfo() {
         return $q.all([
           $http

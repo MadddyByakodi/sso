@@ -68,6 +68,25 @@ app.post('/api/logout', function login(req, res) {
   });
 });
 
+app.post('/api/forgotpass', function login(req, res) {
+  const options = {
+    url: `${config.OAUTH_SERVER}/users/forgotPassword`,
+    json: true,
+    auth: {
+      user: config.OAUTH_CLIENT,
+      pass: config.OAUTH_SECRET,
+    },
+    body: {
+      grant_type: req.body.username,
+    },
+  };
+
+  request.post(options, function handleRes(err, apires, body) {
+    if (err) return res.status(500).json(err);
+    return res.status(apires.statusCode).json(body);
+  });
+});
+
 app.get('/*', function serveApp(req, res) {
   res.sendFile('index.html', {root: __dirname + '/dist/html'});
 });
