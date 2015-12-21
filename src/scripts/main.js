@@ -18,13 +18,13 @@ angular.module('qui')
         version: '0.0.1',
         settings: {
           themeID: 1,
-          navbarHeaderColor: 'bg-black',
-          navbarCollapseColor: 'bg-black',
-          asideColor: 'bg-white',
+          navbarHeaderColor: 'bg-white',
+          navbarCollapseColor: 'bg-white-only',
+          asideColor: 'bg-black',
           headerFixed: true,
-          asideFixed: false,
+          asideFixed: true,
           asideFolded: false,
-          asideDock: false,
+          asideDock: true,
           container: false,
         },
       };

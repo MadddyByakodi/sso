@@ -5,4 +5,5 @@ angular.module('qui', [
   'mwl.calendar',
   'ui.select',
   'ngSanitize',
+  'chart.js',
 ]);

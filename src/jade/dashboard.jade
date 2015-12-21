@@ -1,1 +1,67 @@
 //-Dashboard
+div(ng-controller='DashboardController as Dash')
+  .col-sm-4.no-padder
+    .m-xs
+      .col-xs-12.no-padder
+        .m-xs
+          .hbox.wrapper-md.bg-white-only
+            .col
+              i.fa.fa-file-text-o.fa-lg
+              span.h4.text-black  CVs
+              .fa-4x.h1 {{Dash.summary.cv}}
+            .col.b-l.wrapper-xs
+              i.fa.fa-user-secret.fa-lg
+              span.h4.text-black  Interviews
+              .fa-4x.h1 {{Dash.summary.interview}}
+          .hbox.wrapper-xs.bg-black.text-center Awaiting Feedback
+      .col-xs-12.no-padder
+        .m-xs.wrapper-xs.bg-white
+          .h4.text-black  &nbsp; Actions Required
+          .b-b.m-t-xs
+          .hbox.wrapper-sm.m-t-xs
+              .col: .h6.font-bold Positions
+              .col.thumb-xs: .h6.font-bold.pull-right CVs
+          div
+            .hbox.wrapper-sm.b-b(ng-repeat='pipe in Dash.pipeline')
+              .col: a(ui-sref='app.jobs.manage({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
+              .col.thumb-xs
+                span.pull-right {{pipe.count}}
+  .col-sm-8.no-padder
+    .m-xs
+      .col-xs-6.no-padder
+        .m-xs.bg-white-only
+          .h4.text-black.wrapper-xs.b-b  &nbsp; CV Status
+          .hbox.wrapper-md
+            .col
+              .fa-4x.h1 Chart
+            .col.wrapper-xs
+              div Awaiting Interviews
+              div Awaiting Feedback on CV
+              div Awaiting Feedback on Interview
+
+      .col-xs-6.no-padder
+        .m-xs IN FUTURE
+      .col-xs-12.no-padder
+        .m-xs.wrapper-xs.bg-white-only
+          .h4.text-black.wrapper-xs.b-b  &nbsp; Upcoming Interviews
+          .hbox.wrapper-sm
+            .col: .h6.font-bold Name
+            .col: .h6.font-bold Type
+            .col: .h6.font-bold Time
+          .hbox.wrapper-sm.b-b(ng-repeat='applicant in Dash.interviews')
+            .col: a(ui-sref='app.applicant.view({applicantId: applicant.id})') {{applicant.name}}
+            .col
+              i.fa(class='text-{{Dash.interviewUI[applicant.interview_type].color}} fa-{{Dash.interviewUI[applicant.interview_type].icon}}')
+              |  {{App.states[applicant.interview_type].name}}
+            .col {{applicant.interview_time | date : 'd MMM, h:mm a'}}
+
+      .col-xs-12.no-padder.hide
+        .m-xs.wrapper-xs.bg-white-only
+          .h4.text-black.wrapper-xs.b-b  &nbsp; Upcoming Joinees
+          .hbox.wrapper-md
+            .col
+              .fa-4x.h1 Chart
+            .col.wrapper-xs
+              div x
+              div y
+              div z
