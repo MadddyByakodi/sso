@@ -68,7 +68,7 @@ angular.module('qui')
           templateUrl: 'html/job.view.html',
         })
         .state('app.applicants', {
-          url: '/applicants',
+          url: '/applicants/{bucket}',
           templateUrl: 'html/applicants.html',
         })
         .state('app.applicant', {

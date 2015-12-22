@@ -28,6 +28,11 @@ div(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.l
                 i
               a(ui-sref='app.applicant.view({applicantId: applicant.id})')
                 strong.text-primary-lt  {{applicant.name}}
+
+              span.pull-right(ng-if='applicant.interview_type && applicant.interview_time')
+                i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}')
+                |  {{App.states[applicant.interview_type].name}},
+                |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
             .panel-body.pull-in.b-t
               .col-xs-4
                 i.fa.fa-bookmark

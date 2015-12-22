@@ -12,7 +12,7 @@
         th(style='width:20%;') CVs in Pipeline
     tbody
       tr.bg-white(ng-repeat='job in Job.jobs')
-        td.wrapper-md: a(ui-sref='app.jobs.manage({jobId: job.id })') {{job.role}}
+        td.wrapper-md: a(ui-sref='app.jobs.manage({jobId: job.id, bucket: "Pending Feedback" })') {{job.role}}
         td.wrapper-md(class="text-{{color[job.job_status]}}-dker") {{job.job_status}}
         td.wrapper-md {{job.total_applicants}}
     tfoot

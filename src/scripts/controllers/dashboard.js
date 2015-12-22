@@ -5,20 +5,6 @@ angular.module('qui')
     'moment',
     function JobsCtrl(Summary, Applicants, moment) {
       const vm = this;
-      vm.interviewUI = {
-        5: {
-          icon: 'phone',
-          color: 'success',
-        },
-        8: {
-          icon: 'user',
-          color: 'warning',
-        },
-        17: {
-          icon: 'skype',
-          color: 'info',
-        },
-      };
 
       vm.getSummary = function getSummary() {
         Summary.get({state_id: '1,5,8,9,17'})
