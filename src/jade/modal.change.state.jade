@@ -31,7 +31,7 @@ form.form-validation(name="form")
         strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc_raw}}
         br
         input.form.form-control(ng-model='ChangeState.data.offered_ctc_raw' step='0.1' min='0.1' type='number' ng-change='ChangeState.data.offered_ctc = (ChangeState.data.offered_ctc_raw/100000).toFixed(2)')
-      label(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc')
+      label(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc_raw')
         strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc}}
         br
         input.form.form-control(readonly='' ng-model='ChangeState.data.offered_ctc')

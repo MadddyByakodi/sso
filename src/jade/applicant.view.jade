@@ -67,7 +67,7 @@ div(ng-controller='ApplicantViewController as Applicant')
 
     //- Resume container
     .col-sm-12.wrapper-xs.bg-white.m-t-xs
-      .h4.font-bold RESUME
+      iframe.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}' height='650px')
 
   .col-md-3.no-padder.m-t-xs(ng-controller='ApplicantCommentsController as Comments')
     .col-xs-12(style='max-height: 650px;overflow-x: hidden;overflow-y: scroll;background-color: #fff;overflow-wrap: break-word;')

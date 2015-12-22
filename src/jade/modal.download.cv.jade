@@ -4,11 +4,11 @@
       .close(ng-click='DownloadCV.cancel()') ×
 .modal-body
   .radio.m-b-md: label.i-checks
-    input(type='radio' ng-model='DownloadCV.type' value='1')
+    input(type='radio' ng-model='DownloadCV.concat' value='true')
     i
     |  Download CV with CTC
   .radio: label.i-checks
-    input(type='radio' ng-model='DownloadCV.type' value='0')
+    input(type='radio' ng-model='DownloadCV.concat' value='false')
     i
     |  Download CV without CTC
 .modal-footer
