@@ -13,10 +13,10 @@ div(ng-controller='JobViewController as Job')
             i.fa.fa-briefcase.fa-4x.wrapper-xs.text-white
           .col.bg-white.wrapper-xs
             .hbox
-              .col.h3 {{Job.data.client_name}}
+              .col.h3 &nbsp; {{Job.data.client_name}}
             .hbox
               .col.h4
-                | {{Job.data.role}}
+                | &nbsp;{{Job.data.role}}
                 i.btn.fa.fa-download(ng-click='App.downloadJob([Job.data.id])')
             .hbox
               .col
@@ -31,7 +31,7 @@ div(ng-controller='JobViewController as Job')
                 .pull-right
                   .hbox.h5.m-t-xs.text-muted
                     .col.v-middle Total Applicants
-                    .col.fa-2x {{Job.data.total_applicants}}
+                    .col.fa-2x &nbsp;{{Job.data.total_applicants}}
                   .hbox.h5.m-t-xs.text-muted
                     .col.v-middle Priority
                     .col.v-middle: .btn.btn-success.rounded {{Job.data.job_status}}

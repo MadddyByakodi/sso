@@ -2,27 +2,27 @@ angular.module('qui')
   .controller('DownloadCVController', [
     '$uibModalInstance',
     'ApplicantIds',
-    'DownloadCV',
-    function JobsCtrl($uibModalInstance, ApplicantIds, DownloadCV) {
+    'APP',
+    '$window',
+    'Session',
+    function JobsCtrl($uibModalInstance, ApplicantIds, APP, $window, Session) {
       const vm = this;
       vm.concat = 'true'; // download cv type default to with CTC
 
+      if (!angular.isArray(ApplicantIds)) return;
+      const token = Session.getAccessToken();
+      if (ApplicantIds.length === 1) {
+        vm.downloadUrl =
+          `${APP.apiServer}/quarc/applicant/${ApplicantIds[0]}/download?access_token=${token}&concat=${vm.concat}`;
+      }
+
+      if (ApplicantIds.length > 1) {
+        vm.downloadUrl =
+          `${APP.apiServer}/quarc/applicant/download?access_token=${token}&id=${ApplicantIds.join(',')}&concat=${vm.concat}`;
+      }
+
       vm.ok = function ok() {
-        if (!angular.isArray(ApplicantIds)) return;
-
-        if (ApplicantIds.length === 1) {
-          DownloadCV.getOne(ApplicantIds[0], {concat: vm.concat})
-            .then(function downloadStarted() {
-              $uibModalInstance.close(vm.concat);
-            });
-        }
-
-        if (ApplicantIds.length > 1) {
-          DownloadCV.get({id: ApplicantIds.join(','), concat: vm.concat})
-            .then(function downloadStarted() {
-              $uibModalInstance.close(vm.concat);
-            });
-        }
+        $uibModalInstance.close(vm.concat);
       };
 
       vm.cancel = function cancel() {
