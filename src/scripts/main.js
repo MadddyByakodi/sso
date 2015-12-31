@@ -4,7 +4,8 @@ angular.module('qui')
     '$uibModal',
     'Session',
     'User',
-    function AppCtrl($window, $uibModal, Session, User) {
+    '$state',
+    function AppCtrl($window, $uibModal, Session, User, $state) {
       const vm = this;
 
       // add 'ie' classes to html
@@ -46,6 +47,9 @@ angular.module('qui')
 
       vm.userinfo = User.userinfo;
       vm.states = User.states;
+      vm.showNavJobs = function showNavJobs() {
+        return $state.is('app.applicants') || $state.is('app.jobs.manage');
+      };
 
       vm.downloadApplicant = function downloadApplicant(ids) {
         // ApplicantIds is array contatining applicant id to download cvs

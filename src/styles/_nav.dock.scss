@@ -1,4 +1,19 @@
+.nav-job {
+    position: fixed;
+    z-index: 2;
+    overflow: hidden;
+    top: 50px;
+    bottom: 0;
+}
+
 @media (min-width: $app-aside-dock-media) {
+  .nav-job {
+      position: fixed;
+      z-index: 2;
+      overflow: hidden;
+      top: 113px;
+      bottom: 0;
+  }
 	.app-aside-dock{
 		.app-content,
 		.app-footer{
@@ -39,7 +54,7 @@
 			}
 			nav > .nav{
 				float: left;
-			}			
+			}
 			.hidden-folded,
 			.line,
 			.navi-wrap > div{
@@ -71,7 +86,7 @@
 						line-height: 40px;
 						width: 40px;
 					}
-					> span.pull-right{						
+					> span.pull-right{
 						position: absolute;
 						bottom: 2px;
 						left: 50%;
@@ -105,7 +120,7 @@
 				}
 				.nav-sub-header{
 					display: none !important;
-				}	
+				}
 			}
 			.navi li li a{
 				padding-left: 15px;

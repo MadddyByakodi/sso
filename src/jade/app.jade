@@ -7,4 +7,8 @@ content
   .app-content
     div(ui-butterbar='')
     a.off-screen-toggle.hide(href='', ui-toggle-class='off-screen', data-target='.app-aside')
-    .app-content-body(ui-view='')
+    .app-content-body
+     .hbox
+      .col.w(ng-if='App.showNavJobs()')
+        div(ng-include="'html/blocks/nav.jobs.html'")
+      .col(ui-view='')
