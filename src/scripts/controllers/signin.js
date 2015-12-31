@@ -30,7 +30,7 @@ angular.module('qui')
           .then(function setSession() {
             return Auth.setSessionData()
               .then(function openApp() {
-                $window.location.href = $state.href('app.jobs.list', {}, {absolute: true});
+                $window.location.href = $state.href('app.applicants', {bucket: 'All'}, {absolute: true});
                 return;
               });
           });
