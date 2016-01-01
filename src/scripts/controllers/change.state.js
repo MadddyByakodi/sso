@@ -28,7 +28,7 @@ angular.module('qui')
       vm.ok = function ok() {
         ChangeState.set(applicant.id, vm.data)
           .then(function handleChangeState() {
-            $uibModalInstance.close(vm.type);
+            $uibModalInstance.close(vm.data);
           })
           .catch(function handleFailure(response) {
             vm.changeStateError = response.error;

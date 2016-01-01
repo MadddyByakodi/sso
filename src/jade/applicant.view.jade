@@ -70,7 +70,7 @@ div(ng-controller='ApplicantViewController as Applicant')
       iframe.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}' height='650px')
 
   .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='ApplicantCommentsController as Comments')
-    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;')
+    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
       .col
         .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')
           .col.text-center.thumb-sm

@@ -84,8 +84,9 @@ angular.module('qui')
           },
         });
 
-        modalInstance.result.then(function success() {
-          // console.log(type);
+        modalInstance.result.then(function success(data) {
+          applicant.state_id = data.state_id;
+          applicant.state_name = vm.states[data.state_id].name;
         });
       };
 

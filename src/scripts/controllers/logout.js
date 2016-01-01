@@ -19,7 +19,7 @@ angular.module('qui')
             function handleError(error) {
               $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
               const err = new Error(error.message);
-              return $q.reject(err.message);
+              return $state.go('access.signin');
             }
           );
       };

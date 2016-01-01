@@ -58,6 +58,7 @@ angular.module('qui')
             },
 
             function logoutError(response) {
+              Session.destroy();
               return $q.reject(response.data);
             }
           );
