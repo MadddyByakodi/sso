@@ -14,6 +14,11 @@ angular.module('qui')
       vm.stateId = stateId;
       vm.currency = CURRENCY;
       vm.today = new Date();
+      vm.exData = {
+        scheduled_on_time: moment()
+        .set('hour', 10)
+        .set('minute', 0),
+      };
 
       vm.setScheduledOn = function scheduledOnTimeChange() {
         const hour = moment(vm.exData.scheduled_on_time).get('hour');

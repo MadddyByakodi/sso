@@ -12,22 +12,22 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
         |  High Priority
       ul.m-t-xs.nav
         li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "High Priority"}' ng-init='$first ? (Job.job_high = true): null' ui-sref-active='active')
-          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id, bucket: "All" })') {{job.role}}
+          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id})') {{job.role}}
       .m-l-xs.h5.text-info-lt.font-bold(ng-if='Job.job_open')
         i.fa.fa-square
         |  Open
       ul.m-t-xs.nav
         li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "Open"}' ng-init='$first ? (Job.job_open = true): null' ui-sref-active='active')
-          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id, bucket: "All" })') {{job.role}}
+          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id})') {{job.role}}
       .m-l-xs.h5.text-warning-dker.font-bold(ng-if='Job.job_hold')
         i.fa.fa-square
         |  Hold
       ul.m-t-xs.nav
         li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "Hold"}' ng-init='$first ? (Job.job_hold = true): null' ui-sref-active='active')
-          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id, bucket: "All" })') {{job.role}}
+          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id})') {{job.role}}
       .m-l-xs.h5.text-danger.font-bold(ng-if='Job.job_closed')
         i.fa.fa-square
         |  Closed
       ul.m-t-xs.nav
         li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "Closed"}' ng-init='$first ? (Job.job_closed = true): null' ui-sref-active='active')
-          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id, bucket: "All" })') {{job.role}}
+          a.m-l-md(ui-sref='app.jobs.manage({jobId: job.id})') {{job.role}}
