@@ -239,7 +239,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
             | Email of contact person
             span.text-danger *
           .col-xs-12.no-padder
-            input.form.form-control(type='email' ng-model='NewJob.data.email' required)
+            input.form.form-control(type='email' ng-model='NewJob.data.email' required ng-value='App.userinfo.email_id')
       .line.line-dashed.b-b.line-lg.pull-in
       label.w-full.input-group
         .col-xs-12.no-padder Sourcing and Screening Guidelines

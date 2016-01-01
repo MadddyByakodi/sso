@@ -16,8 +16,8 @@ angular.module('qui')
       vm.today = new Date();
       vm.exData = {
         scheduled_on_time: moment()
-        .set('hour', 10)
-        .set('minute', 0),
+          .startOf('day')
+          .set('hour', 10),
       };
 
       vm.setScheduledOn = function scheduledOnTimeChange() {
@@ -25,9 +25,7 @@ angular.module('qui')
         const minute = moment(vm.exData.scheduled_on_time).get('minute');
         vm.data.scheduled_on = moment(vm.exData.scheduled_on_date)
           .set('hour', hour)
-          .set('minute', minute)
-          .set('second', 0)
-          .set('millisecond', 0);
+          .set('minute', minute);
       };
 
       vm.ok = function ok() {
