@@ -27,7 +27,7 @@ angular.module('qui')
             vm.data.push({
               name: User.userinfo.name,
               comment: comment,
-              timestamp: new Date(),
+              timestamp: new Date().toISOString(),
             });
 
             // data has been loaded

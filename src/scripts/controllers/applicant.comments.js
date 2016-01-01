@@ -3,7 +3,7 @@ angular.module('qui')
     'ApplicantComments',
     '$stateParams',
     'User',
-    function JobsCtrl(ApplicantComments, $stateParams, User) {
+    function ApplicantCommentsController(ApplicantComments, $stateParams, User) {
       const vm = this;
       vm.loadApplicantComments = function loadApplicantComments() {
         vm.ui = {loading: true};
@@ -27,7 +27,7 @@ angular.module('qui')
             vm.data.push({
               name: User.userinfo.name,
               comment: comment,
-              created_on: new Date(),
+              created_on: new Date().toISOString(),
             });
 
             // data has been loaded

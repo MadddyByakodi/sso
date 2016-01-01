@@ -1,6 +1,6 @@
 div(ng-controller='JobViewController as Job')
-  .wrapper-md.bg-light.b-b
-    h1.m-n.font-thin.h3
+  .wrapper-xs.bg-light.b-b
+    .m-l-md.font-thin.h3
       | Positions /
       a(ui-sref='app.jobs.manage({jobId: Job.data.id})')  {{Job.data.role}} /
       a(ui-sref='app.job.view({jobId: Job.data.id})')  View JD
@@ -104,20 +104,22 @@ div(ng-controller='JobViewController as Job')
           .h4.text-info-dker Interview Address
           .h5.text-muted(ng-bind-html="Job.interview_addr")
 
-  .col-md-3.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
-    .col-xs-12(style='max-height: 650px;overflow-x: hidden;overflow-y: scroll;background-color: #fff;overflow-wrap: break-word;')
-      .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "timestamp"')
-        .col.text-center.thumb-sm
-          .img-circle.bg-primary.dker.wrapper-xs.h3 {{comment.name[0].toUpperCase()}}
-        .col.clearfix
-          .col-xs-12
-            .text-info-dker {{comment.name}}
-            p {{comment.comment}}
-            .text-muted.pull-right(title='{{comment.timestamp | date: "medium"}}') {{comment.timestamp | date: 'd MMM, h:mm a'}}
-    form.form.form-validation.col-xs-12.wrapper-xs.bg-white(ng-submit='Comments.insert()' name='commentForm')
+  .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
+    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;')
+      .col
+        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "timestamp"')
+          .col.text-center.thumb-sm
+            .img-circle.bg-primary.dker.wrapper-xs.h3 {{comment.name[0].toUpperCase()}}
+          .col.clearfix
+            .col-xs-12
+              .text-info-dker {{comment.name}}
+              p {{comment.comment}}
+              .text-muted.pull-right(title='{{comment.timestamp | date: "medium"}}') {{comment.timestamp | date: 'd MMM, h:mm a'}}
+        .hbox(style='height: 40px;')
+    form.form.form-validation.col-xs-12.wrapper-xs.bg-white(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
       .input-group
         input.form-control(type='text' name='comment' placeholder='enter to comment' required ng-model='Comments.post.comment')
         span.input-group-btn
           button.btn.btn-default(type='sumbit' ng-disabled='commentForm.$invalid')
-            i.fa.fa-plus
+            i.fa.fa-paper-plane
 

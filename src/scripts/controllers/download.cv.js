@@ -13,12 +13,12 @@ angular.module('qui')
       const token = Session.getAccessToken();
       if (ApplicantIds.length === 1) {
         vm.downloadUrl =
-          `${APP.apiServer}/quarc/applicant/${ApplicantIds[0]}/download?access_token=${token}&concat=${vm.concat}`;
+          `${APP.apiServer}/quarc/applicant/${ApplicantIds[0]}/download?access_token=${token}`;
       }
 
       if (ApplicantIds.length > 1) {
         vm.downloadUrl =
-          `${APP.apiServer}/quarc/applicant/download?access_token=${token}&id=${ApplicantIds.join(',')}&concat=${vm.concat}`;
+          `${APP.apiServer}/quarc/applicant/download?access_token=${token}&id=${ApplicantIds.join(',')}`;
       }
 
       vm.ok = function ok() {

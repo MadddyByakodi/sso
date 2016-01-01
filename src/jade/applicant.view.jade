@@ -1,9 +1,9 @@
 div(ng-controller='ApplicantViewController as Applicant')
-  .wrapper-md.bg-light.b-b
-    h1.m-n.font-thin.h3
+  .wrapper-xs.bg-light.b-b
+    .m-l-md.font-thin.h3
       | Positions /
       a(ui-sref='app.applicant.view({applicantId: Applicant.data.id})')  CV
-  .col-sm-9
+  .col-sm-9.m-t-xs
     //- Applicant top cover container
     .col-sm-12.bg-info.dker.no-padder
       .col-sm-7.wrapper.clearfix
@@ -69,21 +69,23 @@ div(ng-controller='ApplicantViewController as Applicant')
     .col-sm-12.wrapper-xs.bg-white.m-t-xs
       iframe.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}' height='650px')
 
-  .col-md-3.no-padder.m-t-xs(ng-controller='ApplicantCommentsController as Comments')
-    .col-xs-12(style='max-height: 650px;overflow-x: hidden;overflow-y: scroll;background-color: #fff;overflow-wrap: break-word;')
-      .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')
-        .col.text-center.thumb-sm
-          .img-circle.bg-primary.dker.wrapper-xs.h3 {{comment.name[0].toUpperCase()}}
-        .col.clearfix
-          .col-xs-12
-            .text-info-dker {{comment.name}}
-            .text-danger-dker {{App.states[comment.state_id].name}}
-            .text-success.dk {{comment.scheduled_on | date: 'MMM d, yyyy h:mm a'}}
-            p {{comment.comment}}
-            .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_on | date: 'd MMM, h:mm a'}}
-    form.form.form-validation.col-xs-12.wrapper-xs.bg-white(ng-submit='Comments.insert()' name='commentForm')
+  .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='ApplicantCommentsController as Comments')
+    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;')
+      .col
+        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')
+          .col.text-center.thumb-sm
+            .img-circle.bg-primary.dker.wrapper-xs.h3 {{comment.name[0].toUpperCase()}}
+          .col.clearfix
+            .col-xs-12
+              .text-info-dker {{comment.name}}
+              .text-danger-dker {{App.states[comment.state_id].name}}
+              .text-success.dk {{comment.scheduled_on | date: 'MMM d, yyyy h:mm a'}}
+              p {{comment.comment}}
+              .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_on | date: 'd MMM, h:mm a'}}
+        .hbox(style='height: 40px;')
+    form.form.form-validation.col-xs-12.wrapper-xs.bg-white.col-xs-12(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
       .input-group
         input.form-control(type='text' name='comment' placeholder='enter to comment' ng-model='Comments.post.comment' required)
         span.input-group-btn
           button.btn.btn-default(type='sumbit' ng-disabled='commentForm.$invalid')
-            i.fa.fa-plus
+            i.fa.fa-paper-plane

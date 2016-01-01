@@ -7,6 +7,15 @@
 }
 
 @media (min-width: $app-aside-dock-media) {
+  .nav-comment {
+      position: fixed;
+      z-index: 2;
+      overflow: hidden;
+      top: 110px;
+      right: 0;
+      bottom: 0;
+  }
+
   .nav-job {
       position: fixed;
       z-index: 2;
