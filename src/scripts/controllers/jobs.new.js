@@ -19,6 +19,7 @@ angular.module('qui')
         preferred_genders: 'No Preference',
         direct_line_up: '0',
         whitelist: '0',
+        func_id: '0',
         JobSkill: [],
         JobsDegree: [],
         JobsInstitute: [],
@@ -190,24 +191,11 @@ angular.module('qui')
         loadingRegions: false,
       };
 
-      vm.Funcs = {
-        select: function selectFunc($item) {
-          vm.data.func_id = $item.id;
-        },
-
-        get: function getFuncs(search) {
-          return Funcs
-            .get({func: search})
-            .then(function gotFuncs(response) {
-              return response.data.map(function iterate(value) {
-                return value;
-              });
-            });
-        },
-
-        noResults: false,
-        loadingRegions: false,
-      };
+      Funcs
+        .get({func: ''})
+        .then(function gotFuncs(response) {
+          vm.Funcs = response.data;
+        });
 
       vm.create = function createJob() {
         Jobs

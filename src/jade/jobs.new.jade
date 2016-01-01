@@ -165,11 +165,9 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
             | Job Functional Area
             span.text-danger *
           .col-xs-12.no-padder
-            input.form-control(type='text' ng-model='NewJob.Funcs.model' placeholder='Functional Area' uib-typeahead='industry.name for industry in NewJob.Funcs.get($viewValue)' typeahead-loading='NewJob.Funcs.loadingFuncs' typeahead-no-results='NewJob.Funcs.noResults' required typeahead-on-select='NewJob.Funcs.select($item)')
-            i.fa.fa-refresh.fa-spin(ng-show='NewJob.Funcs.loadingFuncs')
-            div(ng-show='NewJob.Funcs.noResults')
-              i.fa.fa-remove
-              |  No Results Found
+            select.form-control.m-b(name='functional_area' ng-model='NewJob.data.func_id')
+              option(value='0' selected disabled) -- Choose One Functional Area --
+              option(ng-repeat='func in NewJob.Funcs' ng-value='func.id') {{func.name}}
       .line.line-dashed.b-b.line-lg.pull-in
       .col-sm-6.no-padder
         label.w-full.input-group
@@ -221,7 +219,8 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
               i
               | No
       .col-sm-4.no-padder
-        label.w-full.input-group
+        //- Hidden White List JD from Clients
+        label.w-full.input-group.hide
           .col-xs-12.no-padder
             | White List JD
             span.text-danger *
@@ -236,7 +235,9 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
               | No
       .col-sm-4.no-padder
         label.w-full.input-group
-          .col-xs-12.no-padder Email of contact person
+          .col-xs-12.no-padder
+            | Email of contact person
+            span.text-danger *
           .col-xs-12.no-padder
             input.form.form-control(type='email' ng-model='NewJob.data.email' required)
       .line.line-dashed.b-b.line-lg.pull-in
