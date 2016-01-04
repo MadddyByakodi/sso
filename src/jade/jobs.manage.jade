@@ -20,8 +20,8 @@
           button.pull-right.btn.btn-success.m-t-n-sm(ng-if='Applicant.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(Applicant.getApplicants({checked: true}, "id"))') Download CV(s)
     .m-b-md.hbox(ng-repeat='applicant in Applicant.applicants')
       .col.bg-white
-        .col-xs-12.col-md-9.no-padder
-          .tl-content.panel.padder.b-r.w-full.w-auto-xs
+        .col-xs-12.col-md-10.no-padder
+          .tl-content.m-none.padder.w-full.w-auto-xs
             .m-b-sm
               label.i-checks.m-b-none
                 input(type='checkbox' ng-model='applicant.checked')
@@ -29,44 +29,44 @@
               a(ui-sref='app.applicant.view({applicantId: applicant.id})')
                 strong.text-primary-lt  {{applicant.name}}
 
-              span.pull-right(ng-if='applicant.interview_type && applicant.interview_time')
+              .btn-group.pull-right.m-t-n-xs(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
+                button.w-full.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[applicant.state_id].view.length===0' style='padding: 4px 8px;')
+                  | {{applicant.state_name}}&nbsp;
+                  span(ng-if='App.states[applicant.state_id].view.length>0').caret
+                ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
+                  li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
+                    a(href='' ng-click='App.changeState(applicant, state_id)') {{App.states[state_id].name}}
+
+              span.pull-right.padder(ng-if='applicant.interview_type && applicant.interview_time')
                 i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}')
-                |  {{App.states[applicant.interview_type].name}},
                 |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
-            .panel-body.pull-in.b-t
+
+            .panel-body.pull-in.b-t.wrapper-xs
               .col-xs-4
                 i.fa.fa-bookmark
-                |  {{applicant.exp_designation}}
+                | &nbsp; {{applicant.exp_designation}}
               .col-xs-4
                 i.fa.fa-graduation-cap
-                |  {{applicant.edu_degree}}
+                | &nbsp; {{applicant.edu_degree}}
               .col-xs-4
                 i.fa.fa-inr
-                |  {{applicant.exp_salary}}&nbsp;Lakhs
+                | &nbsp; {{applicant.exp_salary}}&nbsp;Lakhs
               .col-xs-4
                 i.fa.fa-briefcase
-                |  {{applicant.exp_employer}}
+                | &nbsp; {{applicant.exp_employer}}
               .col-xs-4
                 i.fa.fa-line-chart
-                |  {{applicant.total_exp}}&nbsp;Years
+                | &nbsp; {{applicant.total_exp}}&nbsp;Years
               .col-xs-4
                 i.fa.fa-map-marker
-                |  {{applicant.exp_location}}
-        .col-xs-12.col-md-3
-            .col-xs-3.col-md-12.wrapper-xs: span.pull-right.m-t-xs {{applicant.created_on | date: 'h:mm a'}}
-            .col-xs-6.col-md-12.wrapper-xs.no-padder
-              .col-xs-3.item.text-info.h1.pull-left.no-padder.font-thin  {{applicant.applicant_score}}
-
-              .col-xs-9.pull-right.no-padder
-                .btn-group.w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-                  button.w-full.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[applicant.state_id].view.length===0')
-                    | {{applicant.state_name}}&nbsp;
-                    span(ng-if='App.states[applicant.state_id].view.length>0').caret
-                  ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-                    li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
-                      a(href='' ng-click='App.changeState(applicant, state_id)') {{App.states[state_id].name}}
-            .col-xs-3.col-md-12.wrapper-xs
-              i.btn.pull-right.text-success-dker.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
+                | &nbsp; {{applicant.exp_location}}
+        .col-xs-12.col-md-2.no-padder
+          .m-none.wrapper-sm.w-full.w-auto-xs
+            .m-b-sm.clearfix: span.pull-right.padder.m-t-xxs {{applicant.created_on | date: 'h:mm a'}}
+            .panel-body.pull-in.m-r-n-sm.wrapper-xs.b-t
+              .clearfix
+                i.btn.pull-right.text-success-dker.m-t-xs.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
+                .item.text-info.h1.pull-right.padder.b-l.b-r.b-light.font-thin  {{applicant.applicant_score}}
     .col-xs-2.col-xs-offset-5
       button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
         i.fa.fa-circle-o-notch.fa-spin
