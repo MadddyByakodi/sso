@@ -10,8 +10,8 @@ angular.module('qui')
         Summary.get({state_id: '1,5,8,9,17'})
           .then(function gotSummary(response) {
             vm.summary = {
-              cv: response.data['1'],
-              interview: response.data['9'],
+              cv: response.data['1'] || 0,
+              interview: response.data['9'] || 0,
               await_interview: [
                 response.data['5'] || 0,
                 response.data['8'] || 0,

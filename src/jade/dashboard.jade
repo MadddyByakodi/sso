@@ -18,11 +18,13 @@ div(ng-controller='DashboardController as Dash')
         .m-xs.wrapper-xs.bg-white
           .h4.text-black  &nbsp; Actions Required
           .b-b.m-t-xs
-          .hbox.wrapper-sm.m-t-xs
+          .hbox.wrapper-sm.m-t-xs(ng-if='Dash.pipeline.length===0')
+              .col.text-center All Done
+          .hbox.wrapper-sm.m-t-xs(ng-if='Dash.pipeline.length>0')
               .col: .h6.font-bold Positions
               .col.thumb-xs: .h6.font-bold.pull-right CVs
           div
-            .hbox.wrapper-sm.b-b(ng-repeat='pipe in Dash.pipeline')
+            .hbox.wrapper-sm.b-b(ng-repeat='pipe in Dash.pipeline | orderBy:"-count"')
               .col: a(ui-sref='app.jobs.manage({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
               .col.thumb-xs
                 span.pull-right {{pipe.count}}
@@ -52,7 +54,9 @@ div(ng-controller='DashboardController as Dash')
       .col-xs-12.no-padder
         .m-xs.wrapper-xs.bg-white-only
           .h4.text-black.wrapper-xs.b-b  &nbsp; Upcoming Interviews
-          .hbox.wrapper-sm
+          .hbox.wrapper-sm(ng-if='Dash.interviews.length===0')
+            .col.text-center.text-light-lter None for This Week
+          .hbox.wrapper-sm(ng-if='Dash.interviews.length>0')
             .col: .h6.font-bold Name
             .col: .h6.font-bold Type
             .col: .h6.font-bold Time

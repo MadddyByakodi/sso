@@ -11,6 +11,7 @@ div(ng-controller='ApplicantViewController as Applicant')
           .h4
             | {{Applicant.data.name}}
             i.btn.text-white.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
+        .col.thumb-xs(title='Score'): .font-thin.h3 {{Applicant.data.applicant_score}}
       .m-b-xs
         .hbox
           .col
@@ -21,8 +22,6 @@ div(ng-controller='ApplicantViewController as Applicant')
               ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
                 li(role='menuitem' ng-repeat='state_id in App.states[Applicant.data.state_id].view')
                   a(href='' ng-click='App.changeState(Applicant.data, state_id)') {{App.states[state_id].name}}
-          .col.thumb-xs(title='Score')
-            .h2 &nbsp;{{Applicant.data.applicant_score}}
 
     //- Applicant Details
 
@@ -91,7 +90,9 @@ div(ng-controller='ApplicantViewController as Applicant')
       .col
         .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')
           .col.text-center.thumb-sm
-            .img-circle.bg-primary.dker.wrapper-xs.h3 {{comment.name[0].toUpperCase()}}
+            .fa-stack.fa-2x.text-primary
+              i.fa.fa-circle.fa-stack-2x
+              span.fa.fa-stack-1x.h3.fa-inverse {{comment.name[0].toUpperCase()}}
           .col.clearfix
             .col-xs-12
               .text-info-dker {{comment.name}}
