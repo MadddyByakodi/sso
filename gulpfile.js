@@ -11,7 +11,7 @@ gulp.task('develop', function develop() {
 
     // tasks: plugin.livereload.changed,
     ignore: ['node_modules/**', 'bower_components/**', 'src/**', 'dist/**'],
-    nodeArgs: ['--debug'],
+    nodeArgs: [],
     env: {NODE_ENV: 'development' },
   });
 });

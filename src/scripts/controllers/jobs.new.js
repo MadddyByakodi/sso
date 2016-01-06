@@ -13,6 +13,7 @@ angular.module('qui')
       const vm = this;
       vm.data = {
         days_per_week: '5',
+        email: '',
         start_work_time: '9:00 AM',
         end_work_time: '5:00 PM',
         job_nature: '1',
@@ -20,11 +21,11 @@ angular.module('qui')
         direct_line_up: '0',
         whitelist: '0',
         func_id: '0',
-        JobSkill: [],
-        JobsDegree: [],
-        JobsInstitute: [],
-        JobsIndustry: [],
-        JobsEmployer: [],
+        JobSkills: [],
+        JobsDegrees: [],
+        JobsInstitutes: [],
+        JobsIndustries: [],
+        JobsEmployers: [],
       };
 
       vm.ui = {
@@ -69,7 +70,7 @@ angular.module('qui')
       vm.Degrees = {
         select: function selectDegree($item) {
           vm.Degrees.model = '';
-          vm.data.JobsDegree.push({
+          vm.data.JobsDegrees.push({
             degree_id: $item.id,
             degree: $item.degree,
           });
@@ -92,7 +93,7 @@ angular.module('qui')
       vm.Institutes = {
         select: function selectInstitute($item) {
           vm.Institutes.model = '';
-          vm.data.JobsInstitute.push({
+          vm.data.JobsInstitutes.push({
             institute_id: $item.id,
             name: $item.name,
           });
@@ -115,7 +116,7 @@ angular.module('qui')
       vm.Industries = {
         select: function selectIndustry($item) {
           vm.Industries.model = '';
-          vm.data.JobsIndustry.push({
+          vm.data.JobsIndustries.push({
             industry_id: $item.id,
             name: $item.name,
           });
@@ -138,7 +139,7 @@ angular.module('qui')
       vm.Employers = {
         select: function selectEmployer($item) {
           vm.Employers.model = '';
-          vm.data.JobsEmployer.push({
+          vm.data.JobsEmployers.push({
             employer_id: $item.id,
             name: $item.name,
           });
@@ -161,7 +162,7 @@ angular.module('qui')
       vm.Skills = {
         selectRequired: function selectSkill($item) {
           vm.Skills.modelRequired = '';
-          vm.data.JobSkill.push({
+          vm.data.JobSkills.push({
             skill_id: $item.id,
             isRequired: 1,
             name: $item.name,
@@ -170,7 +171,7 @@ angular.module('qui')
 
         selectOptional: function selectSkill($item) {
           vm.Skills.modelOptional = '';
-          vm.data.JobSkill.push({
+          vm.data.JobSkills.push({
             skill_id: $item.id,
             isRequired: 0,
             name: $item.name,
