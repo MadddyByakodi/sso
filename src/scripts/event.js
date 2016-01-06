@@ -7,6 +7,9 @@ angular.module('qui')
     '$state',
     '$log',
     function handleEvents($rootScope, Auth, AUTH_EVENTS, Session, $state, $log) {
+      /* eslint angular/on-watch: 0 */
+
+      // In Future: assign to variable to destroy during the $destroy event
       $rootScope.$on('$stateChangeStart', function handleStateChange(event, next) {
         if (!Session.isAuthenticated() && (next.name.split('.')[0] !== 'access')) {
           event.preventDefault();

@@ -95,8 +95,16 @@ gulp.task('lint', function lint() {
   return gulp.src(['app/**/*.js', '*.js', 'src/scripts/**/*.js'])
     .pipe(plugin.eslint())
     .pipe(plugin.eslint.format())
+    .pipe(plugin.if(
+      ~process.argv.indexOf('--fail'),
+      plugin.eslint.failAfterError()
+    ))
     .pipe(plugin.jscs())
     .pipe(plugin.jscs.reporter())
+    .pipe(plugin.if(
+      ~process.argv.indexOf('--fail'),
+      plugin.jscs.reporter('fail')
+    ))
     .pipe(plugin.notify({
       onLast: true,
       title: 'Lint Notification',
