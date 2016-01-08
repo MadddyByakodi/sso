@@ -5,13 +5,13 @@
   button.pull-right.visible-xs(ui-toggle-class='off-screen', data-target='.app-aside', ui-scroll='app')
     i.fa.fa-align-justify
   //- brand
-  a.navbar-brand.text-lt(href='/')
+  a.navbar-brand.text-lt(ui-sref='app.dashboard')
     img.w-sm(src='/images/logo.svg', alt='{{App.app.name}}')
     span.hide.hidden-folded.m-l-xs {{App.app.name}}
 //- navbar collapse
 .collapse.pos-rlt.navbar-collapse.box-shadow(class='{{App.app.settings.navbarCollapseColor}}')
   //- buttons
-  .nav.navbar-nav.hidden-xs
+  .nav.navbar-nav.hidden-xs.hide
     a.btn.no-shadow.navbar-btn(href='', ng-click='App.app.settings.asideFolded = !App.app.settings.asideFolded')
       i.fa.fa-fw(class="{{App.app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}}")
     a.btn.no-shadow.navbar-btn(href='', ui-toggle-class='show', target='#aside-user')
@@ -27,10 +27,10 @@
 
       //- dropdown
       ul.dropdown-menu.animated.fadeInRight.w
-        li
+        li.hide
           a(ui-sref='app.help')
             span.label.bg-info.pull-right new
             | Help
-        li.divider
+        li.hide.divider
         li(ng-controller='LogoutController as logout')
           a(ng-click='logout.init()') Logout

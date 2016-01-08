@@ -16,6 +16,11 @@ angular.module('qui')
           $state.go('access.signin');
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
         }
+
+        if (Session.isAuthenticated() && (next.name === 'access.signin')) {
+          event.preventDefault();
+          $state.go('app.dashboard');
+        }
       });
 
       $rootScope.$on(AUTH_EVENTS.loginSuccess, function loginSuccess(event, data) {
