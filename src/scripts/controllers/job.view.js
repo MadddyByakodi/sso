@@ -7,7 +7,7 @@ angular.module('qui')
       const vm = this;
       vm.data = {};
       vm.loadJob = function loadJob() {
-        vm.ui = {loading: true};
+        vm.ui = { loading: true };
         Jobs
           .getOne($stateParams.jobId)
           .then(function gotJob(result) {

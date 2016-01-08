@@ -34,7 +34,7 @@ angular.module('qui')
 
       authService.refreshToken = function refreshToken() {
         return $http
-          .post('/api/refresh', {refresh_token: Session.read('oauth').refresh_token})
+          .post('/api/refresh', { refresh_token: Session.read('oauth').refresh_token })
           .then(function tokenRefreshed(response) {
             Session.create('oauth', response.data);
             return response.data;
@@ -49,7 +49,7 @@ angular.module('qui')
       authService.logout = function logout() {
         const url = '/api/logout';
         return $http
-          .post(url, {access_token: Session.getAccessToken()})
+          .post(url, { access_token: Session.getAccessToken() })
           .then(
             function logoutSuccess(response) {
               // Destroy Session data
@@ -67,7 +67,7 @@ angular.module('qui')
       authService.forgotpass = function forgotpass(username) {
         const url = '/api/forgotpass';
         return $http
-          .post(url, {username: username})
+          .post(url, { username: username })
           .then(
             function forgotpassSuccess(response) {
               return response.data;

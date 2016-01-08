@@ -7,7 +7,7 @@ angular.module('qui')
       const vm = this;
 
       vm.getSummary = function getSummary() {
-        Summary.get({state_id: '1,5,8,9,17'})
+        Summary.get({ state_id: '1,5,8,9,17' })
           .then(function gotSummary(response) {
             vm.summary = {
               cv: response.data['1'] || 0,

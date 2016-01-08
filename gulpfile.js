@@ -12,14 +12,14 @@ gulp.task('develop', function develop() {
     // tasks: plugin.livereload.changed,
     ignore: ['node_modules/**', 'bower_components/**', 'src/**', 'dist/**'],
     nodeArgs: [],
-    env: {NODE_ENV: 'development' },
+    env: { NODE_ENV: 'development' },
   });
 });
 
 // Jade Templates
 gulp.task('html', function html() {
   return gulp.src('src/jade/**/*.jade')
-    .pipe(plugin.changed('dist/html', {extension: '.html'}))
+    .pipe(plugin.changed('dist/html', { extension: '.html' }))
     .pipe(
       plugin.jade({
         pretty: true,
@@ -39,7 +39,7 @@ gulp.task('html', function html() {
 // Images
 gulp.task('images', function images() {
   return gulp.src('src/images/**/*')
-    .pipe(plugin.changed('dist/images', {extension: '.svg'}))
+    .pipe(plugin.changed('dist/images', { extension: '.svg' }))
     .pipe(plugin.cache(plugin.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/images'))
     .pipe(plugin.notify({

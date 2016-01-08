@@ -10,11 +10,11 @@ angular.module('qui')
       // Set default bucket to ALL
       if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
       vm.applicants = []; // collection of applicants
-      vm.ui = {lazyLoad: true, loading: false}; // ui states
-      vm.params = {start: 0, rows: 15, fl: 'id,name,state_id,state_name,_root_'}; // GET query params
+      vm.ui = { lazyLoad: true, loading: false }; // ui states
+      vm.params = { start: 0, rows: 15, fl: 'id,name,state_id,state_name,_root_' }; // GET query params
       vm.loadApplicants = function loadApplicants() {
         if (!vm.ui.lazyLoad) return; // if no more applicants to get
-        vm.ui = {lazyLoad: false, loading: true};
+        vm.ui = { lazyLoad: false, loading: true };
 
         if ($stateParams.bucket === 'Interview') {
           vm.params.interview_time = [

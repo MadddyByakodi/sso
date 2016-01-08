@@ -12,14 +12,14 @@ angular.module('qui')
       if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
       vm.applicants = []; // collection of applicants
       vm.job = {}; // Job applied by applicant initialized
-      vm.ui = {lazyLoad: true, loading: false}; // ui states
+      vm.ui = { lazyLoad: true, loading: false }; // ui states
       vm.params = {
         start: 0, rows: 15,
         fl: 'applicant_score,created_on,edu_degree,exp_designation,exp_employer,exp_location,exp_salary,id,name,state_id,state_name,total_exp',
       }; // GET query params
       vm.loadApplicants = function loadApplicants() {
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
-        vm.ui = {lazyLoad: false, loading: true};
+        vm.ui = { lazyLoad: false, loading: true };
 
         if ($stateParams.bucket === 'Interview') {
           // Customization for Interview tab
@@ -51,7 +51,7 @@ angular.module('qui')
       vm.loadApplicants(); // get applicants
 
       vm.loadJob = function loadJob() {
-        Jobs.getOne($stateParams.jobId, {fl: 'id,role'}).then(function getJob(response) {
+        Jobs.getOne($stateParams.jobId, { fl: 'id,role' }).then(function getJob(response) {
           vm.job = response.data;
         });
       };

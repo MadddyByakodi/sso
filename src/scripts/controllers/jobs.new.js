@@ -55,7 +55,7 @@ angular.module('qui')
 
         get: function getRegions(search) {
           return Regions
-            .get({region: search})
+            .get({ region: search })
             .then(function gotRegions(response) {
               return response.data.map(function iterate(value) {
                 return value;
@@ -78,7 +78,7 @@ angular.module('qui')
 
         get: function getDegrees(search) {
           return Degrees
-            .get({degree: search})
+            .get({ degree: search })
             .then(function gotDegrees(response) {
               return response.data.map(function iterate(value) {
                 return value;
@@ -101,7 +101,7 @@ angular.module('qui')
 
         get: function getInstitutes(search) {
           return Institutes
-            .get({institute: search})
+            .get({ institute: search })
             .then(function gotInstitutes(response) {
               return response.data.map(function iterate(value) {
                 return value;
@@ -124,7 +124,7 @@ angular.module('qui')
 
         get: function getIndustries(search) {
           return Industries
-            .get({industry: search})
+            .get({ industry: search })
             .then(function gotIndustries(response) {
               return response.data.map(function iterate(value) {
                 return value;
@@ -147,7 +147,7 @@ angular.module('qui')
 
         get: function getEmployer(search) {
           return Employers
-            .get({employer: search})
+            .get({ employer: search })
             .then(function gotEmployer(response) {
               return response.data.map(function iterate(value) {
                 return value;
@@ -180,7 +180,7 @@ angular.module('qui')
 
         get: function getSkill(search) {
           return Skills
-            .get({skill: search})
+            .get({ skill: search })
             .then(function gotSkill(response) {
               return response.data.map(function iterate(value) {
                 return value;
@@ -193,7 +193,7 @@ angular.module('qui')
       };
 
       Funcs
-        .get({func: ''})
+        .get({ func: '' })
         .then(function gotFuncs(response) {
           vm.Funcs = response.data;
         });

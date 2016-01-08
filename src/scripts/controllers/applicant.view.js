@@ -14,7 +14,7 @@ angular.module('qui')
 
       vm.resumeSrc = `${APP.apiServer}/quarc/applicant/${$stateParams.applicantId}/viewcv?access_token=${Session.getAccessToken()}`;
       vm.loadApplicant = function loadApplicant() {
-        vm.ui = {loading: true};
+        vm.ui = { loading: true };
         Applicants
           .getOne($stateParams.applicantId)
           .then(function gotApplicant(result) {

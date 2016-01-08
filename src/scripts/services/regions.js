@@ -9,7 +9,7 @@ angular.module('qui')
       regionService.get = function getRegions(params) {
         const url = `${APP.apiServer}/quarc/region`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successRegions(response) {
               return response.data;

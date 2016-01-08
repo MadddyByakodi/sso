@@ -9,7 +9,7 @@ angular.module('qui')
       employerService.get = function getEmployers(params) {
         const url = `${APP.apiServer}/quarc/employer`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successEmployers(response) {
               return response.data;

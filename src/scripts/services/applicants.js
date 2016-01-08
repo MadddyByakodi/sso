@@ -11,7 +11,7 @@ angular.module('qui')
       applicantsService.get = function get(params) {
         const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/allapplicants`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successJobs(response) {
               $log.info(response);
@@ -28,7 +28,7 @@ angular.module('qui')
       applicantsService.getOne = function getOne(applicantId, params) {
         const url = `${APP.apiServer}/quarc/applicant/${applicantId}/`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successJobs(response) {
               $log.info(response);

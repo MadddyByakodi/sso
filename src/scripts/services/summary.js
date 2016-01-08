@@ -9,7 +9,7 @@ angular.module('qui')
       summaryService.get = function getSummary(params) {
         const url = `${APP.apiServer}/quarc/client/summary`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successSummary(response) {
               return response.data;
@@ -24,7 +24,7 @@ angular.module('qui')
       summaryService.getPipeline = function getPipeline(params) {
         const url = `${APP.apiServer}/quarc/client/summary/pipeline`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successPipeline(response) {
               return response.data;

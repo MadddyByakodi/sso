@@ -9,7 +9,7 @@ angular.module('qui')
       funcService.get = function getFuncs(params) {
         const url = `${APP.apiServer}/quarc/func`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successFuncs(response) {
               return response.data;

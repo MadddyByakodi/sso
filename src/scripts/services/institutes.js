@@ -9,7 +9,7 @@ angular.module('qui')
       instituteService.get = function getInstitutes(params) {
         const url = `${APP.apiServer}/quarc/institute`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successInstitutes(response) {
               return response.data;

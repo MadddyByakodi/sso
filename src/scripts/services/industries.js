@@ -9,7 +9,7 @@ angular.module('qui')
       industryService.get = function getIndustries(params) {
         const url = `${APP.apiServer}/quarc/industry`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successIndustries(response) {
               return response.data;

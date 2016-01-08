@@ -10,7 +10,7 @@ angular.module('qui')
       jobCommentService.get = function getJobComments(jobId, params) {
         const url = `${APP.apiServer}/quarc/job/${jobId}/comments`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successGetJobComments(response) {
               return response.data;

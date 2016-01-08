@@ -9,7 +9,7 @@ angular.module('qui')
       degreeService.get = function getDegrees(params) {
         const url = `${APP.apiServer}/quarc/degree`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successDegrees(response) {
               return response.data;

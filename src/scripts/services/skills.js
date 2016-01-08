@@ -9,7 +9,7 @@ angular.module('qui')
       skillService.get = function getSkills(params) {
         const url = `${APP.apiServer}/quarc/skill`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successSkills(response) {
               return response.data;

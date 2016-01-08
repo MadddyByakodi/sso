@@ -4,11 +4,11 @@ angular.module('qui')
     function JobsCtrl(Jobs) {
       const vm = this;
       vm.jobs = []; // collection of jobs
-      vm.ui = {lazyLoad: true, loading: false}; // ui states
-      vm.params = {start: 0, rows: 15}; // GET query params
+      vm.ui = { lazyLoad: true, loading: false }; // ui states
+      vm.params = { start: 0, rows: 15 }; // GET query params
       vm.loadJobs = function loadJobs() {
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
-        vm.ui = {lazyLoad: false, loading: true};
+        vm.ui = { lazyLoad: false, loading: true };
         Jobs.get(vm.params).then(function jobList(result) {
           angular.forEach(result.data, function iterateJobs(job) {
             vm.jobs.push(job);

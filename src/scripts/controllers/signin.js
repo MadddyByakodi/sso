@@ -14,7 +14,7 @@ angular.module('qui')
         vm.authError = null;
 
         // Try to login
-        Auth.login({username: vm.user.username, password: vm.user.password})
+        Auth.login({ username: vm.user.username, password: vm.user.password })
           .then(
             function handleLogin() {
               $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -30,7 +30,7 @@ angular.module('qui')
           .then(function setSession() {
             return Auth.setSessionData()
               .then(function openApp() {
-                $window.location.href = $state.href('app.applicants', {bucket: 'All'}, {absolute: true});
+                $window.location.href = $state.href('app.applicants', { bucket: 'All' }, { absolute: true });
                 return;
               });
           });

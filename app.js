@@ -88,7 +88,7 @@ app.post('/api/forgotpass', function login(req, res) {
 });
 
 app.get('/*', function serveApp(req, res) {
-  res.sendFile('index.html', {root: __dirname + '/dist/html'});
+  res.sendFile('index.html', { root: __dirname + '/dist/html' });
 });
 
 app.listen(3000);

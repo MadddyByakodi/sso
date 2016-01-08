@@ -11,7 +11,7 @@ angular.module('qui')
       jobsService.get = function getJobs(params) {
         const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/postedjobs`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successJobs(response) {
               $log.info(response);
@@ -28,7 +28,7 @@ angular.module('qui')
       jobsService.getOne = function getJobs(jobId, params) {
         const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/postedjobs/${jobId}`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successJobs(response) {
               $log.info(response);
@@ -45,7 +45,7 @@ angular.module('qui')
       jobsService.getApplicants = function getApplicants(jobId, params) {
         const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/postedjobs/${jobId}/appliedapplicants`;
         return $http
-          .get(url, {params: params})
+          .get(url, { params: params })
           .then(
             function successJobs(response) {
               $log.info(response);
