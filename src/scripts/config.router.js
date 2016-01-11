@@ -13,7 +13,7 @@ angular.module('qui')
     '$urlRouterProvider',
     function quiStateConfig($stateProvider, $urlRouterProvider) {
       $urlRouterProvider
-        .otherwise('/access/signin');
+        .otherwise('/access/404');
 
       $stateProvider
         .state('access', {
@@ -24,10 +24,11 @@ angular.module('qui')
           url: '/signin',
           templateUrl: 'html/signin.html',
         })
-        .state('access.forgotpass', {
-          url: '/forgotpass',
-          templateUrl: 'html/forgotpass.html',
-        })
+
+        // .state('access.forgotpass', {
+        //   url: '/forgotpass',
+        //   templateUrl: 'html/forgotpass.html',
+        // })
         .state('access.404', {
           url: '/404',
           templateUrl: 'html/404.html',

@@ -1,23 +1,20 @@
 .hobx(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.loadApplicants()')
   .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 2;')
     ul.nav.nav-pills.nav-sm
+      li: label.i-checks.m-t-xs.m-b-none.m-l-lg
+        input(type='checkbox' ng-click='Applicant.setChecked(Applicant.checkAll)' ng-model='Applicant.checkAll')
+        i.m-r-none(ng-if='Applicant.applicants.length > 0')
       li(ng-repeat='bucket in Applicant.buckets' ui-sref-active="active")
         a(ui-sref='app.jobs.manage({bucket: bucket})') {{bucket}}
+  .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
+    ul.nav.nav-pills.nav-sm
+      li
+        button.btn.btn-primary.btn-sm(ng-if='Applicant.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(Applicant.getApplicants({checked: true}, "id"))') Download CV(s)
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.job.view({jobId: 570})') View JD
   .wrapper-md
     .m-b-xs.hbox.m-t-xl(ng-if='Applicant.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!Applicant.ui.loading') No Applicants
-    .m-b-xs.hbox.m-t-xl(ng-if='Applicant.applicants.length > 0'): .col
-        .col-xs-6.col-md-9.no-padder
-          .padder.w-full.w-auto-xs.m-b-xs
-              label.i-checks.m-b-none
-                input(type='checkbox' ng-click='Applicant.setChecked(Applicant.checkAll)' ng-model='Applicant.checkAll')
-                i
-              span
-                | Positions /
-                a(ui-sref='app.job.view({jobId: Applicant.job.id, bucket:"all"})')  {{Applicant.job.role}}
-                |  / Manage
-        .col-xs-6.col-md-3.no-padder
-          button.pull-right.btn.btn-success.m-t-n-sm(ng-if='Applicant.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(Applicant.getApplicants({checked: true}, "id"))') Download CV(s)
+    .m-t-lg
     .m-b-md.hbox(ng-repeat='applicant in Applicant.applicants')
       .col.bg-white
         .col-xs-12.col-md-10.no-padder
@@ -31,7 +28,7 @@
 
               .btn-group.pull-right.m-t-n-xs(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
                 button.w-full.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[applicant.state_id].view.length===0' style='padding: 4px 8px;')
-                  | {{applicant.state_name}}&nbsp;
+                  span {{applicant.state_name}}&nbsp;
                   span(ng-if='App.states[applicant.state_id].view.length>0').caret
                 ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
                   li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
@@ -42,24 +39,24 @@
                 |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
 
             .panel-body.pull-in.b-t.wrapper-xs
-              .col-xs-4
-                i.fa.fa-bookmark
-                | &nbsp; {{applicant.exp_designation}}
-              .col-xs-4
+              .col-xs-4.text-ellipsis
+                i.fa.fa-bookmark(style='margin:0 2px;')
+                | {{applicant.exp_designation}}
+              .col-xs-4.text-ellipsis
                 i.fa.fa-graduation-cap
-                | &nbsp; {{applicant.edu_degree}}
-              .col-xs-4
+                | {{applicant.edu_degree}}
+              .col-xs-4.text-ellipsis
                 i.fa.fa-inr
-                | &nbsp; {{applicant.exp_salary}}&nbsp;Lakhs
-              .col-xs-4
+                |  {{applicant.exp_salary}}&nbsp;Lakhs
+              .col-xs-4.text-ellipsis
                 i.fa.fa-briefcase
-                | &nbsp; {{applicant.exp_employer}}
-              .col-xs-4
+                |  {{applicant.exp_employer}}
+              .col-xs-4.text-ellipsis
                 i.fa.fa-line-chart
-                | &nbsp; {{applicant.total_exp}}&nbsp;Years
-              .col-xs-4
+                |  {{applicant.total_exp}}&nbsp;Years
+              .col-xs-4.text-ellipsis
                 i.fa.fa-map-marker
-                | &nbsp; {{applicant.exp_location}}
+                |  {{applicant.exp_location}}
         .col-xs-12.col-md-2.no-padder
           .m-none.wrapper-sm.w-full.w-auto-xs
             .m-b-sm.clearfix: span.pull-right.padder.m-t-xxs {{applicant.created_on | date: 'h:mm a'}}

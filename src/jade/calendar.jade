@@ -1,12 +1,13 @@
 div(ng-controller='CalendarController as Calendar')
-  .wrapper-md.bg-light.b-b
+  .wrapper-md.bg-light.b-b.hide
     button.btn.btn-default.btn-addon.pull-right.m-t-n-xs(type='button', ui-toggle-class='show', target='#aside')
       i.fa.fa-bars
       |  List
     h1.m-n.font-thin.h3 Calendar
   .hbox.hbox-auto-xs.hbox-auto-sm
     .col.wrapper-md
-      .clearfix.m-b
+      .clearfix.m-b-xs
+        .pull-left.h1.m-n.font-thin.h3 Calendar
         .pull-right
           button.btn.btn-sm.btn-default(mwl-date-modifier='', date='Calendar.calendarDay', set-to-today='') Today
           .btn-group.m-l-xs

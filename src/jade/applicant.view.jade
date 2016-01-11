@@ -1,5 +1,5 @@
 div(ng-controller='ApplicantViewController as Applicant')
-  .col-sm-3.m-t-xs.no-padder
+  .col-sm-3.no-padder
     //- Applicant top cover container
     .wrapper-xs.bg-info.dker.m-b-xs
       .hbox.m-t-xs
@@ -95,10 +95,10 @@ div(ng-controller='ApplicantViewController as Applicant')
                span.font-bold.text-info-dker(ng-if='!Applicant.showAllSkill') + More
 
     //- Resume container
-  .col-sm-6.m-t-xs.no-padder
+  .col-sm-6.no-padder
     iframe.b-a.b-light.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}' height='650px')
 
-  .col-sm-3.nav-comment.no-padder.m-t-xs(ng-controller='ApplicantCommentsController as Comments')
+  .col-sm-3.nav-comment.no-padder(ng-controller='ApplicantCommentsController as Comments')
     .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
       .col
         .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')
