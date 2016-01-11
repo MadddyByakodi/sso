@@ -70,6 +70,25 @@ angular.module('qui')
         });
       };
 
+      vm.addFollower = function addFollower(ids) {
+        // ApplicantIds is array contatining applicant id to download cvs
+        const modalInstance = $uibModal.open({
+          templateUrl: 'html/modal.add.follower.html',
+          controller: 'AddFollowerController',
+          controllerAs: 'AddFollower',
+          size: 'md',
+          resolve: {
+            ApplicantIds: function ApplicantIds() {
+              return ids;
+            },
+          },
+        });
+
+        modalInstance.result.then(function success() {
+          // console.log(type);
+        });
+      };
+
       vm.changeState = function changeState(applicant, stateId) {
         // ApplicantIds is array contatining applicant id to download cvs
         const modalInstance = $uibModal.open({
