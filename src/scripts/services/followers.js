@@ -25,6 +25,24 @@ angular.module('qui')
           );
       };
 
+      followersService.create = function create(data,ApplicantId) {
+        const url = APP.apiServer + '/quarc/follower/' +ApplicantId + '/' + User.userinfo.id + '/insertfollower';
+        return $http
+          .post(url, data)
+          .then(
+          function successJobs(response) {
+            $log.info(response);
+            return response.data;
+          },
+
+          function errorJobs(response) {
+            $log.error(response);
+            return $q.reject(response.data);
+          }
+        );
+      };
+
+
       return followersService;
     },
   ]);
