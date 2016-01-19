@@ -82,8 +82,9 @@ div(ng-controller='ApplicantViewController as Applicant')
             span.font-bold.text-info-dker(ng-if='!Applicant.showAllSkill') + More
 
     //- Resume container
-  .col-sm-6.no-padder
-    iframe.b-a.b-light.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}' height='650px')
+  .col-sm-6.no-padder.fixed-resume
+    div(style='position: relative; height: 100%; width: 100%; top: 0; overflow: hidden;')
+      iframe.h-full.b-a.b-light.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}')
 
   .col-sm-3.nav-comment.no-padder(ng-controller='ApplicantCommentsController as Comments')
     .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
