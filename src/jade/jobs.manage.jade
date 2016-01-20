@@ -63,7 +63,7 @@
             .panel-body.pull-in.m-r-n-sm.wrapper-xs.b-t
               .clearfix
                 i.btn.pull-right.text-success-dker.m-t-xs.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
-                .item.text-info.h1.pull-right.padder.b-l.b-r.b-light.font-thin  {{applicant.applicant_score}}
+                .item.text-info.h1.pull-right.padder.b-l.b-r.b-light.font-thin(title='System generated alogrithmic Score')  {{applicant.applicant_score}}
     .col-xs-2.col-xs-offset-5
       button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
         i.fa.fa-circle-o-notch.fa-spin

@@ -33,6 +33,7 @@ angular.module('qui')
 
       vm.Applicants = {
         select: function gotoApplicant($item) {
+          vm.Applicants.searchText = '';
           $state.go('app.applicant.view', { applicantId: $item.id });
         },
 

@@ -36,6 +36,17 @@ gulp.task('html', function html() {
     }));
 });
 
+// Fonts
+gulp.task('fonts', function images() {
+  return gulp.src('bower_components/bootstrap-sass/assets/fonts/**')
+    .pipe(gulp.dest('dist/fonts'))
+    .pipe(plugin.notify({
+      onLast: true,
+      title: 'Font copied',
+      message: 'Font copy done!',
+    }));
+});
+
 // Images
 gulp.task('images', function images() {
   return gulp.src('src/images/**/*')
@@ -142,7 +153,7 @@ gulp.task('watch', function watch() {
 });
 
 gulp.task('build:dev', function buildSeq(cb) {
-  runSequence('lint', 'clean', ['styles', 'scripts', 'images'], 'html', cb);
+  runSequence('lint', 'clean', ['styles', 'scripts', 'images', 'fonts'], 'html', cb);
 });
 
 gulp.task('default', function dev(cb) {
