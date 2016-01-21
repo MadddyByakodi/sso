@@ -22,13 +22,12 @@ angular.module('qui')
             vm.data = result.data;
 
             // Loading Followers
-
             Followers
               .getOne($stateParams.applicantId)
               .then(function gotFollower(fresult) {
                 vm.data.follower = fresult.data;
-                // console.log( vm.data);
               });
+
             // data has been loaded
             vm.ui.loading = false;
           });

@@ -12,9 +12,8 @@ angular.module('qui')
     '$stateProvider',
     '$urlRouterProvider',
     function quiStateConfig($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider
-        .otherwise('/access/404');
-
+      $urlRouterProvider.when('/', '/app/dashboard');
+      $urlRouterProvider.otherwise('/access/404');
       $stateProvider
         .state('access', {
           url: '/access',

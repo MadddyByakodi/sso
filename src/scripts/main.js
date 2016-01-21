@@ -91,7 +91,7 @@ angular.module('qui')
         });
       };
 
-      vm.addFollower = function addFollower(follower,applicantId) {
+      vm.addFollower = function addFollower(follower, applicantId) {
         // ApplicantIds is array contatining applicant id to download cvs
         const modalInstance = $uibModal.open({
           templateUrl: 'html/modal.add.follower.html',
@@ -102,10 +102,10 @@ angular.module('qui')
             FollowerData: function FollowerData() {
               return follower[0];
             },
+
             ApplicantId: function ApplicantId() {
               return applicantId;
             },
-
           },
         });
 

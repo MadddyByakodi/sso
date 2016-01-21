@@ -9,7 +9,7 @@ angular.module('qui')
       const followersService = {};
 
       followersService.getOne = function getFollowers(applicantId, params) {
-        const url = APP.apiServer + '/quarc/follower/' + applicantId + '/' + User.userinfo.id;
+        const url = `${APP.apiServer}/quarc/follower/${applicantId}/${User.userinfo.id}`;
         return $http
           .get(url, { params: params })
           .then(
@@ -25,8 +25,8 @@ angular.module('qui')
           );
       };
 
-      followersService.create = function create(data,ApplicantId) {
-        const url = APP.apiServer + '/quarc/follower/' +ApplicantId + '/' + User.userinfo.id + '/insertfollower';
+      followersService.create = function create(data, ApplicantId) {
+        const url = `${APP.apiServer}/quarc/follower/${ApplicantId}/${User.userinfo.id}/insertfollower`;
         return $http
           .post(url, data)
           .then(
@@ -41,7 +41,6 @@ angular.module('qui')
           }
         );
       };
-
 
       return followersService;
     },
