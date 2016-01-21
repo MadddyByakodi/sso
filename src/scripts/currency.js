@@ -1,6 +1,5 @@
 angular.module('qui')
   .constant('CURRENCY', {
-    INR: 'INR India Rupees',
     USD: 'USD United States Dollars',
     EUR: 'EUR Euro',
     CAD: 'CAD Canada Dollars',

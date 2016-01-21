@@ -1,12 +1,10 @@
 angular.module('qui')
   .constant('AUTH_EVENTS', {
-    loginSuccess: 'auth-login-success',
-    loginFailed: 'auth-login-failed',
-    logoutSuccess: 'auth-logout-success',
-    refreshTokenSuccess: 'auth-token-refresh-success',
-    refreshedTokenFailed: 'auth-token-refresh-failed',
-    notAuthenticated: 'auth-not-authenticated',
-    notAuthorized: 'auth-not-authorized',
+    loginConfirmed: 'event:auth-loginConfirmed',
+    loginCancelled: 'event:auth-loginCancelled',
+    logoutConfirmed: 'event:auth-logoutConfirmed',
+    loginRequired: 'event:auth-loginRequired',
+    forbidden: 'event:auth-forbidden',
   })
   .factory('Auth', [
     '$http',
@@ -15,10 +13,11 @@ angular.module('qui')
     'APP',
     function Auth($http, $q, Session, APP) {
       const authService = {};
+      let refreshingToken = false;
 
       authService.login = function login(credentials) {
         return $http
-          .post('/api/login', credentials)
+          .post('/api/login', credentials, { ignoreAuthModule: true })
           .then(
             function signinSuccess(response) {
               return Session.create('oauth', response.data);
@@ -33,15 +32,23 @@ angular.module('qui')
       };
 
       authService.refreshToken = function refreshToken() {
+        // To Save Multiple Async RefreshToken Request
+        if (refreshingToken) return $q.reject({ error: 'Multiple refresh request' });
+        refreshingToken = true; // Set refresh_token reuqest tracker flag
         return $http
-          .post('/api/refresh', { refresh_token: Session.read('oauth').refresh_token })
+          .post(
+            '/api/refresh',
+            { refresh_token: Session.read('oauth').refresh_token },
+            { ignoreAuthModule: true }
+          )
           .then(function tokenRefreshed(response) {
             Session.create('oauth', response.data);
+            refreshingToken = false; // reset refresh_token reuqest tracker flag
             return response.data;
           },
 
           function tokenRefreshError(response) {
-            Session.destroy('oauth');
+            refreshingToken = false; // reset refresh_token reuqest tracker flag
             return $q.reject(response.data);
           });
       };
@@ -67,7 +74,7 @@ angular.module('qui')
       authService.forgotpass = function forgotpass(username) {
         const url = '/api/forgotpass';
         return $http
-          .post(url, { username: username })
+          .post(url, { username: username }, { ignoreAuthModule: true })
           .then(
             function forgotpassSuccess(response) {
               return response.data;

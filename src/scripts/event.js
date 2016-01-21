@@ -2,11 +2,12 @@ angular.module('qui')
   .run([
     '$rootScope',
     'Auth',
+    'authService',
     'AUTH_EVENTS',
     'Session',
     '$state',
     '$log',
-    function handleEvents($rootScope, Auth, AUTH_EVENTS, Session, $state, $log) {
+    function handleEvents($rootScope, Auth, authService, AUTH_EVENTS, Session, $state, $log) {
       /* eslint angular/on-watch: 0 */
 
       // In Future: assign to variable to destroy during the $destroy event
@@ -28,17 +29,19 @@ angular.module('qui')
         $log.info(data);
       });
 
-      $rootScope.$on(AUTH_EVENTS.notAuthenticated, function notAuthenticated() {
+      $rootScope.$on(AUTH_EVENTS.loginRequired, function loginRequired() {
         if (Session.isAuthenticated()) {
           // Refresh token autimatically if token expires
           Auth.refreshToken().then(
             function gotRefreshToken() {
-              $rootScope.$broadcast(AUTH_EVENTS.refreshTokenSuccess);
+              authService.loginConfirmed('success', function updateConfig(config) {
+                config.headers.Authorization = 'Bearer ' + Session.getAccessToken();
+                return config;
+              });
             },
 
             function errRefreshToken(error) {
               $log.error(error);
-              $rootScope.$broadcast(AUTH_EVENTS.refreshTokenFailed);
             }
           );
         }

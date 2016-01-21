@@ -24,7 +24,7 @@ form.form-validation(name="form")
       strong {{ChangeState.states[ChangeState.stateId].config.scheduled_on}}
       .input-group
         input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.exData.scheduled_on_date' ng-change='ChangeState.setScheduledOn()' is-open='ChangeState.ui.scheduledOn' close-text='Close' ng-click='ChangeState.ui.scheduledOn = true' min-date='ChangeState.today' required)
-    label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on')
+    label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on' ng-show='ChangeState.stateId === 12')
       strong Time
       .input-group
         uib-timepicker(ng-model='ChangeState.exData.scheduled_on_time' ng-change='ChangeState.setScheduledOn()' hour-step='1' minute-step='15' show-meridian='true')
@@ -35,7 +35,11 @@ form.form-validation(name="form")
 
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.currency')
       strong {{ChangeState.states[ChangeState.stateId].config.currency}}
-      select.form.form-control(ng-model='ChangeState.data.currency' required)
+      select.form.form-control(ng-model='ChangeState.data.currency' ng-init='ChangeState.data.currency = "INR"' required)
+
+        //- Hack:: Couldn't set default model value to INR
+        //- Angular Add undefined option in list of options
+        option(value='INR') INR India Rupees
         option(ng-repeat='(currencyKey, currency) in ChangeState.currency' ng-value='currencyKey') {{currency}}
     .input-group
       label(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc_raw')
