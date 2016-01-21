@@ -91,6 +91,29 @@ angular.module('qui')
         });
       };
 
+      vm.addFollower = function addFollower(follower,applicantId) {
+        // ApplicantIds is array contatining applicant id to download cvs
+        const modalInstance = $uibModal.open({
+          templateUrl: 'html/modal.add.follower.html',
+          controller: 'AddFollowerController',
+          controllerAs: 'AddFollower',
+          size: 'md',
+          resolve: {
+            FollowerData: function FollowerData() {
+              return follower[0];
+            },
+            ApplicantId: function ApplicantId() {
+              return applicantId;
+            },
+
+          },
+        });
+
+        modalInstance.result.then(function success() {
+          // console.log(type);
+        });
+      };
+
       vm.changeState = function changeState(applicant, stateId) {
         // ApplicantIds is array contatining applicant id to download cvs
         const modalInstance = $uibModal.open({

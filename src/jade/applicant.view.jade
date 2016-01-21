@@ -82,6 +82,19 @@ div(ng-controller='ApplicantViewController as Applicant')
             span.font-bold.text-info-dker(ng-if='Applicant.showAllSkill') – Less
             span.font-bold.text-info-dker(ng-if='!Applicant.showAllSkill') + More
 
+    //- Applicant Followers
+    .panel.panel-default.no-border
+         .panel-heading.bg-dark.lter.h4
+           .h4.text-white Followers
+           button.btn.btn-rounded.btn.btn-icon.btn-default.pull-right
+                i.fa.fa-user-plus(ng-click='App.addFollower([Applicant.data.follower],Applicant.data.id)' title='Add Follower')
+         .panel-body
+           .h6.clearfix
+             .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='follower in Applicant.data.follower' style='padding: 2px;' ng-if='Applicant.showAllFollower || $index < 6') {{follower.name}}
+             a.pull-left(ng-click='Applicant.showAllFollower = !Applicant.showAllFollower')
+               span.font-bold.text-info-dker(ng-if='Applicant.showAllFollower') – Less
+               span.font-bold.text-info-dker(ng-if='!Applicant.showAllFollower') + More
+
     //- Resume container
   .col-sm-6.no-padder.fixed-resume
     div(style='position: relative; height: 100%; width: 100%; top: 0; overflow: hidden;')
