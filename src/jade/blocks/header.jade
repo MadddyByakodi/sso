@@ -16,6 +16,13 @@
       i.fa.fa-fw(class="{{App.app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}}")
     a.btn.no-shadow.navbar-btn(href='', ui-toggle-class='show', target='#aside-user')
       i.icon-user.fa-fw
+
+  form.navbar-form.navbar-form-lg.navbar-left.shift(role='search' style='width: 60%;')
+    .form-group.w-full: .input-group.w-full
+      input.form-control.input-sm.bg-light.no-border.rounded.padder(type='text' ng-model='App.Applicants.searchText' uib-typeahead='applicant.name for applicant in App.Applicants.get($viewValue)' typeahead-on-select='App.Applicants.select($item)' placeholder='Search candidate by name, email or phone...')
+      span.input-group-btn
+        button.btn.btn-sm.bg-light.rounded(type='submit')
+          i.fa.fa-search
   ul.nav.navbar-nav.navbar-right
     li.hide: a: i.fa.fa-lg.fa-comments
 

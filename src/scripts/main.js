@@ -4,8 +4,9 @@ angular.module('qui')
     '$uibModal',
     'Session',
     'User',
+    'Applicants',
     '$state',
-    function AppCtrl($window, $uibModal, Session, User, $state) {
+    function AppCtrl($window, $uibModal, Session, User, Applicants, $state) {
       const vm = this;
 
       // add 'ie' classes to html
@@ -28,6 +29,26 @@ angular.module('qui')
           asideDock: true,
           container: false,
         },
+      };
+
+      vm.Applicants = {
+        select: function gotoApplicant($item) {
+          vm.Applicants.searchText = '';
+          $state.go('app.applicant.view', { applicantId: $item.id });
+        },
+
+        get: function searchApplicants(searchText) {
+          return Applicants
+            .get({ start: 0, rows: 15, fl: 'id,name', q: searchText })
+            .then(function gotApplicants(response) {
+              return response.data.map(function iterate(value) {
+                return value;
+              });
+            });
+        },
+
+        noResults: false,
+        loadingRegions: false,
       };
 
       vm.interviewUI = {

@@ -8,12 +8,50 @@
 
 @media (min-width: $app-aside-dock-media) {
   .nav-comment {
-      position: fixed;
-      z-index: 2;
-      overflow: hidden;
-      top: 110px;
-      right: 0;
-      bottom: 0;
+    position: fixed;
+    z-index: 2;
+    overflow: hidden;
+    top: 110px;
+    right: 0;
+    bottom: 0;
+  }
+
+  .nav-comment > div {
+    padding-right: 16px;
+    overflow-y: hidden;
+  }
+
+  .nav-comment:hover > div {
+    padding-right: 0;
+    overflow-y: scroll;
+  }
+
+  .fixed-applicant-details {
+    position: fixed;
+    z-index: 2;
+    overflow: hidden;
+    top: 110px;
+    left: 0;
+    right: 75%;
+    bottom: 0;
+  }
+
+  .fixed-applicant-details > div {
+    overflow-y: hidden;
+  }
+
+  .fixed-applicant-details:hover > div {
+    overflow-y: scroll;
+  }
+
+  .fixed-resume {
+    position: fixed;
+    z-index: 2;
+    overflow: hidden;
+    top: 110px;
+    left: 25%;
+    right: 25%;
+    bottom: 0;
   }
 
   .nav-job {

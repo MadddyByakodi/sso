@@ -53,7 +53,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-12.no-padder.m-t-xs.m-b-xs
             span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='degree in NewJob.data.JobsDegrees')
               span.wrapper-xs {{degree.degree}}
-              a.text-info-dk(ng-click='NewJob.data.JobsDegrees.splice($index,1)'): i.fa.fa-times
+              a.text-info-lt.font-bold(ng-click='NewJob.data.JobsDegrees.splice($index,1)'): span.fa.fa-1x ×&nbsp;
           input.form-control(type='text' ng-model='NewJob.Degrees.model' placeholder='Degree' uib-typeahead='degree.degree for degree in NewJob.Degrees.get($viewValue)' typeahead-loading='NewJob.Degrees.loadingDegrees' typeahead-no-results='NewJob.Degrees.noResults' typeahead-on-select='NewJob.Degrees.select($item)')
           i.fa.fa-refresh.fa-spin(ng-show='NewJob.Degrees.loadingDegrees')
           div(ng-show='NewJob.Degrees.noResults')
@@ -67,7 +67,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
         .col-xs-12.no-padder.m-t-xs.m-b-xs
           span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='institute in NewJob.data.JobsInstitutes')
             span.wrapper-xs {{institute.name}}
-            a.text-info-dk(ng-click='NewJob.data.JobsInstitutes.splice($index,1)'): i.fa.fa-times
+            a.text-info-lt.font-bold(ng-click='NewJob.data.JobsInstitutes.splice($index,1)'): span.fa.fa-1x ×&nbsp;
         .col-xs-12.no-padder
           input.form-control(type='text' ng-model='NewJob.Institutes.model' placeholder='Target Institutions (if any)' uib-typeahead='institute.name for institute in NewJob.Institutes.get($viewValue)' typeahead-loading='NewJob.Institutes.loadingInstitutes' typeahead-no-results='NewJob.Institutes.noResults' typeahead-on-select='NewJob.Institutes.select($item)')
           div(ng-show='NewJob.Institutes.noResults')
@@ -80,7 +80,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-12.no-padder.m-t-xs.m-b-xs
             span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='industry in NewJob.data.JobsIndustries')
               span.wrapper-xs {{industry.name}}
-              a.text-info-dk(ng-click='NewJob.data.JobsIndustries.splice($index,1)'): i.fa.fa-times
+              a.text-info-lt.font-bold(ng-click='NewJob.data.JobsIndustries.splice($index,1)'): span.fa.fa-1x ×&nbsp;
           input.form-control(type='text' ng-model='NewJob.Industries.model' placeholder='Target Industries (if any)' uib-typeahead='industry.name for industry in NewJob.Industries.get($viewValue)' typeahead-loading='NewJob.Industries.loadingIndustries' typeahead-no-results='NewJob.Industries.noResults' typeahead-on-select='NewJob.Industries.select($item)')
           i.fa.fa-refresh.fa-spin(ng-show='NewJob.Industries.loadingIndustries')
           div(ng-show='NewJob.Industries.noResults')
@@ -94,7 +94,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
         .col-xs-12.no-padder.m-t-xs.m-b-xs
           span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='employer in NewJob.data.JobsEmployers')
             span.wrapper-xs {{employer.name}}
-            a.text-info-dk(ng-click='NewJob.data.JobsEmployers.splice($index,1)'): i.fa.fa-times
+            a.text-info-lt.font-bold(ng-click='NewJob.data.JobsEmployers.splice($index,1)'): span.fa.fa-1x ×&nbsp;
         .col-xs-12.no-padder
           input.form-control(type='text' ng-model='NewJob.Employers.model' placeholder='Target Companies (if any)' uib-typeahead='employer.name for employer in NewJob.Employers.get($viewValue)' typeahead-loading='NewJob.Employers.loadingEmployers' typeahead-no-results='NewJob.Employers.noResults' typeahead-on-select='NewJob.Employers.select($item)')
           div(ng-show='NewJob.Employers.noResults')
@@ -113,11 +113,11 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-6.no-padder.m-t-xs.m-b-xs
             span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='skill in NewJob.data.JobSkills' ng-show='skill.isRequired')
               span.wrapper-xs {{skill.name}}
-              a.text-info-dk(ng-click='NewJob.data.JobSkills.splice($index,1)'): i.fa.fa-times
+              a.text-info-lt.font-bold(ng-click='NewJob.data.JobSkills.splice($index,1)'): span.fa.fa-1x ×&nbsp;
           .col-xs-6.no-padder.m-t-xs.m-b-xs
             span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='skill in NewJob.data.JobSkills' ng-show='!skill.isRequired')
               span.wrapper-xs {{skill.name}}
-              a.text-info-dk(ng-click='NewJob.data.JobSkills.splice($index,1)'): i.fa.fa-times
+              a.text-info-lt.font-bold(ng-click='NewJob.data.JobSkills.splice($index,1)'): span.fa.fa-1x ×&nbsp;
         .col-xs-6.no-padder
           .col-xs-6.no-padder.input-group
             input.form-control(type='text' ng-model='NewJob.Skills.modelRequired' placeholder='Required Skills' uib-typeahead='industry.name for industry in NewJob.Skills.get($viewValue)' typeahead-loading='NewJob.Skills.loadingSkills' typeahead-no-results='NewJob.Skills.noRequiredResults' typeahead-on-select='NewJob.Skills.selectRequired($item)')
@@ -167,7 +167,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-12.no-padder
             select.form-control.m-b(name='functional_area' ng-model='NewJob.data.func_id')
               option(value='0' selected disabled) -- Choose One Functional Area --
-              option(ng-repeat='func in NewJob.Funcs' ng-value='func.id') {{func.name}}
+              option(ng-repeat='func in NewJob.Funcs | orderBy:"name"' ng-value='func.id') {{func.name}}
       .line.line-dashed.b-b.line-lg.pull-in
       .col-sm-6.no-padder
         label.w-full.input-group

@@ -1,77 +1,78 @@
 div(ng-controller='ApplicantViewController as Applicant')
-  .col-sm-3.no-padder
-    //- Applicant top cover container
-    .wrapper-xs.bg-info.dker.m-b-xs
-      .hbox.m-t-xs
-        .col.thumb-lg
-          .fa-stack.fa-3x.text-info-dker
-            i.fa.fa-circle.fa-stack-2x.fa-inverse
-            i.fa.fa-user.fa-stack-1x.fa-2x.m-t-xs
-        .col.v-middle
-          .h4
-            | {{Applicant.data.name}}
-            i.btn.text-white.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
-        .col.thumb-xs(title='Score'): .font-thin.h3 {{Applicant.data.applicant_score}}
-      .m-b-xs
-        .hbox
-          .col
-            .btn-group.w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-              button.w-full.btn.rounded(class='btn-{{App.states[Applicant.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[Applicant.data.state_id].view.length===0')
-                | {{Applicant.data.state_name}}&nbsp;
-                span(ng-if='App.states[Applicant.data.state_id].view.length>0').caret
-              ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-                li(role='menuitem' ng-repeat='state_id in App.states[Applicant.data.state_id].view')
-                  a(href='' ng-click='App.changeState(Applicant.data, state_id)') {{App.states[state_id].name}}
+  .col-sm-3.no-padder.fixed-applicant-details
+    div(style='position: relative; height: 100%; width: 100%; top: 0; overflow-x: hidden; overflow-wrap: break-word;')
+      //- Applicant top cover container
+      .wrapper-xs.bg-info.dker.m-b-xs
+        .hbox.m-t-xs
+          .col.thumb-lg
+            .fa-stack.fa-3x.text-info-dker
+              i.fa.fa-circle.fa-stack-2x.fa-inverse
+              i.fa.fa-user.fa-stack-1x.fa-2x.m-t-xs
+          .col.v-middle
+            .h4
+              | {{Applicant.data.name}}
+              i.btn.text-white.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
+          .col.thumb-xs(title='System generated alogrithmic Score'): .font-thin.h3 {{Applicant.data.applicant_score}}
+        .m-b-xs
+          .hbox
+            .col
+              .btn-group.w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
+                button.w-full.btn.rounded(class='btn-{{App.states[Applicant.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[Applicant.data.state_id].view.length===0')
+                  | {{Applicant.data.state_name}}&nbsp;
+                  span(ng-if='App.states[Applicant.data.state_id].view.length>0').caret
+                ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
+                  li(role='menuitem' ng-repeat='state_id in App.states[Applicant.data.state_id].view')
+                    a(href='' ng-click='App.changeState(Applicant.data, state_id)') {{App.states[state_id].name}}
 
-    //- Applicant Details
+      //- Applicant Details
 
-    //- Applicant Employee Information
-    .panel.panel-default.no-border
-      .panel-heading.bg-dark.lter.h4
-        .h4.text-white Employee Information
-      .panel-body
-        .h4.m-l-xs
-          .text-info-dker Designation
-          .font-thin {{Applicant.data.exp_designation}}
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Current Company
-          .font-thin {{Applicant.data.exp_employer}}
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Qualification
-          .font-thin {{Applicant.data.edu_degree}}
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Designation
-          .font-thin {{Applicant.data.exp_designation}}
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Location
-          .font-thin {{Applicant.data.exp_location}}
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Current CTC
-          .font-thin {{Applicant.data.exp_salary}} Lakhs
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Expected CTC
-          .font-thin {{Applicant.data.expected_ctc}} Lakhs (Above)
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Work Experience
-          .font-thin {{Applicant.data.total_exp | number: 0}} Years
-        .h4.m-l-xs.m-t-sm
-          .text-info-dker Notice Period
-          .font-thin {{Applicant.data.notice_period}} Days
+      //- Applicant Employee Information
+      .panel.panel-default.no-border
+        .panel-heading.bg-dark.lter.h4
+          .h4.text-white Employee Information
+        .panel-body
+          .h4.m-l-xs
+            .text-info-dker Designation
+            .font-thin {{Applicant.data.exp_designation}}
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Current Company
+            .font-thin {{Applicant.data.exp_employer}}
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Qualification
+            .font-thin {{Applicant.data.edu_degree}}
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Designation
+            .font-thin {{Applicant.data.exp_designation}}
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Location
+            .font-thin {{Applicant.data.exp_location}}
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Current CTC
+            .font-thin {{Applicant.data.exp_salary}} Lakhs
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Expected CTC
+            .font-thin {{Applicant.data.expected_ctc}} Lakhs (Above)
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Work Experience
+            .font-thin {{Applicant.data.total_exp | number: 0}} Years
+          .h4.m-l-xs.m-t-sm
+            .text-info-dker Notice Period
+            .font-thin {{Applicant.data.notice_period}} Days
 
-    //- Applicant Contact Details
-    .panel.panel-default.no-border
-      .panel-heading.bg-dark.lter.h4
-        .h4.text-white Contact Details
-      .panel-body
-        .h4.m-xs
-          i.fa.fa-lg.fa-phone.text-success-dker.wrapper-xs
-          |  &nbsp; {{Applicant.data.mobile}}
-        .h4.m-xs
-          i.fa.fa-lg.fa-envelope.text-info-dker.wrapper-xs
-          |  &nbsp; {{Applicant.data.email}}
+      //- Applicant Contact Details
+      .panel.panel-default.no-border
+        .panel-heading.bg-dark.lter.h4
+          .h4.text-white Contact Details
+        .panel-body
+          .h4.m-xs
+            i.fa.fa-lg.fa-phone.text-success-dker.wrapper-xs
+            |  &nbsp; {{Applicant.data.mobile}}
+          .h4.m-xs
+            i.fa.fa-lg.fa-envelope.text-info-dker.wrapper-xs
+            |  &nbsp; {{Applicant.data.email}}
 
-    //- Applicant Skills
-    .panel.panel-default.no-border
+      //- Applicant Skills
+      .panel.panel-default.no-border
       .panel-heading.bg-dark.lter.h4
         .h4.text-white Skills
       .panel-body
@@ -95,11 +96,12 @@ div(ng-controller='ApplicantViewController as Applicant')
                span.font-bold.text-info-dker(ng-if='!Applicant.showAllSkill') + More
 
     //- Resume container
-  .col-sm-6.no-padder
-    iframe.b-a.b-light.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}' height='650px')
+  .col-sm-6.no-padder.fixed-resume
+    div(style='position: relative; height: 100%; width: 100%; top: 0; overflow: hidden;')
+      iframe.h-full.b-a.b-light.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}')
 
   .col-sm-3.nav-comment.no-padder(ng-controller='ApplicantCommentsController as Comments')
-    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
+    .col-xs-12(style='position: relative; height: 100%; width: 100%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
       .col
         .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')
           .col.text-center.thumb-sm
