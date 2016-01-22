@@ -4,12 +4,11 @@ angular.module('qui')
     '$q',
     '$log',
     'APP',
-    'User',
-    function Followers($http, $q, $log, APP, User) {
+    function Followers($http, $q, $log, APP) {
       const followersService = {};
 
       followersService.getOne = function getFollowers(applicantId, params) {
-        const url = `${APP.apiServer}/quarc/follower/${applicantId}/${User.userinfo.id}`;
+        const url = `${APP.apiServer}/quarc/applicant/${applicantId}/followers`;
         return $http
           .get(url, { params: params })
           .then(
@@ -26,7 +25,7 @@ angular.module('qui')
       };
 
       followersService.create = function create(data, ApplicantId) {
-        const url = `${APP.apiServer}/quarc/follower/${ApplicantId}/${User.userinfo.id}/insertfollower`;
+        const url = `${APP.apiServer}/quarc/applicant/${ApplicantId}/followers`;
         return $http
           .post(url, data)
           .then(
