@@ -1,5 +1,6 @@
 angular.module('qui')
   .controller('NewJobController', [
+    '$state',
     'Regions',
     'Degrees',
     'Institutes',
@@ -9,7 +10,7 @@ angular.module('qui')
     'Funcs',
     'moment',
     'Jobs',
-    function JobsManageCtrl(Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
+    function JobsManageCtrl($state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
       const vm = this;
       vm.data = {
         days_per_week: '5',
@@ -201,9 +202,8 @@ angular.module('qui')
       vm.create = function createJob() {
         Jobs
           .create(vm.data)
-          .then(function jobCreated() {
-            // job Saved handle next action
-            // alert('posted');
+          .then(function jobCreated(result) {
+            $state.go('app.job.view', { jobId: result.data.id });
           });
       };
     },

@@ -1,7 +1,13 @@
 //- navbar
 .app-header.navbar(ng-include="'html/blocks/header.html'")
 //- menu
-.app-aside.hidden-xs.b-r(ng-include="'html/blocks/aside.html'", class='{{App.app.settings.asideColor}}')
+.app-aside.hidden-xs(
+  ng-include="'html/blocks/aside.html'"
+  class='{{App.app.settings.asideColor}}'
+  ng-class="{\
+    'off-screen': App.app.settings.offScreen,\
+  }"
+)
 
 content
   .app-content

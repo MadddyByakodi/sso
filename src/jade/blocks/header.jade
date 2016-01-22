@@ -1,15 +1,20 @@
 //- navbar header
 .navbar-header(class='{{App.app.settings.navbarHeaderColor}}')
-  button.pull-right.visible-xs.dk(ui-toggle-class='show', data-target='.navbar-collapse')
+  button.pull-right.visible-xs.dk(ng-click='App.app.settings.mobileHeader = !App.app.settings.mobileHeader')
     i.fa.fa-cog
-  button.pull-right.visible-xs(ui-toggle-class='off-screen', data-target='.app-aside', ui-scroll='app')
+  button.pull-right.visible-xs(ng-click='App.app.settings.offScreen = !App.app.settings.offScreen')
     i.fa.fa-align-justify
   //- brand
   a.navbar-brand.text-lt(ui-sref='app.dashboard')
     img.w-sm(src='/images/logo.svg', alt='{{App.app.name}}')
     span.hide.hidden-folded.m-l-xs {{App.app.name}}
 //- navbar collapse
-.collapse.pos-rlt.navbar-collapse.box-shadow(class='{{App.app.settings.navbarCollapseColor}}')
+.collapse.pos-rlt.navbar-collapse.box-shadow(
+  class='{{App.app.settings.navbarCollapseColor}}'
+  ng-class="{\
+    'show': App.app.settings.mobileHeader,\
+  }"
+)
   //- buttons
   .nav.navbar-nav.hidden-xs.hide
     a.btn.no-shadow.navbar-btn(href='', ng-click='App.app.settings.asideFolded = !App.app.settings.asideFolded')
@@ -17,7 +22,7 @@
     a.btn.no-shadow.navbar-btn(href='', ui-toggle-class='show', target='#aside-user')
       i.icon-user.fa-fw
 
-  form.navbar-form.navbar-form-lg.navbar-left.shift(role='search' style='width: 60%;')
+  .col-sm-7.no-padder: form.w-full.navbar-form.navbar-form-lg.navbar-left(role='search')
     .form-group.w-full: .input-group.w-full
       input.form-control.input-sm.bg-light.no-border.rounded.padder(type='text' ng-model='App.Applicants.searchText' uib-typeahead='applicant.name for applicant in App.Applicants.get($viewValue)' typeahead-on-select='App.Applicants.select($item)' placeholder='Search candidate by name, email or phone...')
       span.input-group-btn

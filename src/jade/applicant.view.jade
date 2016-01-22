@@ -1,5 +1,5 @@
 div(ng-controller='ApplicantViewController as Applicant')
-  .col-sm-3.no-padder.fixed-applicant-details
+  .col-md-3.no-padder.fixed-applicant-details
     div(style='position: relative; height: 100%; width: 100%; top: 0; overflow-x: hidden; overflow-wrap: break-word;')
       //- Applicant top cover container
       .wrapper-xs.bg-info.dker.m-b-xs
@@ -96,11 +96,11 @@ div(ng-controller='ApplicantViewController as Applicant')
                span.font-bold.text-info-dker(ng-if='!Applicant.showAllFollower') + More
 
     //- Resume container
-  .col-sm-6.no-padder.fixed-resume
+  .col-md-6.no-padder.fixed-resume
     div(style='position: relative; height: 100%; width: 100%; top: 0; overflow: hidden;')
       iframe.h-full.b-a.b-light.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}')
 
-  .col-sm-3.nav-comment.no-padder(ng-controller='ApplicantCommentsController as Comments')
+  .col-md-3.nav-comment.no-padder(ng-controller='ApplicantCommentsController as Comments')
     .col-xs-12(style='position: relative; height: 100%; width: 100%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
       .col
         .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_on"')

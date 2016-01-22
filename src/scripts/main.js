@@ -6,7 +6,8 @@ angular.module('qui')
     'User',
     'Applicants',
     '$state',
-    function AppCtrl($window, $uibModal, Session, User, Applicants, $state) {
+    '$rootScope',
+    function AppCtrl($window, $uibModal, Session, User, Applicants, $state, $rootScope) {
       const vm = this;
 
       // add 'ie' classes to html
@@ -25,11 +26,20 @@ angular.module('qui')
           asideColor: 'bg-black',
           headerFixed: true,
           asideFixed: true,
-          asideFolded: false,
+          asideFolded: true,
           asideDock: true,
           container: false,
+          offScreen: false, // flag for show of sidebar for mobile view
+          mobileHeader: false, // flag to show header Nav and Search in mobile view
         },
       };
+
+      // keeps track of state change and hides sidebar view for mobile
+      /* eslint angular/on-watch: 0 */
+      $rootScope.$on('$stateChangeStart', function handleStateChange() {
+        vm.app.settings.offScreen = false;
+        vm.app.settings.mobileHeader = false;
+      });
 
       vm.Applicants = {
         select: function gotoApplicant($item) {
