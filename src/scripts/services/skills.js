@@ -21,6 +21,21 @@ angular.module('qui')
           );
       };
 
+      skillService.create = function createSkill(data) {
+        const url = `${APP.apiServer}/quarc/skill`;
+        return $http
+          .post(url, data)
+          .then(
+            function createdSkills(response) {
+              return response.data;
+            },
+
+            function failledCreation(response) {
+              return $q.reject(response.data);
+            }
+          );
+      };
+
       return skillService;
     },
   ]);

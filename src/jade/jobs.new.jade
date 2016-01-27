@@ -80,12 +80,9 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-12.no-padder.m-t-xs.m-b-xs
             span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='industry in NewJob.data.JobsIndustries')
               span.wrapper-xs {{industry.name}}
-              a.text-info-lt.font-bold(ng-click='NewJob.data.JobsIndustries.splice($index,1)'): span.fa.fa-1x ×&nbsp;
-          input.form-control(type='text' ng-model='NewJob.Industries.model' placeholder='Target Industries (if any)' uib-typeahead='industry.name for industry in NewJob.Industries.get($viewValue)' typeahead-loading='NewJob.Industries.loadingIndustries' typeahead-no-results='NewJob.Industries.noResults' typeahead-on-select='NewJob.Industries.select($item)')
-          i.fa.fa-refresh.fa-spin(ng-show='NewJob.Industries.loadingIndustries')
-          div(ng-show='NewJob.Industries.noResults')
-            i.fa.fa-remove
-            |  No Results Found
+              a.text-info-lt.font-bold(ng-click='NewJob.Industries.list.push(NewJob.data.JobsIndustries.splice($index,1)[0])'): span.fa.fa-1x ×&nbsp;
+          input.form-control(type='text' ng-model='NewJob.Industries.model' ng-init='NewJob.Industries.model=""' placeholder='Target Industries (if any)' uib-typeahead='industry.name for industry in (NewJob.Industries.list |  filter: { name: $viewValue })' typeahead-loading='NewJob.Industries.loadingIndustries' typeahead-no-results='NewJob.Industries.noResults' typeahead-on-select='NewJob.Industries.select($item)' typeahead-min-length='0' typeahead-show-hint='true' typeahead-editable='true')
+
       .line.line-dashed.b-b.line-lg.pull-in
       label.w-full.input-group
         .col-xs-12.no-padder
@@ -122,7 +119,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-6.no-padder.input-group
             input.form-control(type='text' ng-model='NewJob.Skills.modelRequired' placeholder='Required Skills' uib-typeahead='industry.name for industry in NewJob.Skills.get($viewValue)' typeahead-loading='NewJob.Skills.loadingSkills' typeahead-no-results='NewJob.Skills.noRequiredResults' typeahead-on-select='NewJob.Skills.selectRequired($item)')
             span.input-group-btn
-              button.btn.btn-default(type='button'): i.fa.fa-plus
+              button.btn.btn-default(type='button' ng-if='NewJob.Skills.modelRequired && NewJob.Skills.noRequiredResults' ng-click='NewJob.Skills.create(NewJob.Skills.modelRequired, true)'): i.fa.fa-plus
           div(ng-show='NewJob.Skills.noRequiredResults')
             i.fa.fa-remove
             |  No Results Found
@@ -130,7 +127,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-6.no-padder.input-group
             input.form-control(type='text' ng-model='NewJob.Skills.modelOptional' placeholder='Optional Skills' uib-typeahead='industry.name for industry in NewJob.Skills.get($viewValue)' typeahead-loading='NewJob.Skills.loadingSkills' typeahead-no-results='NewJob.Skills.noOptionalResults' typeahead-on-select='NewJob.Skills.selectOptional($item)')
             span.input-group-btn
-              button.btn.btn-default(type='button'): i.fa.fa-plus
+              button.btn.btn-default(type='button' ng-if='NewJob.Skills.modelOptional && NewJob.Skills.noOptionalResults' ng-click='NewJob.Skills.create(NewJob.Skills.modelOptional, false)'): i.fa.fa-plus
           div(ng-show='NewJob.Skills.noOptionalResults')
             i.fa.fa-remove
             |  No Results Found

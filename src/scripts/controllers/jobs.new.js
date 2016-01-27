@@ -121,17 +121,20 @@ angular.module('qui')
             industry_id: $item.id,
             name: $item.name,
           });
+
+          // Removes industry from list
+          angular.forEach(vm.Industries.list, function removeIndustry(value, key) {
+            if (value.id === $item.id) vm.Industries.list.splice(key, 1);
+          });
         },
 
-        get: function getIndustries(search) {
+        get: (function getIndustries() {
           return Industries
-            .get({ industry: search })
+            .get({ industry: '' })
             .then(function gotIndustries(response) {
-              return response.data.map(function iterate(value) {
-                return value;
-              });
+              vm.Industries.list = response.data;
             });
-        },
+        })(),
 
         noResults: false,
         loadingRegions: false,
@@ -186,6 +189,23 @@ angular.module('qui')
               return response.data.map(function iterate(value) {
                 return value;
               });
+            });
+        },
+
+        create: function createSkill(skill, required) {
+          return Skills
+            .create({ name: skill })
+            .then(function gotSkill(response) {
+              const $item = {
+                id: response.data.id,
+                name: response.data.name,
+              };
+
+              if (required) {
+                return vm.Skills.selectRequired($item);
+              }
+
+              return vm.Skills.selectOptional($item);
             });
         },
 
