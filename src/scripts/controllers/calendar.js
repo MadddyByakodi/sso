@@ -1,11 +1,13 @@
 angular.module('qui')
   .controller('CalendarController', [
+    'Page',
     '$scope',
     'Applicants',
     'moment',
     '$state',
-    function JobsCtrl($scope, Applicants, moment, $state) {
+    function JobsCtrl(Page, $scope, Applicants, moment, $state) {
       const vm = this;
+      Page.setTitle('Scheduled Interview Calendar');
       vm.colors = { 5: 'success', 8: 'warning', 17: 'info' };
       vm.applicants = []; // collection of applicants
       vm.ui = { lazyLoad: true, loading: false }; // ui states

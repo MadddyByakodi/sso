@@ -1,11 +1,12 @@
 angular.module('qui')
   .controller('DashboardController', [
+    'Page',
     'Summary',
     'Applicants',
     'moment',
-    function JobsCtrl(Summary, Applicants, moment) {
+    function JobsCtrl(Page, Summary, Applicants, moment) {
       const vm = this;
-
+      Page.setTitle('Dashboard');
       vm.getSummary = function getSummary() {
         Summary.get({ state_id: '1,5,8,9,17' })
           .then(function gotSummary(response) {

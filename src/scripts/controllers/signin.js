@@ -6,8 +6,10 @@ angular.module('qui')
     '$q',
     'Auth',
     'AUTH_EVENTS',
-    function SigninCtrl($rootScope, $state, $window, $q, Auth, AUTH_EVENTS) {
+    'Page',
+    function SigninCtrl($rootScope, $state, $window, $q, Auth, AUTH_EVENTS, Page) {
       const vm = this;
+      Page.setTitle('Sign In');
       vm.user = {};
       vm.authError = null;
       vm.signin = function signin() {

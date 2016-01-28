@@ -1,5 +1,6 @@
 angular.module('qui')
   .controller('NewJobController', [
+    'Page',
     '$state',
     'Regions',
     'Degrees',
@@ -10,11 +11,13 @@ angular.module('qui')
     'Funcs',
     'moment',
     'Jobs',
-    function JobsManageCtrl($state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
+    function JobsManageCtrl(Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
       const vm = this;
+      Page.setTitle('Post New Position');
       vm.data = {
         days_per_week: '5',
         email: '',
+        new_job: 1,
         start_work_time: '9:00 AM',
         end_work_time: '5:00 PM',
         job_nature: '1',

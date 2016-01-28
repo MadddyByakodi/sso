@@ -1,8 +1,10 @@
 angular.module('qui')
   .controller('JobsController', [
     'Jobs',
-    function JobsCtrl(Jobs) {
+    'Page',
+    function JobsCtrl(Jobs, Page) {
       const vm = this;
+      Page.setTitle('Posted Jobs');
       vm.jobs = []; // collection of jobs
       vm.ui = { lazyLoad: true, loading: false }; // ui states
       vm.params = { start: 0, rows: 15 }; // GET query params

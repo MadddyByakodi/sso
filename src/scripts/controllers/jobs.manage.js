@@ -1,10 +1,11 @@
 angular.module('qui')
   .controller('JobsManageController', [
     'Jobs',
+    'Page',
     '$stateParams',
     '$filter',
     'moment',
-    function JobsManageCtrl(Jobs, $stateParams, $filter, moment) {
+    function JobsManageCtrl(Jobs, Page, $stateParams, $filter, moment) {
       const vm = this;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
 
@@ -53,6 +54,7 @@ angular.module('qui')
       vm.loadJob = function loadJob() {
         Jobs.getOne($stateParams.jobId, { fl: 'id,role' }).then(function getJob(response) {
           vm.job = response.data;
+          Page.setTitle(`${vm.job.role} - ${$stateParams.bucket} Applicants`); // set page title
         });
       };
 

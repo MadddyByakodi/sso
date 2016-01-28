@@ -1,14 +1,17 @@
 angular.module('qui')
   .controller('ApplicantsController', [
     'Applicants',
+    'Page',
     '$stateParams',
     'moment',
-    function JobsCtrl(Applicants, $stateParams, moment) {
+    function JobsCtrl(Applicants, Page, $stateParams, moment) {
       const vm = this;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
 
       // Set default bucket to ALL
       if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
+
+      Page.setTitle(`${$stateParams.bucket} Applicants`);
       vm.applicants = []; // collection of applicants
       vm.ui = { lazyLoad: true, loading: false }; // ui states
       vm.params = { start: 0, rows: 15, fl: 'id,name,state_id,state_name,_root_' }; // GET query params

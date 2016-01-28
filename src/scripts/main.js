@@ -1,13 +1,28 @@
 angular.module('qui')
+  .factory('Page', [
+    function Page() {
+      let title = 'Welcome';
+      return {
+        title: function getTitle() {
+          return title;
+        },
+
+        setTitle: function setTitle(newTitle) {
+          title = newTitle;
+        },
+      };
+    },
+  ])
   .controller('AppController', [
     '$window',
     '$uibModal',
     'Session',
     'User',
     'Applicants',
+    'Page',
     '$state',
     '$rootScope',
-    function AppCtrl($window, $uibModal, Session, User, Applicants, $state, $rootScope) {
+    function AppCtrl($window, $uibModal, Session, User, Applicants, Page, $state, $rootScope) {
       const vm = this;
 
       // add 'ie' classes to html
@@ -41,6 +56,9 @@ angular.module('qui')
         vm.app.settings.mobileHeader = false;
       });
 
+      vm.Page = Page; // Set Page title
+
+      // Applicant search related Functions
       vm.Applicants = {
         select: function gotoApplicant($item) {
           vm.Applicants.searchText = '';
