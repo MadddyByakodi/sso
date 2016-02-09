@@ -5,7 +5,7 @@ angular.module('qui')
     'Applicants',
     'moment',
     '$state',
-    function JobsCtrl(Page, $scope, Applicants, moment, $state) {
+    function CalendarCtrl(Page, $scope, Applicants, moment, $state) {
       const vm = this;
       Page.setTitle('Scheduled Interview Calendar');
       vm.colors = { 5: 'success', 8: 'warning', 17: 'info' };
@@ -42,7 +42,7 @@ angular.module('qui')
           moment(vm.calendarDay).endOf('month').toISOString(),
         ].join(',');
         Applicants.get(vm.params).then(function applicants(result) {
-          angular.forEach(result.data, function iterateApplicants(applicant) {
+          angular.forEach(result, function iterateApplicants(applicant) {
             vm.applicants.push({
               title: `
                 <a href="${$state.href('app.jobs.manage', { jobId: applicant._root_.id }) }" target="_blank">
@@ -63,7 +63,7 @@ angular.module('qui')
           vm.ui.loading = false;
 
           // check for returned results count and set lazy loadLoad false if less
-          vm.ui.lazyLoad = angular.equals(result.data.length, vm.params.rows) ? true : false;
+          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
 
           // increment offset for next loading of results
           vm.params.start = vm.params.start + vm.params.rows;

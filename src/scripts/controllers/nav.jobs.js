@@ -1,7 +1,7 @@
 angular.module('qui')
   .controller('NavJobsController', [
     'Jobs',
-    function JobsCtrl(Jobs) {
+    function NavJobsCtrl(Jobs) {
       const vm = this;
       vm.jobs = []; // collection of jobs
       vm.ui = { lazyLoad: true, loading: false }; // ui states
@@ -10,7 +10,7 @@ angular.module('qui')
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
         vm.ui = { lazyLoad: false, loading: true };
         Jobs.get(vm.params).then(function jobList(result) {
-          angular.forEach(result.data, function iterateJobs(job) {
+          angular.forEach(result, function iterateJobs(job) {
             vm.jobs.push(job);
           });
 
@@ -18,7 +18,7 @@ angular.module('qui')
           vm.ui.loading = false;
 
           // check for returned results count and set lazy loadLoad false if less
-          vm.ui.lazyLoad = angular.equals(result.data.length, vm.params.rows) ? true : false;
+          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
 
           // increment offset for next loading of results
           vm.params.start = vm.params.start + vm.params.rows;

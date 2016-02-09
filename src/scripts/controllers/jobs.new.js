@@ -11,7 +11,7 @@ angular.module('qui')
     'Funcs',
     'moment',
     'Jobs',
-    function JobsManageCtrl(Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
+    function NewJobCtrl(Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
       const vm = this;
       Page.setTitle('Post New Position');
       vm.data = {
@@ -59,9 +59,9 @@ angular.module('qui')
 
         get: function getRegions(search) {
           return Regions
-            .get({ region: search })
+            .get({ q: search })
             .then(function gotRegions(response) {
-              return response.data.map(function iterate(value) {
+              return response.items.map(function iterate(value) {
                 return value;
               });
             });
@@ -76,15 +76,15 @@ angular.module('qui')
           vm.Degrees.model = '';
           vm.data.JobsDegrees.push({
             degree_id: $item.id,
-            degree: $item.degree,
+            name: $item.name,
           });
         },
 
         get: function getDegrees(search) {
           return Degrees
-            .get({ degree: search })
+            .get({ q: search })
             .then(function gotDegrees(response) {
-              return response.data.map(function iterate(value) {
+              return response.items.map(function iterate(value) {
                 return value;
               });
             });
@@ -105,9 +105,9 @@ angular.module('qui')
 
         get: function getInstitutes(search) {
           return Institutes
-            .get({ institute: search })
+            .get({ q: search })
             .then(function gotInstitutes(response) {
-              return response.data.map(function iterate(value) {
+              return response.items.map(function iterate(value) {
                 return value;
               });
             });
@@ -133,9 +133,9 @@ angular.module('qui')
 
         get: (function getIndustries() {
           return Industries
-            .get({ industry: '' })
+            .get({ q: '' })
             .then(function gotIndustries(response) {
-              vm.Industries.list = response.data;
+              vm.Industries.list = response.items;
             });
         })(),
 
@@ -154,9 +154,9 @@ angular.module('qui')
 
         get: function getEmployer(search) {
           return Employers
-            .get({ employer: search })
+            .get({ q: search })
             .then(function gotEmployer(response) {
-              return response.data.map(function iterate(value) {
+              return response.items.map(function iterate(value) {
                 return value;
               });
             });
@@ -187,9 +187,9 @@ angular.module('qui')
 
         get: function getSkill(search) {
           return Skills
-            .get({ skill: search })
+            .get({ q: search })
             .then(function gotSkill(response) {
-              return response.data.map(function iterate(value) {
+              return response.items.map(function iterate(value) {
                 return value;
               });
             });
@@ -200,8 +200,8 @@ angular.module('qui')
             .create({ name: skill })
             .then(function gotSkill(response) {
               const $item = {
-                id: response.data.id,
-                name: response.data.name,
+                id: response.id,
+                name: response.name,
               };
 
               if (required) {
@@ -217,16 +217,16 @@ angular.module('qui')
       };
 
       Funcs
-        .get({ func: '' })
+        .get({ q: '', rows: 20 })
         .then(function gotFuncs(response) {
-          vm.Funcs = response.data;
+          vm.Funcs = response.items;
         });
 
       vm.create = function createJob() {
         Jobs
           .create(vm.data)
           .then(function jobCreated(result) {
-            $state.go('app.job.view', { jobId: result.data.id });
+            $state.go('app.job.view', { jobId: result.id });
           });
       };
     },

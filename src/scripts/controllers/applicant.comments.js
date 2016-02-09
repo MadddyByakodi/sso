@@ -10,7 +10,7 @@ angular.module('qui')
         ApplicantComments
           .get($stateParams.applicantId)
           .then(function gotJobComment(result) {
-            vm.data = result.data;
+            vm.data = result;
 
             // data has been loaded
             vm.ui = { loading: false, scrollToBottom: true };
@@ -25,9 +25,9 @@ angular.module('qui')
           .then(function insertedComment() {
             vm.post.comment = '';
             vm.data.push({
-              name: User.userinfo.name,
-              comment: comment,
-              created_on: new Date().toISOString(),
+              user: { name: User.userinfo.name },
+              body: comment,
+              created_at: new Date().toISOString(),
             });
 
             // data has been loaded

@@ -6,8 +6,7 @@ angular.module('qui')
     'AUTH_EVENTS',
     'Session',
     '$state',
-    '$log',
-    function handleEvents($rootScope, Auth, authService, AUTH_EVENTS, Session, $state, $log) {
+    function handleEvents($rootScope, Auth, authService, AUTH_EVENTS, Session, $state) {
       /* eslint angular/on-watch: 0 */
 
       // In Future: assign to variable to destroy during the $destroy event
@@ -25,8 +24,8 @@ angular.module('qui')
       });
 
       $rootScope.$on(AUTH_EVENTS.loginSuccess, function loginSuccess(event, data) {
-        $log.info(event);
-        $log.info(data);
+        angular.noop(event);
+        angular.noop(data);
       });
 
       $rootScope.$on(AUTH_EVENTS.loginRequired, function loginRequired() {
@@ -41,7 +40,7 @@ angular.module('qui')
             },
 
             function errRefreshToken(error) {
-              $log.error(error);
+              angular.noop(error);
             }
           );
         }

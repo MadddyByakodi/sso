@@ -107,16 +107,16 @@ div(ng-controller='JobViewController as Job')
   .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
     .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
       .col
-        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "timestamp"')
+        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_at"')
           .col.text-center.thumb-sm
             .fa-stack.fa-2x.text-primary
               i.fa.fa-circle.fa-stack-2x
-              span.fa.fa-stack-1x.h3.fa-inverse {{comment.name[0].toUpperCase()}}
+              span.fa.fa-stack-1x.h3.fa-inverse {{comment.user.name[0].toUpperCase()}}
           .col.clearfix
             .col-xs-12
-              .text-info-dker {{comment.name}}
-              p {{comment.comment}}
-              .text-muted.pull-right(title='{{comment.timestamp | date: "medium"}}') {{comment.timestamp | date: 'd MMM, h:mm a'}}
+              .text-info-dker {{comment.user.name}}
+              p {{comment.body}}
+              .text-muted.pull-right(title='{{comment.created_at | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
         .hbox(style='height: 40px;')
     form.form.form-validation.col-xs-12.wrapper-xs.bg-white(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
       .input-group

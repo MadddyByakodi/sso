@@ -69,7 +69,7 @@ angular.module('qui')
           return Applicants
             .get({ start: 0, rows: 15, fl: 'id,name', q: searchText })
             .then(function gotApplicants(response) {
-              return response.data.map(function iterate(value) {
+              return response.map(function iterate(value) {
                 return value;
               });
             });

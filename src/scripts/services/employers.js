@@ -7,7 +7,7 @@ angular.module('qui')
       const employerService = {};
 
       employerService.get = function getEmployers(params) {
-        const url = `${APP.apiServer}/quarc/employer`;
+        const url = `${APP.apiServer}/search/employers`;
         return $http
           .get(url, { params: params })
           .then(

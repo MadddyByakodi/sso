@@ -7,7 +7,7 @@ angular.module('qui')
     'Auth',
     'AUTH_EVENTS',
     'Page',
-    function SigninCtrl($rootScope, $state, $window, $q, Auth, AUTH_EVENTS, Page) {
+    function SigninFormCtrl($rootScope, $state, $window, $q, Auth, AUTH_EVENTS, Page) {
       const vm = this;
       Page.setTitle('Sign In');
       vm.user = {};

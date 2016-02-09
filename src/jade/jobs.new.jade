@@ -15,7 +15,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           label.col-xs-11.input-group
             | Location
             span.text-danger *
-            input.form-control(type='text' ng-model='NewJob.Regions.model' placeholder='Job Location' uib-typeahead='region.region for region in NewJob.Regions.get($viewValue)' typeahead-loading='NewJob.Regions.loadingRegions' typeahead-no-results='NewJob.Regions.noResults' typeahead-on-select='NewJob.Regions.select($item)' required)
+            input.form-control(type='text' ng-model='NewJob.Regions.model' placeholder='Job Location' uib-typeahead='region.name for region in NewJob.Regions.get($viewValue)' typeahead-loading='NewJob.Regions.loadingRegions' typeahead-no-results='NewJob.Regions.noResults' typeahead-on-select='NewJob.Regions.select($item)' required)
             i.fa.fa-refresh.fa-spin(ng-show='NewJob.Regions.loadingRegions')
             div(ng-show='NewJob.Regions.noResults')
               i.fa.fa-remove
@@ -54,7 +54,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
             span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='degree in NewJob.data.JobsDegrees')
               span.wrapper-xs {{degree.degree}}
               a.text-info-lt.font-bold(ng-click='NewJob.data.JobsDegrees.splice($index,1)'): span.fa.fa-1x ×&nbsp;
-          input.form-control(type='text' ng-model='NewJob.Degrees.model' placeholder='Degree' uib-typeahead='degree.degree for degree in NewJob.Degrees.get($viewValue)' typeahead-loading='NewJob.Degrees.loadingDegrees' typeahead-no-results='NewJob.Degrees.noResults' typeahead-on-select='NewJob.Degrees.select($item)')
+          input.form-control(type='text' ng-model='NewJob.Degrees.model' placeholder='Degree' uib-typeahead='degree.name for degree in NewJob.Degrees.get($viewValue)' typeahead-loading='NewJob.Degrees.loadingDegrees' typeahead-no-results='NewJob.Degrees.noResults' typeahead-on-select='NewJob.Degrees.select($item)')
           i.fa.fa-refresh.fa-spin(ng-show='NewJob.Degrees.loadingDegrees')
           div(ng-show='NewJob.Degrees.noResults')
             i.fa.fa-remove

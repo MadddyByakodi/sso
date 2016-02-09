@@ -2,13 +2,12 @@ angular.module('qui')
   .factory('ApplicantComments', [
     '$http',
     '$q',
-    'User',
     'APP',
-    function ApplicantComments($http, $q, User, APP) {
+    function ApplicantComments($http, $q, APP) {
       const applicantCommentService = {};
 
       applicantCommentService.get = function getApplicantComments(applicantId, params) {
-        const url = `${APP.apiServer}/quarc/applicant/${applicantId}/comments`;
+        const url = `${APP.apiServer}/user/job/applicants/${applicantId}/comments`;
         return $http
           .get(url, { params: params })
           .then(
@@ -23,7 +22,7 @@ angular.module('qui')
       };
 
       applicantCommentService.set = function setApplicantComments(applicantId, data) {
-        const url = `${APP.apiServer}/quarc/applicant/${applicantId}/comments`;
+        const url = `${APP.apiServer}/user/job/applicants/${applicantId}/comments`;
         return $http
           .post(url, data)
           .then(

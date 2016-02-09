@@ -7,9 +7,9 @@ angular.module('qui')
       const changeStateService = {};
 
       changeStateService.set = function setState(applicantId, data) {
-        const url = `${APP.apiServer}/quarc/applicant/${applicantId}/state`;
+        const url = `${APP.apiServer}/user/job/applicants/${applicantId}/state`;
         return $http
-          .post(url, data)
+          .put(url, data)
           .then(
             function successChangeState(response) {
               return response.data;

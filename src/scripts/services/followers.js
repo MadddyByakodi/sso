@@ -2,9 +2,8 @@ angular.module('qui')
   .factory('Followers', [
     '$http',
     '$q',
-    '$log',
     'APP',
-    function Followers($http, $q, $log, APP) {
+    function Followers($http, $q, APP) {
       const followersService = {};
 
       followersService.getOne = function getFollowers(applicantId, params) {
@@ -13,12 +12,10 @@ angular.module('qui')
           .get(url, { params: params })
           .then(
             function successJobs(response) {
-              $log.info(response);
               return response.data;
             },
 
             function errorJobs(response) {
-              $log.error(response);
               return $q.reject(response.data);
             }
           );
@@ -30,12 +27,10 @@ angular.module('qui')
           .post(url, data)
           .then(
           function successJobs(response) {
-            $log.info(response);
             return response.data;
           },
 
           function errorJobs(response) {
-            $log.error(response);
             return $q.reject(response.data);
           }
         );

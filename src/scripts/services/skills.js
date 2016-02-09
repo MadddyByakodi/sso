@@ -7,7 +7,7 @@ angular.module('qui')
       const skillService = {};
 
       skillService.get = function getSkills(params) {
-        const url = `${APP.apiServer}/quarc/skill`;
+        const url = `${APP.apiServer}/search/skills`;
         return $http
           .get(url, { params: params })
           .then(
@@ -22,7 +22,7 @@ angular.module('qui')
       };
 
       skillService.create = function createSkill(data) {
-        const url = `${APP.apiServer}/quarc/skill`;
+        const url = `${APP.apiServer}/skills`;
         return $http
           .post(url, data)
           .then(

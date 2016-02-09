@@ -4,7 +4,7 @@ angular.module('qui')
     'FollowerData',
     'ApplicantId',
     'Followers',
-    function JobsCtrl($uibModalInstance, FollowerData, ApplicantId, Followers) {
+    function AddFollowerCtrl($uibModalInstance, FollowerData, ApplicantId, Followers) {
       const vm = this;
       vm.FollowerData = FollowerData;
       vm.ApplicantId = ApplicantId;

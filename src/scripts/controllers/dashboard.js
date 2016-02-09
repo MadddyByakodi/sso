@@ -4,19 +4,19 @@ angular.module('qui')
     'Summary',
     'Applicants',
     'moment',
-    function JobsCtrl(Page, Summary, Applicants, moment) {
+    function DashboardCtrl(Page, Summary, Applicants, moment) {
       const vm = this;
       Page.setTitle('Dashboard');
       vm.getSummary = function getSummary() {
         Summary.get({ state_id: '1,5,8,9,17' })
           .then(function gotSummary(response) {
             vm.summary = {
-              cv: response.data['1'] || 0,
-              interview: response.data['9'] || 0,
+              cv: response['1'] || 0,
+              interview: response['9'] || 0,
               await_interview: [
-                response.data['5'] || 0,
-                response.data['8'] || 0,
-                response.data['17'] || 0,
+                response['5'] || 0,
+                response['8'] || 0,
+                response['17'] || 0,
               ].reduce(function getSum(a, b) {
                 return Number(a) + Number(b);
               }),
@@ -34,7 +34,7 @@ angular.module('qui')
       vm.getPipeline = function getPipeline() {
         Summary.getPipeline()
           .then(function gotPipeline(response) {
-            vm.pipeline = response.data;
+            vm.pipeline = response;
           });
       };
 
@@ -49,7 +49,7 @@ angular.module('qui')
             moment().endOf('week').toISOString(),
           ].join(','),
         }).then(function gotInterviews(response) {
-          vm.interviews = response.data;
+          vm.interviews = response;
         });
       };
 

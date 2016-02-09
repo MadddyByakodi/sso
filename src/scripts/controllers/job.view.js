@@ -4,7 +4,7 @@ angular.module('qui')
     'Page',
     '$stateParams',
     '$sce',
-    function JobsCtrl(Jobs, Page, $stateParams, $sce) {
+    function JobViewCtrl(Jobs, Page, $stateParams, $sce) {
       const vm = this;
       vm.data = {};
       vm.loadJob = function loadJob() {
@@ -12,10 +12,10 @@ angular.module('qui')
         Jobs
           .getOne($stateParams.jobId)
           .then(function gotJob(result) {
-            Page.setTitle(`${result.data.role} - ${result.data.client_name}`);
-            vm.data = result.data;
-            vm.responsibility = $sce.trustAsHtml(result.data.responsibility);
-            vm.interview_addr = $sce.trustAsHtml(result.data.interview_addr);
+            Page.setTitle(`${result.role} - ${result.client_name}`);
+            vm.data = result;
+            vm.responsibility = $sce.trustAsHtml(result.responsibility);
+            vm.interview_addr = $sce.trustAsHtml(result.interview_addr);
 
             // data has been loaded
             vm.ui.loading = false;

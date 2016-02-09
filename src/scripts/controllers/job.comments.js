@@ -3,14 +3,14 @@ angular.module('qui')
     'JobComments',
     '$stateParams',
     'User',
-    function JobsCtrl(JobComments, $stateParams, User) {
+    function JobCommentsCtrl(JobComments, $stateParams, User) {
       const vm = this;
       vm.loadJobComments = function loadJobComments() {
         vm.ui = { loading: true, scrollToBottom: false };
         JobComments
           .get($stateParams.jobId)
           .then(function gotJobComment(result) {
-            vm.data = result.data;
+            vm.data = result;
 
             // data has been loaded
             vm.ui = { loading: false, scrollToBottom: true };
@@ -25,9 +25,9 @@ angular.module('qui')
           .then(function insertedComment() {
             vm.post.comment = '';
             vm.data.push({
-              name: User.userinfo.name,
-              comment: comment,
-              timestamp: new Date().toISOString(),
+              user: { name: User.userinfo.name },
+              body: comment,
+              created_at: new Date().toISOString(),
             });
 
             // data has been loaded

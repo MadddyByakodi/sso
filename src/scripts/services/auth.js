@@ -89,15 +89,15 @@ angular.module('qui')
       authService.setSessionData = function gInfo() {
         return $q.all([
           $http
-            .get(APP.apiServer + '/userinfo')
+            .get(APP.apiServer + '/user')
             .then(function userinfoSuccess(response) {
               return Session.create('userinfo', response.data);
             }),
 
           $http
-            .get(APP.apiServer + '/quarc/state')
+            .get(APP.apiServer + '/user/states')
             .then(function statesSuccess(response) {
-              return Session.create('states', response.data.data);
+              return Session.create('states', response.data);
             }),
         ]);
       };

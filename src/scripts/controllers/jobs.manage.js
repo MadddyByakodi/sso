@@ -34,7 +34,7 @@ angular.module('qui')
         }
 
         Jobs.getApplicants($stateParams.jobId, vm.params).then(function applicantsList(result) {
-          angular.forEach(result.data, function iterateApplicants(applicant) {
+          angular.forEach(result, function iterateApplicants(applicant) {
             vm.applicants.push(applicant);
           });
 
@@ -42,7 +42,7 @@ angular.module('qui')
           vm.ui.loading = false;
 
           // check for returned results count and set lazy loadLoad false if less
-          vm.ui.lazyLoad = angular.equals(result.data.length, vm.params.rows) ? true : false;
+          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
 
           // increment offset for next loading of results
           vm.params.start = vm.params.start + vm.params.rows;
@@ -53,7 +53,7 @@ angular.module('qui')
 
       vm.loadJob = function loadJob() {
         Jobs.getOne($stateParams.jobId, { fl: 'id,role' }).then(function getJob(response) {
-          vm.job = response.data;
+          vm.job = response;
           Page.setTitle(`${vm.job.role} - ${$stateParams.bucket} Applicants`); // set page title
         });
       };

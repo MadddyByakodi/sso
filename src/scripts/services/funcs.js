@@ -7,7 +7,7 @@ angular.module('qui')
       const funcService = {};
 
       funcService.get = function getFuncs(params) {
-        const url = `${APP.apiServer}/quarc/func`;
+        const url = `${APP.apiServer}/search/funcs`;
         return $http
           .get(url, { params: params })
           .then(

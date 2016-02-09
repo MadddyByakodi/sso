@@ -7,7 +7,7 @@ angular.module('qui')
       const regionService = {};
 
       regionService.get = function getRegions(params) {
-        const url = `${APP.apiServer}/quarc/region`;
+        const url = `${APP.apiServer}/search/regions`;
         return $http
           .get(url, { params: params })
           .then(

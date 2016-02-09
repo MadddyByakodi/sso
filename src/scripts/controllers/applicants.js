@@ -4,7 +4,7 @@ angular.module('qui')
     'Page',
     '$stateParams',
     'moment',
-    function JobsCtrl(Applicants, Page, $stateParams, moment) {
+    function ApplicantsCtrl(Applicants, Page, $stateParams, moment) {
       const vm = this;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
 
@@ -30,7 +30,7 @@ angular.module('qui')
         }
 
         Applicants.get(vm.params).then(function jobList(result) {
-          angular.forEach(result.data, function iterateJobs(applicant) {
+          angular.forEach(result, function iterateJobs(applicant) {
             vm.applicants.push(applicant);
           });
 
@@ -38,7 +38,7 @@ angular.module('qui')
           vm.ui.loading = false;
 
           // check for returned results count and set lazy loadLoad false if less
-          vm.ui.lazyLoad = angular.equals(result.data.length, vm.params.rows) ? true : false;
+          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
 
           // increment offset for next loading of results
           vm.params.start = vm.params.start + vm.params.rows;

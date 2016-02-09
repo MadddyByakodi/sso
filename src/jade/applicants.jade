@@ -22,12 +22,12 @@
           |  {{App.states[applicant.interview_type].name}},
           |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
         td: .w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-          button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;' ng-disabled='App.states[applicant.state_id].view.length===0')
+          button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;' ng-disabled='App.states[applicant.state_id].Actions.length===0')
             | {{applicant.state_name}}&nbsp;
-            span(ng-if='App.states[applicant.state_id].view.length>0').caret
+            span(ng-if='App.states[applicant.state_id].Actions.length>0').caret
           ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-            li(role='menuitem' ng-repeat='state_id in App.states[applicant.state_id].view')
-              a(href='' ng-click='App.changeState(applicant, state_id)') {{App.states[state_id].name}}
+            li(role='menuitem' ng-repeat='state in App.states[applicant.state_id].Actions')
+              a(href='' ng-click='App.changeState(applicant, state.state_id)') {{App.states[state.state_id].name}}
     tfoot
       tr
         td

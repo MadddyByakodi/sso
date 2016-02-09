@@ -2,75 +2,65 @@ angular.module('qui')
   .factory('Jobs', [
     '$http',
     '$q',
-    '$log',
     'APP',
-    'User',
-    function Jobs($http, $q, $log, APP, User) {
+    function Jobs($http, $q, APP) {
       const jobsService = {};
 
       jobsService.get = function getJobs(params) {
-        const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/postedjobs`;
+        const url = `${APP.apiServer}/user/jobs`;
         return $http
           .get(url, { params: params })
           .then(
             function successJobs(response) {
-              $log.info(response);
               return response.data;
             },
 
             function errorJobs(response) {
-              $log.error(response);
               return $q.reject(response.data);
             }
           );
       };
 
       jobsService.getOne = function getJobs(jobId, params) {
-        const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/postedjobs/${jobId}`;
+        const url = `${APP.apiServer}/user/jobs/${jobId}`;
         return $http
           .get(url, { params: params })
           .then(
             function successJobs(response) {
-              $log.info(response);
               return response.data;
             },
 
             function errorJobs(response) {
-              $log.error(response);
               return $q.reject(response.data);
             }
           );
       };
 
       jobsService.getApplicants = function getApplicants(jobId, params) {
-        const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/postedjobs/${jobId}/appliedapplicants`;
+        const url = `${APP.apiServer}/user/jobs/${jobId}/applicants`;
         return $http
           .get(url, { params: params })
           .then(
             function successJobs(response) {
-              $log.info(response);
               return response.data;
             },
 
             function errorJobs(response) {
-              $log.error(response);
               return $q.reject(response.data);
             }
           );
       };
 
       jobsService.create = function create(data) {
-        const url = `${APP.apiServer}/quarc/client/${User.userinfo.id}/uploadjd`;
+        const url = `${APP.apiServer}/user/jobs`;
         return $http
           .post(url, data)
           .then(
             function successJobs(response) {
-              $log.info(response);
               return response.data;
             },
 
             function errorJobs(response) {
-              $log.error(response);
               return $q.reject(response.data);
             }
           );

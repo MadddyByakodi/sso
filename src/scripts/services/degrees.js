@@ -7,7 +7,7 @@ angular.module('qui')
       const degreeService = {};
 
       degreeService.get = function getDegrees(params) {
-        const url = `${APP.apiServer}/quarc/degree`;
+        const url = `${APP.apiServer}/search/degrees`;
         return $http
           .get(url, { params: params })
           .then(

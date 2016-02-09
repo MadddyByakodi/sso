@@ -1,7 +1,7 @@
 angular.module('qui')
   .controller('ForgotpassController', [
     'Auth',
-    function SigninCtrl(Auth) {
+    function orgotpassCtrl(Auth) {
       const vm = this;
       vm.showSuccessAlert = false;
       vm.forgotpass = function forgotpass() {
