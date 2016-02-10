@@ -1,6 +1,6 @@
 angular.module('qui')
   .constant('APP', {
-    apiServer: 'http://localhost:3001',
+    apiServer: '//api.quezx.dev',
   })
   .config([
     '$locationProvider',

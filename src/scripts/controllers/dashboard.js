@@ -11,15 +11,13 @@ angular.module('qui')
         Summary.get({ state_id: '1,5,8,9,17' })
           .then(function gotSummary(response) {
             vm.summary = {
-              cv: response['1'] || 0,
-              interview: response['9'] || 0,
+              cv: response[1] || 0,
+              interview: response[9] || 0,
               await_interview: [
-                response['5'] || 0,
-                response['8'] || 0,
-                response['17'] || 0,
-              ].reduce(function getSum(a, b) {
-                return Number(a) + Number(b);
-              }),
+                response[5] || 0,
+                response[8] || 0,
+                response[17] || 0,
+              ].reduce((a, b) => a + b),
             };
 
             vm.chart = {

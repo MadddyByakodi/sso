@@ -88,4 +88,4 @@ app.get('/*', function serveApp(req, res) {
   res.sendFile('index.html', { root: __dirname + '/dist/html' });
 });
 
-app.listen(3000);
+app.listen(3002);
