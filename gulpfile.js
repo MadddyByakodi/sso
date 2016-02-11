@@ -3,6 +3,7 @@ const gulp = require('gulp');
 const del = require('del');
 const runSequence = require('run-sequence');
 const plugin = require('gulp-load-plugins')();
+const scriptsFolders = ['core', 'accounts', 'hire', 'partner'];
 
 gulp.task('develop', function develop() {
   plugin.nodemon({
@@ -78,30 +79,39 @@ gulp.task('styles', function styles() {
     }));
 });
 
-// Scripts
-gulp.task('scripts', function scripts() {
-  return gulp.src('src/scripts/**/*.js')
-    .pipe(plugin.sourcemaps.init())
-    .pipe(plugin.concat('app.js'))
-    .pipe(plugin.babel({
-      presets: ['es2015'],
-    }))
-    .on('error', plugin.notify.onError({
-      message: 'Babel Error: <%= error.message %>',
-    }))
-    .pipe(plugin.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/scripts'))
-    .pipe(plugin.rename({ suffix: '.min' }))
-    .pipe(plugin.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/scripts'))
-    .pipe(plugin.notify({
-      onLast: true,
-      title: 'Scripts Compilation',
-      message: 'script build completed',
-    }));
-});
+// Script Tasks
+(function scripts() {
+  const scriptTasks = scriptsFolders.map(f => {
+    const task = `scripts:${f}`;
+    gulp.task(task, () => {
+      return gulp.src(`src/scripts/${f}/**/*.js`)
+        .pipe(plugin.sourcemaps.init())
+        .pipe(plugin.concat(`${f}.js`))
+        .pipe(plugin.babel({
+          presets: ['es2015'],
+        }))
+        .on('error', plugin.notify.onError({
+          message: 'Babel Error: <%= error.message %>',
+        }))
+        .pipe(plugin.sourcemaps.write('.'))
+        .pipe(gulp.dest('dist/scripts'))
+        .pipe(plugin.rename({ suffix: '.min' }))
+        .pipe(plugin.sourcemaps.write('.'))
+        .pipe(gulp.dest('dist/scripts'))
+        .pipe(plugin.notify({
+          onLast: true,
+          title: 'Scripts Compilation',
+          message: 'script build completed',
+        }));
+    });
 
-// Scripts
+    return task;
+  });
+
+  gulp.task('scripts', scriptTasks);
+})();
+
+// lint Scripts
 gulp.task('lint', function lint() {
   return gulp.src(['app/**/*.js', '*.js', 'src/scripts/**/*.js'])
     .pipe(plugin.eslint())
@@ -140,7 +150,7 @@ gulp.task('watch', function watch() {
   gulp.watch('src/styles/**/*.scss', ['styles']);
 
   // Watch frontend .js files
-  gulp.watch('src/scripts/**/*.js', ['scripts']);
+  scriptsFolders.map(f => gulp.watch(`src/scripts/${f}/**/*.js`, [`scripts:${f}`]));
 
   // Watch node server files
   gulp.watch(['app/**/*.js', '*.js', 'src/scripts/**/*.js'], ['lint']);

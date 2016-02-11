@@ -1,0 +1,8 @@
+//- navbar
+.app-header.navbar(ng-include="'html/blocks/accounts.header.html'")
+
+content
+  .app-content
+    div(ui-butterbar='')
+    a.off-screen-toggle.hide(href='', ui-toggle-class='off-screen', data-target='.app-aside')
+    .app-content-body(ui-view='')
