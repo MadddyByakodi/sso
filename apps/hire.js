@@ -16,8 +16,8 @@ app.post('/api/login', function login(req, res) {
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     auth: {
-      user: config.OAUTH_CLIENT,
-      pass: config.OAUTH_SECRET,
+      user: config.HIRE_CLIENT,
+      pass: config.HIRE_SECRET,
     },
     form: {
       grant_type: 'authorization_code',
@@ -36,8 +36,8 @@ app.post('/api/refresh', function login(req, res) {
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     auth: {
-      user: config.OAUTH_CLIENT,
-      pass: config.OAUTH_SECRET,
+      user: config.HIRE_CLIENT,
+      pass: config.HIRE_SECRET,
     },
     form: {
       grant_type: 'refresh_token',
@@ -55,8 +55,8 @@ app.post('/api/logout', function login(req, res) {
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}/${req.body.access_token}`,
     auth: {
-      user: config.OAUTH_CLIENT,
-      pass: config.OAUTH_SECRET,
+      user: config.HIRE_CLIENT,
+      pass: config.HIRE_SECRET,
     },
   };
 

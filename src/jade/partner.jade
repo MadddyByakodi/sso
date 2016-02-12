@@ -1,5 +1,5 @@
 doctype html
-html(lang='en' ng-app='qui.hire' ng-controller='AppController as App')
+html(lang='en' ng-app='qui.partner' ng-controller='AppController as App')
   head
     meta(charset='utf-8')
     title  {{App.Page.title()}} | QuezX.com
@@ -9,9 +9,7 @@ html(lang='en' ng-app='qui.hire' ng-controller='AppController as App')
     link(rel='stylesheet' href='/styles/main.css' type='text/css')
     link(rel='stylesheet' href='/bower_components/animate.css/animate.css' type='text/css')
     link(rel='stylesheet' href='/bower_components/source-sans-pro/source-sans-pro.css' type='text/css')
-    link(rel='stylesheet' href='/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css' type='text/css')
     link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css' type='text/css')
-    link(rel='stylesheet', href='bower_components/angular-chart.js/dist/angular-chart.css' type='text/css')
 
   body
     .app#app(
@@ -31,8 +29,5 @@ html(lang='en' ng-app='qui.hire' ng-controller='AppController as App')
     script(src='/bower_components/angular-http-auth/src/http-auth-interceptor.js')
     script(src='/bower_components/angular-ui-router/release/angular-ui-router.js')
     script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
-    script(src='/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js')
-    script(src='bower_components/Chart.js/Chart.min.js')
-    script(src='bower_components/angular-chart.js/dist/angular-chart.min.js')
     script(src='/scripts/core.js')
     script(src='/scripts/partner.js')

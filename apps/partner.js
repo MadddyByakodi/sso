@@ -16,8 +16,8 @@ app.post('/api/login', function login(req, res) {
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     auth: {
-      user: config.OAUTH_CLIENT,
-      pass: config.OAUTH_SECRET,
+      user: config.PARTNER_CLIENT,
+      pass: config.PARTNER_SECRET,
     },
     form: {
       grant_type: 'password',
@@ -36,8 +36,8 @@ app.post('/api/refresh', function login(req, res) {
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}`,
     auth: {
-      user: config.OAUTH_CLIENT,
-      pass: config.OAUTH_SECRET,
+      user: config.PARTNER_CLIENT,
+      pass: config.PARTNER_SECRET,
     },
     form: {
       grant_type: 'refresh_token',
@@ -55,8 +55,8 @@ app.post('/api/logout', function login(req, res) {
   const options = {
     url: `${config.OAUTH_SERVER}${config.OAUTH_ENDPOINT}/${req.body.access_token}`,
     auth: {
-      user: config.OAUTH_CLIENT,
-      pass: config.OAUTH_SECRET,
+      user: config.PARTNER_CLIENT,
+      pass: config.PARTNER_SECRET,
     },
   };
 
@@ -71,8 +71,8 @@ app.post('/api/forgotpass', function login(req, res) {
     url: `${config.OAUTH_SERVER}/users/forgotPassword`,
     json: true,
     auth: {
-      user: config.OAUTH_CLIENT,
-      pass: config.OAUTH_SECRET,
+      user: config.PARTNER_CLIENT,
+      pass: config.PARTNER_SECRET,
     },
     body: {
       grant_type: req.body.username,

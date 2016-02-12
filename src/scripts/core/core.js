@@ -9,8 +9,11 @@ angular
     apiServer: '//api.quezx.dev',
     accountsServer: '//accounts.quezx.dev',
     hireServer: '//hire.quezx.dev',
-    hireLogin: '//accounts.quezx.dev/authorise?client_id=quezxrecruiterappid&response_type=code&' +
+    partnerServer: '//partner.quezx.dev',
+    hireLogin: '//accounts.quezx.dev/authorise?client_id=hirequezx&response_type=code&' +
     'redirect_uri=http://hire.quezx.dev/access/oauth&state=yo',
+    partnerLogin: '//accounts.quezx.dev/authorise?client_id=partnerquezx&response_type=code&' +
+    'redirect_uri=http://partner.quezx.dev/access/oauth&state=yo',
   })
   .config([
     '$locationProvider',
