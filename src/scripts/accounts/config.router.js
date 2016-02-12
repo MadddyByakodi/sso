@@ -3,8 +3,7 @@ angular.module('qui.accounts')
     '$stateProvider',
     '$urlRouterProvider',
     function quiStateConfig($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.when('/', '/app/home');
-      $urlRouterProvider.otherwise('/oauth/404');
+      $urlRouterProvider.otherwise('/home');
       $stateProvider
         .state('oauth', {
           url: '/oauth',

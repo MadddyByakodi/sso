@@ -5,7 +5,6 @@ const config = require('./config');
 
 const app = express();
 
-app.use(require('morgan')('dev'));
 app.use(express.static(__dirname + '/../dist'));
 app.use('/bower_components', express.static(__dirname + '/../bower_components'));
 

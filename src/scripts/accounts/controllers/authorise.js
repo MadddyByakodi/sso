@@ -7,7 +7,10 @@ angular.module('qui.accounts')
       const vm = this;
 
       OAuthorise.get($location.search())
-        .then(res => vm.app = res.data)
+        .then(res => {
+          vm.app = res.data;
+          vm.done(true);
+        })
         .catch(res => vm.error = res.data.error);
 
       vm.done = function done(allow) {
