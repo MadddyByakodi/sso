@@ -1,17 +1,21 @@
 angular.module('qui.hire')
   .controller('JobsController', [
-    'Jobs',
+    'Summary',
     'Page',
-    function JobsCtrl(Jobs, Page) {
+    function JobsCtrl(Summary, Page) {
       const vm = this;
       Page.setTitle('Posted Jobs');
       vm.jobs = []; // collection of jobs
       vm.ui = { lazyLoad: true, loading: false }; // ui states
-      vm.params = { start: 0, rows: 15 }; // GET query params
+      vm.params = {
+        start: 0, rows: 15, fl: 'id,role,job_status_id', mincount: 0,
+        state_id: '1,4,5,8,9,10,17,19,20,22,23,24,25,33,34,35,36',
+      }; // GET query params
+
       vm.loadJobs = function loadJobs() {
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
         vm.ui = { lazyLoad: false, loading: true };
-        Jobs.get(vm.params).then(function jobList(result) {
+        Summary.getPipeline(vm.params).then(function jobList(result) {
           angular.forEach(result, function iterateJobs(job) {
             vm.jobs.push(job);
           });
