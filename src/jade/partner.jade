@@ -2,7 +2,7 @@ doctype html
 html(lang='en' ng-app='qui.partner' ng-controller='AppController as App')
   head
     meta(charset='utf-8')
-    title  {{App.Page.title()}} | QuezX.com
+    title(ng-bind='App.Page.title()') Partner | QuezX.com
     base(href='/')
     meta(name='description' content='dashboard, recruiter, client')
     meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
