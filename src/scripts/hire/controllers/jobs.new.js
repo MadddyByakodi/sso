@@ -1,5 +1,6 @@
 angular.module('qui.hire')
   .controller('NewJobController', [
+    '$timeout',
     'Page',
     '$state',
     'Regions',
@@ -11,7 +12,7 @@ angular.module('qui.hire')
     'Funcs',
     'moment',
     'Jobs',
-    function NewJobCtrl(Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
+    function NewJobCtrl($timeout, Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
       const vm = this;
       Page.setTitle('Post New Position');
       vm.data = {
@@ -133,7 +134,7 @@ angular.module('qui.hire')
 
         get: (function getIndustries() {
           return Industries
-            .get({ q: '' })
+            .get({ q: '', rows: 20 })
             .then(function gotIndustries(response) {
               vm.Industries.list = response.items;
             });
@@ -226,7 +227,10 @@ angular.module('qui.hire')
         Jobs
           .create(vm.data)
           .then(function jobCreated(result) {
-            $state.go('app.job.view', { jobId: result.id });
+            // Wait for solr to index data
+            $timeout(() => {
+              $state.go('app.job.view', { jobId: result.id });
+            }, 1000);
           });
       };
     },

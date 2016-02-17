@@ -18,7 +18,7 @@ angular.module('qui.hire')
 
       if (ApplicantIds.length > 1) {
         vm.downloadUrl =
-          `${APP.apiServer}/quarc/job/applicants/download?access_token=${token}&id=${ApplicantIds.join(',')}`;
+          `${APP.apiServer}/user/job/applicants/download?access_token=${token}&id=${ApplicantIds.join(',')}`;
       }
 
       vm.ok = function ok() {
