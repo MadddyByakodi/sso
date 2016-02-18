@@ -21,7 +21,7 @@ angular.module('qui.hire')
         new_job: 1,
         start_work_time: '9:00 AM',
         end_work_time: '5:00 PM',
-        job_nature: '1',
+        job_nature: 1,
         preferred_genders: 'No Preference',
         direct_line_up: '0',
         whitelist: '0',
