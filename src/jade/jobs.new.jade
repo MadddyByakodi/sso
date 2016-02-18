@@ -80,8 +80,11 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
           .col-xs-12.no-padder.m-t-xs.m-b-xs
             span.b-a.b-info.text-info-dker.m-r-xs(ng-repeat='industry in NewJob.data.JobsIndustries')
               span.wrapper-xs {{industry.name}}
-              a.text-info-lt.font-bold(ng-click='NewJob.Industries.list.push(NewJob.data.JobsIndustries.splice($index,1)[0])'): span.fa.fa-1x ×&nbsp;
-          input.form-control(type='text' ng-model='NewJob.Industries.model' ng-init='NewJob.Industries.model=""' placeholder='Target Industries (if any)' uib-typeahead='industry.name for industry in (NewJob.Industries.list |  filter: { name: $viewValue })' typeahead-loading='NewJob.Industries.loadingIndustries' typeahead-no-results='NewJob.Industries.noResults' typeahead-on-select='NewJob.Industries.select($item)' typeahead-min-length='0' typeahead-show-hint='true' typeahead-editable='true')
+              a.text-info-lt.font-bold(ng-click='NewJob.Industries.addToList(NewJob.data.JobsIndustries.splice($index,1)[0])'): span.fa.fa-1x ×&nbsp;
+
+          select.form-control.m-b(ng-model='NewJob.Industries.model' ng-init='NewJob.Industries.model = "0"' ng-change='NewJob.Industries.select()')
+            option(value='0' selected disabled) -- Choose Target Industries --
+            option(ng-repeat='industry in NewJob.Industries.list | orderBy:"name"' ng-value='industry.id') {{industry.name}}
 
       .line.line-dashed.b-b.line-lg.pull-in
       label.w-full.input-group

@@ -119,16 +119,28 @@ angular.module('qui.hire')
       };
 
       vm.Industries = {
-        select: function selectIndustry($item) {
-          vm.Industries.model = '';
-          vm.data.JobsIndustries.push({
-            industry_id: $item.id,
-            name: $item.name,
-          });
+        select: function selectIndustry() {
+          const industryId = Number(vm.Industries.model);
+          if (industryId === 0) return;
 
           // Removes industry from list
-          angular.forEach(vm.Industries.list, function removeIndustry(value, key) {
-            if (value.id === $item.id) vm.Industries.list.splice(key, 1);
+          angular.forEach(vm.Industries.list, (value, key) => {
+            if (value.id === industryId) {
+              const $item = vm.Industries.list.splice(key, 1)[0];
+              vm.data.JobsIndustries.push({
+                industry_id: $item.id,
+                name: $item.name,
+              });
+            }
+          });
+
+          vm.Industries.model = '0';
+        },
+
+        addToList: function addToList(item) {
+          vm.Industries.list.push({
+            id: item.industry_id,
+            name: item.name,
           });
         },
 
