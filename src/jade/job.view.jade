@@ -105,7 +105,7 @@ div(ng-controller='JobViewController as Job')
           .h5.text-muted(ng-bind-html="Job.interview_addr")
 
   .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
-    .col-xs-12(style='position: relative; height: 100%; width: 104%; top: 0; bottom: 50px; overflow-x: hidden; overflow-y: scroll; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
+    .col-xs-12(style='position: relative; height: 100%; width: 102%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
       .col
         .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_at"')
           .col.text-center.thumb-sm
