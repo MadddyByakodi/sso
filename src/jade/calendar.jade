@@ -7,14 +7,14 @@ div(ng-controller='CalendarController as Calendar')
   .hbox.hbox-auto-xs.hbox-auto-sm
     .col.wrapper-md
       .clearfix.m-b-xs
-        .pull-left.h1.m-n.font-thin.h3 Calendar
+        .pull-left.h1.m-l-lg.font-thin.h3 Calendar
         .pull-right
           button.btn.btn-sm.btn-default(mwl-date-modifier='', date='Calendar.calendarDay', set-to-today='') Today
           .btn-group.m-l-xs
             button.btn.btn-sm.btn-default(ng-model='Calendar.calendarView', uib-btn-radio="'day'") Day
             button.btn.btn-sm.btn-default(ng-model='Calendar.calendarView', uib-btn-radio="'week'") Week
             button.btn.btn-sm.btn-default(ng-model='Calendar.calendarView', uib-btn-radio="'month'") Month
-      .pos-rlt.b
+      .pos-rlt.b.m-l-lg
         .h3.text-center.font-thin.wrapper-sm.bg-info
           a.pull-left: i.fa.fa-chevron-left(mwl-date-modifier='', date='Calendar.calendarDay', decrement='Calendar.calendarView')
           | {{ Calendar.calendarTitle }}

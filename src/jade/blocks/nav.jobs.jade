@@ -23,6 +23,8 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
         i.fa.fa-plus-square(ng-if='Job.job_closed_collapse')
         i.fa.fa-minus-square(ng-if='!Job.job_closed_collapse')
         | &nbsp; Closed
-      ul.m-t-xs.nav(uib-collapse='Job.job_closed_collapse')
+      ul.m-t-xs.nav(uib-collapse='Job.job_closed_collapse' ng-init='Job.job_closed_collapse = true')
         li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "Closed"}' ng-init='$first ? (Job.job_closed = true): null' ui-sref-active='active')
           a.text-ellipsis.m-l-md(ui-sref='app.jobs.manage({jobId: job.id})' uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
+
+      .m-b-md

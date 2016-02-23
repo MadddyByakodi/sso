@@ -4,6 +4,7 @@ div(ng-controller='DashboardController as Dash')
     .m-xs
       .col-xs-12.no-padder
         .m-xs
+          .hbox.wrapper-xs.bg-black.text-center: a(ui-sref='app.applicants({bucket: "Pending Feedback"})') Awaiting Feedback
           .hbox.wrapper-md.bg-white-only
             .col
               i.fa.fa-file-text-o.fa-lg
@@ -13,7 +14,6 @@ div(ng-controller='DashboardController as Dash')
               i.fa.fa-user-secret.fa-lg
               span.h4.text-black  Interviews
               .fa-4x.h1 {{Dash.summary.interview}}
-          .hbox.wrapper-xs.bg-black.text-center: a(ui-sref='app.applicants({bucket: "Pending Feedback"})') Awaiting Feedback
       .col-xs-12.no-padder
         .m-xs.wrapper-xs.bg-white
           .h4.text-black  &nbsp; Actions Required

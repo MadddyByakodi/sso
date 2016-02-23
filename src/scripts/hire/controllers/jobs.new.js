@@ -146,7 +146,7 @@ angular.module('qui.hire')
 
         get: (function getIndustries() {
           return Industries
-            .get({ q: '', rows: 20 })
+            .get({ q: '', rows: 30 })
             .then(function gotIndustries(response) {
               vm.Industries.list = response.items;
             });
