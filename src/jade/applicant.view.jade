@@ -132,17 +132,19 @@ div(ng-controller='ApplicantViewController as Applicant')
 
                 //- only show time for interview
                 span(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1')  {{comment.scheduled_on | date: 'h:mm a'}}
-              .text-success-dker(ng-if='comment.suggested_join_date')
+
+              //- Make an Offer
+              .text-success-dker(ng-if='comment.suggested_join_date && comment.state_id === 10')
                 //- Make an offer
-                b(ng-if='comment.state_id === 10') Suggested Joining Date -
+                b Suggested Joining Date -
                 |  {{comment.suggested_join_date | date: 'MMM d, yyyy'}}
-              .text-success-dker(ng-if='comment.offered_ctc')
-                //- Make an offer
-                b(ng-if='comment.state_id === 10') Offered CTC  -
+              .text-success-dker(ng-if='comment.offered_ctc && comment.state_id === 10')
+                b Offered CTC  -
                 |  {{comment.currency}} {{comment.offered_ctc}} Lacs
-              .text-success-dker(ng-if='comment.final_ctc')
-                //- Make an offer
-                b(ng-if='comment.state_id === 30') Final CTC  -
+
+              //- Candidate Joined
+              .text-success-dker(ng-if='comment.final_ctc && comment.state_id === 30')
+                b Final CTC  -
                 |  {{comment.currency}} {{comment.final_ctc}} Lacs
               p {{comment.body}}
               .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
