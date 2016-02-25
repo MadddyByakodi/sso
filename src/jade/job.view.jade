@@ -15,8 +15,14 @@ div(ng-controller='JobViewController as Job')
             .h3.m-b-xs {{Job.data.client_name}}
             div.m-b-xs
               span.h4 {{Job.data.role}}
-              .m-l-xs.label.bg-success
-                span.h5 {{Job.data.job_status}}
+
+              //- Job status label
+              span.m-l-xs
+                .label.bg-danger(ng-if='Job.data.job_status === "Closed"')
+                  span.h5 Closed
+                .label.bg-success(ng-if='!(Job.data.job_status === "Closed")')
+                  span.h5 Open
+
             .pull-left.text-muted
               .h4.wrapper-xs
                   i.fa.fa-lg.fa-inr
