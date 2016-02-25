@@ -9,32 +9,21 @@ div(ng-controller='JobViewController as Job')
     .col-sm-12.dker.no-padder
       .col-sm-7.no-padder.clearfix.m-t-xs
         .hbox
-          .col.thumb-xl.text-center.bg-light.dker.wrapper-lg
-            i.fa.fa-briefcase.fa-4x.wrapper-xs.text-white
-          .col.bg-white.wrapper-xs
-            .hbox
-              .col.h3 &nbsp; {{Job.data.client_name}}
-            .hbox
-              .col.h4
-                | &nbsp;{{Job.data.role}}
-                i.btn.fa.fa-download(ng-click='App.downloadJob([Job.data.id])')
-            .hbox
-              .col
-                .hox.h5.m-t-xs.text-muted
-                  .col.v-middle
-                    i.fa.fa-lg.fa-inr
-                  .col.v-middle  &nbsp; {{Job.data.min_sal}}–{{Job.data.max_sal}} Lakhs
-                .hbox.h5.m-t-xs.text-muted
-                  .col.v-middle(style='width:20px;'): i.fa.fa-lg.fa-map-marker
-                  .col.v-middle  &nbsp; {{Job.data.job_location}}
-              .col
-                .pull-right
-                  .hbox.h5.m-t-xs.text-muted
-                    .col.v-middle Total Applicants
-                    .col.fa-2x &nbsp;{{Job.data.total_applicants}}
-                  .hbox.h5.m-t-xs.text-muted
-                    .col.v-middle Priority
-                    .col.v-middle: .btn.btn-success.rounded {{Job.data.job_status}}
+          .col.w-sm.v-middle.bg-light.dker
+            img.w-full(src='{{Job.data._root_.logo}}')
+          .col.bg-white.wrapper-xs.clearfix
+            .h3.m-b-xs {{Job.data.client_name}}
+            div.m-b-xs
+              span.h4 {{Job.data.role}}
+              .m-l-xs.label.bg-success
+                span.h5 {{Job.data.job_status}}
+            .pull-left.text-muted
+              .h4.wrapper-xs
+                  i.fa.fa-lg.fa-inr
+                  | &nbsp; {{Job.data.min_sal}}–{{Job.data.max_sal}} Lakhs
+              .h4.wrapper-xs
+                i.fa.fa-lg.fa-map-marker
+                | &nbsp; {{Job.data.job_location}}
       .col-sm-5.clearfix.no-padder.m-t-xs
         .panel.panel-primary.m-l-xs.bg-white.no-border
           .panel-heading

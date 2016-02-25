@@ -3,8 +3,13 @@ div(ng-controller='DashboardController as Dash')
   .col-sm-4.no-padder
     .m-xs
       .col-xs-12.no-padder
-        .m-xs
-          .hbox.wrapper-xs.bg-black.text-center: a(ui-sref='app.applicants({bucket: "Pending Feedback"})') Awaiting Feedback
+        .m-xs.bg-white-only
+          .wrapper-xs.b-b
+            span.h4.text-black &nbsp; Awaiting Feedback
+            a.pull-right.label.bg-primary.lt.m-r-xs(ui-sref='app.applicants({bucket: "Pending Feedback"})')
+              .h5
+                i.fa.fa-eye
+                |  View
           .hbox.wrapper-md.bg-white-only
             .col
               i.fa.fa-file-text-o.fa-lg
