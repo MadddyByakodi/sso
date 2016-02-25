@@ -112,7 +112,38 @@ div(ng-controller='ApplicantViewController as Applicant')
             .col-xs-12
               .text-info-dker {{comment.user.name}}
               .text-danger-dker {{App.states[comment.state_id].name}}
-              .text-success.dk {{comment.scheduled_on | date: 'MMM d, yyyy h:mm a'}}
+              .text-success-dker(ng-if='comment.scheduled_on')
+                //- Interviews
+                b(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1') Scheduled
+                //- Make an offer
+                b(ng-if='comment.state_id === 10') Offer
+                //-  Offer Accepted
+                b(ng-if='comment.state_id === 20')  Offer Accepted
+                //-  Offer Rejected
+                b(ng-if='comment.state_id === 28')  Offer Rejected
+                //- Backout after Joining
+                b(ng-if='comment.state_id === 29') Post-Joining Backout
+                //- Candidate Joined
+                b(ng-if='comment.state_id === 30') Joining
+                //- Backout before Joining
+                b(ng-if='comment.state_id === 31') Pre-Joining Backout
+                b  Date -
+                |  {{comment.scheduled_on | date: 'MMM d, yyyy'}}
+
+                //- only show time for interview
+                span(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1')  {{comment.scheduled_on | date: 'h:mm a'}}
+              .text-success-dker(ng-if='comment.suggested_join_date')
+                //- Make an offer
+                b(ng-if='comment.state_id === 10') Suggested Joining Date -
+                |  {{comment.suggested_join_date | date: 'MMM d, yyyy'}}
+              .text-success-dker(ng-if='comment.offered_ctc')
+                //- Make an offer
+                b(ng-if='comment.state_id === 10') Offered CTC  -
+                |  {{comment.currency}} {{comment.offered_ctc}} Lacs
+              .text-success-dker(ng-if='comment.final_ctc')
+                //- Make an offer
+                b(ng-if='comment.state_id === 30') Final CTC  -
+                |  {{comment.currency}} {{comment.final_ctc}} Lacs
               p {{comment.body}}
               .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
         .hbox(style='height: 40px;')
