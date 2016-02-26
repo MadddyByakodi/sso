@@ -16,6 +16,7 @@ angular.module('qui.hire')
             vm.data = result;
             vm.responsibility = $sce.trustAsHtml(result.responsibility);
             vm.interview_addr = $sce.trustAsHtml(result.interview_addr);
+            vm.interview_place_direction = $sce.trustAsHtml(result.interview_place_direction);
 
             // data has been loaded
             vm.ui.loading = false;

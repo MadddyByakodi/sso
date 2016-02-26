@@ -20,22 +20,17 @@ angular.module('qui.accounts')
           .then(
             function handleLogin() {
               $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+              Auth.setSessionData().then(function openApp() {
+                if ($location.search().continue) return $location.url($location.search().continue);
+                $location.path($state.href('app.home'));
+              });
             },
 
             function handleError(error) {
               $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-              vm.authError = error.message;
-              const err = new Error(error.message);
-              return $q.reject(err.message);
+              vm.authError = error.error_description;
             }
-          )
-          .then(function setSession() {
-            return Auth.setSessionData()
-              .then(function openApp() {
-                if ($location.search().continue) return $location.url($location.search().continue);
-                $location.path($state.href('app.home'));
-              });
-          });
+          );
       };
     },
   ]);

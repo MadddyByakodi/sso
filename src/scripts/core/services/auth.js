@@ -25,8 +25,7 @@ angular.module('qui.core')
 
             function signinFailure(response) {
               Session.destroy();
-              const err = new Error(response.data.error);
-              return $q.reject(err);
+              return $q.reject(response.data);
             }
           );
       };

@@ -1,103 +1,106 @@
 div(ng-controller='JobViewController as Job')
-  .wrapper-xs.bg-light.b-b
-    .m-l-md.font-thin.h3
-      | Positions /
-      a(ui-sref='app.jobs.manage({jobId: Job.data.id})')  {{Job.data.role}} /
-      a(ui-sref='app.job.view({jobId: Job.data.id})')  View JD
   .col-md-9.clearfix
     //- Job top cover container
-    .col-sm-12.dker.no-padder
-      .col-sm-7.no-padder.clearfix.m-t-xs
-        .hbox
-          .col.w-sm.v-middle.bg-light.dker
-            img.w-full(src='{{Job.data._root_.logo}}')
-          .col.bg-white.wrapper-xs.clearfix
-            .h3.m-b-xs {{Job.data.client_name}}
-            div.m-b-xs
-              span.h4 {{Job.data.role}}
+    .hbox
+      .col.w-sm.v-middle.bg-light.dker
+        img.w-full(src='{{Job.data._root_.logo}}')
+      .col.bg-white-only.wrapper-xs.clearfix
+        div.m-b-xs.m-l-xs
+          b.h3.m-b-xs {{Job.data.client_name}}
 
-              //- Job status label
-              span.m-l-xs
-                .label.bg-danger(ng-if='Job.data.job_status === "Closed"')
-                  span.h5 Closed
-                .label.bg-success(ng-if='!(Job.data.job_status === "Closed")')
-                  span.h5 Open
+          //- Job status label
+          .pull-right
+            .label.wrapper-xs.bg-danger.lt(ng-if='Job.data.job_status === "Closed"')
+              span.padder.h5 Closed
+            .label.wrapper-xs.bg-success.dker(ng-if='!(Job.data.job_status === "Closed")')
+              span.padder.h5 Open
 
-            .pull-left.text-muted
-              .h4.wrapper-xs
-                  i.fa.fa-lg.fa-inr
-                  | &nbsp; {{Job.data.min_sal}}–{{Job.data.max_sal}} Lakhs
-              .h4.wrapper-xs
-                i.fa.fa-lg.fa-map-marker
-                | &nbsp; {{Job.data.job_location}}
-      .col-sm-5.clearfix.no-padder.m-t-xs
-        .panel.panel-primary.m-l-xs.bg-white.no-border
-          .panel-heading
-          .panel-body.wrapper-xs
-            .hbox
-              .col.thumb-lg.clearfix
-                .pull-right Experience: &nbsp;
-              .col  {{Job.data.min_exp}}–{{Job.data.max_exp}} Years
-            .hbox.padder-v(ng-if='Job.data.degrees.length>=0')
-              .col.thumb-lg.clearfix
-                .pull-right Qualifications: &nbsp;
-              .col
-                .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='degree in Job.data.degrees' style='padding: 2px;' ng-if='Job.showAllDegree || $index < 3') {{degree}}
-                a.pull-left(ng-if='Job.data.degrees.length>=3' ng-click='Job.showAllDegree = !Job.showAllDegree')
-                  span.font-bold.text-info-dker(ng-if='Job.showAllDegree') – Less
-                  span.font-bold.text-info-dker(ng-if='!Job.showAllDegree') + More
+          .h4 {{Job.data.role}}
+
+        .pull-left.text-muted
+          .h4.wrapper-xs
+              i.fa.fa-lg.fa-inr.text-dark-lter
+              | &nbsp; {{Job.data.min_sal}}–{{Job.data.max_sal}} Lakhs
+          .h4.wrapper-xs
+            i.fa.fa-lg.fa-map-marker.text-danger-lt
+            | &nbsp; {{Job.data.job_location}}
+
+    .panel.bg-white-only.b-t.h5: .panel-body.wrapper-sm
+      .hbox(ng-if='Job.data.min_exp && Job.data.max_exp')
+        .col.thumb-lg.clearfix: strong.pull-right Experience: &nbsp;
+        .col  {{Job.data.min_exp}} – {{Job.data.max_exp}} Years
+
+      .m-t-xs
+      .hbox(ng-if='Job.data.degrees')
+        .col.thumb-lg.clearfix: strong.pull-right Qualifications: &nbsp;
+        .col: span {{Job.data.degrees.join(', ')}}
 
     //- Job Responsibility
     .col-sm-12.no-padder.m-t-xs(ng-if='Job.data.responsibility')
-      .panel.panel-primary.no-border.m-n
-        .panel-heading Duties and Responsibility
-        .panel-body.bg-light.dker(ng-bind-html="Job.responsibility")
+      .panel.no-border.m-n
+        .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Duties and Responsibility
+        .panel-body.bg-light.dk(ng-bind-html="Job.responsibility" style='break-word: break-word')
 
     //- Job Details
-    .col-sm-12.bg-white.m-t-xs
+    .col-sm-12.bg-white-only.m-t-xs.wrapper-md
         div
           .h5.text-black-dker.font-bold.m-t-xs About Us
-          .h4.text-info-dker {{Job.data.client_name}}
+          .h4.text-info-dker.m-t-xs
+            | {{Job.data.client_name}}
+            i.text-muted(ng-if='Job.data._root_.min_emp && Job.data._root_.max_emp')
+              |  ({{Job.data._root_.min_emp}} - {{Job.data._root_.max_emp}} Employee)
+          .m-t-xs
           p.text-muted {{Job.data._root_.description}}
           p.text-muted(ng-if='Job.data._root_.website') Website: {{Job.data._root_.website}}
           p.text-muted
             a(ng-href='{{Job.data._root_.apple_store_link}}'): i.fa-lg.fa.fa-apple.wrapper-xs
             a(ng-href='{{Job.data._root_.playstore_link}}'): i.fa-lg.fa.fa-android.wrapper-xs
             a(ng-href='{{Job.data._root_.windiows_store_link}}'): i.fa-lg.fa.fa-windows.wrapper-xs
-        .line.line-dashed.b-b.line-lg.pull-in
-        .h5.font-bold.m-t-xs.m-b-xs Skills
+
+        .h4.m-t-xs.m-b-xs Skills
         .h6.clearfix
           .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in Job.data.skills' style='padding: 2px;' ng-if='Job.showAllSkill || $index < 6') {{skill}}
           a.pull-left(ng-if='Job.data.skills.length>6' ng-click='Job.showAllSkill = !Job.showAllSkill')
             span.font-bold.text-info-dker(ng-if='Job.showAllSkill') – Less
             span.font-bold.text-info-dker(ng-if='!Job.showAllSkill') + More
-        .line.line-dashed.b-b.line-lg.pull-in
 
-        .h5.font-bold.m-t-xs.m-b-xs Working Days
-        .h5.clearfix {{Job.data.days_per_week}} Days a Week ({{Job.data.start_work_time}} to {{Job.data.end_work_time}})
-        .line.line-dashed.b-b.line-lg.pull-in
+
+        .h4.m-t-xs.m-b-xs Working Days
+        .h5.text-muted.clearfix {{Job.data.days_per_week}} Days a Week ({{Job.data.start_work_time}} to {{Job.data.end_work_time}})
+        .m-b-xs
 
     //- Job Information
     .col-sm-12.no-padder.m-t-xs
-      .panel.panel-primary.no-border.m-n
-        .panel-heading Information
+      .panel.no-border.m-n
+        .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Information
         .panel-body
-          .h4.text-info-dker Sourcing
+          .h4 Sourcing
           .wrapper-xs
             .h5 Vacancy :
               span.text-muted  &nbsp; {{Job.data.vacancy}}
-            .clearfix.m-t-xs
-              span.h5.pull-left Target Educational Institutions: &nbsp;
-              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='institute in Job.data.institutes' style='padding: 2px;' ng-if='Job.showAllInstitute || $index < 6')  {{institute}}
-            .clearfix.m-t-xs
-              span.h5.pull-left Target Industries: &nbsp;
-              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='industry in Job.data.industries' style='padding: 2px;' ng-if='Job.showAllIndustry || $index < 6')  {{industry}}
-            .clearfix.m-t-xs
-              span.h5.pull-left Target Companies: &nbsp;
-              span.h6.pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='employer in Job.data.employers' style='padding: 2px;' ng-if='Job.showAllEmployer || $index < 6')  {{employer}}
+            ul.padder
+              li(ng-if='Job.data.institutes')
+                span.h5 Target Educational Institutions: &nbsp;
+                span.h5.text-muted {{Job.data.institutes.join(', ')}}
+                span.h5.text-muted {{Job.data.institutes.join(', ')}}
+                span.h5.text-muted {{Job.data.institutes.join(', ')}}
+                span.h5.text-muted {{Job.data.institutes.join(', ')}}
+                span.h5.text-muted {{Job.data.institutes.join(', ')}}
+                span.h5.text-muted {{Job.data.institutes.join(', ')}}
+              li(ng-if='Job.data.industries')
+                span.h5 Target Industries: &nbsp;
+                span.h5.text-muted {{Job.data.industries.join(', ')}}
+              li(ng-if='Job.data.employers')
+                span.h5 Target Companies: &nbsp;
+                span.h5.text-muted {{Job.data.employers.join(', ')}}
 
-          .h4.text-info-dker Interview Address
-          .h5.text-muted(ng-bind-html="Job.interview_addr")
+          .m-t-xs(ng-if='Job.interview_addr')
+            .h4.m-b-xs Interview Address
+            .h5.text-muted(ng-bind-html="Job.interview_addr")
+
+          .m-t-xs(ng-if='Job.interview_place_direction')
+            .h4.m-b-xs Interview Place Direction
+            .h5.text-muted(ng-bind-html="Job.interview_place_direction")
 
   .col-md-3.nav-comment.no-padder.m-t-xs(ng-controller='JobCommentsController as Comments')
     .col-xs-12(style='position: relative; height: 100%; width: 102%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')

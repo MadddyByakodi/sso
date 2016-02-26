@@ -103,7 +103,7 @@ div(ng-controller='ApplicantViewController as Applicant')
   .col-md-3.nav-comment.no-padder(ng-controller='ApplicantCommentsController as Comments')
     .col-xs-12(style='position: relative; height: 100%; width: 100%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
       .col
-        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: "created_at"')
+        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: ["created_at", "id"]')
           .col.text-center.thumb-sm
             .fa-stack.fa-2x.text-primary
               i.fa.fa-circle.fa-stack-2x
