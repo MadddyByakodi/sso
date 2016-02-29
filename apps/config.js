@@ -10,6 +10,7 @@ const config = {
     PARTNER_CLIENT: process.env.PARTNER_CLIENT || 'partnerquezx',
     PARTNER_SECRET: process.env.PARTNER_SECRET || 'partnerquezxsecret',
     PARTNER_REDIRECT_URI: process.env.PARTNER_REDIRECT_URI || 'http://hire.quezx.dev/oauth/quezx',
+    ASSET_DIR: process.env.ASSET_DIR || `${__dirname}/../dist`,
     livereload: true,
   },
   production: {
@@ -23,7 +24,17 @@ const config = {
     PARTNER_CLIENT: process.env.PARTNER_CLIENT || 'partnerquezx',
     PARTNER_SECRET: process.env.PARTNER_SECRET || 'partnerquezxsecret',
     PARTNER_REDIRECT_URI: process.env.PARTNER_REDIRECT_URI || 'https://partner.quezx.com/oauth/quezx',
+    ASSET_DIR: process.env.ASSET_DIR || `${__dirname}/../assets`,
   },
 };
 
-module.exports = config[process.env.NODE_ENV || 'development'];
+const conf = config[process.env.NODE_ENV || 'development'];
+
+conf.handleResponse = function handleResponse(res) {
+  return function sendResponse(err, apires, body) {
+    if (err) return res.status(500).send(err);
+    return res.status(apires.statusCode).send(body);
+  };
+};
+
+module.exports = conf;

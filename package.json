@@ -25,7 +25,8 @@
   "homepage": "https://github.com/quezx/qui#readme",
   "dependencies": {
     "body-parser": "^1.14.1",
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.1.18",
