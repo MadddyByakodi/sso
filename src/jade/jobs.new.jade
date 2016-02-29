@@ -175,10 +175,10 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
             | Job Nature
             span.text-danger *
           .col-xs-12.no-padder: .btn-group.text-center
-            label.w-xs.btn.btn-sm.btn-default(name='job_nature' ng-model='NewJob.data.job_nature', btn-radio='1')
+            label.w-xs.btn.btn-sm.btn-default(name='job_nature' ng-model='NewJob.data.job_nature', uib-btn-radio='1')
               i.fa.fa-check.text-active
               | Full Time
-            label.w-xs.btn.btn-sm.btn-default(name='job_nature' ng-model='NewJob.data.job_nature', btn-radio='0')
+            label.w-xs.btn.btn-sm.btn-default(name='job_nature' ng-model='NewJob.data.job_nature', uib-btn-radio='0')
               i.fa.fa-check.text-active
               | Part Time
 
@@ -188,13 +188,13 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(ng-controller='NewJobC
             | Gender Preference
             span.text-danger *
           .col-xs-12.no-padder: .btn-group.text-center(ng-init='NewJob.data.preferred_genders = "No Preference"')
-            label.w-xs.btn.btn-sm.btn-default(ng-model='NewJob.data.preferred_genders', btn-radio='"No Preference"')
+            label.w-xs.btn.btn-sm.btn-default(ng-model='NewJob.data.preferred_genders', uib-btn-radio='"No Preference"')
               i.fa.fa-check.text-active
               | None
-            label.w-xs.btn.btn-sm.btn-default(ng-model='NewJob.data.preferred_genders', btn-radio='"Male"')
+            label.w-xs.btn.btn-sm.btn-default(ng-model='NewJob.data.preferred_genders', uib-btn-radio='"Male"')
               i.fa.fa-check.text-active
               | Male
-            label.w-xs.btn.btn-sm.btn-default(ng-model='NewJob.data.preferred_genders', btn-radio='"Female"')
+            label.w-xs.btn.btn-sm.btn-default(ng-model='NewJob.data.preferred_genders', uib-btn-radio='"Female"')
               i.fa.fa-check.text-active
               | Female
 

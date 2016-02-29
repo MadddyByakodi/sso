@@ -2,8 +2,9 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
   .w(style='position: fixed; z-index: 2;')
     .wrapper-xs
       .input-group
-        a.input-group-addon.bg-primary(uib-tooltip='Upload New JD' tooltip-placement='right' ui-sref='app.jobs.new')
-          i.text-white.fa.fa-upload
+        span.input-group-btn(uib-tooltip='Upload New JD' tooltip-placement='right')
+          button.btn.btn-md.bg-primary(ui-sref='app.jobs.new')
+            i.text-white.fa.fa-upload
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='Job.searchText.role' ng-change='Job.job_open_collapse = Job.job_close_collapse = false')
   .w.m-t-xl.nav-job
     .bg-dark.lt.w.m-t-xs(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 208px;')

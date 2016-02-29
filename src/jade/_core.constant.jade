@@ -1,0 +1,11 @@
+- var apiServer = '//api.' + DOMAIN;
+- var accountsServer = '//accounts.' + DOMAIN;
+- var hireServer = '//hire.' + DOMAIN;
+- var partnerServer = '//partner.' + DOMAIN;
+- var hireLogin = '//accounts.' + DOMAIN + '/authorise?client_id=' + HIRE_CLIENT + '&response_type=code&redirect_uri=' + HIRE_REDIRECT_URI + '&state=yo';
+- var partnerLogin = '//accounts.' + DOMAIN+ '/authorise?client_id=' + PARTNER_CLIENT + '&response_type=code&redirect_uri=' + PARTNER_REDIRECT_URI + '&state=yo';
+- var APP = { apiServer: apiServer, accountsServer: accountsServer, hireServer: hireServer, hireLogin: hireLogin, partnerLogin: partnerLogin };
+
+script.
+  angular.module('qui.core')
+    .constant('APP', !{JSON.stringify(APP)});

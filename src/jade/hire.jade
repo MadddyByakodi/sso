@@ -6,12 +6,15 @@ html(lang='en' ng-app='qui.hire' ng-controller='AppController as App')
     base(href='/')
     meta(name='description' content='dashboard, recruiter, client')
     meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
-    link(rel='stylesheet' href='/styles/main.css' type='text/css')
-    link(rel='stylesheet' href='/bower_components/animate.css/animate.css' type='text/css')
-    link(rel='stylesheet' href='/bower_components/source-sans-pro/source-sans-pro.css' type='text/css')
-    link(rel='stylesheet' href='/bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css' type='text/css')
-    link(rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css' type='text/css')
+
+    // build:css styles/hire.css
+    link(rel='stylesheet' href='styles/main.css' type='text/css')
+    link(rel='stylesheet' href='bower_components/animate.css/animate.css' type='text/css')
+    link(rel='stylesheet' href='bower_components/source-sans-pro/source-sans-pro.css' type='text/css')
+    link(rel='stylesheet' href='bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css' type='text/css')
+    link(rel='stylesheet' href='bower_components/font-awesome/css/font-awesome.css' type='text/css')
     link(rel='stylesheet', href='bower_components/angular-chart.js/dist/angular-chart.css' type='text/css')
+    // endbuild
 
   body
     .app#app(
@@ -25,14 +28,21 @@ html(lang='en' ng-app='qui.hire' ng-controller='AppController as App')
       }"
     )
 
-    script(src='/bower_components/angular/angular.js')
-    script(src='/bower_components/moment/moment.js')
-    script(src='/bower_components/angular-animate/angular-animate.js')
-    script(src='/bower_components/angular-http-auth/src/http-auth-interceptor.js')
-    script(src='/bower_components/angular-ui-router/release/angular-ui-router.js')
-    script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
-    script(src='/bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js')
+    // build:js scripts/hire-vendor.js
+    script(src='bower_components/angular/angular.js')
+    script(src='bower_components/moment/moment.js')
+    script(src='bower_components/angular-animate/angular-animate.js')
+    script(src='bower_components/angular-http-auth/src/http-auth-interceptor.js')
+    script(src='bower_components/angular-ui-router/release/angular-ui-router.js')
+    script(src='bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
+    script(src='bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js')
     script(src='bower_components/Chart.js/Chart.min.js')
     script(src='bower_components/angular-chart.js/dist/angular-chart.min.js')
+    // endbuild
+
+    // build:js scripts/hire.js
     script(src='/scripts/core.js')
     script(src='/scripts/hire.js')
+    // endbuild
+
+    include ./_core.constant.jade

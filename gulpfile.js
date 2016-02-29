@@ -24,6 +24,7 @@ gulp.task('html', function html() {
     .pipe(
       plugin.jade({
         pretty: true,
+        locals: require('./apps/config'),
       })
       .on('error', plugin.notify.onError({
         message: 'Jade Error: <%= error.message %>',
@@ -135,7 +136,7 @@ gulp.task('lint', function lint() {
 
 // Clean
 gulp.task('clean', function clean() {
-  return del(['dist/styles', 'dist/scripts', 'dist/html', 'dist/images']);
+  return del(['dist', 'assets']);
 });
 
 // Watch
@@ -165,6 +166,38 @@ gulp.task('watch', function watch() {
 gulp.task('build:dev', function buildSeq(cb) {
   runSequence('lint', 'clean', ['styles', 'scripts', 'images', 'fonts'], 'html', cb);
 });
+
+gulp.task('build:prod', () => {
+  return gulp.src('dist/**/*.html')
+    .pipe(plugin.useref({ searchPath: ['dist', '.'] }))
+    .pipe(plugin.if('*.js', plugin.uglify()))
+    .pipe(plugin.if('*.js', plugin.rev()))
+    .pipe(plugin.if('*.css', plugin.minifyCss()))
+    .pipe(plugin.if('*.css', plugin.rev()))
+    .pipe(plugin.if('**/*.html', plugin.htmlmin({ collapseWhitespace: true })))
+    .pipe(plugin.revReplace())
+    .pipe(gulp.dest('assets'));
+});
+
+gulp.task('build:copy', ['build:copy:sourcesanspro', 'build:copy:fontawesome'], () => {
+  return gulp.src(['dist/images/**', 'dist/fonts/**'], { base: 'dist' })
+    .pipe(gulp.dest('assets'));
+});
+
+gulp.task('build:copy:sourcesanspro', () => {
+  return gulp.src(
+      'bower_components/source-sans-pro/**/*.?(eot|otf|ttf|woff|woff2)',
+      { base: 'bower_components/source-sans-pro' }
+    )
+    .pipe(gulp.dest('assets/styles'));
+});
+
+gulp.task('build:copy:fontawesome', () => {
+  return gulp.src('bower_components/font-awesome/fonts/**', { base: 'bower_components/font-awesome' })
+    .pipe(gulp.dest('assets'));
+});
+
+gulp.task('build', cb => runSequence('build:dev', ['build:prod', 'build:copy'], cb));
 
 gulp.task('default', function dev(cb) {
   runSequence('develop', 'build:dev', 'watch', cb);
