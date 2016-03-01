@@ -3,7 +3,7 @@
     .h2
     ul.nav.nav-pills.nav-sm
       li.m-r-xs(ng-repeat='bucket in Applicant.buckets' ui-sref-active="active")
-        a(ui-sref='app.applicants({bucket: bucket})') {{bucket}}
+        a(ui-sref='app.jobs.applicants({bucket: bucket})') {{bucket}}
   table.table.m-b-none.m-t-xl(before-bottom='Applicant.loadApplicants()')
     thead
       tr

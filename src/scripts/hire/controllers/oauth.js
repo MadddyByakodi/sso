@@ -21,7 +21,7 @@ angular.module('qui.hire')
           Auth.setSessionData().then(() => {
             $window.location.href = $state
             .href(
-              'app.applicants', { bucket: 'All' }, { absolute: true }
+              'app.jobs.applicants', { bucket: 'All' }, { absolute: true }
             );
           });
         });
@@ -29,6 +29,6 @@ angular.module('qui.hire')
         return;
       }
 
-      $state.go('app.applicants');
+      $state.go('app.jobs.applicants');
     },
   ]);

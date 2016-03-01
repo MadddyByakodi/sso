@@ -241,7 +241,7 @@ angular.module('qui.hire')
           .then(function jobCreated(result) {
             // Wait for solr to index data
             $timeout(() => {
-              $state.go('app.job.view', { jobId: result.id });
+              $state.go('app.jobs.view', { jobId: result.id });
             }, 1000);
           });
       };

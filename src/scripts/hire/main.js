@@ -38,6 +38,7 @@ angular.module('qui.hire')
       });
 
       vm.Page = Page; // Set Page title
+      vm.$state = $state; // Set Page title
 
       // Applicant search related Functions
       vm.Applicants = {
@@ -78,7 +79,7 @@ angular.module('qui.hire')
       vm.userinfo = User.userinfo;
       vm.states = User.states;
       vm.showNavJobs = function showNavJobs() {
-        return $state.is('app.applicants') || $state.is('app.jobs.manage');
+        return $state.is('app.jobs.applicants') || $state.is('app.jobs.manage') || $state.is('app.jobs.view');
       };
 
       vm.downloadApplicant = function downloadApplicant(ids) {

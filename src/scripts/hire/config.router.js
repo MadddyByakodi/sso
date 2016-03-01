@@ -30,7 +30,7 @@ angular.module('qui.hire')
         .state('app.jobs', {
           abstract: true,
           url: '/jobs',
-          templateUrl: 'html/jobs.html',
+          template: '<div ui-view></div>',
         })
         .state('app.jobs.new', {
           url: '/new',
@@ -40,22 +40,17 @@ angular.module('qui.hire')
           url: '/',
           templateUrl: 'html/jobs.list.html',
         })
-        .state('app.jobs.manage', {
-          url: '/manage/{bucket}/{jobId}',
-          templateUrl: 'html/jobs.manage.html',
+        .state('app.jobs.applicants', {
+          url: '/applicants/{bucket}',
+          templateUrl: 'html/applicants.html',
         })
-        .state('app.job', {
-          abstract: true,
-          url: '/job',
-          template: '<div ui-view class="fade-in-right-big smooth"></div>',
-        })
-        .state('app.job.view', {
+        .state('app.jobs.view', {
           url: '/{jobId}',
           templateUrl: 'html/job.view.html',
         })
-        .state('app.applicants', {
-          url: '/applicants/{bucket}',
-          templateUrl: 'html/applicants.html',
+        .state('app.jobs.manage', {
+          url: '/{jobId}/{bucket}',
+          templateUrl: 'html/jobs.manage.html',
         })
         .state('app.applicant', {
           abstract: true,

@@ -10,7 +10,7 @@
     ul.nav.nav-pills.nav-sm
       li
         button.btn.btn-primary.btn-sm(ng-if='Applicant.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(Applicant.getApplicants({checked: true}, "id"))') Download CV(s)
-      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.job.view({jobId: Applicant.job.id})') View JD
+      li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: Applicant.job.id})') View JD
   .wrapper-md
     .m-b-xs.hbox.m-t-xl(ng-if='Applicant.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!Applicant.ui.loading') No Applicants

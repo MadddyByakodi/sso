@@ -3,7 +3,7 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
     .wrapper-xs
       .input-group
         span.input-group-btn(uib-tooltip='Upload New JD' tooltip-placement='right')
-          button.btn.btn-md.bg-primary(ui-sref='app.jobs.new')
+          button.btn.btn-md.bg-primary(ng-href='app.jobs.new')
             i.text-white.fa.fa-upload
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='Job.searchText.role' ng-change='Job.job_open_collapse = Job.job_close_collapse = false')
   .w.m-t-xl.nav-job
@@ -15,8 +15,8 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
         i.fa.fa-minus-square(ng-if='!Job.job_open_collapse')
         | &nbsp; Open
       ul.m-t-xs.nav(uib-collapse='Job.job_open_collapse')
-        li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "!Closed"}' ng-init='$first ? (Job.job_open = true): null' ui-sref-active='active')
-          a.text-ellipsis.m-l-md(ui-sref='app.jobs.manage({jobId: job.id})' uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
+        li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "!Closed"}' ng-init='$first ? (Job.job_open = true): null' ng-class='{active: job.id == App.$state.params.jobId}')
+          a.text-ellipsis.m-l-md(ng-href='{{App.$state.href(App.$state.current.name, {jobId: job.id})}}' uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
 
       .m-t-sm
 
@@ -25,7 +25,7 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
         i.fa.fa-minus-square(ng-if='!Job.job_closed_collapse')
         | &nbsp; Closed
       ul.m-t-xs.nav(uib-collapse='Job.job_closed_collapse' ng-init='Job.job_closed_collapse = true')
-        li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "Closed"}' ng-init='$first ? (Job.job_closed = true): null' ui-sref-active='active')
-          a.text-ellipsis.m-l-md(ui-sref='app.jobs.manage({jobId: job.id})' uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
+        li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "Closed"}' ng-init='$first ? (Job.job_closed = true): null' ng-class='{active: job.id == App.$state.params.jobId}')
+          a.text-ellipsis.m-l-md(ng-href='{{App.$state.href(App.$state.current.name, {jobId: job.id})}}' uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
 
       .m-b-md
