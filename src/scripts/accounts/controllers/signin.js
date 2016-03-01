@@ -10,7 +10,7 @@ angular.module('qui.accounts')
     function SigninFormCtrl($rootScope, $state, $location, $q, Auth, AUTH_EVENTS, Page) {
       const vm = this;
       Page.setTitle('Sign In');
-      vm.user = {};
+      vm.user = { username: '', password: '' };
       vm.authError = null;
       vm.signin = function signin() {
         vm.authError = null;

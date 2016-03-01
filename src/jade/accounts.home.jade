@@ -1,9 +1,4 @@
 //-Dashboard
-div(ng-controller='HomeController as Home')
-  .col-sm-6.no-padder
-    .m-xs
-      .h3 Hi,
-        span.text-muted  {{App.userinfo.name}}
-  .col-sm-6.no-padder
-    .m-xs(ng-controller='LogoutController as logout')
-      .h3: a(ng-click='logout.init()') Logout
+.text-center.text-muted(ng-controller='HomeController as Home')
+  i.fa-4x.fa.fa-circle-o-notch.fa-spin
+  .m-t-xs  Loading...
