@@ -1,8 +1,15 @@
 angular.module('qui.hire')
   .controller('NavJobsController', [
     'Jobs',
-    function NavJobsCtrl(Jobs) {
+    '$state',
+    function NavJobsCtrl(Jobs, $state) {
       const vm = this;
+      vm.jobHref = function jobHref(jobId) {
+        const states = ['app.jobs.manage', 'app.jobs.view'];
+        const name = ~states.indexOf($state.current.name) ? $state.current.name : states[0];
+        return $state.href(name, { jobId });
+      };
+
       vm.jobs = []; // collection of jobs
       vm.ui = { lazyLoad: true, loading: false }; // ui states
       vm.params = { start: 0, rows: 15 }; // GET query params

@@ -15,21 +15,20 @@ div(ng-controller='JobViewController as Job')
     .col.col-.clearfix.wrapper-xs
 
       //- Job top cover container
-      .hbox.m-t-xl
-        .col.w-sm.v-middle.bg-light.dker
+      .m-t-xl.clearfix
+        .pull-left.w-sm.bg-light.dker
           img.w-full(src='{{Job.data._root_.logo}}')
-        .col.bg-white-only.wrapper-xs.clearfix
-          div.m-b-xs.m-l-xs
-            b.h3.m-b-xs {{Job.data.client_name}}
+        .bg-white-only.clearfix: .wrapper-xs.clear
+          b.m-l-xs.h3.m-b-xs {{Job.data.client_name}}
 
-            //- Job status label
-            .pull-right
-              .label.wrapper-xs.bg-danger.lt(ng-if='Job.data.job_status === "Closed"')
-                span.padder.h5 Closed
-              .label.wrapper-xs.bg-success.dker(ng-if='!(Job.data.job_status === "Closed")')
-                span.padder.h5 Open
+          //- Job status label
+          .pull-right
+            .label.wrapper-xs.bg-danger.lt(ng-if='Job.data.job_status === "Closed"')
+              span.padder.h5 Closed
+            .label.wrapper-xs.bg-success.dker(ng-if='!(Job.data.job_status === "Closed")')
+              span.padder.h5 Open
 
-            .h4 {{Job.data.role}}
+          .m-l-xs.h4 {{Job.data.role}}
 
           .pull-left.text-muted
             .h4.wrapper-xs
