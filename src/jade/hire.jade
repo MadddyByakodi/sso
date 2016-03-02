@@ -29,20 +29,20 @@ html(lang='en' ng-app='qui.hire' ng-controller='AppController as App')
     )
 
     // build:js scripts/hire-vendor.js
-    script(src='bower_components/angular/angular.js')
-    script(src='bower_components/moment/moment.js')
-    script(src='bower_components/angular-animate/angular-animate.js')
-    script(src='bower_components/angular-http-auth/src/http-auth-interceptor.js')
-    script(src='bower_components/angular-ui-router/release/angular-ui-router.js')
-    script(src='bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
-    script(src='bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js')
-    script(src='bower_components/Chart.js/Chart.min.js')
-    script(src='bower_components/angular-chart.js/dist/angular-chart.min.js')
+    script(type='text/javascript' src='bower_components/angular/angular.js')
+    script(type='text/javascript' src='bower_components/moment/moment.js')
+    script(type='text/javascript' src='bower_components/angular-animate/angular-animate.js')
+    script(type='text/javascript' src='bower_components/angular-http-auth/src/http-auth-interceptor.js')
+    script(type='text/javascript' src='bower_components/angular-ui-router/release/angular-ui-router.js')
+    script(type='text/javascript' src='bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
+    script(type='text/javascript' src='bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.js')
+    script(type='text/javascript' src='bower_components/Chart.js/Chart.min.js')
+    script(type='text/javascript' src='bower_components/angular-chart.js/dist/angular-chart.min.js')
     // endbuild
 
     // build:js scripts/hire.js
-    script(src='/scripts/core.js')
-    script(src='/scripts/hire.js')
+    script(type='text/javascript' src='/scripts/core.js')
+    script(type='text/javascript' src='/scripts/hire.js')
     // endbuild
 
     include ./_core.constant.jade

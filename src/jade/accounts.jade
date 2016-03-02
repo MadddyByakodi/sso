@@ -30,17 +30,17 @@ html(lang='en' ng-app='qui.accounts' ng-controller='AppController as App')
 
 
     // build:js scripts/accounts-vendor.js
-    script(src='/bower_components/angular/angular.js')
-    script(src='/bower_components/moment/moment.js')
-    script(src='/bower_components/angular-animate/angular-animate.js')
-    script(src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
-    script(src='/bower_components/angular-http-auth/src/http-auth-interceptor.js')
-    script(src='/bower_components/angular-ui-router/release/angular-ui-router.js')
+    script(type='text/javascript' src='/bower_components/angular/angular.js')
+    script(type='text/javascript' src='/bower_components/moment/moment.js')
+    script(type='text/javascript' src='/bower_components/angular-animate/angular-animate.js')
+    script(type='text/javascript' src='/bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
+    script(type='text/javascript' src='/bower_components/angular-http-auth/src/http-auth-interceptor.js')
+    script(type='text/javascript' src='/bower_components/angular-ui-router/release/angular-ui-router.js')
     // endbuild
 
     // build:js scripts/accounts.js
-    script(src='/scripts/core.js')
-    script(src='/scripts/accounts.js')
+    script(type='text/javascript' src='/scripts/core.js')
+    script(type='text/javascript' src='/scripts/accounts.js')
     // endbuild
 
     include ./_core.constant.jade
