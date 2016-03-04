@@ -7,7 +7,7 @@ angular.module('qui.hire')
       const followersService = {};
 
       followersService.getOne = function getFollowers(applicantId, params) {
-        const url = `${APP.apiServer}/quarc/applicant/${applicantId}/followers`;
+        const url = `${APP.apiServer}/user/job/applicants/${applicantId}/followers`;
         return $http
           .get(url, { params: params })
           .then(
@@ -22,7 +22,7 @@ angular.module('qui.hire')
       };
 
       followersService.create = function create(data, ApplicantId) {
-        const url = `${APP.apiServer}/quarc/applicant/${ApplicantId}/followers`;
+        const url = `${APP.apiServer}/user/job/applicants/${ApplicantId}/followers`;
         return $http
           .post(url, data)
           .then(

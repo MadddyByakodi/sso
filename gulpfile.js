@@ -174,7 +174,7 @@ gulp.task('build:prod', () => {
     .pipe(plugin.if('*.js', plugin.rev()))
     .pipe(plugin.if('*.css', plugin.minifyCss()))
     .pipe(plugin.if('*.css', plugin.rev()))
-    .pipe(plugin.if('**/*.html', plugin.htmlmin({ collapseWhitespace: true })))
+    .pipe(plugin.if('**/*.html', plugin.htmlmin()))
     .pipe(plugin.revReplace())
     .pipe(gulp.dest('assets'));
 });
