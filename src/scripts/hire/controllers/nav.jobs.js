@@ -12,7 +12,7 @@ angular.module('qui.hire')
 
       vm.jobs = []; // collection of jobs
       vm.ui = { lazyLoad: true, loading: false }; // ui states
-      vm.params = { start: 0, rows: 15 }; // GET query params
+      vm.params = { start: 0, rows: 15, fl: 'id,role,job_status,owner_id' }; // GET query params
       vm.loadJobs = function loadJobs() {
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
         vm.ui = { lazyLoad: false, loading: true };

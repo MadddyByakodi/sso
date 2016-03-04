@@ -16,7 +16,10 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
         | &nbsp; Open
       ul.m-t-xs.nav(uib-collapse='Job.job_open_collapse')
         li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "!Closed"}' ng-init='$first ? (Job.job_open = true): null' ng-class='{active: job.id == App.$state.params.jobId}')
-          a.text-ellipsis.m-l-md(ng-href='{{Job.jobHref(job.id)}}' uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
+          a.btn-addon.text-ellipsis(ng-href='{{Job.jobHref(job.id)}}')
+            i.fa.fa-user-plus(ng-if='App.userinfo.id !== job.owner_id' uib-tooltip='Shared with me' tooltip-append-to-body='true' tooltip-placement='right')
+            span.m-l-lg.m-r-xs(ng-if='!(App.userinfo.id !== job.owner_id)')
+            span.m-l-n-sm(uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
 
       .m-t-sm
 
@@ -26,6 +29,9 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
         | &nbsp; Closed
       ul.m-t-xs.nav(uib-collapse='Job.job_closed_collapse' ng-init='Job.job_closed_collapse = true')
         li(ng-repeat='job in Job.jobs | filter: Job.searchText | filter: {job_status: "Closed"}' ng-init='$first ? (Job.job_closed = true): null' ng-class='{active: job.id == App.$state.params.jobId}')
-          a.text-ellipsis.m-l-md(ng-href='{{Job.jobHref(job.id)}}' uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
+          a.btn-addon.text-ellipsis(ng-href='{{Job.jobHref(job.id)}}')
+            i.fa.fa-user-plus(ng-if='App.userinfo.id !== job.owner_id' uib-tooltip='Shared with me' tooltip-append-to-body='true' tooltip-placement='right')
+            span.m-l-lg.m-r-xs(ng-if='!(App.userinfo.id !== job.owner_id)')
+            span.m-l-n-sm(uib-tooltip="{{job.role}}" tooltip-placement='right' tooltip-append-to-body='true') {{job.role}}
 
       .m-b-md
