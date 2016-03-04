@@ -66,10 +66,10 @@ div(ng-controller='ApplicantViewController as Applicant')
         .panel-body
           .h4.m-xs
             i.fa.fa-lg.fa-phone.text-success-dker.wrapper-xs
-            |  &nbsp; {{Applicant.data.mobile}}
+            | &nbsp; {{Applicant.data.mobile}}
           .h4.m-xs
             i.fa.fa-lg.fa-envelope.text-info-dker.wrapper-xs
-            |  &nbsp; {{Applicant.data.email}}
+            | &nbsp; {{Applicant.data.email}}
 
       //- Applicant Skills
       .panel.panel-default.no-border
@@ -118,34 +118,34 @@ div(ng-controller='ApplicantViewController as Applicant')
                 //- Make an offer
                 span(ng-if='comment.state_id === 10') Offer
                 //-  Offer Accepted
-                span(ng-if='comment.state_id === 20')  Offer Accepted
+                span(ng-if='comment.state_id === 20') Offer Accepted
                 //-  Offer Rejected
-                span(ng-if='comment.state_id === 28')  Offer Rejected
+                span(ng-if='comment.state_id === 28') Offer Rejected
                 //- Backout after Joining
                 span(ng-if='comment.state_id === 29') Post-Joining Backout
                 //- Candidate Joined
                 span(ng-if='comment.state_id === 30') Joining
                 //- Backout before Joining
                 span(ng-if='comment.state_id === 31') Pre-Joining Backout
-                span  Date -
-                strong  {{comment.scheduled_on | date: 'MMM d, yyyy'}}
+                span &nbsp;Date -
+                strong &nbsp;{{comment.scheduled_on | date: 'MMM d, yyyy'}}
 
                 //- only show time for interview
-                strong(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1')  {{comment.scheduled_on | date: 'h:mm a'}}
+                strong(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1') &nbsp;{{comment.scheduled_on | date: 'h:mm a'}}
 
               //- Make an Offer
               .text-success-dker(ng-if='comment.suggested_join_date && comment.state_id === 10')
                 //- Make an offer
                 span Suggested Joining Date -
-                strong  {{comment.suggested_join_date | date: 'MMM d, yyyy'}}
+                strong &nbsp;{{comment.suggested_join_date | date: 'MMM d, yyyy'}}
               .text-success-dker(ng-if='comment.offered_ctc && comment.state_id === 10')
-                span Offered CTC  -
-                strong  {{comment.currency}} {{comment.offered_ctc}} Lacs
+                span Offered CTC -
+                strong &nbsp;{{comment.currency}} {{comment.offered_ctc}} Lacs
 
               //- Candidate Joined
               .text-success-dker(ng-if='comment.final_ctc && comment.state_id === 30')
-                span Final CTC  -
-                strong  {{comment.currency}} {{comment.final_ctc}} Lacs
+                span Final CTC -
+                strong &nbsp;{{comment.currency}} {{comment.final_ctc}} Lacs
               p {{comment.body}}
               .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
         .hbox(style='height: 40px;')

@@ -13,15 +13,15 @@ div(ng-controller='DashboardController as Dash')
           .hbox.wrapper-md.bg-white-only
             .col
               i.fa.fa-file-text-o.fa-lg
-              span.h4.text-black  CVs
+              span.h4.text-black &nbsp;CVs
               .fa-4x.h1 {{Dash.summary.cv}}
             .col.b-l.wrapper-xs
               i.fa.fa-user-secret.fa-lg
-              span.h4.text-black  Interviews
+              span.h4.text-black &nbsp;Interviews
               .fa-4x.h1 {{Dash.summary.interview}}
       .col-xs-12.no-padder
         .m-xs.wrapper-xs.bg-white
-          .h4.text-black  &nbsp; Actions Required
+          .h4.text-black &nbsp; Actions Required
           .b-b.m-t-xs
           .hbox.wrapper-sm.m-t-xs(ng-if='Dash.pipeline.length===0')
               .col.text-center All Done
@@ -38,7 +38,7 @@ div(ng-controller='DashboardController as Dash')
       .col-xs-12.no-padder
         .col-sm-6.no-padder
           .m-xs.bg-white-only
-            .h4.text-black.wrapper-xs.b-b  &nbsp; CV Status
+            .h4.text-black.wrapper-xs.b-b &nbsp; CV Status
             .hbox.wrapper-xs
               .col(style='max-width: 250px;')
                 canvas.chart.chart-doughnut(chart-data='Dash.chart.data' chart-colours='["#5B90BF", "#96b5b4", "#ab7967"]' chart-labels='Dash.chart.labels')
@@ -58,7 +58,7 @@ div(ng-controller='DashboardController as Dash')
           .m-xs.hide IN FUTURE
       .col-xs-12.no-padder
         .m-xs.wrapper-xs.bg-white-only
-          .h4.text-black.wrapper-xs.b-b  &nbsp; Upcoming Interviews
+          .h4.text-black.wrapper-xs.b-b &nbsp; Upcoming Interviews
           .hbox.wrapper-sm(ng-if='Dash.interviews.length===0')
             .col.text-center.text-light-lter None for This Week
           .hbox.wrapper-sm(ng-if='Dash.interviews.length>0')
@@ -74,7 +74,7 @@ div(ng-controller='DashboardController as Dash')
 
       .col-xs-12.no-padder.hide
         .m-xs.wrapper-xs.bg-white-only
-          .h4.text-black.wrapper-xs.b-b  &nbsp; Upcoming Joinees
+          .h4.text-black.wrapper-xs.b-b &nbsp; Upcoming Joinees
           .hbox.wrapper-md
             .col
               .fa-4x.h1 Chart
