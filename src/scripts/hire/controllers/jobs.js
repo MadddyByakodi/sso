@@ -8,7 +8,7 @@ angular.module('qui.hire')
       vm.jobs = []; // collection of jobs
       vm.ui = { lazyLoad: true, loading: false }; // ui states
       vm.params = {
-        start: 0, rows: 15, fl: 'id,role,job_status_id', mincount: 0,
+        start: 0, rows: 15, fl: 'id,role,user_id,job_status_id', mincount: 0,
         state_id: '1,4,5,8,9,10,17,19,20,22,23,24,25,33,34,35,36',
       }; // GET query params
 

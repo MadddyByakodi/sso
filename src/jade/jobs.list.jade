@@ -12,7 +12,9 @@
         th(style='width:20%;') CVs in Pipeline
     tbody
       tr.bg-white(ng-repeat='job in Job.jobs')
-        td.wrapper-md: a(ui-sref='app.jobs.manage({jobId: job.id, bucket: "Pending Feedback" })') {{job.role}}
+        td.wrapper-md: a(ui-sref='app.jobs.manage({jobId: job.id, bucket: "Pending Feedback" })')
+          | {{job.role}}
+          i.m-l-xs.text-dark-lter.fa.fa-user-plus(ng-if='App.userinfo.id !== job.user_id' uib-tooltip='Shared with me' tooltip-placement='right')
         td.wrapper-md(class='text-danger-dker' ng-if='job.job_status_id === 4') Closed
         td.wrapper-md(class='text-primary-dker' ng-if='!(job.job_status_id === 4)') Open
         td.wrapper-md {{job.count}}

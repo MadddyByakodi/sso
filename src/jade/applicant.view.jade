@@ -2,27 +2,24 @@ div(ng-controller='ApplicantViewController as Applicant')
   .col-md-3.no-padder.fixed-applicant-details
     div(style='position: relative; height: 100%; width: 100%; top: 0; overflow-x: hidden; overflow-wrap: break-word;')
       //- Applicant top cover container
-      .wrapper-xs.bg-info.dker.m-b-xs
-        .hbox.m-t-xs
+      .wrapper-xs.bg-gd-applicant.dker.m-b-xs
+        .hbox.m-t-xs.text-white
           .col.thumb-lg
             .fa-stack.fa-3x.text-info-dker
               i.fa.fa-circle.fa-stack-2x.fa-inverse
-              i.fa.fa-user.fa-stack-1x.fa-2x.m-t-xs
+              i.fa.fa-user.fa-stack-1x.m-t-xs(style='font-size: 1.5em;margin-top: 0.14em;color: #104465;')
           .col.v-middle
-            .h4
-              | {{Applicant.data.name}}
-              i.btn.text-white.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
-          .col.thumb-xs(title='System generated alogrithmic Score'): .font-thin.h3 {{Applicant.data.applicant_score}}
+            .h4.text-ellipsis(title='{{Applicant.data.name}}') {{Applicant.data.name}}
+          .col.v-middle.thumb-xs(title='System generated alogrithmic Score'): .font-thin.h3 {{Applicant.data.applicant_score}}
         .m-b-xs
-          .hbox
-            .col
-              .btn-group.w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-                button.w-full.btn.rounded(class='btn-{{App.states[Applicant.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[Applicant.data.state_id].Actions.length===0')
-                  | {{Applicant.data.state_name}}&nbsp;
-                  span(ng-if='App.states[Applicant.data.state_id].Actions.length>0').caret
-                ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
-                  li(role='menuitem' ng-repeat='state in App.states[Applicant.data.state_id].Actions')
-                    a(href='' ng-click='App.changeState(Applicant.data, state.state_id)') {{App.states[state.state_id].name}}
+          .hbox(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
+            button.btn.rounded(class='btn-{{App.states[Applicant.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[Applicant.data.state_id].Actions.length===0')
+              | {{Applicant.data.state_name}}&nbsp;
+              span(ng-if='App.states[Applicant.data.state_id].Actions.length>0').caret
+            a.col.v-middle(href='' style='width: 2em;'): i.b-a.b-2x.b-success.wrapper-xs.text-success.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
+            ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
+              li(role='menuitem' ng-repeat='state in App.states[Applicant.data.state_id].Actions')
+                a(href='' ng-click='App.changeState(Applicant.data, state.state_id)') {{App.states[state.state_id].name}}
 
       //- Applicant Details
 

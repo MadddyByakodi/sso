@@ -50,8 +50,9 @@ angular.module('qui.hire')
                 </a> –
                 <a href="${$state.href('app.applicant.view', { applicantId: applicant.id })}" target="_blank">
                   <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant.name}</span>
-                </a>
-                <div class="label label-${vm.colors[applicant.interview_type]}">${applicant.state_name}</div>
+                </a> &nbsp;
+                <span class="h6 b-a b-${vm.colors[applicant.interview_type]}">&nbsp; ${applicant.state_name} &nbsp;
+                </span> &nbsp;
               `,
               type: vm.colors[applicant.interview_type],
               startsAt: moment(applicant.interview_time).toDate(),

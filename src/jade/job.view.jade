@@ -9,9 +9,9 @@ div(ng-controller='JobViewController as Job')
 
   .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
     ul.nav.nav-pills.nav-sm: li(ui-sref-active="active")
-      a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: Job.data.id})') View JD
+      a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
 
-  .hbox.hbox-auto-sm.hbox-auto-xs
+  .hbox.hbox-auto-xs.hbox-auto-sm
     .col.col-.clearfix.wrapper-xs
 
       //- Job top cover container
@@ -64,9 +64,9 @@ div(ng-controller='JobViewController as Job')
         p.text-muted {{Job.data._root_.description}}
         p.text-muted(ng-if='Job.data._root_.website') Website: {{Job.data._root_.website}}
         p.text-muted
-          a(ng-href='{{Job.data._root_.apple_store_link}}'): i.fa-lg.fa.fa-apple.wrapper-xs
-          a(ng-href='{{Job.data._root_.playstore_link}}'): i.fa-lg.fa.fa-android.wrapper-xs
-          a(ng-href='{{Job.data._root_.windiows_store_link}}'): i.fa-lg.fa.fa-windows.wrapper-xs
+          a(ng-href='{{Job.data._root_.apple_store_link}}' ng-if='Job.data._root_.apple_store_link'): i.fa-lg.fa.fa-apple.wrapper-xs
+          a(ng-href='{{Job.data._root_.playstore_link}}' ng-if='Job.data._root_.playstore_link'): i.fa-lg.fa.fa-android.wrapper-xs
+          a(ng-href='{{Job.data._root_.windiows_store_link}}' ng-if='Job.data._root_.windiows_store_link'): i.fa-lg.fa.fa-windows.wrapper-xs
 
         .h4.m-t-xs.m-b-xs(ng-if='Job.data.skills') Skills
         .h6.clearfix
@@ -107,8 +107,8 @@ div(ng-controller='JobViewController as Job')
             .h4.m-b-xs Interview Place Direction
             .h5.text-muted(ng-bind-html="Job.interview_place_direction")
 
-    .col.w-lg: .w-lg.nav-comment.m-t-xl(ng-controller='JobCommentsController as Comments')
-      div(style='position: relative; height: 100%; width: 102%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
+    .col.w-lg: .w-lg.w-auto-xs.w-auto-sm.nav-comment.m-t-xl(ng-controller='JobCommentsController as Comments')
+      div(style='position: relative; height: 100%; width: 100%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
         ul.list-group.no-bg.pull-in
           li.list-group-item(ng-repeat='comment in Comments.data | orderBy: "created_at"')
             a.pull-left.thumb-sm.m-r-md(href=''): .fa-stack.fa-2x.text-primary

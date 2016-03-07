@@ -426,6 +426,7 @@
 
 // sm
 @media (min-width: 768px) and (max-width: 991px) {
+  .w-auto-sm{width: auto;}
   .hidden-sm.show{display: inherit !important;}
 }
 
