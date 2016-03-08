@@ -1,0 +1,41 @@
+//- Job Follower Add and Edit
+a.dropdown-toggle(uib-dropdown-toggle id='append-to-link')
+  i.fa.fa-user-plus.fa-fw(style='font-size: 1.2em;')
+  span.badge.badge-sm.up.bg-danger(style='margin-left: -10px;') 5
+
+.dropdown-menu
+  .panel.bg-white-only
+    .panel-heading.bg-light.wrapper-xs
+      strong.m-l-xs JD shared with
+    .list-group
+      .hbox.list-group-item
+        .col.w-xxl.text-info USERS
+        .col.w-xs.clearfix: span.pull-right Privileges
+      .hbox.list-group-item(ng-repeat='follower in Follower.followers')
+        .col.w-xxl.v-middle
+          .fa-stack.text-info-dker
+            i.fa.fa-circle.fa-stack-2x
+            i.fa.fa-user.fa-stack-1x.fa-inverse(style='font-size: 1.5em;margin-top: 0.12em;')
+          | {{follower.user.name}}
+        .col(style='width: 100px;')
+          .btn-group
+            label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='follower.follower_access_id', uib-btn-radio='1')
+              i.fa.fa-check.text-active
+              | View
+            label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='follower.follower_access_id', uib-btn-radio='2')
+              i.fa.fa-check.text-active
+              | Edit
+
+    .wrapper-xs.bg-light.dk: form.hide.form-inline(role='follower')
+      .form-group.wrapper-xs
+        input.form-control(placeholder='Enter name or Email')
+      .form-group.wrapper-xs.text-muted.b-l Access
+      .btn-group(ng-init='Follower.data.follower_access_id = 2')
+        label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='Follower.data.follower_access_id', uib-btn-radio='1')
+          i.fa.fa-check.text-active
+          | View
+        label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='Follower.data.follower_access_id', uib-btn-radio='2')
+          i.fa.fa-check.text-active
+          | Edit
+      .form-group.b-l.m-l-md.padder
+        button.btn.btn-sm.btn-success(type='submit') Add

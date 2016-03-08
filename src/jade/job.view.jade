@@ -8,8 +8,12 @@ div(ng-controller='JobViewController as Job')
         a(ui-sref='app.jobs.manage({bucket: bucket, jobId: Job.data.id })') {{bucket}}
 
   .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
-    ul.nav.nav-pills.nav-sm: li(ui-sref-active="active")
-      a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
+    ul.nav.nav-pills.nav-sm.navbar-right
+
+      li.dropdown.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'")
+
+      li(ui-sref-active="active")
+        a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
 
   .hbox.hbox-auto-xs.hbox-auto-sm
     .col.col-.clearfix.wrapper-xs
