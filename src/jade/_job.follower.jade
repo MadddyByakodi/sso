@@ -1,7 +1,7 @@
 //- Job Follower Add and Edit
 a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.followers.length > 0')
   i.fa.fa-user-plus.fa-fw(style='font-size: 1.2em;')
-  span.badge.badge-sm.up.bg-danger(style='margin-left: -10px;') Follower.followers.length
+  span.badge.badge-sm.up.bg-danger(style='margin-left: -10px;') {{Follower.followers.length}}
 
 .dropdown-menu
   .panel.bg-white-only
@@ -26,7 +26,7 @@ a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.follow
               i.fa.fa-check.text-active
               | Edit
 
-    .wrapper-xs.bg-light.dk: form.hide.form-inline(role='follower')
+    .wrapper-xs.bg-light.dk: form.form-inline(role='follower')
       .form-group.wrapper-xs
         input.form-control(placeholder='Enter name or Email')
       .form-group.wrapper-xs.text-muted.b-l Access

@@ -8,9 +8,9 @@ div(ng-controller='JobViewController as Job')
         a(ui-sref='app.jobs.manage({bucket: bucket, jobId: Job.data.id })') {{bucket}}
 
   .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
-    ul.nav.nav-pills.nav-sm.navbar-right
+    ul.nav.nav-pills.nav-sm.navbar-right.m-n
 
-      li.dropdown.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'")
+      li.hide.dropdown.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'")
 
       li(ui-sref-active="active")
         a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
@@ -72,15 +72,16 @@ div(ng-controller='JobViewController as Job')
           a(ng-href='{{Job.data._root_.playstore_link}}' ng-if='Job.data._root_.playstore_link'): i.fa-lg.fa.fa-android.wrapper-xs
           a(ng-href='{{Job.data._root_.windiows_store_link}}' ng-if='Job.data._root_.windiows_store_link'): i.fa-lg.fa.fa-windows.wrapper-xs
 
-        .h4.m-t-xs.m-b-xs(ng-if='Job.data.skills') Skills
-        .h6.clearfix
-          .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in Job.data.skills' style='padding: 2px;' ng-if='Job.showAllSkill || $index < 6') {{skill}}
-          a.pull-left(ng-if='Job.data.skills.length>6' ng-click='Job.showAllSkill = !Job.showAllSkill')
-            span.font-bold.text-info-dker(ng-if='Job.showAllSkill') – Less
-            span.font-bold.text-info-dker(ng-if='!Job.showAllSkill') + More
+        .h4.m-t-xs.m-b-xs(ng-if='Job.data.required_skills || Job.data.optional_skills') Skills
+        .h5.clearfix(ng-if='Job.data.required_skills')
+          div: strong.m-t-xs.text-muted Must have
+          .pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in Job.data.required_skills') &nbsp;{{skill}}&nbsp;
+        .h5.m-t-sm.clearfix(ng-if='Job.data.optional_skills')
+          div: strong.text-muted Optional
+          .pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in Job.data.optional_skills') &nbsp;{{skill}}&nbsp;
 
 
-        .h4.m-t-xs.m-b-xs Working Days
+        .h4.m-t-sm.m-b-xs Working Days
         .h5.text-muted.clearfix {{Job.data.days_per_week}} Days a Week ({{Job.data.start_work_time}} to {{Job.data.end_work_time}})
         .m-b-xs
 
