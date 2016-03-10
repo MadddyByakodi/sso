@@ -19,7 +19,7 @@ a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.follow
           | {{follower.user.name}}
         .col(style='width: 8em;')
           span.pull-right.b-a.text-muted.r(ng-if='follower.owner') &nbsp;Owner&nbsp;
-          .btn-group(ng-if='!follower.owner')
+          .btn-group.pull-right(ng-if='!follower.owner')
             label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='follower.follower_access_id', uib-btn-radio='1' style='width: 4.5em')
               i.fa.fa-check.text-active
               | View
@@ -28,9 +28,17 @@ a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.follow
               | Edit
         .line.m-xs
 
-    .wrapper-xs.bg-light.dk: form.form-inline(role='follower')
+    .wrapper-xs.bg-light.dk: form.form-inline(name='follower' role='follower' ng-submit='Follower.add()')
+
+      div
+        i.fa.fa-refresh.fa-spin.m-r-xs.m-l-xs(ng-show='Follower.Users.loading')
+        span.m-l-xs(ng-show='Follower.Users.model') Invite:
+          a.text-info-dker(href='') &nbsp; {{Follower.Users.model}}
+
       .form-group.wrapper-xs
-        input.form-control(placeholder='Enter name or Email')
+        input.form-control(type='text' placeholder='Name or Email' ng-model='Follower.Users.model' uib-typeahead='user.name for user in Follower.Users.get($viewValue)' typeahead-loading='Follower.Users.loading' typeahead-no-results='Follower.Users.noResults' typeahead-on-select='Follower.Users.select($item)' required)
+
+      input(type='hidden' ng-model='Follower.data.user_id' required)
       .form-group.wrapper-xs.text-muted.b-l Access
       .btn-group(ng-init='Follower.data.follower_access_id = 2' style='width: 8em;')
         label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='Follower.data.follower_access_id', uib-btn-radio='1' style='width: 4.5em')
@@ -40,4 +48,4 @@ a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.follow
           i.fa.fa-check.text-active
           | Edit
       .form-group.b-l.m-l-lg.padder
-        button.btn.btn-sm.btn-success(type='submit') Add
+        button.btn.btn-sm.btn-success(type='submit' ng-disabled='follower.$invalid') Add

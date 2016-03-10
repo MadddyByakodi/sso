@@ -12,8 +12,8 @@ angular.module('qui.hire')
           .get(url, { params: params });
       };
 
-      jobFollowersService.create = function create(data, ApplicantId) {
-        const url = `${APP.apiServer}/user/jobs/${ApplicantId}/followers`;
+      jobFollowersService.add = function add(jobId, data) {
+        const url = `${APP.apiServer}/user/jobs/${jobId}/followers`;
         return $http
           .post(url, data);
       };
