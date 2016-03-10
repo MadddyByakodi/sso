@@ -11,7 +11,7 @@
       li
         button.btn.btn-primary.btn-sm(ng-if='Applicant.getApplicants({checked: true}, "id").length>0' ng-click='App.downloadApplicant(Applicant.getApplicants({checked: true}, "id"))') Download CV(s
 
-      li.hide.dropdown.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'")
+      li.dropdown.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'")
 
       li: a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
   .wrapper-md
