@@ -1,7 +1,14 @@
 //- Job Follower Add and Edit
 a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.followers.length > 0')
   i.fa.fa-user-plus.fa-fw(style='font-size: 1.2em;')
-  span.badge.badge-sm.up.bg-danger(style='margin-left: -10px;') {{Follower.followers.length}}
+  span.badge.badge-sm.up.bg-danger(ng-if= 'Follower.followers.length > 1' style='margin-left: -10px;') {{Follower.followers.length}}
+
+script(type='text/ng-template' id='userTemplate.html'): a
+  span(ng-bind-html='match.label | uibTypeaheadHighlight:query')
+  span.text-black-lter
+    | &nbsp; &lt;
+    span(ng-bind-html='match.model.email_id | uibTypeaheadHighlight:query')
+    | &gt;
 
 .dropdown-menu
   .panel.bg-white-only
@@ -28,15 +35,17 @@ a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.follow
               | Edit
         .line.m-xs
 
-    .wrapper-xs.bg-light.dk: form.form-inline(name='follower' role='follower' ng-submit='Follower.add()')
+    //- Only get users if clicked on elements => saves getUser XHR
+    .wrapper-xs.bg-light.dk(ng-click='Follower.Users.all || Follower.getAllUser()'): form.form-inline(name='follower' role='follower' ng-submit='Follower.add()')
 
-      div
+      div.hide
         i.fa.fa-refresh.fa-spin.m-r-xs.m-l-xs(ng-show='Follower.Users.loading')
         span.m-l-xs(ng-show='Follower.Users.model') Invite:
           a.text-info-dker(href='') &nbsp; {{Follower.Users.model}}
+        span &nbsp;
 
       .form-group.wrapper-xs
-        input.form-control(type='text' placeholder='Name or Email' ng-model='Follower.Users.model' uib-typeahead='user.name for user in Follower.Users.get($viewValue)' typeahead-loading='Follower.Users.loading' typeahead-no-results='Follower.Users.noResults' typeahead-on-select='Follower.Users.select($item)' required)
+        input.form-control(type='text' placeholder='Name or Email' ng-model='Follower.Users.model' uib-typeahead='user as user.name for user in Follower.Users.list() | filter: {$:$viewValue} ' typeahead-loading='Follower.Users.loading' typeahead-no-results='Follower.Users.noResults' typeahead-on-select='Follower.Users.select($item)' required typeahead-min-length='0' typeahead-template-url='userTemplate.html')
 
       input(type='hidden' ng-model='Follower.data.user_id' required)
       .form-group.wrapper-xs.text-muted.b-l Access

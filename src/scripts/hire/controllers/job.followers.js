@@ -25,15 +25,19 @@ angular.module('qui.hire')
         .then(x => vm.followers = x.data);
 
       vm.Users = {
-        get: function searchUser($viewValue) {
-          return Users.getAll({ q: $viewValue })
-            .then(x => x.data.items.filter(u => !vm.followers.some(f => f.user.id === u.id)));
+        all: '',
+        list: function searchUser() {
+          return vm.Users.all.filter(u => !vm.followers.some(f => f.user.id === u.id));
         },
 
         select: function selectUser($item) {
           vm.data.user_id = $item.id;
           vm.Users.selected = $item; // to pre inset in list of followers
         },
+      };
+
+      vm.getAllUser = function getAllUser() {
+        Users.getAll({ q: '' }).then(r => vm.Users.all = r.data.items);
       };
     },
   ]);
