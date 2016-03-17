@@ -40,14 +40,27 @@ angular.module('qui.hire')
 
       vm.getInterviews = function getInterviews() {
         Applicants.get({
-          fl: 'id,name,interview_type,interview_time,_root_',
+          fl: 'id,name,interview_type,interview_time,state_id,_root_',
           sort: 'interview_time ASC',
           interview_time: [
             moment().startOf('day').toISOString(),
             moment().endOf('week').toISOString(),
           ].join(','),
         }).then(function gotInterviews(response) {
-          vm.interviews = response;
+          vm.interviews = response.filter(i => {
+            // hide interview if
+            //   - current state is not an interview
+            //   ---- AND
+            //   - interview time is not in between current time and tommorow
+            const hideInterview =
+              !~[5, 8, 9].indexOf(i.interview_type) &&
+              !(
+                moment(i.interview_time).isAfter(moment()) &&
+                moment(i.interview_time).isBefore(moment().startOf('day').add(2, 'days'))
+              );
+            if (hideInterview) return false;
+            return true;
+          });
         });
       };
 
