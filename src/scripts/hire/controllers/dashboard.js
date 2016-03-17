@@ -47,7 +47,7 @@ angular.module('qui.hire')
             moment().endOf('week').toISOString(),
           ].join(','),
         }).then(function gotInterviews(response) {
-          vm.interviews = response.filter(i => {
+          vm.interviews = response && response.filter(i => {
             // hide interview if
             //   - current state is not an interview
             //   ---- AND
