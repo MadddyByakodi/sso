@@ -5,7 +5,7 @@ div(ng-controller='JobViewController as Job')
       li: label.i-checks.m-t-xs.m-b-none.m-l-lg
         i.m-r-none(ng-if='Applicant.applicants.length > 0')
       li(ng-repeat='bucket in Job.buckets' ui-sref-active="active")
-        a(ui-sref='app.jobs.manage({bucket: bucket, jobId: Job.data.id })') {{bucket}}
+        a(ui-sref='app.jobs.manage({bucket: bucket, jobId: App.$state.params.jobId })') {{bucket}}
 
   .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
     ul.nav.nav-pills.nav-sm.navbar-right.m-n
@@ -55,7 +55,13 @@ div(ng-controller='JobViewController as Job')
       .m-t-xs(ng-if='Job.data.responsibility')
         .panel.no-border.m-n
           .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Duties and Responsibility
-          .panel-body.bg-light.dk(ng-bind-html="Job.responsibility" style='word-break: break-all;')
+          .panel-body.bg-light.dk.wrapper-sm(ng-bind-html="Job.responsibility" style='word-break: break-all;')
+
+      //- Job Perks
+      .m-t-xs(ng-if='Job.data.perks')
+        .panel.no-border.m-n
+          .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Perks
+          .panel-body.bg-light.dk.wrapper-sm(ng-bind-html="Job.perks" style='word-break: break-all;')
 
       //- Job Details
       .bg-white-only.m-t-xs.wrapper-md

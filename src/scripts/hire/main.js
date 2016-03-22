@@ -80,7 +80,10 @@ angular.module('qui.hire')
       vm.states = User.states;
 
       vm.showNavJobs = function showNavJobs() {
-        return $state.is('app.jobs.applicants') || $state.is('app.jobs.manage') || $state.is('app.jobs.view');
+        return $state.is('app.jobs.applicants') ||
+          $state.is('app.jobs.manage') ||
+          $state.is('app.jobs.view') ||
+          $state.is('app.jobs.edit');
       };
 
       vm.downloadApplicant = function downloadApplicant(ids) {

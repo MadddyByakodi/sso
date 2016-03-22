@@ -36,6 +36,12 @@ angular.module('qui.hire')
           );
       };
 
+      jobsService.getByIdRaw = function getByIdRaw(jobId, params) {
+        const url = `${APP.apiServer}/user/jobs/${jobId}/raw`;
+        return $http
+          .get(url, { params: params });
+      };
+
       jobsService.getApplicants = function getApplicants(jobId, params) {
         const url = `${APP.apiServer}/user/jobs/${jobId}/applicants`;
         return $http
@@ -54,16 +60,13 @@ angular.module('qui.hire')
       jobsService.create = function create(data) {
         const url = `${APP.apiServer}/user/jobs`;
         return $http
-          .post(url, data)
-          .then(
-            function successJobs(response) {
-              return response.data;
-            },
+          .post(url, data);
+      };
 
-            function errorJobs(response) {
-              return $q.reject(response.data);
-            }
-          );
+      jobsService.update = function create(jobId, data) {
+        const url = `${APP.apiServer}/user/jobs/${jobId}`;
+        return $http
+          .put(url, data);
       };
 
       return jobsService;

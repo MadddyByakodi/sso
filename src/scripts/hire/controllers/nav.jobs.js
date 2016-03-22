@@ -5,7 +5,7 @@ angular.module('qui.hire')
     function NavJobsCtrl(Jobs, $state) {
       const vm = this;
       vm.jobHref = function jobHref(jobId) {
-        const states = ['app.jobs.manage', 'app.jobs.view'];
+        const states = ['app.jobs.manage', 'app.jobs.view', 'app.jobs.edit'];
         const name = ~states.indexOf($state.current.name) ? $state.current.name : states[0];
         return $state.href(name, { jobId });
       };

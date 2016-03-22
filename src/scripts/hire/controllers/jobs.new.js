@@ -1,5 +1,6 @@
 angular.module('qui.hire')
   .controller('NewJobController', [
+    '$q',
     '$timeout',
     'Page',
     '$state',
@@ -12,20 +13,22 @@ angular.module('qui.hire')
     'Funcs',
     'moment',
     'Jobs',
-    function NewJobCtrl($timeout, Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
+    function NewJobCtrl($q, $timeout, Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
       const vm = this;
-      Page.setTitle('Post New Position');
+      vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
+      const title = $state.params.jobId ? 'Edit Position' : 'Post New Position';
+      Page.setTitle(title);
       vm.data = {
-        days_per_week: '5',
+        days_per_week: 5,
         email: '',
         new_job: 1,
         start_work_time: '9:00 AM',
         end_work_time: '5:00 PM',
-        job_nature: 1,
+        job_nature: '1',
         preferred_genders: 'No Preference',
-        direct_line_up: '0',
-        whitelist: '0',
-        func_id: '0',
+        direct_line_up: 0,
+        whitelist: 0,
+        func_id: 0,
         JobSkills: [],
         JobsDegrees: [],
         JobsInstitutes: [],
@@ -33,25 +36,19 @@ angular.module('qui.hire')
         JobsEmployers: [],
       };
 
+      function generateInterval(startHour) {
+        const interval = [];
+        for (let i = 0; i < 48; i++) {
+          interval.push(moment().startOf('day').add(startHour, 'hour').add(i * 30, 'minute').format('h:mm A'));
+        }
+
+        return interval;
+      }
+
       vm.ui = {
         days_per_week: [1, 2, 3, 4, 5, 6, 7],
-        start_work_time: (function intervalGenerator() {
-          const interval = [];
-          for (let i = 0; i < 48; i++) {
-            interval.push(moment().startOf('day').add(7, 'hour').add(i * 30, 'minute').format('h:mm A'));
-          }
-
-          return interval;
-        })(),
-
-        end_work_time: (function intervalGenerator() {
-          const interval = [];
-          for (let i = 0; i < 48; i++) {
-            interval.push(moment().startOf('day').add(15, 'hour').add(i * 30, 'minute').format('h:mm A'));
-          }
-
-          return interval;
-        })(),
+        start_work_time: generateInterval(7),
+        end_work_time: generateInterval(15),
       };
       vm.Regions = {
         select: function selectRegion($item) {
@@ -61,11 +58,7 @@ angular.module('qui.hire')
         get: function getRegions(search) {
           return Regions
             .get({ q: search })
-            .then(function gotRegions(response) {
-              return response.items.map(function iterate(value) {
-                return value;
-              });
-            });
+            .then(res => res.items);
         },
 
         noResults: false,
@@ -84,11 +77,13 @@ angular.module('qui.hire')
         get: function getDegrees(search) {
           return Degrees
             .get({ q: search })
-            .then(function gotDegrees(response) {
-              return response.items.map(function iterate(value) {
-                return value;
-              });
-            });
+            .then(res => res
+              .items
+              .filter(item => !vm.data
+                .JobsDegrees
+                .find(x => item.id === x.degree_id)
+              )
+            );
         },
 
         noResults: false,
@@ -107,11 +102,13 @@ angular.module('qui.hire')
         get: function getInstitutes(search) {
           return Institutes
             .get({ q: search })
-            .then(function gotInstitutes(response) {
-              return response.items.map(function iterate(value) {
-                return value;
-              });
-            });
+            .then(res => res
+              .items
+              .filter(item => !vm.data
+                .JobsInstitutes
+                .find(x => item.id === x.institute_id)
+              )
+            );
         },
 
         noResults: false,
@@ -119,8 +116,7 @@ angular.module('qui.hire')
       };
 
       vm.Industries = {
-        select: function selectIndustry() {
-          const industryId = Number(vm.Industries.model);
+        select: function selectIndustry(industryId) {
           if (industryId === 0) return;
 
           // Removes industry from list
@@ -144,14 +140,6 @@ angular.module('qui.hire')
           });
         },
 
-        get: (function getIndustries() {
-          return Industries
-            .get({ q: '', rows: 30 })
-            .then(function gotIndustries(response) {
-              vm.Industries.list = response.items;
-            });
-        })(),
-
         noResults: false,
         loadingRegions: false,
       };
@@ -168,11 +156,13 @@ angular.module('qui.hire')
         get: function getEmployer(search) {
           return Employers
             .get({ q: search })
-            .then(function gotEmployer(response) {
-              return response.items.map(function iterate(value) {
-                return value;
-              });
-            });
+            .then(res => res
+              .items
+              .filter(item => !vm.data
+                .JobsEmployers
+                .find(x => item.id === x.employer_id)
+              )
+            );
         },
 
         noResults: false,
@@ -201,11 +191,13 @@ angular.module('qui.hire')
         get: function getSkill(search) {
           return Skills
             .get({ q: search })
-            .then(function gotSkill(response) {
-              return response.items.map(function iterate(value) {
-                return value;
-              });
-            });
+            .then(res => res
+              .items
+              .filter(item => !vm.data
+                .JobSkills
+                .find(x => item.id === x.skill_id)
+              )
+            );
         },
 
         create: function createSkill(skill, required) {
@@ -229,19 +221,43 @@ angular.module('qui.hire')
         loadingRegions: false,
       };
 
-      Funcs
-        .get({ q: '', rows: 20 })
-        .then(function gotFuncs(response) {
-          vm.Funcs = response.items;
-        });
+      $q.all([
+        Funcs.get({ q: '', rows: 20 }),
+        Industries.get({ q: '', rows: 30 }),
+      ])
+      .then(result => {
+        vm.Funcs = result[0].items;
+        vm.Industries.list = result[1].items;
+
+        // Load Data to edit JD
+        if ($state.params.jobId) {
+          Jobs
+          .getByIdRaw($state.params.jobId)
+          .then(res => {
+            const industries = res.data.JobsIndustries;
+            res.data.JobsIndustries = []; // clean industries as array
+
+            vm.Regions.model = res.data.region; // set region model value
+            delete res.data.region; // remove region from response
+
+            vm.data = res.data;
+
+            // Add industries
+            industries.map(i => vm.Industries.select(i.industry_id));
+          });
+        }
+      });
 
       vm.create = function createJob() {
-        Jobs
-          .create(vm.data)
-          .then(function jobCreated(result) {
+        const saveJob = $state.params.jobId ?
+          Jobs.update($state.params.jobId, vm.data) :
+          Jobs.create(vm.data);
+
+        saveJob
+          .then(res => {
             // Wait for solr to index data
             $timeout(() => {
-              $state.go('app.jobs.view', { jobId: result.id });
+              $state.go('app.jobs.view', { jobId: res.data.id });
             }, 1000);
           });
       };

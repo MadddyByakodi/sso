@@ -34,6 +34,7 @@ angular.module('qui.hire')
         })
         .state('app.jobs.new', {
           url: '/new',
+          controller: 'NewJobController as Job',
           templateUrl: 'html/jobs.new.html',
         })
         .state('app.jobs.list', {
@@ -47,6 +48,11 @@ angular.module('qui.hire')
         .state('app.jobs.view', {
           url: '/{jobId}',
           templateUrl: 'html/job.view.html',
+        })
+        .state('app.jobs.edit', {
+          url: '/{jobId}/edit',
+          controller: 'NewJobController as Job',
+          templateUrl: 'html/jobs.new.html',
         })
         .state('app.jobs.manage', {
           url: '/{jobId}/{bucket}',

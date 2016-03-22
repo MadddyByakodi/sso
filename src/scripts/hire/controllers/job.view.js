@@ -19,6 +19,7 @@ angular.module('qui.hire')
             Page.setTitle(`${result.role} - ${result.client_name}`);
             vm.data = result;
             vm.responsibility = $sce.trustAsHtml(result.responsibility);
+            vm.perks = $sce.trustAsHtml(result.perks);
             vm.interview_addr = $sce.trustAsHtml(result.interview_addr);
             vm.interview_place_direction = $sce.trustAsHtml(result.interview_place_direction);
 
