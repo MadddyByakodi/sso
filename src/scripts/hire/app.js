@@ -5,4 +5,5 @@ angular.module('qui.hire', [
   'ui.bootstrap',
   'mwl.calendar',
   'chart.js',
+  'textAngular',
 ]);

@@ -110,6 +110,10 @@ div(ng-controller='JobViewController as Job')
                 span.h5 Target Companies: &nbsp;
                 span.h5.text-muted {{Job.data.employers.join(', ')}}
 
+          .m-t-xs(ng-if='Job.comments')
+            .h4.m-b-xs Sourcing and Screening Guidelines
+            .h5.text-muted(ng-bind-html="Job.comments")
+
           .m-t-xs(ng-if='Job.interview_addr')
             .h4.m-b-xs Interview Address
             .h5.text-muted(ng-bind-html="Job.interview_addr")
