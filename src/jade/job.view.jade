@@ -55,13 +55,13 @@ div(ng-controller='JobViewController as Job')
       .m-t-xs(ng-if='Job.data.responsibility')
         .panel.no-border.m-n
           .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Duties and Responsibility
-          .panel-body.bg-light.dk.wrapper-sm(ng-bind-html="Job.responsibility" style='word-break: break-all;')
+          .panel-body.bg-white.dk.wrapper-sm(ng-bind-html="Job.responsibility" style='word-break: break-all;')
 
       //- Job Perks
       .m-t-xs(ng-if='Job.data.perks')
         .panel.no-border.m-n
           .w-full.wrapper-xs.bg-primary.lt: strong.m-l-xs Perks
-          .panel-body.bg-light.dk.wrapper-sm(ng-bind-html="Job.perks" style='word-break: break-all;')
+          .panel-body.bg-white.dk.wrapper-sm(ng-bind-html="Job.perks" style='word-break: break-all;')
 
       //- Job Details
       .bg-white-only.m-t-xs.wrapper-md
