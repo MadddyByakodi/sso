@@ -120,6 +120,7 @@ angular.module('qui.hire')
         });
 
         modalInstance.result.then(function success(data) {
+          $rootScope.$broadcast('ApplicantStateChangeSuccess', data);
           applicant.state_id = data.state_id;
           applicant.state_name = vm.states[data.state_id].name;
         });

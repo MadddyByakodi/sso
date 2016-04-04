@@ -17,7 +17,8 @@ angular.module('qui.hire')
       vm.exData = {
         scheduled_on_time: moment()
           .startOf('day')
-          .set('hour', 10),
+          .set('hour', 10)
+          .toDate(),
       };
 
       vm.setScheduledOn = function scheduledOnTimeChange() {
@@ -25,7 +26,8 @@ angular.module('qui.hire')
         const minute = moment(vm.exData.scheduled_on_time).get('minute');
         vm.data.scheduled_on = moment(vm.exData.scheduled_on_date)
           .set('hour', hour)
-          .set('minute', minute);
+          .set('minute', minute)
+          .toDate();
       };
 
       vm.ok = function ok() {
