@@ -3,7 +3,7 @@ ul.nav
   li.hidden-folded.padder.m-t.m-b-sm.text-muted.text-xs
     span Navigation
   li(ui-sref-active='active'): a(ui-sref='app.dashboard')
-    i.fa.fa-bar-chart.icon.text-primary-dker
+    i.fa.fa-home.icon.text-default-lter
     span.font-bold Dashboard
   li(ui-sref-active='active'): a(ui-sref='app.jobs.list')
     b.hide.badge.bg-info.pull-right 20
@@ -16,6 +16,6 @@ ul.nav
     b.hide.badge.bg-info.pull-right 9
     i.fa.fa-calendar-check-o.icon.text-success-dker
     span.font-bold Calendar
-  li.hide(ui-sref-active='active'): a(ui-sref='app.payment')
-    i.fa.fa-credit-card.icon.text-danger-lter
-    span.font-bold Payment
+  li(ng-class='{active: App.$state.includes("app.stats")}'): a(ui-sref='app.stats.conversion({nav: 0})')
+    i.fa.fa-line-chart.icon.text-danger-lter
+    span.font-bold Statistics

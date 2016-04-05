@@ -1,7 +1,7 @@
 //- navbar
 .app-header.navbar(ng-include="'html/blocks/header.html'")
 //- menu
-.b-b.app-aside.hidden-xs(
+.app-aside.hidden-xs(
   ng-include="'html/blocks/aside.html'"
   class='{{App.app.settings.asideColor}}'
   ng-class="{\
@@ -9,9 +9,8 @@
   }"
 )
 
-content
+.content
   .app-content
-    div(ui-butterbar='')
     a.off-screen-toggle.hide(href='', ui-toggle-class='off-screen', data-target='.app-aside')
     .app-content-body
      .hbox
