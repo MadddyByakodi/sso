@@ -2,7 +2,7 @@
   .modal-title
     .h4.text-info Change Status of {{ChangeState.applicant.name}}
       .close(ng-click='ChangeState.cancel()') ×
-form.form-validation(name="form")
+form.form-validation(name="form" ng-submit='ChangeState.ok()')
   .modal-body
     //- by default angular doesn't set value to module
     label.input-group(ng-init='ChangeState.data.state_id = ChangeState.states[ChangeState.stateId].Childs[0].state_id')
@@ -69,4 +69,4 @@ form.form-validation(name="form")
       textarea.form.form-control(name='textarea' placeholder='{{ChangeState.states[ChangeState.stateId].config.comments}}' rows='7' cols='50' ng-model='ChangeState.data.comments')
 
   .modal-footer
-    a.btn.btn-primary(type='submit' ng-disabled='form.$invalid' ng-click='ChangeState.ok()') Submit
+    button.btn.btn-primary(type='submit' ng-disabled='form.$invalid') Submit

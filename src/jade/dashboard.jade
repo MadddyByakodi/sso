@@ -25,14 +25,19 @@ div(ng-controller='DashboardController as Dash')
           .b-b.m-t-xs
           .hbox.wrapper-sm.m-t-xs(ng-if='Dash.pipeline.length===0')
               .col.text-center All Done
-          .hbox.wrapper-sm.m-t-xs(ng-if='Dash.pipeline.length>0')
+          .hbox.wrapper-sm.m-t-xs.b-b(ng-if='Dash.pipeline.length>0')
               .col: .h6.font-bold Positions
               .col.thumb-xs: .h6.font-bold.pull-right CVs
-          div
+          div(style='max-height: 300px; overflow-y: auto;')
             .hbox.wrapper-sm.b-b(ng-repeat='pipe in Dash.pipeline | orderBy:"-count"')
               .col: a(ui-sref='app.jobs.manage({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
               .col.thumb-xs
                 span.pull-right {{pipe.count}}
+            .text-center
+              div.wrapper-xs(ng-if='Dash.pipeUI.loading')
+                i.fa.fa-spin.fa-circle-o-notch.btn.btn-default.wrapper-xs.rounded(title='Loading')
+              div.wrapper-xs(ng-if='Dash.pipeUI.lazyLoad')
+                i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded(title='Load More' ng-click='Dash.getPipeline()')
   .col-sm-8.no-padder
     .m-xs
       .col-xs-12.no-padder
@@ -61,17 +66,22 @@ div(ng-controller='DashboardController as Dash')
           .h4.text-black.wrapper-xs.b-b &nbsp; Upcoming Interviews
           .hbox.wrapper-sm(ng-if='Dash.interviews.length===0')
             .col.text-center.text-light-lter None for This Week
-          .hbox.wrapper-sm(ng-if='Dash.interviews.length>0')
+          .hbox.wrapper-sm.b-b(ng-if='Dash.interviews.length>0')
             .col: .h6.font-bold Name
             .col: .h6.font-bold Type
             .col: .h6.font-bold Time
-          .hbox.wrapper-sm.b-b(ng-repeat='applicant in Dash.interviews')
-            .col: a(ui-sref='app.applicant.view({applicantId: applicant.id})') {{applicant.name}}
-            .col
-              i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}' uib-tooltip='{{App.states[applicant.interview_type].name}}' tooltip-placement='left')
-              |  {{App.states[applicant.state_id].name}}
-            .col {{applicant.interview_time | date : 'd MMM, h:mm a'}}
-
+          div(style='max-height: 300px; overflow-y: auto;')
+            .hbox.wrapper-sm.b-b(ng-repeat='applicant in Dash.interviews')
+              .col: a(ui-sref='app.applicant.view({applicantId: applicant.id})') {{applicant.name}}
+              .col
+                i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}' uib-tooltip='{{App.states[applicant.interview_type].name}}' tooltip-placement='left')
+                |  {{App.states[applicant.state_id].name}}
+              .col {{applicant.interview_time | date : 'd MMM, h:mm a'}}
+            .text-center
+              div.wrapper-xs(ng-if='Dash.interviewsUI.loading')
+                i.fa.fa-spin.fa-circle-o-notch.btn.btn-default.wrapper-xs.rounded(title='Loading')
+              div.wrapper-xs(ng-if='Dash.interviewsUI.lazyLoad')
+                i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded(title='Load More' ng-click='Dash.getInterviews()')
       .col-xs-12.no-padder.hide
         .m-xs.wrapper-xs.bg-white-only
           .h4.text-black.wrapper-xs.b-b &nbsp; Upcoming Joinees
