@@ -3,7 +3,7 @@ angular.module('qui.hire')
     '$stateProvider',
     '$urlRouterProvider',
     function quiStateConfig($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.when('/', '/app/dashboard');
+      $urlRouterProvider.when('/', '/dashboard');
       $urlRouterProvider.otherwise('/access/404');
       $stateProvider
         .state('access', {

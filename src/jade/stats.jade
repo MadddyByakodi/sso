@@ -1,7 +1,9 @@
 .hbox(ng-controller='StatsController as Stats')
   .col.w-md.bg-dark.lt.b-r.bg-auto
     ul.nav
-      li.padder.m-t.m-b-sm.text-muted.text-xs Stats
+      li.padder.m-t.m-b-sm.text-muted.text-xs
+        span Stats
+          a.pull-right(ng-href='{{Stats.download}}') Export to CSV
       li(ng-class='{active: App.$state.includes(navstate)}' ng-repeat='(navstate, navitem) in Stats.nav')
         a.auto
           span.pull-right.text-muted

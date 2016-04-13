@@ -1,6 +1,8 @@
 angular.module('qui.hire')
   .controller('StatsController', [
-    function StatsCtrl() {
+    'APP',
+    'Session',
+    function StatsCtrl(APP, Session) {
       const vm = this;
       vm.subNav = ['By Job Description', 'By Owner', 'By Project'];
       vm.nav = {
@@ -9,5 +11,6 @@ angular.module('qui.hire')
         'app.stats.pipespeed': 'Pipeline Speed',
         'app.stats.pipeline': 'Existing Pipeline',
       };
+      vm.download = `${APP.apiServer}/user/job/download?access_token=${Session.getAccessToken()}`;
     },
   ]);
