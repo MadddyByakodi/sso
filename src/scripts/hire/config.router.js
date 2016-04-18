@@ -23,6 +23,10 @@ angular.module('qui.hire')
           url: '',
           templateUrl: 'html/hire.app.html',
         })
+        .state('app.welcome', {
+          url: '/welcome',
+          templateUrl: 'html/hire.welcome.html',
+        })
         .state('app.dashboard', {
           url: '/dashboard',
           templateUrl: 'html/dashboard.html',

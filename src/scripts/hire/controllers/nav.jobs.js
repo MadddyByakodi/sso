@@ -17,6 +17,8 @@ angular.module('qui.hire')
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
         vm.ui = { lazyLoad: false, loading: true };
         Jobs.get(vm.params).then(function jobList(result) {
+          // if no jobs uploaded ever redirect to welcome
+          if (!(vm.params.start || result.length)) return $state.go('app.welcome');
           angular.forEach(result, function iterateJobs(job) {
             vm.jobs.push(job);
           });

@@ -2,7 +2,8 @@ angular.module('qui.hire')
   .controller('JobsController', [
     'Summary',
     'Page',
-    function JobsCtrl(Summary, Page) {
+    '$state',
+    function JobsCtrl(Summary, Page, $state) {
       const vm = this;
       Page.setTitle('Posted Jobs');
       vm.jobs = []; // collection of jobs
@@ -16,6 +17,8 @@ angular.module('qui.hire')
         if (!vm.ui.lazyLoad) return; // if no more jobs to get
         vm.ui = { lazyLoad: false, loading: true };
         Summary.getPipeline(vm.params).then(function jobList(result) {
+          // if no jobs uploaded ever redirect to welcome
+          if (!(vm.params.start || result.length)) return $state.go('app.welcome');
           angular.forEach(result, function iterateJobs(job) {
             vm.jobs.push(job);
           });
