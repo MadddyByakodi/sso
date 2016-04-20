@@ -10,7 +10,7 @@ div(ng-controller='JobViewController as Job')
   .wrapper-xs.bg-light.b-b(style='position: fixed; right: 0;background: #fff; z-index: 3;')
     ul.nav.nav-pills.nav-sm.navbar-right.m-n
 
-      li.dropdown.hide.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'")
+      li.dropdown.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'")
 
       li(ui-sref-active="active")
         a.h5.b-a.b-info.b-2x.text-info.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
@@ -27,6 +27,9 @@ div(ng-controller='JobViewController as Job')
 
           //- Job status label
           .pull-right
+            a.padder.text-info(ui-sref='app.jobs.edit({jobId: Job.data.id})' title='Edit JD' ng-if='Job.data.owner')
+              i.fa.fa-edit
+              | &nbsp;Edit
             .label.wrapper-xs.bg-danger.lt(ng-if='Job.data.job_status === "Closed"')
               span.padder.h5 Closed
             .label.wrapper-xs.bg-success.dker(ng-if='!(Job.data.job_status === "Closed")')

@@ -16,6 +16,6 @@ ul.nav
     b.hide.badge.bg-info.pull-right 9
     i.fa.fa-calendar-check-o.icon.text-success-dker
     span.font-bold Calendar
-  li.hide(ng-class='{active: App.$state.includes("app.stats")}'): a(ui-sref='app.stats.conversion({nav: 0})')
+  li(ng-class='{active: App.$state.includes("app.stats")}'): a(ui-sref='app.stats.candidate({nav: 0})')
     i.fa.fa-line-chart.icon.text-danger-lter
     span.font-bold Statistics

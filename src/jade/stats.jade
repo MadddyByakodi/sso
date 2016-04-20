@@ -1,9 +1,11 @@
 .hbox(ng-controller='StatsController as Stats')
-  .col.w-md.bg-dark.lt.b-r.bg-auto
+  //- .col.hide.w-md.bg-dark.lt.b-r.bg-auto
     ul.nav
       li.padder.m-t.m-b-sm.text-muted.text-xs
         span Stats
-          a.pull-right(ng-href='{{Stats.download}}') Export to CSV
+          a.pull-right(ng-href='{{Stats.download}}')
+            i.fa.fa-download
+            | &nbsp; Export to XLXS
       li(ng-class='{active: App.$state.includes(navstate)}' ng-repeat='(navstate, navitem) in Stats.nav')
         a.auto
           span.pull-right.text-muted
@@ -13,7 +15,13 @@
         ul.nav.nav-sub.bg-dark
           li(ng-class='{active: (App.$state.params.nav == id) && (App.$state.current.name === navstate)}' ng-repeat='(id, nav) in Stats.subNav')
             a(ng-href='{{App.$state.href(navstate, {nav: id})}}' ng-bind='nav')
-  .col
+
+  .col.v-middle.text-center.fa-2x.wrapper-xl
+    .m-t-xxl: a(ng-href='{{Stats.download}}')
+      i.fa.fa-download
+      | &nbsp; Export to XLXS
+
+  //- .col.hide
     div.wrapper-sm.m-l-sm
       span(ng-bind='Stats.nav[App.$state.current.name]')
       span &nbsp;&gt;&nbsp;

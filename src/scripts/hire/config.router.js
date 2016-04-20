@@ -83,18 +83,6 @@ angular.module('qui.hire')
         .state('app.stats.candidate', {
           url: '/candidate/{nav}',
           templateUrl: 'html/stats.candidate.html',
-        })
-        .state('app.stats.conversion', {
-          url: '/conversion/{nav}',
-          templateUrl: 'html/stats.conversion.html',
-        })
-        .state('app.stats.pipespeed', {
-          url: '/pipespeed/{nav}',
-          templateUrl: 'html/stats.pipespeed.html',
-        })
-        .state('app.stats.pipeline', {
-          url: '/pipeline/{nav}',
-          templateUrl: 'html/stats.pipeline.html',
         });
     },
   ]);
