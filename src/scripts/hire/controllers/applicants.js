@@ -14,7 +14,7 @@ angular.module('qui.hire')
       Page.setTitle(`${$stateParams.bucket} Applicants`);
       vm.applicants = []; // collection of applicants
       vm.ui = { lazyLoad: true, loading: false }; // ui states
-      vm.params = { start: 0, rows: 15, fl: 'id,name,state_id,state_name,_root_' }; // GET query params
+      vm.params = { start: 0, rows: 15, fl: 'id,name,state_id,state_name,_root_' };
       vm.loadApplicants = function loadApplicants() {
         if (!vm.ui.lazyLoad) return; // if no more applicants to get
         vm.ui = { lazyLoad: false, loading: true };

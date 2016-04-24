@@ -13,7 +13,10 @@ angular.module('qui.hire')
     'Funcs',
     'moment',
     'Jobs',
-    function NewJobCtrl($q, $timeout, Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills, Funcs, moment, Jobs) {
+    function NewJobCtrl(
+      $q, $timeout, Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills,
+      Funcs, moment, Jobs
+    ) {
       const vm = this;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
       const title = $state.params.jobId ? 'Edit Position' : 'Post New Position';
@@ -39,7 +42,12 @@ angular.module('qui.hire')
       function generateInterval(startHour) {
         const interval = [];
         for (let i = 0; i < 48; i++) {
-          interval.push(moment().startOf('day').add(startHour, 'hour').add(i * 30, 'minute').format('h:mm A'));
+          interval.push(moment()
+            .startOf('day')
+            .add(startHour, 'hour')
+            .add(i * 30, 'minute')
+            .format('h:mm A')
+          );
         }
 
         return interval;

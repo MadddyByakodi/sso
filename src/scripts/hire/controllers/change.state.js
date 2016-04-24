@@ -7,7 +7,9 @@ angular.module('qui.hire')
     'state_id',
     'ChangeState',
     'moment',
-    function ChangeStateCtrl($uibModalInstance, User, CURRENCY, applicant, stateId, ChangeState, moment) {
+    function ChangeStateCtrl(
+      $uibModalInstance, User, CURRENCY, applicant, stateId, ChangeState, moment
+    ) {
       const vm = this;
       vm.states = User.states;
       vm.applicant = applicant;

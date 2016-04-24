@@ -16,7 +16,8 @@ angular.module('qui.hire')
       vm.ui = { lazyLoad: true, loading: false }; // ui states
       vm.params = {
         start: 0, rows: 15,
-        fl: 'applicant_score,created_on,edu_degree,exp_designation,exp_employer,exp_location,exp_salary,id,name,state_id,state_name,total_exp',
+        fl: 'applicant_score,created_on,edu_degree,exp_designation,exp_employer,exp_location,' +
+          'exp_salary,id,name,state_id,state_name,total_exp',
       }; // GET query params
       vm.loadApplicants = function loadApplicants() {
         if (!vm.ui.lazyLoad) return; // if no more jobs to get

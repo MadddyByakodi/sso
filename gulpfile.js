@@ -53,7 +53,9 @@ gulp.task('fonts', function images() {
 gulp.task('images', function images() {
   return gulp.src('src/images/**/*')
     .pipe(plugin.changed('dist/images', { extension: '.svg' }))
-    .pipe(plugin.cache(plugin.imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
+    .pipe(plugin.cache(plugin.imagemin(
+      { optimizationLevel: 3, progressive: true, interlaced: true }
+    )))
     .pipe(gulp.dest('dist/images'))
     .pipe(plugin.notify({
       onLast: true,
@@ -84,27 +86,27 @@ gulp.task('styles', function styles() {
 (function scripts() {
   const scriptTasks = scriptsFolders.map(f => {
     const task = `scripts:${f}`;
-    gulp.task(task, () => {
-      return gulp.src(`src/scripts/${f}/**/*.js`)
-        .pipe(plugin.sourcemaps.init())
-        .pipe(plugin.concat(`${f}.js`))
-        .pipe(plugin.babel({
-          presets: ['es2015'],
-        }))
-        .on('error', plugin.notify.onError({
-          message: 'Babel Error: <%= error.message %>',
-        }))
-        .pipe(plugin.sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/scripts'))
-        .pipe(plugin.rename({ suffix: '.min' }))
-        .pipe(plugin.sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/scripts'))
-        .pipe(plugin.notify({
-          onLast: true,
-          title: 'Scripts Compilation',
-          message: 'script build completed',
-        }));
-    });
+    gulp.task(task, () => gulp
+      .src(`src/scripts/${f}/**/*.js`)
+      .pipe(plugin.sourcemaps.init())
+      .pipe(plugin.concat(`${f}.js`))
+      .pipe(plugin.babel({
+        presets: ['es2015'],
+      }))
+      .on('error', plugin.notify.onError({
+        message: 'Babel Error: <%= error.message %>',
+      }))
+      .pipe(plugin.sourcemaps.write('.'))
+      .pipe(gulp.dest('dist/scripts'))
+      .pipe(plugin.rename({ suffix: '.min' }))
+      .pipe(plugin.sourcemaps.write('.'))
+      .pipe(gulp.dest('dist/scripts'))
+      .pipe(plugin.notify({
+        onLast: true,
+        title: 'Scripts Compilation',
+        message: 'script build completed',
+      }))
+    );
 
     return task;
   });
@@ -167,35 +169,41 @@ gulp.task('build:dev', function buildSeq(cb) {
   runSequence('lint', 'clean', ['styles', 'scripts', 'images', 'fonts'], 'html', cb);
 });
 
-gulp.task('build:prod', () => {
-  return gulp.src('dist/**/*.html')
-    .pipe(plugin.useref({ searchPath: ['dist', '.'] }))
-    .pipe(plugin.if('*.js', plugin.uglify()))
-    .pipe(plugin.if('*.js', plugin.rev()))
-    .pipe(plugin.if('*.css', plugin.minifyCss()))
-    .pipe(plugin.if('*.css', plugin.rev()))
-    .pipe(plugin.if('**/*.html', plugin.htmlmin()))
-    .pipe(plugin.revReplace())
-    .pipe(gulp.dest('assets'));
-});
+gulp.task('build:prod', () => gulp
+  .src('dist/**/*.html')
+  .pipe(plugin.useref({ searchPath: ['dist', '.'] }))
+  .pipe(plugin.if('*.js', plugin.uglify()))
+  .pipe(plugin.if('*.js', plugin.rev()))
+  .pipe(plugin.if('*.css', plugin.minifyCss()))
+  .pipe(plugin.if('*.css', plugin.rev()))
+  .pipe(plugin.if('**/*.html', plugin.htmlmin()))
+  .pipe(plugin.revReplace())
+  .pipe(gulp.dest('assets'))
+);
 
-gulp.task('build:copy', ['build:copy:sourcesanspro', 'build:copy:fontawesome'], () => {
-  return gulp.src(['dist/images/**', 'dist/fonts/**'], { base: 'dist' })
-    .pipe(gulp.dest('assets'));
-});
+gulp.task(
+  'build:copy',
+  ['build:copy:sourcesanspro', 'build:copy:fontawesome'],
+  () => gulp
+    .src(['dist/images/**', 'dist/fonts/**'], { base: 'dist' })
+    .pipe(gulp.dest('assets'))
+);
 
-gulp.task('build:copy:sourcesanspro', () => {
-  return gulp.src(
-      'bower_components/source-sans-pro/**/*.?(eot|otf|ttf|woff|woff2)',
-      { base: 'bower_components/source-sans-pro' }
-    )
-    .pipe(gulp.dest('assets/styles'));
-});
+gulp.task('build:copy:sourcesanspro', () => gulp
+  .src(
+    'bower_components/source-sans-pro/**/*.?(eot|otf|ttf|woff|woff2)',
+    { base: 'bower_components/source-sans-pro' }
+  )
+  .pipe(gulp.dest('assets/styles'))
+);
 
-gulp.task('build:copy:fontawesome', () => {
-  return gulp.src('bower_components/font-awesome/fonts/**', { base: 'bower_components/font-awesome' })
-    .pipe(gulp.dest('assets'));
-});
+gulp.task('build:copy:fontawesome', () => gulp
+  .src(
+    'bower_components/font-awesome/fonts/**',
+    { base: 'bower_components/font-awesome' }
+  )
+  .pipe(gulp.dest('assets'))
+);
 
 gulp.task('build', cb => runSequence('build:dev', ['build:prod', 'build:copy'], cb));
 

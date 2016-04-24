@@ -8,7 +8,9 @@ angular.module('qui.partner')
     '$state',
     '$window',
     'APP',
-    function handleEvents($rootScope, Auth, authService, AUTH_EVENTS, Session, $state, $window, APP) {
+    function handleEvents(
+      $rootScope, Auth, authService, AUTH_EVENTS, Session, $state, $window, APP
+    ) {
       /* eslint angular/on-watch: 0 */
 
       // In Future: assign to variable to destroy during the $destroy event

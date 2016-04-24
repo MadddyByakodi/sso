@@ -13,7 +13,9 @@ angular.module('qui.hire')
         return $sce.trustAsResourceUrl(src);
       };
 
-      vm.resumeSrc = `${APP.apiServer}/user/job/applicants/${$stateParams.applicantId}/resume?access_token=${Session.getAccessToken()}`;
+      vm.resumeSrc = `${APP.apiServer}/user/job/applicants/${
+        $stateParams.applicantId
+      }/resume?access_token=${Session.getAccessToken()}`;
       vm.loadApplicant = function loadApplicant() {
         vm.ui = { loading: true };
         Applicants

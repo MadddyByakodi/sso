@@ -45,13 +45,23 @@ angular.module('qui.hire')
           angular.forEach(result, function iterateApplicants(applicant) {
             vm.applicants.push({
               title: `
-                <a href="${$state.href('app.jobs.manage', { jobId: applicant._root_.id }) }" target="_blank">
-                  <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant._root_.role}</span>
+                <a href="${
+                  $state.href('app.jobs.manage', { jobId: applicant._root_.id })
+                }" target="_blank">
+                  <span class="text-${vm.colors[applicant.interview_type]}-lter">${
+                    applicant._root_.role
+                  }</span>
                 </a> –
-                <a href="${$state.href('app.applicant.view', { applicantId: applicant.id })}" target="_blank">
-                  <span class="text-${vm.colors[applicant.interview_type]}-lter">${applicant.name}</span>
+                <a href="${
+                  $state.href('app.applicant.view', { applicantId: applicant.id })
+                }" target="_blank">
+                  <span class="text-${
+                    vm.colors[applicant.interview_type]
+                  }-lter">${applicant.name}</span>
                 </a> &nbsp;
-                <span class="h6 b-a b-${vm.colors[applicant.interview_type]}">&nbsp; ${applicant.state_name} &nbsp;
+                <span class="h6 b-a b-${
+                  vm.colors[applicant.interview_type]
+                }">&nbsp; ${applicant.state_name} &nbsp;
                 </span> &nbsp;
               `,
               type: vm.colors[applicant.interview_type],

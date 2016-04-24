@@ -12,13 +12,19 @@ angular.module('qui.hire')
       if (!angular.isArray(ApplicantIds)) return;
       const token = Session.getAccessToken();
       if (ApplicantIds.length === 1) {
-        vm.downloadUrl =
-          `${APP.apiServer}/user/job/applicants/${ApplicantIds[0]}/download?access_token=${token}`;
+        vm.downloadUrl = `${
+            APP.apiServer
+          }/user/job/applicants/${
+            ApplicantIds[0]
+          }/download?access_token=${token}`;
       }
 
       if (ApplicantIds.length > 1) {
-        vm.downloadUrl =
-          `${APP.apiServer}/user/job/applicants/download?access_token=${token}&id=${ApplicantIds.join(',')}`;
+        vm.downloadUrl = `${
+            APP.apiServer
+          }/user/job/applicants/download?access_token=${token}&id=${
+            ApplicantIds.join(',')
+          }`;
       }
 
       vm.ok = function ok() {
