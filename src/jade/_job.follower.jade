@@ -24,13 +24,13 @@ script(type='text/ng-template' id='userTemplate.html'): a
             i.fa.fa-circle.fa-stack-2x
             i.fa.fa-user.fa-stack-1x.fa-inverse(style='font-size: 1.5em;margin-top: 0.12em;')
           | {{follower.user.name}}
-        .col(style='width: 8.5em;')
+        .col(style='width: 10em;')
           span.pull-right.b-a.text-muted.r(ng-if='follower.owner') &nbsp;Owner&nbsp;
           .btn-group.pull-right(ng-if='!follower.owner')
-            label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='follower.follower_access_id', uib-btn-radio='1' style='width: 4.5em' disabled)
+            label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='follower.follower_access_id', uib-btn-radio='1' style='width: 6em' disabled title='Can view')
               i.fa.fa-check.text-active
-              | View
-            label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='follower.follower_access_id', uib-btn-radio='2' style='width: 5em' disabled)
+              | Follower
+            label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='follower.follower_access_id', uib-btn-radio='2' style='width: 5em' disabled title='Can edit')
               i.fa.fa-check.text-active
               | Owner
         .line.m-xs
@@ -49,11 +49,11 @@ script(type='text/ng-template' id='userTemplate.html'): a
 
       input(type='hidden' ng-model='Follower.data.user_id' required)
       .form-group.wrapper-xs.text-muted.b-l Access
-      .btn-group(ng-init='Follower.data.follower_access_id = 2' style='width: 8.5em;')
-        label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='Follower.data.follower_access_id', uib-btn-radio='1' style='width: 4.5em')
+      .btn-group(ng-init='Follower.data.follower_access_id = 2' style='width: 10em;')
+        label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='Follower.data.follower_access_id', uib-btn-radio='1' style='width: 6em' title='Can view')
           i.fa.fa-check.text-active
-          | View
-        label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='Follower.data.follower_access_id', uib-btn-radio='2' style='width: 5em')
+          | Follower
+        label.btn.btn-sm.btn-default(name='follower_access_id' ng-model='Follower.data.follower_access_id', uib-btn-radio='2' style='width: 5em' title='Can edit')
           i.fa.fa-check.text-active
           | Owner
       .form-group.b-l.m-l-lg.padder

@@ -48,7 +48,7 @@ angular.module('qui.hire')
                 <a href="${
                   $state.href('app.jobs.manage', { jobId: applicant._root_.id })
                 }" target="_blank">
-                  <span class="text-${vm.colors[applicant.interview_type]}-lter">${
+                  <span class="text-${vm.colors[applicant.interview_type]}-dker">${
                     applicant._root_.role
                   }</span>
                 </a> –
@@ -57,7 +57,7 @@ angular.module('qui.hire')
                 }" target="_blank">
                   <span class="text-${
                     vm.colors[applicant.interview_type]
-                  }-lter">${applicant.name}</span>
+                  }-dker">${applicant.name}</span>
                 </a> &nbsp;
                 <span class="h6 b-a b-${
                   vm.colors[applicant.interview_type]

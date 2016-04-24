@@ -19,7 +19,7 @@ angular.module('qui.hire')
           themeID: 1,
           navbarHeaderColor: 'bg-white',
           navbarCollapseColor: 'bg-white-only',
-          asideColor: 'bg-black',
+          asideColor: 'bg-dark bg-gd-dk',
           headerFixed: true,
           asideFixed: true,
           asideFolded: true,
