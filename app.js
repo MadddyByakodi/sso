@@ -1,3 +1,3 @@
-require('./apps/accounts').listen(3001);
-require('./apps/hire').listen(3002);
-require('./apps/partner').listen(3003);
+const env = require('./apps/config');
+require('./apps/accounts').listen(env.accounts.port);
+require('./apps/hire').listen(env.hire.port);

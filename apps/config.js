@@ -1,36 +1,45 @@
-const config = {
-  development: {
-    DOMAIN: process.env.DOMAIN || 'quezx.dev',
-    OAUTH_SERVER: process.env.OAUTH_SERVER || 'http://api.quezx.dev',
-    OAUTH_ENDPOINT: process.env.OAUTH_ENDPOINT || '/oauth/token',
-    ACCOUNTS_CLIENT: process.env.ACCOUNTS_CLIENT || 'accountsquezx',
-    ACCOUNTS_SECRET: process.env.ACCOUNTS_SECRET || 'accountsquezxsecret',
-    HIRE_CLIENT: process.env.HIRE_CLIENT || 'hirequezx',
-    HIRE_SECRET: process.env.HIRE_SECRET || 'hirequezxsecret',
-    HIRE_REDIRECT_URI: process.env.HIRE_REDIRECT_URI || 'http://hire.quezx.dev/access/oauth',
-    PARTNER_CLIENT: process.env.PARTNER_CLIENT || 'partnerquezx',
-    PARTNER_SECRET: process.env.PARTNER_SECRET || 'partnerquezxsecret',
-    PARTNER_REDIRECT_URI: process.env.PARTNER_REDIRECT_URI || 'http://hire.quezx.dev/access/oauth',
-    ASSET_DIR: process.env.ASSET_DIR || `${__dirname}/../dist`,
-    livereload: true,
+const def = {
+  domain: process.env.DOMAIN,
+  prefix: process.env.PREFIX,
+  asset_dir: process.env.ASSET_DIR,
+  accounts: {
+    client: process.env.ACCOUNTS_CLIENT || 'accountsquezx',
+    secret: process.env.ACCOUNTS_SECRET || 'accountsquezxsecret',
+    port: process.env.ACCOUNTS_PORT || 3001,
   },
-  production: {
-    DOMAIN: process.env.DOMAIN || 'quezx.com',
-    OAUTH_SERVER: process.env.OAUTH_SERVER || 'https://api.quezx.com',
-    OAUTH_ENDPOINT: process.env.OAUTH_ENDPOINT || '/oauth/token',
-    ACCOUNTS_CLIENT: process.env.ACCOUNTS_CLIENT || 'accountsquezx',
-    ACCOUNTS_SECRET: process.env.ACCOUNTS_SECRET || 'accountsquezxsecret',
-    HIRE_CLIENT: process.env.HIRE_CLIENT || 'hirequezx',
-    HIRE_SECRET: process.env.HIRE_SECRET || 'hirequezxsecret',
-    HIRE_REDIRECT_URI: process.env.HIRE_REDIRECT_URI || 'https://hire.quezx.com/access/oauth',
-    PARTNER_CLIENT: process.env.PARTNER_CLIENT || 'partnerquezx',
-    PARTNER_SECRET: process.env.PARTNER_SECRET || 'partnerquezxsecret',
-    PARTNER_REDIRECT_URI: process.env.PARTNER_REDIRECT_URI || 'https://partner.quezx.com/access/oauth',
-    ASSET_DIR: process.env.ASSET_DIR || `${__dirname}/../assets`,
+  hire: {
+    client: process.env.HIRE_CLIENT || 'hirequezx',
+    secret: process.env.HIRE_SECRET || 'hirequezxsecret',
+    port: process.env.ACCOUNTS_PORT || 3002,
+  },
+  partner: {
+    client: process.env.PARTNER_CLIENT || 'partnerquezx',
   },
 };
 
+const config = {
+  development: Object.assign({}, def, {
+    domain: def.domain || 'quezx.dev',
+    prefix: def.prefix || 'http://',
+    asset_dir: def.asset_dir || `${__dirname}/../dist`,
+    livereload: true, // livereload in development
+  }),
+  production: Object.assign({}, def, {
+    domain: def.domain || 'quezx.com',
+    prefix: def.prefix || 'https://',
+    asset_dir: def.asset_dir || `${__dirname}/../assets`,
+  }),
+  staging: Object.assign({}, def, {
+    domain: def.domain || 'quezx.com',
+    prefix: def.prefix || 'https://staging-',
+    asset_dir: def.asset_dir || `${__dirname}/../assets`,
+  }),
+};
+
 const conf = config[process.env.NODE_ENV || 'development'];
+conf.oauth_server = `${conf.prefix}api.${conf.domain}`;
+conf.hire.redirect_uri = `${conf.prefix}hire.${conf.domain}/access/oauth`;
+conf.partner.redirect_uri = `${conf.prefix}partner.${conf.domain}/access/oauth`;
 
 conf.handleResponse = function handleResponse(res) {
   return function sendResponse(err, apires, body) {
