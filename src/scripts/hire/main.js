@@ -8,7 +8,8 @@ angular.module('qui.hire')
     'Page',
     '$state',
     '$rootScope',
-    function AppCtrl($window, $uibModal, Session, User, Applicants, Page, $state, $rootScope) {
+    'APP',
+    function AppCtrl($window, $uibModal, Session, User, Applicants, Page, $state, $rootScope, APP) {
       const vm = this;
 
       // config
@@ -27,6 +28,7 @@ angular.module('qui.hire')
           container: false,
           offScreen: false, // flag for show of sidebar for mobile view
           mobileHeader: false, // flag to show header Nav and Search in mobile view
+          updatePassword: `${APP.accountsServer}/update-password`,
         },
       };
 

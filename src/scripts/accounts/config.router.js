@@ -34,6 +34,10 @@ angular.module('qui.accounts')
           url: '/authorise',
           templateUrl: 'html/accounts.authorise.html',
         })
+        .state('app.update-password', {
+          url: '/update-password',
+          template: '<update-password></update-password>',
+        })
         .state('app.home', {
           url: '/home',
           templateUrl: 'html/accounts.home.html',

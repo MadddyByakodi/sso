@@ -13,9 +13,11 @@ angular.module('qui.accounts')
       };
 
       authoriseService.post = function post(data) {
+        // attach state to query params so it can be return on success.
+        const state = data.state ? '?state=' + data.state : '';
         const req = {
           method: 'POST',
-          url: `${APP.apiServer}/authorise`,
+          url: `${APP.apiServer}/authorise${state}`,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },

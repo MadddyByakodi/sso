@@ -44,5 +44,7 @@
             span.label.bg-info.pull-right new
             | Help
         li.hide.divider
+        li
+          a(ng-href='{{App.app.settings.updatePassword}}') Change Password
         li(ng-controller='LogoutController as logout')
           a(ng-click='logout.init()') Logout
