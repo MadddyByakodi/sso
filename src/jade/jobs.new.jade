@@ -34,7 +34,8 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
           label.col-xs-11.input-group
             | Location
             span.text-danger *
-            input.form-control(type='text' ng-model='Job.Regions.model' placeholder='Job Location' uib-typeahead='region.name for region in Job.Regions.get($viewValue)' typeahead-loading='Job.Regions.loadingRegions' typeahead-no-results='Job.Regions.noResults' typeahead-on-select='Job.Regions.select($item)' required)
+            input.form-control(type='text' ng-model='Job.Regions.model' placeholder='Job Location' uib-typeahead='region.name for region in Job.Regions.get($viewValue)' typeahead-loading='Job.Regions.loadingRegions' typeahead-no-results='Job.Regions.noResults' typeahead-on-select='Job.Regions.select($item)' required ng-change='Job.data.region_id = ""')
+            input(type='hidden' ng-model='Job.data.region_id' required)
             i.fa.fa-refresh.fa-spin(ng-show='Job.Regions.loadingRegions')
             div(ng-show='Job.Regions.noResults')
               i.fa.fa-remove
@@ -188,7 +189,7 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
             | Job Functional Area
             span.text-danger *
           .col-sm-12.no-padder
-            select.form-control.m-b(name='functional_area' ng-model='Job.data.func_id' ng-options='func.id*1 as func.name for func in  Job.Funcs | orderBy:"name"')
+            select.form-control.m-b(name='functional_area' ng-model='Job.data.func_id' ng-options='func.id*1 as func.name for func in  Job.Funcs | orderBy:"name"' id='func_id' required)
       .line.line-dashed.b-b.line-lg.pull-in
       .col-sm-6.no-padder
         label.w-full.input-group

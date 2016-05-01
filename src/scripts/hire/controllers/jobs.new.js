@@ -31,7 +31,6 @@ angular.module('qui.hire')
         preferred_genders: 'No Preference',
         direct_line_up: 0,
         whitelist: 0,
-        func_id: 0,
         JobSkills: [],
         JobsDegrees: [],
         JobsInstitutes: [],
