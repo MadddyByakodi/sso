@@ -6,12 +6,16 @@ angular.module('qui.accounts')
       $urlRouterProvider.otherwise('/home');
       $stateProvider
         .state('oauth', {
-          url: '/oauth',
+          url: '',
           template: '<div ui-view class="fade-in-right-big smooth"></div>',
         })
         .state('oauth.signin', {
           url: '/signin',
           templateUrl: 'html/signin.html',
+        })
+        .state('oauth.password-reset', {
+          url: '/password_reset',
+          template: '<password-reset></password-reset>',
         })
         .state('oauth.forgotpass', {
           url: '/forgotpass',
@@ -34,9 +38,9 @@ angular.module('qui.accounts')
           url: '/authorise',
           templateUrl: 'html/accounts.authorise.html',
         })
-        .state('app.update-password', {
-          url: '/update-password',
-          template: '<update-password></update-password>',
+        .state('app.password-change', {
+          url: '/password_change',
+          template: '<password-change></password-change>',
         })
         .state('app.home', {
           url: '/home',

@@ -28,7 +28,7 @@ angular.module('qui.hire')
           container: false,
           offScreen: false, // flag for show of sidebar for mobile view
           mobileHeader: false, // flag to show header Nav and Search in mobile view
-          updatePassword: `${APP.accountsServer}/update-password`,
+          changePassword: `${APP.accountsServer}/password_change`,
         },
       };
 
