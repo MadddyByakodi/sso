@@ -19,7 +19,7 @@ div(ng-controller='JobViewController as Job')
     .col.col-.clearfix.wrapper-xs
 
       //- Job top cover container
-      .m-t-xl.clearfix
+      .m-t-xl.clearfix.text-dark
         .pull-left.w-sm.bg-light.dker
           img.w-full(src='{{Job.data._root_.logo}}')
         .bg-white-only.clearfix: .wrapper-xs.clear
@@ -35,14 +35,17 @@ div(ng-controller='JobViewController as Job')
             .label.wrapper-xs.bg-success.dker(ng-if='!(Job.data.job_status === "Closed")')
               span.padder.h5 Open
 
-          .wrapper-xs.h4 {{Job.data.role}}
-          .pull-left.text-muted
-            .h4.wrapper-xs
+          .wrapper-xs: strong.h3(title='Job position') {{Job.data.role}}
+          .pull-left
+            .h4.wrapper-xs(title='Salary range')
                 i.fa.fa-lg.fa-inr.text-dark-lter
                 | &nbsp; {{Job.data.min_sal}}–{{Job.data.max_sal}} Lakhs
-            .h4.wrapper-xs
+            .h4.wrapper-xs(title='Job location')
               i.fa.fa-lg.fa-map-marker.text-danger-lt
               | &nbsp; {{Job.data.job_location}}
+            .h4.wrapper-xs(title='Functional area')
+              i.fa.fa-md.fa-briefcase.text-info-dker
+              | &nbsp;{{Job.data.functional_area}}
 
       .panel.bg-white-only.b-t.h5: .panel-body.wrapper-sm
         .hbox(ng-if='Job.data.min_exp && Job.data.max_exp')
@@ -84,10 +87,10 @@ div(ng-controller='JobViewController as Job')
         .h4.m-t-xs.m-b-xs(ng-if='Job.data.required_skills || Job.data.optional_skills') Skills
         .h5.clearfix(ng-if='Job.data.required_skills')
           div: strong.m-t-xs.text-muted Must have
-          .pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in Job.data.required_skills') &nbsp;{{skill}}&nbsp;
+          .wrapper-xs.pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in Job.data.required_skills') &nbsp;{{skill}}&nbsp;
         .h5.m-t-sm.clearfix(ng-if='Job.data.optional_skills')
           div: strong.text-muted Optional
-          .pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in Job.data.optional_skills') &nbsp;{{skill}}&nbsp;
+          .wrapper-xs.pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='skill in Job.data.optional_skills') &nbsp;{{skill}}&nbsp;
 
 
         .h4.m-t-sm.m-b-xs Working Days

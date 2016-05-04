@@ -53,10 +53,15 @@ angular.module('qui.hire')
       vm.loadApplicants(); // get applicants
 
       vm.loadJob = function loadJob() {
-        Jobs.getOne($stateParams.jobId, { fl: 'id,role' }).then(function getJob(response) {
-          vm.job = response;
-          Page.setTitle(`${vm.job.role} - ${$stateParams.bucket} Applicants`); // set page title
-        });
+        Jobs
+          .getOne(
+            $stateParams.jobId,
+            { fl: 'id,role,job_status,min_exp,max_exp,min_sal,max_sal,vacancy,job_location' }
+          )
+          .then((response) => {
+            vm.job = response;
+            Page.setTitle(`${vm.job.role} - ${$stateParams.bucket} Applicants`); // set page title
+          });
       };
 
       vm.loadJob(); // get job details
