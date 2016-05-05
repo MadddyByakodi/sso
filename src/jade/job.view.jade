@@ -27,13 +27,15 @@ div(ng-controller='JobViewController as Job')
 
           //- Job status label
           .pull-right
-            a.padder.text-info(ui-sref='app.jobs.edit({jobId: Job.data.id})' title='Edit JD' ng-if='Job.data.owner')
+            a.padder.text-info-dker(ui-sref='app.jobs.edit({jobId: Job.data.id})' title='Edit JD' ng-if='Job.data.owner')
               i.fa.fa-edit
               | &nbsp;Edit
-            .label.wrapper-xs.bg-danger.lt(ng-if='Job.data.job_status === "Closed"')
-              span.padder.h5 Closed
-            .label.wrapper-xs.bg-success.dker(ng-if='!(Job.data.job_status === "Closed")')
-              span.padder.h5 Open
+
+            span.wrapper-sm(title='Job status')
+              span.b-a.rounded.text-danger.b-danger.lt(ng-if='(Job.data.job_status === "Closed")')
+                span.padder.h5 Closed
+              span.b-a.rounded.text-success-dker.b-success.dk(ng-if='!(Job.data.job_status === "Closed")')
+                span.padder.h5 Open
 
           .wrapper-xs: strong.h3(title='Job position') {{Job.data.role}}
           .pull-left

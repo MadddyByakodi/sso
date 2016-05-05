@@ -1,4 +1,4 @@
-.hobx(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.loadApplicants()')
+.hbox(ng-controller='JobsManageController as Applicant' before-bottom='Applicant.loadApplicants()')
   .wrapper-xs.bg-light.b-b(style='position: fixed;width: 100%;background: #fff; z-index: 2;')
     ul.nav.nav-pills.nav-sm
       li: label.i-checks.m-t-xs.m-b-none.m-l-lg
@@ -15,36 +15,36 @@
 
       li: a.h5.b-a.b-info.b-2x.text-info.bg-white-only.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
 
-  .wrapper-xs
-    .m-t-xl.m-b-xs.b-a.wrapper-sm(ng-if='Applicant.job')
-      .hbox.m-b-sm
-        .col
-          span.h4.text-dark(title='Job position') {{Applicant.job.role}}
+  .wrapper-xs.m-l-sm
+    .m-t-xl.m-b-xs.wrapper-sm(ng-if='Applicant.job')
+      span.wrapper-sm
+        span.h4.text-dark(title='Job position') {{Applicant.job.role}}
+        span.h4(title='Job location') &nbsp; – {{Applicant.job.job_location}}
 
-          span.h4(title='Job location') &nbsp; – {{Applicant.job.job_location}}
-        .col.v-middle
-          span.pull-right(title='Job status')
-            .label.wrapper-xs.bg-danger.lt(ng-if='Applicant.job.job_status === "Closed"')
-              span.padder.h5 Closed
-            .label.wrapper-xs.bg-success.dk(ng-if='!(Applicant.job.job_status === "Closed")')
-              span.padder.h5 Open
+      span.padder: span.b-1x.b-r.b-l.b-ligth-dker
 
-      .hbox.h4
-        .col(title='Salary range')
-          i.fa.fa-lg.fa-inr.text-dark-lter
-          span &nbsp; {{Applicant.job.min_sal}}–{{Applicant.job.max_sal}} Lakhs
-        .col(title='Minumux/Maximum experience')
-          i.fa.fa-lg.fa-line-chart.text-danger-lt
-          span &nbsp; {{Applicant.job.min_exp}}–{{Applicant.job.max_exp}} Years
-        .col(title='Total vacancy')
-          i.fa.fa-lg.fa-users.text-dark-lter
-          span &nbsp; Vacancy {{Applicant.job.vacancy}}
+      span.wrapper-sm(title='Salary range')
+        i.fa.fa-lg.fa-inr.text-light-dker
+        | &nbsp; {{Applicant.job.min_sal}}–{{Applicant.job.max_sal}} Lakhs
+      span.wrapper-sm(title='Minumux/Maximum experience')
+        i.fa.fa-md.fa-line-chart.text-light-dker
+        span &nbsp; {{Applicant.job.min_exp}}–{{Applicant.job.max_exp}} Years
+
+      span.wrapper-sm(title='Total vacancy')
+        i.fa.fa-md.fa-users.text-light-dker
+        span &nbsp; Vacancy {{Applicant.job.vacancy}}
+
+      span.wrapper-sm(title='Job status')
+        span.b-a.rounded.text-danger.b-danger.lt(ng-if='(Applicant.job.job_status === "Closed")')
+          span.padder.h5 Closed
+        span.b-a.rounded.text-success-dker.b-success.dk(ng-if='!(Applicant.job.job_status === "Closed")')
+          span.padder.h5 Open
 
     .m-b-xs.hbox.m-t-xl(ng-if='Applicant.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!Applicant.ui.loading') No Applicants
 
-    .m-b-md.hbox(ng-repeat='applicant in Applicant.applicants')
-      .col.bg-white
+    .m-b-md.wrapper-xs.hbox(ng-repeat='applicant in Applicant.applicants')
+      .col.bg-white.b-a
         .col-xs-12.col-md-10.no-padder
           .tl-content.m-none.padder.w-full.w-auto-xs
             .m-b-sm
