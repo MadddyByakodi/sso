@@ -1,7 +1,12 @@
 .wrapper-xs.bg-light.b-b
-  a.btn.btn-sm.btn-primary.btn-addon.pull-right.m-t-n-xs(uib-tooltip='Create new job Position' ui-sref='app.jobs.new' tooltip-placement='left' target='_blank')
-    i.fa.fa-plus
-    | Add
+  a.btn.btn-md.btn-primary.btn-addon.pull-right.m-t-n-xs(
+    uib-tooltip='Create new job Position'
+    ui-sref='app.jobs.new'
+    tooltip-placement='left'
+    target='_blank'
+  )
+    i.fa.fa-upload
+    span.font-thin Upload JD
   .m-l-md.font-thin.h3 Positions
 .col-lg-10.col-lg-offset-1.wrapper-md
   table.table.m-b-none(ng-controller='JobsController as Job' ng-init="color={'High Priority':'success','Open': 'info', 'Hold': 'warning', 'Closed': 'danger'}" before-bottom='Job.loadJobs()')
