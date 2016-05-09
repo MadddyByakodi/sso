@@ -6,14 +6,12 @@ angular.module('qui.components')
         scope: {
           scrollToBottom: '=',
         },
-        link: function link(scope, element) {
-          scope.$watchCollection('scrollToBottom', function updateScroll(newValue) {
-            if (newValue) {
-              $timeout(function scroll() {
-                element[0].scrollTop = element[0].scrollHeight;
-              }, 0);
-            }
-          });
+        link: function link(scope, elm) {
+          const element = elm;
+          scope.$watchCollection('scrollToBottom', changed => (changed ?
+            $timeout(() => (element[0].scrollTop = element[0].scrollHeight), 0) :
+            null
+          ));
         },
       };
     },

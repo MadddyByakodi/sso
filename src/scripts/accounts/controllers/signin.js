@@ -18,17 +18,17 @@ angular.module('qui.accounts')
         // Try to login
         Auth.login({ username: vm.user.username, password: vm.user.password })
           .then(
-            function handleLogin() {
+            () => {
               $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-              Auth.setSessionData().then(function openApp() {
+              Auth.setSessionData().then(() => {
                 if ($location.search().continue) return $location.url($location.search().continue);
-                $location.path($state.href('app.home'));
+                return $location.path($state.href('app.home'));
               });
             },
 
-            function handleError(error) {
+            err => {
               $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-              vm.authError = error.error_description;
+              vm.authError = err.error_description;
             }
           );
       };

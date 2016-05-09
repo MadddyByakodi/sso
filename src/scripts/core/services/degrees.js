@@ -9,16 +9,8 @@ angular.module('qui.search', [])
       degreeService.get = function getDegrees(params) {
         const url = `${APP.apiServer}/search/degrees`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successDegrees(response) {
-              return response.data;
-            },
-
-            function errorDegrees(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       return degreeService;

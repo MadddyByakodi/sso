@@ -1,4 +1,4 @@
-angular.module('qui.search')
+  angular.module('qui.search')
   .factory('Employers', [
     '$http',
     '$q',
@@ -9,16 +9,8 @@ angular.module('qui.search')
       employerService.get = function getEmployers(params) {
         const url = `${APP.apiServer}/search/employers`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successEmployers(response) {
-              return response.data;
-            },
-
-            function errorEmployers(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       return employerService;

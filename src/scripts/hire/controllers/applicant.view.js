@@ -20,7 +20,7 @@ angular.module('qui.hire')
         vm.ui = { loading: true };
         Applicants
           .getOne($stateParams.applicantId)
-          .then(function gotApplicant(result) {
+          .then(result => {
             vm.data = result;
             Page.setTitle(vm.data.name);
 

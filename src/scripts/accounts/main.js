@@ -27,7 +27,7 @@ angular.module('qui.accounts')
 
       // keeps track of state change and hides sidebar view for mobile
       /* eslint angular/on-watch: 0 */
-      $rootScope.$on('$stateChangeStart', function handleStateChange() {
+      $rootScope.$on('$stateChangeStart', () => {
         vm.app.settings.offScreen = false;
         vm.app.settings.mobileHeader = false;
       });

@@ -7,10 +7,11 @@ angular.module('qui.hire')
     'moment',
     function JobsManageCtrl(Jobs, Page, $stateParams, $filter, moment) {
       const vm = this;
+      const params = $stateParams;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
 
       // Set default bucket to ALL
-      if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
+      if (!~vm.buckets.indexOf(params.bucket)) params.bucket = 'All';
       vm.applicants = []; // collection of applicants
       vm.job = {}; // Job applied by applicant initialized
       vm.ui = { lazyLoad: true, loading: false }; // ui states
@@ -26,28 +27,34 @@ angular.module('qui.hire')
         if ($stateParams.bucket === 'Interview') {
           // Customization for Interview tab
           vm.params.interview_time = [
-            moment().startOf('day').toISOString(),
-            moment().startOf('day').add(1, 'months').toISOString(),
+            moment()
+            .startOf('day')
+            .toISOString(),
+
+            moment()
+              .startOf('day')
+              .add(1, 'months')
+              .toISOString(),
           ].join(',');
           vm.params.fl += ',interview_time,interview_type';
         } else {
           vm.params.state_id = $stateParams.bucket.replace(' ', '_').toUpperCase();
         }
 
-        Jobs.getApplicants($stateParams.jobId, vm.params).then(function applicantsList(result) {
-          angular.forEach(result, function iterateApplicants(applicant) {
-            vm.applicants.push(applicant);
+        Jobs
+          .getApplicants($stateParams.jobId, vm.params)
+          .then(result => {
+            angular.forEach(result, applicant => vm.applicants.push(applicant));
+
+            // data has been loaded
+            vm.ui.loading = false;
+
+            // check for returned results count and set lazy loadLoad false if less
+            vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows);
+
+            // increment offset for next loading of results
+            vm.params.start = vm.params.start + vm.params.rows;
           });
-
-          // data has been loaded
-          vm.ui.loading = false;
-
-          // check for returned results count and set lazy loadLoad false if less
-          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
-
-          // increment offset for next loading of results
-          vm.params.start = vm.params.start + vm.params.rows;
-        });
       };
 
       vm.loadApplicants(); // get applicants
@@ -69,16 +76,12 @@ angular.module('qui.hire')
       // returns array containing resultkey of search result
       vm.getApplicants = function getApplicant(criteria = {}, returnkey = 'id') {
         return $filter('filter')(vm.applicants, criteria)
-          .map(function checkedApplicant(applicant) {
-            return applicant[returnkey];
-          });
+          .map(applicant => applicant[returnkey]);
       };
 
       // sets value
       vm.setChecked = function setChecked(state) {
-        angular.forEach(vm.applicants, function checked(value, key) {
-          vm.applicants[key].checked = state;
-        });
+        angular.forEach(vm.applicants, (value, key) => (vm.applicants[key].checked = state));
       };
     },
   ]);

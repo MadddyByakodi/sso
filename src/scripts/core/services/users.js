@@ -8,7 +8,7 @@ angular.module('qui.search')
 
       userService.getAll = function getUsers(params) {
         return $http
-          .get(`${APP.apiServer}/search/users`, { params: params });
+          .get(`${APP.apiServer}/search/users`, { params });
       };
 
       return userService;

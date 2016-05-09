@@ -9,7 +9,7 @@ angular.module('qui.hire')
         vm.ui = { loading: true, scrollToBottom: false };
         JobComments
           .get($stateParams.jobId)
-          .then(function gotJobComment(result) {
+          .then(result => {
             vm.data = result;
 
             // data has been loaded
@@ -21,8 +21,8 @@ angular.module('qui.hire')
         const comment = vm.post.comment;
         vm.ui = { loading: true, scrollToBottom: false };
         JobComments
-          .set($stateParams.jobId, { comment: comment })
-          .then(function insertedComment() {
+          .set($stateParams.jobId, { comment })
+          .then(() => {
             vm.post.comment = '';
             vm.data.push({
               user: { name: User.userinfo.name },

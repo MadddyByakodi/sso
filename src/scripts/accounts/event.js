@@ -40,8 +40,9 @@ angular.module('qui.accounts')
               () => authService.loginConfirmed(
                 'success',
                 config => {
-                  config.headers.Authorization = 'Bearer ' + Session.getAccessToken();
-                  return config;
+                  const conf = config;
+                  conf.headers.Authorization = `Bearer ${Session.getAccessToken()}`;
+                  return conf;
                 }
               ),
 

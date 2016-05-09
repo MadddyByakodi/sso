@@ -20,16 +20,18 @@ angular.module('qui.hire')
 
       vm.calendarView = 'month';
       vm.calendarDay = moment().toDate();
-      $scope.$watch(function calendarDay() {
-        // watch for change of start of month
-        return moment(vm.calendarDay).startOf('month').toISOString();
-      }, function calendarDayWatch() {
-        // Reset controller variables to default
-        vm.applicants = [];
-        vm.ui = { lazyLoad: true, loading: false };
-        vm.params.start = 0; // Reset result offset
-        vm.loadApplicants();
-      }, true);
+      $scope.$watch(
+        () => moment(vm.calendarDay).startOf('month').toISOString(),
+        () => {
+          // Reset controller variables to default
+          vm.applicants = [];
+          vm.ui = { lazyLoad: true, loading: false };
+          vm.params.start = 0; // Reset result offset
+          vm.loadApplicants();
+        },
+
+        true
+      );
 
       vm.isCellOpen = true;
       vm.loadApplicants = function loadApplicants() {
@@ -41,45 +43,49 @@ angular.module('qui.hire')
           moment(vm.calendarDay).startOf('month').toISOString(),
           moment(vm.calendarDay).endOf('month').toISOString(),
         ].join(',');
-        Applicants.get(vm.params).then(function applicants(result) {
-          angular.forEach(result, function iterateApplicants(applicant) {
-            vm.applicants.push({
-              title: `
-                <a href="${
-                  $state.href('app.jobs.manage', { jobId: applicant._root_.id })
-                }" target="_blank">
-                  <span class="text-${vm.colors[applicant.interview_type]}-dker">${
-                    applicant._root_.role
-                  }</span>
-                </a> –
-                <a href="${
-                  $state.href('app.applicant.view', { applicantId: applicant.id })
-                }" target="_blank">
-                  <span class="text-${
+
+        Applicants
+          .get(vm.params)
+          .then(result => {
+            const root = '_root_';
+            angular.forEach(result, applicant => {
+              vm.applicants.push({
+                title: `
+                  <a href="${
+                    $state.href('app.jobs.manage', { jobId: applicant[root].id })
+                  }" target="_blank">
+                    <span class="text-${vm.colors[applicant.interview_type]}-dker">${
+                      applicant[root].role
+                    }</span>
+                  </a> –
+                  <a href="${
+                    $state.href('app.applicant.view', { applicantId: applicant.id })
+                  }" target="_blank">
+                    <span class="text-${
+                      vm.colors[applicant.interview_type]
+                    }-dker">${applicant.name}</span>
+                  </a> &nbsp;
+                  <span class="h6 b-a b-${
                     vm.colors[applicant.interview_type]
-                  }-dker">${applicant.name}</span>
-                </a> &nbsp;
-                <span class="h6 b-a b-${
-                  vm.colors[applicant.interview_type]
-                }">&nbsp; ${applicant.state_name} &nbsp;
-                </span> &nbsp;
-              `,
-              type: vm.colors[applicant.interview_type],
-              startsAt: moment(applicant.interview_time).toDate(),
-              endsAt: moment(applicant.interview_time).add(1, 'hours').toDate(),
+                  }">&nbsp; ${applicant.state_name} &nbsp;
+                  </span> &nbsp;
+                `,
+                type: vm.colors[applicant.interview_type],
+                startsAt: moment(applicant.interview_time).toDate(),
+                endsAt: moment(applicant.interview_time).add(1, 'hours').toDate(),
+              });
             });
+
+            // data has been loaded
+            vm.ui.loading = false;
+
+            // check for returned results count and set lazy loadLoad false if less
+            vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows);
+
+            // increment offset for next loading of results
+            vm.params.start = vm.params.start + vm.params.rows;
+            vm.loadApplicants();
           });
-
-          // data has been loaded
-          vm.ui.loading = false;
-
-          // check for returned results count and set lazy loadLoad false if less
-          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
-
-          // increment offset for next loading of results
-          vm.params.start = vm.params.start + vm.params.rows;
-          vm.loadApplicants();
-        });
       };
     },
   ]);

@@ -20,7 +20,7 @@ angular.module('qui.accounts')
                 vm.success = `Password reset mail sent to ${vm.data.email_id}`;
                 vm.data.email_id = '';
               })
-              .catch(res => vm.error = res.data.error_description);
+              .catch(res => (vm.error = res.data.error_description));
           },
         ],
       };

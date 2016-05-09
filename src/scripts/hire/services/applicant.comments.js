@@ -9,31 +9,15 @@ angular.module('qui.hire')
       applicantCommentService.get = function getApplicantComments(applicantId, params) {
         const url = `${APP.apiServer}/user/job/applicants/${applicantId}/comments`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successGetApplicantComments(response) {
-              return response.data;
-            },
-
-            function errorGetApplicantComments(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       applicantCommentService.set = function setApplicantComments(applicantId, data) {
         const url = `${APP.apiServer}/user/job/applicants/${applicantId}/comments`;
         return $http
           .post(url, data)
-          .then(
-            function successSetApplicantComments(response) {
-              return response.data;
-            },
-
-            function errorSetApplicantComments(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       return applicantCommentService;

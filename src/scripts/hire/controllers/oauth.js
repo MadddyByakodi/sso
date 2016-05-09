@@ -19,8 +19,8 @@ angular.module('qui.hire')
       if (query.code) {
         Auth.login({ code: query.code }).then(() => {
           Auth.setSessionData().then(() => {
-            $window.location.href = $state
-            .href(
+            const location = $window.location;
+            location.href = $state.href(
               'app.jobs.applicants', { bucket: 'All' }, { absolute: true }
             );
           });

@@ -9,14 +9,14 @@ angular.module('qui.hire')
       Page.setTitle('Dashboard');
       vm.getSummary = function getSummary() {
         Summary.get({ state_id: '1,5,8,9,17' })
-          .then(function gotSummary(response) {
+          .then(res => {
             vm.summary = {
-              cv: response[1] || 0,
-              interview: response[9] || 0,
+              cv: res[1] || 0,
+              interview: res[9] || 0,
               await_interview: [
-                response[5] || 0,
-                response[8] || 0,
-                response[17] || 0,
+                res[5] || 0,
+                res[8] || 0,
+                res[17] || 0,
               ].reduce((a, b) => a + b),
             };
 

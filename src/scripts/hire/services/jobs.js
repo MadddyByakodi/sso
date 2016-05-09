@@ -9,52 +9,28 @@ angular.module('qui.hire')
       jobsService.get = function getJobs(params) {
         const url = `${APP.apiServer}/user/jobs`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successJobs(response) {
-              return response.data;
-            },
-
-            function errorJobs(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       jobsService.getOne = function getJobs(jobId, params) {
         const url = `${APP.apiServer}/user/jobs/${jobId}`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successJobs(response) {
-              return response.data;
-            },
-
-            function errorJobs(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       jobsService.getByIdRaw = function getByIdRaw(jobId, params) {
         const url = `${APP.apiServer}/user/jobs/${jobId}/raw`;
         return $http
-          .get(url, { params: params });
+          .get(url, { params });
       };
 
       jobsService.getApplicants = function getApplicants(jobId, params) {
         const url = `${APP.apiServer}/user/jobs/${jobId}/applicants`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successJobs(response) {
-              return response.data;
-            },
-
-            function errorJobs(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       jobsService.create = function create(data) {

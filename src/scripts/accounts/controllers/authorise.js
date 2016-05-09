@@ -11,16 +11,15 @@ angular.module('qui.accounts')
           vm.app = res.data;
           vm.done(true);
         })
-        .catch(res => vm.error = res.data.error);
+        .catch(res => (vm.error = res.data.error));
 
       vm.done = function done(allow) {
         const data = $location.search();
+        const location = $window.location;
         data.allow = allow ? 'true' : 'false';
         OAuthorise
           .post(data)
-          .then(res => {
-            $window.location.href = res.data;
-          });
+          .then(res => (location.href = res.data));
       };
     },
   ]);

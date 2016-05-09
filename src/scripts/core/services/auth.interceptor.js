@@ -8,11 +8,12 @@ angular
     function AuthIterceptor($rootScope, $q, AUTH_EVENTS, Session) {
       return {
         request: function request(config) {
+          const conf = config;
           if (Session.isAuthenticated()) {
-            config.headers.Authorization = 'Bearer ' + Session.getAccessToken();
+            conf.headers.Authorization = `Bearer ${Session.getAccessToken()}`;
           }
 
-          return config;
+          return conf;
         },
       };
     },

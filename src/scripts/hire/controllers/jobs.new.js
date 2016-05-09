@@ -210,7 +210,7 @@ angular.module('qui.hire')
         create: function createSkill(skill, required) {
           return Skills
             .create({ name: skill })
-            .then(function gotSkill(response) {
+            .then(response => {
               const $item = {
                 id: response.id,
                 name: response.name,
@@ -240,7 +240,8 @@ angular.module('qui.hire')
         if ($state.params.jobId) {
           Jobs
           .getByIdRaw($state.params.jobId)
-          .then(res => {
+          .then(response => {
+            const res = response;
             const industries = res.data.JobsIndustries;
             res.data.JobsIndustries = []; // clean industries as array
 

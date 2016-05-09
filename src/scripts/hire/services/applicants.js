@@ -9,31 +9,15 @@ angular.module('qui.hire')
       applicantsService.get = function get(params) {
         const url = `${APP.apiServer}/user/job/applicants`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successJobs(response) {
-              return response.data;
-            },
-
-            function errorJobs(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       applicantsService.getOne = function getOne(applicantId, params) {
         const url = `${APP.apiServer}/user/job/applicants/${applicantId}`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successJobs(response) {
-              return response.data;
-            },
-
-            function errorJobs(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       return applicantsService;

@@ -4,7 +4,7 @@ angular.module('qui.components', [])
     '$document',
     function beforeBottom($window, $document) {
       return function link(scope, elm, attr) {
-        angular.element($window).bind('scroll', function scroll() {
+        angular.element($window).bind('scroll', () => {
           const windowHeight = 'innerHeight' in $window ?
             $window.innerHeight : $document.documentElement.offsetHeight;
 

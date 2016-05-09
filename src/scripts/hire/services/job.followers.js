@@ -9,7 +9,7 @@ angular.module('qui.hire')
       jobFollowersService.getAll = function getAll(jobId, params) {
         const url = `${APP.apiServer}/user/jobs/${jobId}/followers`;
         return $http
-          .get(url, { params: params });
+          .get(url, { params });
       };
 
       jobFollowersService.add = function add(jobId, data) {

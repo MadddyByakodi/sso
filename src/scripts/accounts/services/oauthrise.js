@@ -9,12 +9,12 @@ angular.module('qui.accounts')
       authoriseService.get = function get(params) {
         const url = `${APP.apiServer}/authorise`;
         return $http
-          .get(url, { params: params });
+          .get(url, { params });
       };
 
       authoriseService.post = function post(data) {
         // attach state to query params so it can be return on success.
-        const state = data.state ? '?state=' + data.state : '';
+        const state = data.state ? `?state=${data.state}` : '';
         const req = {
           method: 'POST',
           url: `${APP.apiServer}/authorise${state}`,

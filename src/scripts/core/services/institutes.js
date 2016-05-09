@@ -9,16 +9,8 @@ angular.module('qui.search')
       instituteService.get = function getInstitutes(params) {
         const url = `${APP.apiServer}/search/institutes`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successInstitutes(response) {
-              return response.data;
-            },
-
-            function errorInstitutes(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       return instituteService;

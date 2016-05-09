@@ -10,15 +10,7 @@ angular.module('qui.hire')
         const url = `${APP.apiServer}/user/job/applicants/${applicantId}/state`;
         return $http
           .put(url, data)
-          .then(
-            function successChangeState(response) {
-              return response.data;
-            },
-
-            function errorChangeState(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       return changeStateService;

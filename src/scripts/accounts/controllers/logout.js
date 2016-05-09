@@ -11,12 +11,12 @@ angular.module('qui.accounts')
         // Try to logout
         Auth.logout()
           .then(
-            function handleLogin() {
+            () => {
               $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
               return $state.go('oauth.signin');
             },
 
-            function handleError() {
+            () => {
               $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
               return $state.go('oauth.signin');
             }

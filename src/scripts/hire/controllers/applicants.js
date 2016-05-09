@@ -6,10 +6,11 @@ angular.module('qui.hire')
     'moment',
     function ApplicantsCtrl(Applicants, Page, $stateParams, moment) {
       const vm = this;
+      const params = $stateParams;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
 
       // Set default bucket to ALL
-      if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
+      if (!~vm.buckets.indexOf(params.bucket)) params.bucket = 'All';
 
       Page.setTitle(`${$stateParams.bucket} Applicants`);
       vm.applicants = []; // collection of applicants
@@ -19,26 +20,30 @@ angular.module('qui.hire')
         if (!vm.ui.lazyLoad) return; // if no more applicants to get
         vm.ui = { lazyLoad: false, loading: true };
 
-        if ($stateParams.bucket === 'Interview') {
+        if (params.bucket === 'Interview') {
           vm.params.interview_time = [
-            moment().startOf('day').toISOString(),
-            moment().startOf('day').add(1, 'months').toISOString(),
+            moment()
+              .startOf('day')
+              .toISOString(),
+
+            moment()
+              .startOf('day')
+              .add(1, 'months')
+              .toISOString(),
           ].join(',');
           vm.params.fl += ',interview_time,interview_type';
         } else {
           vm.params.state_id = $stateParams.bucket.replace(' ', '_').toUpperCase();
         }
 
-        Applicants.get(vm.params).then(function jobList(result) {
-          angular.forEach(result, function iterateJobs(applicant) {
-            vm.applicants.push(applicant);
-          });
+        Applicants.get(vm.params).then(result => {
+          angular.forEach(result, applicant => vm.applicants.push(applicant));
 
           // data has been loaded
           vm.ui.loading = false;
 
           // check for returned results count and set lazy loadLoad false if less
-          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows) ? true : false;
+          vm.ui.lazyLoad = angular.equals(result.length, vm.params.rows);
 
           // increment offset for next loading of results
           vm.params.start = vm.params.start + vm.params.rows;

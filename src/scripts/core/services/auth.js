@@ -69,11 +69,11 @@ angular.module('qui.core')
       authService.setSessionData = function gInfo() {
         return $q.all([
           $http
-            .get(APP.apiServer + '/user')
+            .get(`${APP.apiServer}/user`)
             .then(res => Session.create('userinfo', res.data)),
 
           $http
-            .get(APP.apiServer + '/user/states')
+            .get(`${APP.apiServer}/user/states`)
             .then(res => Session.create('states', res.data)),
         ]);
       };

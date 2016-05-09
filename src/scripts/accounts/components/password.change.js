@@ -21,7 +21,7 @@ angular.module('qui.accounts')
                 vm.success = 'Password update was successful.';
                 vm.data.old_password = vm.data.password = vm.confirm_password = '';
               })
-              .catch(res => vm.error = res.data.error_description);
+              .catch(res => (vm.error = res.data.error_description));
           },
         ],
       };

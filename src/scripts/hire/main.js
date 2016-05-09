@@ -34,7 +34,7 @@ angular.module('qui.hire')
 
       // keeps track of state change and hides sidebar view for mobile
       /* eslint angular/on-watch: 0 */
-      $rootScope.$on('$stateChangeStart', function handleStateChange() {
+      $rootScope.$on('$stateChangeStart', () => {
         vm.app.settings.offScreen = false;
         vm.app.settings.mobileHeader = false;
       });
@@ -51,12 +51,7 @@ angular.module('qui.hire')
 
         get: function searchApplicants(searchText) {
           return Applicants
-            .get({ start: 0, rows: 15, fl: 'id,name', q: searchText })
-            .then(function gotApplicants(response) {
-              return response.map(function iterate(value) {
-                return value;
-              });
-            });
+            .get({ start: 0, rows: 15, fl: 'id,name', q: searchText });
         },
 
         noResults: false,
@@ -90,7 +85,7 @@ angular.module('qui.hire')
 
       vm.downloadApplicant = function downloadApplicant(ids) {
         // ApplicantIds is array contatining applicant id to download cvs
-        const modalInstance = $uibModal.open({
+        $uibModal.open({
           templateUrl: 'html/modal.download.cv.html',
           controller: 'DownloadCVController',
           controllerAs: 'DownloadCV',
@@ -100,10 +95,6 @@ angular.module('qui.hire')
               return ids;
             },
           },
-        });
-
-        modalInstance.result.then(function success() {
-          // console.log(type);
         });
       };
 
@@ -115,16 +106,14 @@ angular.module('qui.hire')
           controllerAs: 'ChangeState',
           bindToController: 'true',
           size: 'md',
-          resolve: {
-            applicant: applicant,
-            state_id: stateId,
-          },
+          resolve: { applicant, state_id: stateId },
         });
 
-        modalInstance.result.then(function success(data) {
+        const resume = applicant;
+        modalInstance.result.then(data => {
           $rootScope.$broadcast('ApplicantStateChangeSuccess', data);
-          applicant.state_id = data.state_id;
-          applicant.state_name = vm.states[data.state_id].name;
+          resume.state_id = data.state_id;
+          resume.state_name = vm.states[data.state_id].name;
         });
       };
     },

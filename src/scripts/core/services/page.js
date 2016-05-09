@@ -8,7 +8,7 @@ angular.module('qui.core')
         },
 
         setTitle: function setTitle(newTitle) {
-          title = newTitle + ' | QuezX';
+          title = `${newTitle} | QuezX`;
         },
       };
     },

@@ -3,84 +3,76 @@ const gulp = require('gulp');
 const del = require('del');
 const runSequence = require('run-sequence');
 const plugin = require('gulp-load-plugins')();
+const locals = require('./apps/config');
 const scriptsFolders = ['core', 'accounts', 'hire', 'partner'];
 
-gulp.task('develop', function develop() {
-  plugin.nodemon({
-    script: 'app.js',
-    ext: 'js',
+gulp.task('develop', () => plugin.nodemon({
+  script: 'app.js',
+  ext: 'js',
 
-    // tasks: plugin.livereload.changed,
-    ignore: ['node_modules/**', 'bower_components/**', 'src/**', 'dist/**'],
-    nodeArgs: [],
-    env: { NODE_ENV: 'development' },
-  });
-});
+  // tasks: plugin.livereload.changed,
+  ignore: ['node_modules/**', 'bower_components/**', 'src/**', 'dist/**'],
+  nodeArgs: [],
+  env: { NODE_ENV: 'development' },
+}));
 
 // Jade Templates
-gulp.task('html', function html() {
-  return gulp.src('src/jade/**/*.jade')
-    .pipe(plugin.changed('dist/html', { extension: '.html' }))
-    .pipe(
-      plugin.jade({
-        pretty: true,
-        locals: require('./apps/config'),
-      })
-      .on('error', plugin.notify.onError({
-        message: 'Jade Error: <%= error.message %>',
-      }))
-    )
-    .pipe(gulp.dest('dist/html'))
-    .pipe(plugin.notify({
-      onLast: true,
-      title: 'Jade Compilation',
-      message: 'all jade files compiled',
-    }));
-});
+gulp.task('html', () => gulp
+  .src('src/jade/**/*.jade')
+  .pipe(plugin.changed('dist/html', { extension: '.html' }))
+  .pipe(
+    plugin.jade({ pretty: true, locals })
+    .on('error', plugin.notify.onError({
+      message: 'Jade Error: <%= error.message %>',
+    }))
+  )
+  .pipe(gulp.dest('dist/html'))
+  .pipe(plugin.notify({
+    onLast: true,
+    title: 'Jade Compilation',
+    message: 'all jade files compiled',
+  })));
 
 // Fonts
-gulp.task('fonts', function images() {
-  return gulp.src('bower_components/bootstrap-sass/assets/fonts/**')
-    .pipe(gulp.dest('dist/fonts'))
-    .pipe(plugin.notify({
-      onLast: true,
-      title: 'Font copied',
-      message: 'Font copy done!',
-    }));
-});
+gulp.task('fonts', () => gulp
+  .src('bower_components/bootstrap-sass/assets/fonts/**')
+  .pipe(gulp.dest('dist/fonts'))
+  .pipe(plugin.notify({
+    onLast: true,
+    title: 'Font copied',
+    message: 'Font copy done!',
+  })));
 
 // Images
-gulp.task('images', function images() {
-  return gulp.src('src/images/**/*')
-    .pipe(plugin.changed('dist/images', { extension: '.svg' }))
-    .pipe(plugin.cache(plugin.imagemin(
-      { optimizationLevel: 3, progressive: true, interlaced: true }
-    )))
-    .pipe(gulp.dest('dist/images'))
-    .pipe(plugin.notify({
-      onLast: true,
-      title: 'Image Minification',
-      message: 'Image minification done!',
-    }));
-});
+gulp.task('images', () => gulp
+  .src('src/images/**/*')
+  .pipe(plugin.changed('dist/images', { extension: '.svg' }))
+  .pipe(plugin.cache(plugin.imagemin(
+    { optimizationLevel: 3, progressive: true, interlaced: true }
+  )))
+  .pipe(gulp.dest('dist/images'))
+  .pipe(plugin.notify({
+    onLast: true,
+    title: 'Image Minification',
+    message: 'Image minification done!',
+  })));
 
 // Styles
-gulp.task('styles', function styles() {
-  return gulp.src('src/styles/main.scss')
-    .pipe(plugin.sourcemaps.init())
-    .pipe(plugin.sass().on('error', plugin.sass.logError))
-    .pipe(plugin.autoprefixer('last 2 version'))
-    .pipe(plugin.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/styles'))
-    .pipe(plugin.rename({ suffix: '.min' }))
-    .pipe(plugin.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist/styles'))
-    .pipe(plugin.notify({
-      onLast: true,
-      title: 'SASS Compilation',
-      message: 'style build complete',
-    }));
-});
+gulp.task('styles', () => gulp
+  .src('src/styles/main.scss')
+  .pipe(plugin.sourcemaps.init())
+  .pipe(plugin.sass().on('error', plugin.sass.logError))
+  .pipe(plugin.autoprefixer('last 2 version'))
+  .pipe(plugin.sourcemaps.write('.'))
+  .pipe(gulp.dest('dist/styles'))
+  .pipe(plugin.rename({ suffix: '.min' }))
+  .pipe(plugin.sourcemaps.write('.'))
+  .pipe(gulp.dest('dist/styles'))
+  .pipe(plugin.notify({
+    onLast: true,
+    title: 'SASS Compilation',
+    message: 'style build complete',
+  })));
 
 // Script Tasks
 (function scripts() {
@@ -112,37 +104,34 @@ gulp.task('styles', function styles() {
   });
 
   gulp.task('scripts', scriptTasks);
-})();
+}());
 
 // lint Scripts
-gulp.task('lint', function lint() {
-  return gulp.src(['app/**/*.js', '*.js', 'src/scripts/**/*.js'])
-    .pipe(plugin.eslint())
-    .pipe(plugin.eslint.format())
-    .pipe(plugin.if(
-      ~process.argv.indexOf('--fail'),
-      plugin.eslint.failAfterError()
-    ))
-    .pipe(plugin.jscs())
-    .pipe(plugin.jscs.reporter())
-    .pipe(plugin.if(
-      ~process.argv.indexOf('--fail'),
-      plugin.jscs.reporter('fail')
-    ))
-    .pipe(plugin.notify({
-      onLast: true,
-      title: 'Lint Notification',
-      message: 'code linting for error completed',
-    }));
-});
+gulp.task('lint', () => gulp
+  .src(['app/**/*.js', '*.js', 'src/scripts/**/*.js'])
+  .pipe(plugin.eslint())
+  .pipe(plugin.eslint.format())
+  .pipe(plugin.if(
+    ~process.argv.indexOf('--fail'),
+    plugin.eslint.failAfterError()
+  ))
+  .pipe(plugin.jscs())
+  .pipe(plugin.jscs.reporter())
+  .pipe(plugin.if(
+    ~process.argv.indexOf('--fail'),
+    plugin.jscs.reporter('fail')
+  ))
+  .pipe(plugin.notify({
+    onLast: true,
+    title: 'Lint Notification',
+    message: 'code linting for error completed',
+  })));
 
 // Clean
-gulp.task('clean', function clean() {
-  return del(['dist', 'assets']);
-});
+gulp.task('clean', () => del(['dist', 'assets']));
 
 // Watch
-gulp.task('watch', function watch() {
+gulp.task('watch', () => {
   // Watch .jade files
   gulp.watch('src/jade/**/*.jade', ['html']);
 
@@ -165,9 +154,11 @@ gulp.task('watch', function watch() {
   gulp.watch('dist/**').on('change', plugin.livereload.changed);
 });
 
-gulp.task('build:dev', function buildSeq(cb) {
-  runSequence('lint', 'clean', ['styles', 'scripts', 'images', 'fonts'], 'html', cb);
-});
+gulp.task('build:dev', cb => runSequence(
+  'lint', 'clean',
+  ['styles', 'scripts', 'images', 'fonts'],
+  'html', cb
+));
 
 gulp.task('build:prod', () => gulp
   .src('dist/**/*.html')
@@ -207,6 +198,4 @@ gulp.task('build:copy:fontawesome', () => gulp
 
 gulp.task('build', cb => runSequence('build:dev', ['build:prod', 'build:copy'], cb));
 
-gulp.task('default', function dev(cb) {
-  runSequence('develop', 'build:dev', 'watch', cb);
-});
+gulp.task('default', cb => runSequence('develop', 'build:dev', 'watch', cb));

@@ -6,15 +6,16 @@ angular.module('qui.hire')
     '$sce',
     function JobViewCtrl(Jobs, Page, $stateParams, $sce) {
       const vm = this;
+      const params = $stateParams;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
 
       // Set default bucket to ALL
-      if (!~vm.buckets.indexOf($stateParams.bucket)) $stateParams.bucket = 'All';
+      if (!~vm.buckets.indexOf(params.bucket)) params.bucket = 'All';
       vm.data = {};
       vm.loadJob = function loadJob() {
         vm.ui = { loading: true };
         Jobs
-          .getOne($stateParams.jobId)
+          .getOne(params.jobId)
           .then(result => {
             Page.setTitle(`${result.role} - ${result.client_name}`);
             vm.data = result;

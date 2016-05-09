@@ -13,13 +13,13 @@ angular.module('qui.hire')
       function scrollToBottom() {
         // require to scroll after ui update
         vm.ui.scrollToBottom = false;
-        $timeout(() => vm.ui.scrollToBottom = true, 0);
+        $timeout(() => (vm.ui.scrollToBottom = true), 0);
       }
 
       vm.loadApplicantComments = function loadApplicantComments() {
         ApplicantComments
           .get($stateParams.applicantId)
-          .then(function gotJobComment(result) {
+          .then(result => {
             vm.data = result;
 
             // data has been loaded
@@ -39,8 +39,8 @@ angular.module('qui.hire')
       vm.insert = function insertComment() {
         const comment = vm.post.comment;
         ApplicantComments
-          .set($stateParams.applicantId, { comment: comment })
-          .then(function insertedComment() {
+          .set($stateParams.applicantId, { comment })
+          .then(() => {
             vm.post.comment = '';
             vm.data.push({
               user: { name: User.userinfo.name },

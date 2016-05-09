@@ -9,7 +9,8 @@ angular.module('qui.hire')
       vm.add = function addFollower() {
         JobFollowers
           .add($stateParams.jobId, vm.data)
-          .then(follower => {
+          .then(f => {
+            const follower = f;
             follower.data.user = vm.Users.selected;
             vm.followers.push(follower.data);
 
@@ -22,7 +23,7 @@ angular.module('qui.hire')
 
       JobFollowers
         .getAll($stateParams.jobId)
-        .then(x => vm.followers = x.data);
+        .then(x => (vm.followers = x.data));
 
       vm.Users = {
         all: '',
@@ -37,7 +38,7 @@ angular.module('qui.hire')
       };
 
       vm.getAllUser = function getAllUser() {
-        Users.getAll({ q: '' }).then(r => vm.Users.all = r.data.items);
+        Users.getAll({ q: '' }).then(r => (vm.Users.all = r.data.items));
       };
     },
   ]);

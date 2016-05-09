@@ -34,12 +34,8 @@ angular.module('qui.hire')
 
       vm.ok = function ok() {
         ChangeState.set(applicant.id, vm.data)
-          .then(function handleChangeState() {
-            $uibModalInstance.close(vm.data);
-          })
-          .catch(function handleFailure(response) {
-            vm.changeStateError = response.error;
-          });
+          .then(() => $uibModalInstance.close(vm.data))
+          .catch(res => (vm.changeStateError = res.error));
       };
 
       vm.cancel = function cancel() {

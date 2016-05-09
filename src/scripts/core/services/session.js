@@ -3,17 +3,18 @@ angular.module('qui.core')
     '$window',
     function Session($window) {
       const sessionService = {};
+      const localStorage = $window.localStorage;
 
       sessionService.create = function create(key, value) {
-        $window.localStorage[key] = angular.toJson(value);
+        localStorage[key] = angular.toJson(value);
       };
 
       sessionService.read = function read(key) {
-        return angular.fromJson($window.localStorage[key]);
+        return angular.fromJson(localStorage[key]);
       };
 
       sessionService.destroy = function destroy() {
-        $window.localStorage.clear();
+        localStorage.clear();
       };
 
       sessionService.isAuthenticated = function isAuthenticated() {

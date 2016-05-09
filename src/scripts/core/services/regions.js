@@ -9,16 +9,8 @@ angular.module('qui.search')
       regionService.get = function getRegions(params) {
         const url = `${APP.apiServer}/search/regions`;
         return $http
-          .get(url, { params: params })
-          .then(
-            function successRegions(response) {
-              return response.data;
-            },
-
-            function errorRegions(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .get(url, { params })
+          .then(res => res.data, err => $q.reject(err.data));
       };
 
       return regionService;
