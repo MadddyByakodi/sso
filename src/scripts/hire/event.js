@@ -8,8 +8,9 @@ angular.module('qui.hire')
     '$state',
     '$window',
     'APP',
+    '$uibModal',
     function handleEvents(
-      $rootScope, Auth, authService, AUTH_EVENTS, Session, $state, $window, APP
+      $rootScope, Auth, authService, AUTH_EVENTS, Session, $state, $window, APP, $uibModal
     ) {
       /* eslint angular/on-watch: 0 */
 
@@ -19,11 +20,6 @@ angular.module('qui.hire')
           event.preventDefault();
           $window.location.href = APP.hireLogin;
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
-        }
-
-        if (Session.isAuthenticated() && (next.name === 'access.oauth')) {
-          event.preventDefault();
-          $state.go('app.dashboard');
         }
       });
 
@@ -35,18 +31,29 @@ angular.module('qui.hire')
       $rootScope.$on(AUTH_EVENTS.loginRequired, function loginRequired() {
         if (Session.isAuthenticated()) {
           // Refresh token autimatically if token expires
-          Auth.refreshToken().then(
-            function gotRefreshToken() {
-              authService.loginConfirmed('success', function updateConfig(config) {
-                config.headers.Authorization = 'Bearer ' + Session.getAccessToken();
-                return config;
-              });
-            },
+          Auth
+            .refreshToken()
+            .then(
+              () => authService.loginConfirmed(
+                'success',
+                config => {
+                  config.headers.Authorization = 'Bearer ' + Session.getAccessToken();
+                  return config;
+                }
+              ),
 
-            function errRefreshToken(error) {
-              angular.noop(error);
-            }
-          );
+              () => $uibModal.open({
+                animation: true,
+                templateUrl: 'html/modal.reauth.html',
+                controller: function reauth() {
+                  const vm = this;
+                  vm.href = APP.accountsServer;
+                },
+
+                controllerAs: 'ReAuth',
+                backdrop: 'static',
+              })
+            );
         }
       });
     },

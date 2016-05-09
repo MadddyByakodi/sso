@@ -9,30 +9,30 @@ angular.module('qui.core')
   .factory('Auth', [
     '$http',
     '$q',
+    '$log',
     'Session',
     'APP',
-    function Auth($http, $q, Session, APP) {
+    function Auth($http, $q, $log, Session, APP) {
       const authService = {};
       let refreshingToken = false;
 
       authService.login = function login(credentials) {
         return $http
           .post('/api/login', credentials, { ignoreAuthModule: true })
-          .then(
-            function signinSuccess(response) {
-              return Session.create('oauth', response.data);
-            },
-
-            function signinFailure(response) {
-              Session.destroy();
-              return $q.reject(response.data);
-            }
-          );
+          .then(res => Session.create('oauth', res.data))
+          .catch(res => {
+            Session.destroy();
+            return $q.reject(res.data);
+          });
       };
 
       authService.refreshToken = function refreshToken() {
         // To Save Multiple Async RefreshToken Request
-        if (refreshingToken) return $q.reject({ error: 'Multiple refresh request' });
+        if (refreshingToken) {
+          $log.error('Multiple refresh request');
+          return $q.reject({ error: 'Multiple refresh request' });
+        }
+
         refreshingToken = true; // Set refresh_token reuqest tracker flag
         return $http
           .post(
@@ -40,15 +40,14 @@ angular.module('qui.core')
             { refresh_token: Session.read('oauth').refresh_token },
             { ignoreAuthModule: true }
           )
-          .then(function tokenRefreshed(response) {
-            Session.create('oauth', response.data);
+          .then(res => {
+            Session.create('oauth', res.data);
             refreshingToken = false; // reset refresh_token reuqest tracker flag
-            return response.data;
-          },
-
-          function tokenRefreshError(response) {
+            return res.data;
+          })
+          .catch(res => {
             refreshingToken = false; // reset refresh_token reuqest tracker flag
-            return $q.reject(response.data);
+            return $q.reject(res.data);
           });
       };
 
@@ -56,48 +55,26 @@ angular.module('qui.core')
         const url = '/api/logout';
         return $http
           .post(url, { access_token: Session.getAccessToken() })
-          .then(
-            function logoutSuccess(response) {
-              // Destroy Session data
-              Session.destroy();
-              return response.data;
-            },
-
-            function logoutError(response) {
-              Session.destroy();
-              return $q.reject(response.data);
-            }
-          );
-      };
-
-      authService.forgotpass = function forgotpass(username) {
-        const url = '/api/forgotpass';
-        return $http
-          .post(url, { username: username }, { ignoreAuthModule: true })
-          .then(
-            function forgotpassSuccess(response) {
-              return response.data;
-            },
-
-            function forgotpassError(response) {
-              return $q.reject(response.data);
-            }
-          );
+          .then(res => {
+            // Destroy Session data
+            Session.destroy();
+            return res.data;
+          })
+          .catch(res => {
+            Session.destroy();
+            return $q.reject(res.data);
+          });
       };
 
       authService.setSessionData = function gInfo() {
         return $q.all([
           $http
             .get(APP.apiServer + '/user')
-            .then(function userinfoSuccess(response) {
-              return Session.create('userinfo', response.data);
-            }),
+            .then(res => Session.create('userinfo', res.data)),
 
           $http
             .get(APP.apiServer + '/user/states')
-            .then(function statesSuccess(response) {
-              return Session.create('states', response.data);
-            }),
+            .then(res => Session.create('states', res.data)),
         ]);
       };
 
