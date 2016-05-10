@@ -1,5 +1,5 @@
 div(ng-controller='NavJobsController as Job' style='position: relative;')
-  .w.bg-light.b-b.b-white(style='position: fixed; z-index: 2;')
+  .w.bg-light.b-b.b-r(style='position: fixed; z-index: 2;')
     .wrapper-xs
       .b-b: a.w-full.btn.btn-md.btn-primary.btn-addon(ui-sref='app.jobs.new' target='_blank')
         i.fa.fa-upload
@@ -7,7 +7,7 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
       .input-group
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='Job.searchText.role' ng-change='Job.job_open_collapse = Job.job_close_collapse = false')
         a.input-group-addon.input-sm.bg-light.dker: i.fa.fa-search.text-dark
-  .w.nav-job.bg-light
+  .w.nav-job.bg-light.b-r
     .w(style='position: relative;  overflow-y: scroll; overflow-x: hidden; height: 100%; width: 208px;')
       .m-t-sm
 

@@ -16,7 +16,7 @@
       li: a.h5.b-a.b-info.b-2x.text-info.bg-white-only.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
 
   .wrapper-xs.m-l-sm
-    .m-t-xl.m-b-xs.wrapper-sm(ng-if='Applicant.job')
+    .m-t-xl.m-l-sm(ng-if='Applicant.job')
       div.inline.wrapper-sm.h4
         span.text-dark(title='Job position') {{Applicant.job.role}}
         span(title='Job location') &nbsp; – {{Applicant.job.job_location}}
@@ -51,7 +51,7 @@
               label.i-checks.m-b-none
                 input(type='checkbox' ng-model='applicant.checked')
                 i
-              a(ui-sref='app.applicant.view({applicantId: applicant.id})')
+              a(ui-sref='app.applicant.view({applicantId: applicant.id})' target='_blank')
                 strong.text-primary-lt  {{applicant.name}}
 
               .btn-group.pull-right.m-t-n-xs(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
