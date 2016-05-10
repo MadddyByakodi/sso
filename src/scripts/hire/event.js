@@ -39,7 +39,7 @@ angular.module('qui.hire')
                 }
               ),
 
-              () => $uibModal.open({
+              err => (err.status === 400) && $uibModal.open({
                 animation: true,
                 templateUrl: 'html/modal.reauth.html',
                 controller: function reauth() {

@@ -46,10 +46,12 @@ angular.module('qui.accounts')
                 }
               ),
 
-              () => {
-                Session.destroy();
-                $location
-                  .url(`${$state.href('oauth.signin')}?continue=${encodedContinue}`);
+              err => {
+                if (err.status === 400) {
+                  Session.destroy();
+                  $location
+                    .url(`${$state.href('oauth.signin')}?continue=${encodedContinue}`);
+                }
               }
             );
         }

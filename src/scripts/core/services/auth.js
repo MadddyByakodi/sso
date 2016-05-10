@@ -29,8 +29,8 @@ angular.module('qui.core')
       authService.refreshToken = function refreshToken() {
         // To Save Multiple Async RefreshToken Request
         if (refreshingToken) {
-          $log.error('Multiple refresh request');
-          return $q.reject({ error: 'Multiple refresh request' });
+          $log.warn('Refresh token request already sent.');
+          return $q.reject({ warning: 'Refresh token request already sent.' });
         }
 
         refreshingToken = true; // Set refresh_token reuqest tracker flag
@@ -43,11 +43,11 @@ angular.module('qui.core')
           .then(res => {
             Session.create('oauth', res.data);
             refreshingToken = false; // reset refresh_token reuqest tracker flag
-            return res.data;
+            return $q.resolve(res);
           })
           .catch(res => {
             refreshingToken = false; // reset refresh_token reuqest tracker flag
-            return $q.reject(res.data);
+            return $q.reject(res);
           });
       };
 
