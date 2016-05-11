@@ -78,11 +78,13 @@ angular.module('qui.hire')
         .state('app.stats', {
           url: '/stats',
           abstract: true,
+          controller: 'StatsController',
+          controllerAs: 'Stats',
           templateUrl: 'html/stats.html',
         })
         .state('app.stats.candidate', {
           url: '/candidate/{nav}',
-          templateUrl: 'html/stats.candidate.html',
+          template: '<candidate-stats></candidate-stats>',
         });
     },
   ]);

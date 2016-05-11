@@ -1,0 +1,92 @@
+.panel.panel-default
+  .wrapper.clear
+    .pull-left.wrapper-xs.h4.text-primary-dker MY POSITIONS
+    input.pull-right.w-md.input-sm.form-control(
+      type='text'
+      placeholder='Search'
+      ng-model='Stat.own.q'
+      ng-change='Stat.getOwned()'
+      ng-model-options='{debounce: 600}'
+    )
+  .table-responsive
+    table.table.table-striped.b-t.b-light
+      thead
+        tr
+          th Positions
+          th Posted On
+          th(title='Feedback Awaited') New Candidates
+          th Interview Stage
+          th Interview Feedback Awaited
+          th Offered
+          th Joined
+          th All
+          th(style='width:30px;')
+      tbody
+        tr(ng-repeat='JobStat in Stat.own.docs')
+          td(ng-bind='JobStat.role')
+          td(ng-bind='JobStat.created_at | date: "MMM dd, yyyy"')
+          td(ng-bind='JobStat.counts.awaited_feedback')
+          td(ng-bind='JobStat.counts.interview_stage')
+          td(ng-bind='JobStat.counts.awaited_interview_feedback')
+          td(ng-bind='JobStat.counts.offered')
+          td(ng-bind='JobStat.counts.joined')
+          td(ng-bind='JobStat.counts.all')
+  footer.panel-footer.clear
+    small.text-muted.inline.m-t-sm.m-b-sm
+      | showing {{Stat.own.start}} - {{Stat.own.start + Stat.own.docs.length}} of {{Stat.own.numFound}} items
+    ul.pull-right.pagination.pagination-sm.m-t-none.m-b-none
+          li
+            a(href='' ng-click='Stat.own.prev()')
+              i.fa.fa-chevron-left
+          li.hide
+            a(href='') 1
+          li
+            a(href='' ng-click='Stat.own.next()')
+              i.fa.fa-chevron-right
+
+
+.panel.panel-default
+  .wrapper.clear
+    .pull-left.wrapper-xs.h4.text-primary-dker POSITION FOLLOWED BY ME
+    input.pull-right.w-md.input-sm.form-control(
+      type='text'
+      placeholder='Search'
+      ng-model='Stat.following.q'
+      ng-change='Stat.getFollowing()'
+      ng-model-options='{debounce: 600}'
+    )
+  .table-responsive
+    table.table.table-striped.b-t.b-light
+      thead
+        tr
+          th Positions
+          th Posted On
+          th(title='Feedback Awaited') New Candidates
+          th Interview Stage
+          th Interview Feedback Awaited
+          th Offered
+          th Joined
+          th All
+          th(style='width:30px;')
+      tbody
+        tr(ng-repeat='JobStat in Stat.following.docs')
+          td(ng-bind='JobStat.role')
+          td(ng-bind='JobStat.created_at | date: "MMM dd, yyyy"')
+          td(ng-bind='JobStat.counts.awaited_feedback')
+          td(ng-bind='JobStat.counts.interview_stage')
+          td(ng-bind='JobStat.counts.awaited_interview_feedback')
+          td(ng-bind='JobStat.counts.offered')
+          td(ng-bind='JobStat.counts.joined')
+          td(ng-bind='JobStat.counts.all')
+  footer.panel-footer.clear
+    small.text-muted.inline.m-t-sm.m-b-sm
+      | showing {{Stat.following.start}} - {{Stat.following.start + Stat.following.docs.length}} of {{Stat.following.numFound}} items
+    ul.pull-right.pagination.pagination-sm.m-t-none.m-b-none
+          li
+            a(href=''  ng-click='Stat.following.prev()')
+              i.fa.fa-chevron-left
+          li.hide
+            a(href='') 1
+          li
+            a(href='' ng-click='Stat.following.next()')
+              i.fa.fa-chevron-right

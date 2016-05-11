@@ -4,7 +4,7 @@ angular.module('qui.hire')
     'Session',
     function StatsCtrl(APP, Session) {
       const vm = this;
-      vm.subNav = ['By Job Description', 'By Owner'];
+      vm.subNav = ['By Job Description'];
       vm.nav = {
         'app.stats.candidate': 'Candidates',
 

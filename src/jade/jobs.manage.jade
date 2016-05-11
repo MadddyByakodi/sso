@@ -67,22 +67,22 @@
                 |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
 
             .panel-body.pull-in.b-t.wrapper-xs
-              .col-xs-4.text-ellipsis
+              .col-xs-4.text-ellipsis(title='Designation: {{applicant.exp_designation}}')
                 i.fa.fa-bookmark(style='margin:0 2px;')
                 | {{applicant.exp_designation}}
-              .col-xs-4.text-ellipsis
+              .col-xs-4.text-ellipsis(title='Qualification: {{applicant.edu_degree}}')
                 i.fa.fa-graduation-cap
                 | {{applicant.edu_degree}}
-              .col-xs-4.text-ellipsis
+              .col-xs-4.text-ellipsis(title='Current CTC')
                 i.fa.fa-inr
                 |  {{applicant.exp_salary}}&nbsp;Lakhs
-              .col-xs-4.text-ellipsis
+              .col-xs-4.text-ellipsis(title='Current company: {{applicant.exp_employer}}')
                 i.fa.fa-briefcase
                 |  {{applicant.exp_employer}}
-              .col-xs-4.text-ellipsis
+              .col-xs-4.text-ellipsis(title='Total experience')
                 i.fa.fa-line-chart
                 |  {{applicant.total_exp}}&nbsp;Years
-              .col-xs-4.text-ellipsis
+              .col-xs-4.text-ellipsis(title='Current location: {{applicant.exp_location}}')
                 i.fa.fa-map-marker
                 |  {{applicant.exp_location}}
         .col-xs-12.col-md-2.no-padder

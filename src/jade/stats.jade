@@ -1,5 +1,5 @@
-.hbox(ng-controller='StatsController as Stats')
-  //- .col.hide.w-md.bg-dark.lt.b-r.bg-auto
+.hbox
+  .col.w-md.bg-light.dk.b-r.bg-auto
     ul.nav
       li.padder.m-t.m-b-sm.text-muted.text-xs
         span Stats
@@ -12,18 +12,12 @@
             i.fa.fa-fw.fa-angle-right.text
             i.fa.fa-fw.fa-angle-down.text-active
           span(ng-bind='navitem').font-bold
-        ul.nav.nav-sub.bg-dark
-          li(ng-class='{active: (App.$state.params.nav == id) && (App.$state.current.name === navstate)}' ng-repeat='(id, nav) in Stats.subNav')
+        ul.nav.nav-sub.bg-light
+          li(ng-class='{"bg-white": (App.$state.params.nav == id) && (App.$state.current.name === navstate)}' ng-repeat='(id, nav) in Stats.subNav')
             a(ng-href='{{App.$state.href(navstate, {nav: id})}}' ng-bind='nav')
-
-  .col.v-middle.text-center.fa-2x.wrapper-xl
-    .m-t-xxl: a(ng-href='{{Stats.download}}')
-      i.fa.fa-download
-      | &nbsp; Export to XLXS
-
-  //- .col.hide
+  .col
     div.wrapper-sm.m-l-sm
       span(ng-bind='Stats.nav[App.$state.current.name]')
       span &nbsp;&gt;&nbsp;
       span.text-black(ng-bind='Stats.subNav[App.$state.params.nav]')
-    div(ui-view)
+    div.wrapper-sm(ui-view='')

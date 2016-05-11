@@ -70,11 +70,8 @@ div(ng-controller='ApplicantViewController as Applicant')
         .panel-heading.bg-dark.lter.h4
           .h4.text-white Skills
         .panel-body
-          .h6.clearfix
-            .pull-left.b-a.b-info.text-info-dker.m-r-xs.m-b-xs.r(ng-repeat='skill in Applicant.data.skills' style='padding: 2px;' ng-if='Applicant.data.showAllSkill || $index < 6') {{skill}}
-            a.pull-left(ng-click='Applicant.data.showAllSkill = !Applicant.data.showAllSkill')
-              span.font-bold.text-info-dker(ng-if='Applicant.data.showAllSkill') – Less
-              span.font-bold.text-info-dker(ng-if='!Applicant.data.showAllSkill') + More
+          .h6.clear
+            .wrapper-xs.pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='value in Applicant.data.skills') &nbsp;{{value}}&nbsp;
 
     //- Resume container
   .col-md-6.no-padder.fixed-resume
