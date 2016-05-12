@@ -35,7 +35,7 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
 
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.currency')
       strong {{ChangeState.states[ChangeState.stateId].config.currency}}
-      select.form.form-control(ng-model='ChangeState.data.currency' ng-init='ChangeState.data.currency = "INR"' required)
+      select.form-control(ng-model='ChangeState.data.currency' ng-init='ChangeState.data.currency = "INR"' required)
 
         //- Hack:: Couldn't set default model value to INR
         //- Angular Add undefined option in list of options
@@ -43,26 +43,45 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
         option(ng-repeat='(currencyKey, currency) in ChangeState.currency' ng-value='currencyKey') {{currency}}
 
     //- Offered CTC Input
-    .input-group
-      label(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc_raw')
+    .input-group(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc_raw')
+      label
         strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc_raw}}
         br
-        input.form.form-control(ng-model='ChangeState.data.offered_ctc_raw' step='0.1' min='0.1' type='number' ng-change='ChangeState.data.offered_ctc = (ChangeState.data.offered_ctc_raw/100000).toFixed(2)' required)
-      label(ng-if='ChangeState.states[ChangeState.stateId].config.offered_ctc_raw')
+        input.form.form-control(ng-model='ChangeState.data.offered_ctc_raw' step='1' min='1' type='number' ng-change='ChangeState.data.offered_ctc = (ChangeState.data.offered_ctc_raw/100000).toFixed(2)' required)
+      label
         strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc}}
         br
         input.form.form-control(readonly='' ng-model='ChangeState.data.offered_ctc')
 
     //- Final CTC Input for candidate joined
-    .input-group
-      label(ng-if='ChangeState.states[ChangeState.stateId].config.final_ctc_raw')
+    .input-group(ng-if='ChangeState.states[ChangeState.stateId].config.final_ctc_raw')
+      label
         strong {{ChangeState.states[ChangeState.stateId].config.final_ctc_raw}}
         br
-        input.form.form-control(ng-model='ChangeState.data.final_ctc_raw' step='0.1' min='0.1' type='number' ng-change='ChangeState.data.final_ctc = (ChangeState.data.final_ctc_raw/100000).toFixed(2)' required)
-      label(ng-if='ChangeState.states[ChangeState.stateId].config.final_ctc_raw')
+        input.form.form-control(ng-model='ChangeState.data.final_ctc_raw' step='1' min='1' type='number' ng-change='ChangeState.data.final_ctc = (ChangeState.data.final_ctc_raw/100000).toFixed(2)' required)
+      label
         strong {{ChangeState.states[ChangeState.stateId].config.final_ctc}}
         br
         input.form.form-control(readonly='' ng-model='ChangeState.data.final_ctc')
+    .input-group(ng-if='ChangeState.states[ChangeState.stateId].config.is_visible' ng-init='ChangeState.data.is_visible=true')
+      .inline.m-l-n-sm.wrapper-sm: label.i-checks.m-b-none
+        input(type='checkbox' ng-model='ChangeState.data.is_visible' ng-true-value='false' ng-false-value='true')
+        i
+        em {{ChangeState.states[ChangeState.stateId].config.is_visible}}
+      .btn-group(uib-dropdown='' auto-close='outsideClick' ng-if='!ChangeState.data.is_visible')
+        button.btn.btn-default(
+          type='button'
+          uib-dropdown-toggle=''
+          ng-click='ChangeState.Users.all || ChangeState.Users.getAll()'
+        ) Share with &nbsp;
+          span.caret
+        ul.dropdown-menu(uib-dropdown-menu='' role='menu')
+          li(role='menuitem' ng-repeat='follower in ChangeState.Users.all')
+            a(uib-btn-checkbox='' ng-model='ChangeState.Users.all[$index].checkbox')
+              i.fa.fa-check.text-active
+              span {{follower.name}}
+
+
     label.input-group
       strong Instructions and Comments
       br

@@ -7,8 +7,9 @@ angular.module('qui.hire')
     'state_id',
     'ChangeState',
     'moment',
+    'Users',
     function ChangeStateCtrl(
-      $uibModalInstance, User, CURRENCY, applicant, stateId, ChangeState, moment
+      $uibModalInstance, User, CURRENCY, applicant, stateId, ChangeState, moment, Users
     ) {
       const vm = this;
       vm.states = User.states;
@@ -23,6 +24,12 @@ angular.module('qui.hire')
           .toDate(),
       };
 
+      vm.Users = {
+        all: '',
+        getAll: () => Users.getAll({ q: '' })
+          .then(r => (vm.Users.all = r.data.items.filter(u => u.id !== User.userinfo.id))),
+      };
+
       vm.setScheduledOn = function scheduledOnTimeChange() {
         const hour = moment(vm.exData.scheduled_on_time).get('hour');
         const minute = moment(vm.exData.scheduled_on_time).get('minute');
@@ -33,6 +40,13 @@ angular.module('qui.hire')
       };
 
       vm.ok = function ok() {
+        vm.data.CtcVisibilities = [];
+        if (vm.Users.all && !vm.data.is_visible) {
+          vm.data.CtcVisibilities = vm.Users.all
+            .filter(u => u.checkbox)
+            .map(u => ({ user_id: u.id }));
+        }
+
         ChangeState.set(applicant.id, vm.data)
           .then(() => $uibModalInstance.close(vm.data))
           .catch(res => (vm.changeStateError = res.error));
