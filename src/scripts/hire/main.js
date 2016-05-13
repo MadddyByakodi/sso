@@ -98,7 +98,7 @@ angular.module('qui.hire')
         });
       };
 
-      vm.changeState = function changeState(applicant, stateId) {
+      vm.changeState = function changeState(applicant, stateId, jobId) {
         // ApplicantIds is array contatining applicant id to download cvs
         const modalInstance = $uibModal.open({
           templateUrl: 'html/modal.change.state.html',
@@ -106,7 +106,7 @@ angular.module('qui.hire')
           controllerAs: 'ChangeState',
           bindToController: 'true',
           size: 'md',
-          resolve: { applicant, state_id: stateId },
+          resolve: { applicant, stateId, jobId },
         });
 
         const resume = applicant;

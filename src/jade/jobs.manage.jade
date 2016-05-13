@@ -60,7 +60,7 @@
                   span(ng-if='App.states[applicant.state_id].Actions.length>0').caret
                 ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
                   li(role='menuitem' ng-repeat='state in App.states[applicant.state_id].Actions')
-                    a(href='' ng-click='App.changeState(applicant, state.state_id)') {{App.states[state.state_id].name}}
+                    a(href='' ng-click='App.changeState(applicant, state.state_id, applicant._root_)') {{App.states[state.state_id].name}}
 
               span.pull-right.padder(ng-if='applicant.interview_type && applicant.interview_time')
                 i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}')

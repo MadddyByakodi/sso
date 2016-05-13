@@ -72,14 +72,14 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
         button.btn.btn-default(
           type='button'
           uib-dropdown-toggle=''
-          ng-click='ChangeState.Users.all || ChangeState.Users.getAll()'
+          ng-click='ChangeState.JobFollowers.all || ChangeState.JobFollowers.getAll()'
         ) Share with &nbsp;
           span.caret
         ul.dropdown-menu(uib-dropdown-menu='' role='menu')
-          li(role='menuitem' ng-repeat='follower in ChangeState.Users.all')
-            a(uib-btn-checkbox='' ng-model='ChangeState.Users.all[$index].checkbox')
+          li(role='menuitem' ng-repeat='follower in ChangeState.JobFollowers.all')
+            a(uib-btn-checkbox='' ng-model='ChangeState.JobFollowers.all[$index].checkbox')
               i.fa.fa-check.text-active
-              span {{follower.name}}
+              span {{follower.user.name}}
 
 
     label.input-group

@@ -19,7 +19,7 @@ div(ng-controller='ApplicantViewController as Applicant')
             a.col.v-middle(href='' style='width: 2em;'): i.b-a.b-2x.b-success.wrapper-xs.text-success.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
             ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
               li(role='menuitem' ng-repeat='state in App.states[Applicant.data.state_id].Actions')
-                a(href='' ng-click='App.changeState(Applicant.data, state.state_id)') {{App.states[state.state_id].name}}
+                a(href='' ng-click='App.changeState(Applicant.data, state.state_id, Applicant.data._root_)') {{App.states[state.state_id].name}}
 
       //- Applicant Details
 

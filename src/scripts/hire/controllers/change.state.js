@@ -4,12 +4,15 @@ angular.module('qui.hire')
     'User',
     'CURRENCY',
     'applicant',
-    'state_id',
+    'stateId',
+    'jobId',
     'ChangeState',
     'moment',
-    'Users',
+    'JobFollowers',
     function ChangeStateCtrl(
-      $uibModalInstance, User, CURRENCY, applicant, stateId, ChangeState, moment, Users
+      $uibModalInstance, User, CURRENCY,
+      applicant, stateId, jobId,
+      ChangeState, moment, JobFollowers
     ) {
       const vm = this;
       vm.states = User.states;
@@ -24,10 +27,12 @@ angular.module('qui.hire')
           .toDate(),
       };
 
-      vm.Users = {
+      vm.JobFollowers = {
         all: '',
-        getAll: () => Users.getAll({ q: '' })
-          .then(r => (vm.Users.all = r.data.items.filter(u => u.id !== User.userinfo.id))),
+        getAll: () => JobFollowers.getAll(jobId)
+          .then(r => (
+            vm.JobFollowers.all = r.data.filter(f => f.user.id !== User.userinfo.id)
+          )),
       };
 
       vm.setScheduledOn = function scheduledOnTimeChange() {
@@ -41,10 +46,10 @@ angular.module('qui.hire')
 
       vm.ok = function ok() {
         vm.data.CtcVisibilities = [];
-        if (vm.Users.all && !vm.data.is_visible) {
-          vm.data.CtcVisibilities = vm.Users.all
+        if (vm.JobFollowers.all && !vm.data.is_visible) {
+          vm.data.CtcVisibilities = vm.JobFollowers.all
             .filter(u => u.checkbox)
-            .map(u => ({ user_id: u.id }));
+            .map(f => ({ user_id: f.user.id }));
         }
 
         ChangeState.set(applicant.id, vm.data)
