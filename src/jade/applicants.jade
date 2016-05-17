@@ -4,7 +4,7 @@
     ul.nav.nav-pills.nav-sm
       li.m-r-xs(ng-repeat='bucket in Applicant.buckets' ui-sref-active="active")
         a(ui-sref='app.jobs.applicants({bucket: bucket})') {{bucket}}
-  table.table.m-b-none.m-t-xl(before-bottom='Applicant.loadApplicants()')
+  table.table.m-b-none.m-t-xl(before-bottom='Applicant.loadApplicants()' ng-if='Applicant.applicants.length')
     thead
       tr
         th Name
@@ -39,3 +39,4 @@
             i.fa.fa-plus-circle
             strong &nbsp;Load More
         td
+  h1.m-t-xxl.text-center.text-muted(ng-if='!Applicant.applicants.length') No Applicants

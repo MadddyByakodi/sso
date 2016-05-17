@@ -13,7 +13,7 @@
 
       li.dropdown.hidden-xs(ng-controller='JobFollowersController as Follower' uib-dropdown auto-close='disabled' ng-include="'html/_job.follower.html'" uib-tooltip='Add Follower/Owner' tooltip-placement='left' tooltip-append-to-body='true')
 
-      li: a.h5.b-a.b-info.b-2x.text-info.bg-white-only.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})') View JD
+      li: a.h5.b-a.b-info.b-2x.text-info.bg-white-only.font-bold(ui-sref='app.jobs.view({jobId: App.$state.params.jobId})' target='_blank') View JD
 
   .wrapper-xs.m-l-sm
     .m-t-xl.m-l-sm(ng-if='Applicant.job')
@@ -91,7 +91,7 @@
             .panel-body.pull-in.m-r-n-sm.wrapper-xs.b-t
               .clearfix.m-t-xs
                 i.btn.pull-right.text-success-dker.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
-                span.item.text-light-dk.h3.pull-right.padder.b-l.b-r.b-light.font-thin(title='System generated alogrithmic Score')  {{applicant.applicant_score}}
+                span.item.text-light-dk.h3.pull-right.padder.b-l.b-r.b-light.font-thin(title='System generated algorithmic score')  {{applicant.applicant_score}}
     .col-xs-2.col-xs-offset-5
       button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
         i.fa.fa-circle-o-notch.fa-spin

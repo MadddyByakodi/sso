@@ -3,7 +3,7 @@ div(ng-controller='NavJobsController as Job' style='position: relative;')
     .wrapper-xs
       .b-b: a.w-full.btn.btn-md.btn-primary.btn-addon(ui-sref='app.jobs.new' target='_blank')
         span.font-thin Upload JD
-        i.fa.fa-upload
+        i.wrapper-xs.pull-right.fa.fa-upload
       .input-group
         input.form-control.wrapper-xs(type='text' placeholder='Search Position' ng-model='Job.searchText.role' ng-change='Job.job_open_collapse = Job.job_close_collapse = false')
         a.input-group-addon.input-sm.bg-light.dker: i.fa.fa-search.text-dark

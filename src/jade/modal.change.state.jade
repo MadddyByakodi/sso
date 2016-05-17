@@ -31,7 +31,7 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.suggested_join_date')
       strong {{ChangeState.states[ChangeState.stateId].config.suggested_join_date}}
       .input-group
-        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.data.suggested_join_date' is-open='ChangeState.ui.suggestedJoinDate' close-text='Close' ng-click='ChangeState.ui.suggestedJoinDate = true' required)
+        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.data.suggested_join_date' is-open='ChangeState.ui.suggestedJoinDate' close-text='Close' ng-click='ChangeState.ui.suggestedJoinDate = true')
 
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.currency')
       strong {{ChangeState.states[ChangeState.stateId].config.currency}}
@@ -47,7 +47,7 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
       label
         strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc_raw}}
         br
-        input.form.form-control(ng-model='ChangeState.data.offered_ctc_raw' step='1' min='1' type='number' ng-change='ChangeState.data.offered_ctc = (ChangeState.data.offered_ctc_raw/100000).toFixed(2)' required)
+        input.form.form-control(ng-model='ChangeState.data.offered_ctc_raw' step='1' min='1' type='number' ng-change='ChangeState.data.offered_ctc = (ChangeState.data.offered_ctc_raw/100000).toFixed(2)')
       label
         strong {{ChangeState.states[ChangeState.stateId].config.offered_ctc}}
         br

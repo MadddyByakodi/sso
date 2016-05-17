@@ -13,9 +13,10 @@ angular.module('qui.hire')
     'Funcs',
     'moment',
     'Jobs',
+    '$uibModal',
     function NewJobCtrl(
       $q, $timeout, Page, $state, Regions, Degrees, Institutes, Industries, Employers, Skills,
-      Funcs, moment, Jobs
+      Funcs, moment, Jobs, $uibModal
     ) {
       const vm = this;
       vm.buckets = ['Pending Feedback', 'Shortlisted', 'Rejected', 'All', 'Interview'];
@@ -226,6 +227,26 @@ angular.module('qui.hire')
 
         noResults: false,
         loadingRegions: false,
+      };
+
+      vm.confirmDirectLineUp = function confirmDirectLineUp() {
+        const modalInstance = $uibModal.open({
+          controller: [
+            '$uibModalInstance',
+            '$scope',
+            function ConfirmDirectLineUpCtrl($uibModalInstance, $scope) {
+              const viewModel = $scope;
+              viewModel.directLineup = function directLineup(data) {
+                $uibModalInstance.close(data);
+              };
+            },
+          ],
+          size: 'sm',
+          backdrop: 'static',
+          templateUrl: 'html/modal.confirm-direct-line-up.html',
+        });
+
+        modalInstance.result.then(data => (vm.data.direct_line_up = data));
       };
 
       $q.all([

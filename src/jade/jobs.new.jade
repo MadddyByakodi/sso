@@ -225,11 +225,11 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
       | Interview Details
     .panel-body
       .col-sm-4.no-padder
-        label.w-full.input-group
+        .w-full.input-group
           .col-xs-12.no-padder Direct Lineup
           .col-xs-12.no-padder
             .col-xs-4.radio: label.i-checks
-              input(type='radio' name='direct_line_up' ng-model='Job.data.direct_line_up' value='1')
+              input(type='radio' name='direct_line_up' ng-model='Job.data.direct_line_up' value='1' ng-click='Job.confirmDirectLineUp()')
               i
               | Yes
             .col-xs-4.radio: label.i-checks
