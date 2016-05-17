@@ -54,7 +54,8 @@ angular.module('qui.hire')
         sort: 'interview_time ASC',
         interview_time: [
           moment().startOf('day').toISOString(),
-          moment().endOf('week').toISOString(),
+          moment().startOf('day').add(7, 'days')
+            .toISOString(),
         ].join(','),
         start: 0, rows: 15,
       };

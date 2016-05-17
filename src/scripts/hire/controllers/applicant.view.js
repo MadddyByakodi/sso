@@ -1,14 +1,17 @@
 angular.module('qui.hire')
   .controller('ApplicantViewController', [
     'Applicants',
+    'Jobs',
     'Page',
     '$stateParams',
     'Session',
     'APP',
     '$sce',
-    function ApplicantViewCtrl(Applicants, Page, $stateParams, Session, APP, $sce) {
+    function ApplicantViewCtrl(Applicants, Jobs, Page, $stateParams, Session, APP, $sce) {
       const vm = this;
+      const root = '_root_';
       vm.data = {};
+      vm.job = {};
       vm.trustSrc = function trustSrc(src) {
         return $sce.trustAsResourceUrl(src);
       };
@@ -23,6 +26,9 @@ angular.module('qui.hire')
           .then(result => {
             vm.data = result;
             Page.setTitle(vm.data.name);
+
+            // Get job role for applicant
+            Jobs.getOne(result[root], { fl: 'role' }).then(res => (vm.job = res));
 
             // data has been loaded
             vm.ui.loading = false;

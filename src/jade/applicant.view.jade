@@ -10,6 +10,9 @@ div(ng-controller='ApplicantViewController as Applicant')
               i.fa.fa-user.fa-stack-1x.m-t-xs(style='font-size: 1.5em;margin-top: 0.14em;color: #104465;')
           .col.v-middle
             .h4.text-ellipsis(title='{{Applicant.data.name}}') {{Applicant.data.name}}
+            .h5.m-t-xs.text-ellipsis(title='Job position: {{Applicant.job.role}}' ng-if='Applicant.job.role')
+              i.fa.fa-briefcase.m-r-xs
+              span(ng-bind='Applicant.job.role')
           .col.v-middle.thumb-xs(title='System generated alogrithmic Score'): .font-thin.h3 {{Applicant.data.applicant_score}}
         .m-b-xs
           .hbox(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
