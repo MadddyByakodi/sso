@@ -11,6 +11,11 @@ angular.module('qui.search')
           .get(`${APP.apiServer}/search/users`, { params });
       };
 
+      userService.create = function create(data) {
+        return $http
+          .post(`${APP.apiServer}/user/users`, data);
+      };
+
       return userService;
     },
   ]);
