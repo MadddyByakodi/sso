@@ -20,17 +20,16 @@
           th Offered
           th Joined
           th All
-          th(style='width:30px;')
       tbody
         tr(ng-repeat='JobStat in Stat.own.docs')
-          td(ng-bind='JobStat.role')
-          td(ng-bind='JobStat.created_at | date: "MMM dd, yyyy"')
-          td(ng-bind='JobStat.counts.awaited_feedback')
-          td(ng-bind='JobStat.counts.interview_stage')
-          td(ng-bind='JobStat.counts.awaited_interview_feedback')
-          td(ng-bind='JobStat.counts.offered')
-          td(ng-bind='JobStat.counts.joined')
-          td(ng-bind='JobStat.counts.all')
+          td.v-middle(ng-bind='JobStat.role')
+          td.v-middle.text-center(ng-bind='JobStat.created_at | date: "MMM dd, yyyy"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.awaited_feedback || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.interview_stage || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.awaited_interview_feedback || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.offered || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.joined || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.all || "-"')
   footer.panel-footer.clear
     small.text-muted.inline.m-t-sm.m-b-sm
       | showing {{Stat.own.start}} - {{Stat.own.start + Stat.own.docs.length}} of {{Stat.own.numFound}} items
@@ -67,17 +66,16 @@
           th Offered
           th Joined
           th All
-          th(style='width:30px;')
       tbody
         tr(ng-repeat='JobStat in Stat.following.docs')
-          td(ng-bind='JobStat.role')
-          td(ng-bind='JobStat.created_at | date: "MMM dd, yyyy"')
-          td(ng-bind='JobStat.counts.awaited_feedback')
-          td(ng-bind='JobStat.counts.interview_stage')
-          td(ng-bind='JobStat.counts.awaited_interview_feedback')
-          td(ng-bind='JobStat.counts.offered')
-          td(ng-bind='JobStat.counts.joined')
-          td(ng-bind='JobStat.counts.all')
+          td.v-middle(ng-bind='JobStat.role')
+          td.v-middle.text-center(ng-bind='JobStat.created_at | date: "MMM dd, yyyy"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.awaited_feedback || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.interview_stage || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.awaited_interview_feedback || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.offered || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.joined || "-"')
+          td.v-middle.text-center(ng-bind='JobStat.counts.all || "-"')
   footer.panel-footer.clear
     small.text-muted.inline.m-t-sm.m-b-sm
       | showing {{Stat.following.start}} - {{Stat.following.start + Stat.following.docs.length}} of {{Stat.following.numFound}} items
