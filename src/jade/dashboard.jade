@@ -3,9 +3,9 @@ div(ng-controller='DashboardController as Dash')
   .col-sm-4.no-padder
     .m-xs
       .col-xs-12.no-padder
-        .m-xs.bg-white-only
-          .wrapper-xs.b-b
-            span.h4.text-black &nbsp; Awaiting Feedback
+        .m-xs.b-a.bg-white-only
+          .wrapper-sm.b-b
+            span.h4.text-black-lter.m-l-n-sm &nbsp; Awaiting Feedback
             a.pull-right.label.bg-primary.lt.m-r-xs(ui-sref='app.jobs.applicants({bucket: "Pending Feedback"})')
               .h5
                 i.fa.fa-eye
@@ -13,23 +13,22 @@ div(ng-controller='DashboardController as Dash')
           .hbox.wrapper-md.bg-white-only
             .col
               i.fa.fa-file-text-o.fa-lg
-              span.h4.text-black &nbsp;CVs
+              span.h4 &nbsp;CVs
               .fa-4x.h1 {{Dash.summary.cv}}
             .col.b-l.wrapper-xs
               i.fa.fa-user-secret.fa-lg
-              span.h4.text-black &nbsp;Interviews
+              span.h4 &nbsp;Interviews
               .fa-4x.h1 {{Dash.summary.interview}}
       .col-xs-12.no-padder
-        .m-xs.wrapper-xs.bg-white
-          .h4.text-black &nbsp; Actions Required
-          .b-b.m-t-xs
+        .b-a.m-xs.bg-white
+          .h4.text-black-lter.wrapper-sm.b-b: span.m-l-n-sm &nbsp; Actions Required
           .hbox.wrapper-sm.m-t-xs(ng-if='Dash.pipeline.length===0')
               .col.text-center All Done
-          .hbox.wrapper-sm.m-t-xs.b-b(ng-if='Dash.pipeline.length>0')
+          .hbox.wrapper-sm.m-t-xs(ng-if='Dash.pipeline.length>0')
               .col: .h6.font-bold Positions
               .col.thumb-xs: .h6.font-bold.pull-right CVs
           div(style='max-height: 300px; overflow-y: auto;')
-            .hbox.wrapper-sm.b-b(ng-repeat='pipe in Dash.pipeline | orderBy:"-count"')
+            .hbox.wrapper-sm.b-t(ng-repeat='pipe in Dash.pipeline | orderBy:"-count"')
               .col: a(ui-sref='app.jobs.manage({jobId: pipe.id, bucket:"Pending Feedback"})') {{pipe.role}}
               .col.thumb-xs
                 span.pull-right {{pipe.count}}
@@ -41,14 +40,14 @@ div(ng-controller='DashboardController as Dash')
   .col-sm-8.no-padder
     .m-xs
       .col-xs-12.no-padder
-        .col-sm-6.no-padder
-          .m-xs.bg-white-only
-            .h4.text-black.wrapper-xs.b-b &nbsp; CV Status
-            .hbox.wrapper-xs
-              .col(style='max-width: 250px;')
-                canvas.chart.chart-doughnut(chart-data='Dash.chart.data' chart-colours='["#5B90BF", "#96b5b4", "#ab7967"]' chart-labels='Dash.chart.labels')
-              .col.wrapper-xs
-                ul.doughnut-legend
+        .col-sm-8.no-padder
+          .m-xs.b-a.bg-white-only
+            .h4.text-black-lter.wrapper-sm.b-b: span.m-l-n-sm &nbsp; CV Status
+            .hbox.hbox-auto-sm.hbox-auto-xs.wrapper-xs
+              .col.w-md.v-middle(style='max-width: 250px; margin: 0 auto;')
+                canvas.inline.chart.chart-doughnut(chart-data='Dash.chart.data' chart-colours='["#5B90BF", "#96b5b4", "#ab7967"]' chart-labels='Dash.chart.labels')
+              .col.v-middle.wrapper-xs
+                ul.doughnut-legend.clear(style='max-width: 14em; margin: 0 auto;')
                   li.pull-left
                     span(style='background-color:#5B90BF')
                     | Awaiting Interviews
@@ -59,19 +58,19 @@ div(ng-controller='DashboardController as Dash')
                     span(style='background-color:#ab7967')
                     | Awaiting Feedback on Interview
 
-        .col-sm-6.no-padder
+        .col-sm-4.no-padder
           .m-xs.hide IN FUTURE
       .col-xs-12.no-padder
-        .m-xs.wrapper-xs.bg-white-only
-          .h4.text-black.wrapper-xs.b-b &nbsp; Upcoming Interviews
+        .m-xs.b-a.bg-white-only
+          .h4.text-black-lter.wrapper-sm.b-b: span.m-l-n-sm &nbsp; Upcoming Interviews
           .hbox.wrapper-sm(ng-if='Dash.interviews.length===0')
             .col.text-center.text-light-lter None for This Week
-          .hbox.wrapper-sm.b-b(ng-if='Dash.interviews.length>0')
+          .hbox.wrapper-sm(ng-if='Dash.interviews.length>0')
             .col: .h6.font-bold Name
             .col: .h6.font-bold Type
             .col: .h6.font-bold Time
           div(style='max-height: 300px; overflow-y: auto;')
-            .hbox.wrapper-sm.b-b(ng-repeat='applicant in Dash.interviews')
+            .hbox.wrapper-sm.b-t(ng-repeat='applicant in Dash.interviews')
               .col: a(ui-sref='app.applicant.view({applicantId: applicant.id})') {{applicant.name}}
               .col
                 i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}' uib-tooltip='{{App.states[applicant.interview_type].name}}' tooltip-placement='left')
@@ -84,7 +83,7 @@ div(ng-controller='DashboardController as Dash')
                 i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded(title='Load More' ng-click='Dash.getInterviews()')
       .col-xs-12.no-padder.hide
         .m-xs.wrapper-xs.bg-white-only
-          .h4.text-black.wrapper-xs.b-b &nbsp; Upcoming Joinees
+          .h4.text-black-lter.wrapper-xs.b-b &nbsp; Upcoming Joinees
           .hbox.wrapper-md
             .col
               .fa-4x.h1 Chart
