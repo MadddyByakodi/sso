@@ -29,7 +29,7 @@
         button.btn.btn-sm.bg-light.rounded(type='submit')
           i.fa.fa-search
   ul.nav.navbar-nav.navbar-right
-    li.hide: a: i.fa.fa-lg.fa-comments
+    li: a(ui-sref='app.notifications' title='Notifications'): i.fa.fa-lg.fa-bell-o
 
     li.dropdown(uib-dropdown='')
       a.dropdown-toggle.clear(href='', uib-dropdown-toggle='')

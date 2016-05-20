@@ -31,6 +31,13 @@ angular.module('qui.hire')
           url: '/dashboard',
           templateUrl: 'html/dashboard.html',
         })
+        .state('app.notifications', {
+          url: '/notifications',
+          template: [
+            '<div class=" wrapper-sm h4 font-bold b-b m-t-xs">Your Notifications</div>',
+            '<div class="text-center h5 m-t-sm">You have zero notifications.</div>',
+          ].join(),
+        })
         .state('app.jobs', {
           abstract: true,
           url: '/jobs',
