@@ -17,24 +17,24 @@
 
   .wrapper-xs.m-l-sm
     .m-t-xl.m-l-sm(ng-if='Applicant.job')
-      div.inline.wrapper-sm.h4
+      div.inline.wrapper-xs.h4
         span.text-dark(title='Job position') {{Applicant.job.role}}
         span(title='Job location') &nbsp; – {{Applicant.job.job_location}}
 
       div.inline.padder: span.b-1x.b-r.b-l.b-ligth-dker
 
-      div.inline.wrapper-sm(title='Salary range')
+      div.inline.wrapper-xs(title='Salary range')
         i.fa.fa-lg.fa-inr.text-light-dker
         | &nbsp; {{Applicant.job.min_sal}} – {{Applicant.job.max_sal}} Lakhs
-      div.inline.wrapper-sm(title='Minumux/Maximum experience')
+      div.inline.wrapper-xs(title='Minumux/Maximum experience')
         i.fa.fa-md.fa-line-chart.text-light-dker
         span &nbsp; {{Applicant.job.min_exp}} – {{Applicant.job.max_exp}} Years
 
-      div.inline.wrapper-sm(title='Total vacancy')
+      div.inline.wrapper-xs(title='Total vacancy')
         i.fa.fa-md.fa-users.text-light-dker
         span &nbsp; Vacancy {{Applicant.job.vacancy}}
 
-      div.inline.wrapper-sm(title='Job status')
+      div.inline.wrapper-xs(title='Job status')
         span.b-a.rounded.text-danger.b-danger.lt(ng-if='(Applicant.job.job_status === "Closed")')
           span.padder.h5 Closed
         span.b-a.rounded.text-success-dker.b-success.dk(ng-if='!(Applicant.job.job_status === "Closed")')
@@ -43,7 +43,7 @@
     .m-b-xs.hbox.m-t-xl(ng-if='Applicant.applicants.length === 0')
       .col: h1.text-center.text-muted(ng-if='!Applicant.ui.loading') No Applicants
 
-    .m-b-md.wrapper-xs.hbox(ng-repeat='applicant in Applicant.applicants')
+    .wrapper-xs.hbox(ng-repeat='applicant in Applicant.applicants')
       .col.bg-white.b-a
         .col-xs-12.col-md-10.no-padder
           .tl-content.m-none.padder.w-full.w-auto-xs

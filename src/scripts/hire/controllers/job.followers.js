@@ -37,6 +37,10 @@ angular.module('qui.hire')
           vm.data.user_id = $item.id;
           vm.Users.selected = $item; // to pre inset in list of followers
         },
+
+        unselect: function unselect() {
+          delete vm.data.user_id;
+        },
       };
 
       vm.getAllUser = function getAllUser() {

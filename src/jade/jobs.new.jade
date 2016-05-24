@@ -265,11 +265,11 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
       .line.line-dashed.b-b.line-lg.pull-in
       label.w-full.input-group
         .col-xs-12.no-padder Interview Address
-        textarea.form.form-control(type='text' ng-model='Job.data.interview_addr')
+        textarea.form.form-control(type='text' ng-model='Job.data.interview_addr' style='resize: none;')
       .line.line-dashed.b-b.line-lg.pull-in
       label.w-full.input-group
         .col-xs-12.no-padder Interview Directions
-        textarea.form.form-control(type='text' ng-model='Job.data.interview_place_direction')
+        textarea.form.form-control(type='text' ng-model='Job.data.interview_place_direction' style='resize: none;')
 
   .col-xs-12: button.btn.btn-success.pull-right(type='submit' ng-click='Job.create()' ng-disabled='form.$invalid')
     span(ng-if='!App.$state.params.jobId') CREATE

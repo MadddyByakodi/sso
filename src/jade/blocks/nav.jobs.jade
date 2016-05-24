@@ -1,9 +1,10 @@
 div(ng-controller='NavJobsController as Job' style='position: relative;')
   .w.bg-light.b-b.b-r(style='position: fixed; z-index: 2;')
     .wrapper-xs
-      .b-b: a.w-full.btn.btn-md.btn-primary.btn-addon.text-center(ui-sref='app.jobs.new' target='_blank')
-        span.font-thin.pull-left.padder: .padder &nbsp; Upload JD
-        i.pull-right.wrapper-xs.fa.fa-upload
+      .b-b
+        a.btn-group(ui-sref='app.jobs.new' target='_blank')
+          button.btn.btn-primary: .padder: .padder &nbsp;Upload JD
+          button.btn.btn-primary: i.fa.fa-upload
       .input-group
         input.form-control.wrapper-xs(type='text' placeholder='          Search Position' ng-model='Job.searchText.role')
         a.input-group-addon.input-sm.bg-light.dker: i.fa.fa-search.text-dark
