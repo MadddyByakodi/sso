@@ -6,7 +6,18 @@ angular.module('qui.accounts')
     function HomeController(APP, $window, Session) {
       const user = Session.read('userinfo');
       const location = $window.location;
-      if (user.group_id === 5) location.href = APP.hireLogin;
-      if (user.group_id === 2) location.href = APP.partnerLogin;
+      switch (user.group_id) {
+        case 2:
+          location.href = APP.partnerLogin;
+          break;
+        case 4:
+          location.href = APP.manageLogin;
+          break;
+        case 5:
+          location.href = APP.hireLogin;
+          break;
+        default:
+          break;
+      }
     },
   ]);

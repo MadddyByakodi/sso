@@ -3,10 +3,24 @@ angular.module('qui.accounts')
     'OAuthorise',
     '$location',
     '$window',
-    function AuthoriseController(OAuthorise, $location, $window) {
+    'Session',
+    function AuthoriseController(OAuthorise, $location, $window, Session) {
       const vm = this;
+      const user = Session.read('userinfo');
+      const params = $location.search();
 
-      OAuthorise.get($location.search())
+      const apps = {
+        2: ['partnerquezx', 'partnerwordpress'],
+        4: ['managequezx'],
+        5: ['hirequezx'],
+      };
+
+      if (!~(apps[user.group_id] || []).indexOf(params.client_id)) {
+        vm.error = 'Access Denied!';
+        return;
+      }
+
+      OAuthorise.get(params)
         .then(res => {
           vm.app = res.data;
           vm.done(true);
@@ -14,7 +28,7 @@ angular.module('qui.accounts')
         .catch(res => (vm.error = res.data.error));
 
       vm.done = function done(allow) {
-        const data = $location.search();
+        const data = params;
         const location = $window.location;
         data.allow = allow ? 'true' : 'false';
         OAuthorise

@@ -15,6 +15,9 @@ const def = {
   partner: {
     client: process.env.PARTNER_CLIENT || 'partnerquezx',
   },
+  manage: {
+    client: process.env.MANAGE_CLIENT || 'managequezx',
+  },
 };
 
 const config = {
@@ -40,6 +43,7 @@ const conf = config[process.env.NODE_ENV || 'development'];
 conf.oauth_server = `${conf.prefix}api.${conf.domain}`;
 conf.hire.redirect_uri = `${conf.prefix}hire.${conf.domain}/access/oauth`;
 conf.partner.redirect_uri = `${conf.prefix}partner.${conf.domain}/access/oauth`;
+conf.manage.redirect_uri = `${conf.prefix}manage.${conf.domain}/access/oauth`;
 
 conf.handleResponse = function handleResponse(res) {
   return function sendResponse(err, apires, body) {
