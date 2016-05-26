@@ -3,14 +3,7 @@ a.dropdown-toggle(uib-dropdown-toggle id='append-to-link' ng-if='Follower.follow
   i.fa.fa-user-plus.fa-fw(style='font-size: 1.2em;')
   span.badge.badge-sm.up.bg-danger(ng-if= 'Follower.followers.length > 1' style='margin-left: -10px;') {{Follower.followers.length}}
 
-script(type='text/ng-template' id='userTemplate.html'): a
-  span(ng-bind-html='match.label | uibTypeaheadHighlight:query')
-  span.text-black-lter
-    | &nbsp; &lt;
-    span(ng-bind-html='match.model.email_id | uibTypeaheadHighlight:query')
-    | &gt;
-
-.dropdown-menu
+.dropdown-menu(uib-dropdown-menu)
   .panel.bg-white-only
     .panel-heading.bg-light.wrapper-xs
       strong.m-l-xs JD shared with
@@ -36,7 +29,7 @@ script(type='text/ng-template' id='userTemplate.html'): a
         .line.m-xs
 
     //- Only get users if clicked on elements => saves getUser XHR
-    .wrapper-xs.bg-light.dk(ng-click='Follower.Users.all || Follower.getAllUser()')
+    .wrapper-xs.bg-light(ng-click='Follower.Users.all || Follower.getAllUser()')
 
       form.form-inline.bg-white-only(name='inviteUser' role='inviteUser' ng-submit='Follower.inviteUser()' style='top: 20px; z-index: 1001' ng-show='Follower.showInviteUser')
         .form-group.wrapper-xs
@@ -59,11 +52,14 @@ script(type='text/ng-template' id='userTemplate.html'): a
 
       form.form-inline.pos-rlt(name='follower' role='follower' ng-submit='Follower.add(Follower.Users.selected)' ng-show='!Follower.showInviteUser')
 
-        div
-          i.fa.fa-refresh.fa-spin.m-r-xs.m-l-xs(ng-show='Follower.Users.loading')
-          span.m-l-xs(ng-show='Follower.Users.model') Invite:
-            a.text-info-dker(href='' ng-click='Follower.inviteUserData = { name: Follower.Users.model, follower_access_id: 2 }; Follower.showInviteUser = true') &nbsp; {{Follower.Users.model}}
-          span &nbsp;
+        div.m-l-xs
+          a.b-a.b-info.r.bg-white-only(href='')
+            span.text-info-dker(
+              ng-show='Follower.Users.model'
+              ng-click='Follower.invite(Follower.Users.model)'
+            )
+              strong &nbsp; Add co-worker:
+              span &nbsp; {{Follower.Users.model}} &nbsp;
 
         .form-group.wrapper-xs
           input.form-control(type='text' placeholder='Name or Email' ng-model='Follower.Users.model' uib-typeahead='user.name for user in Follower.Users.list() | filter: {$:$viewValue} ' typeahead-loading='Follower.Users.loading' typeahead-no-results='Follower.Users.noResults' typeahead-on-select='Follower.Users.select($item)' required typeahead-min-length='0' typeahead-template-url='userTemplate.html' ng-change='Follower.Users.unselect()')
@@ -81,3 +77,9 @@ script(type='text/ng-template' id='userTemplate.html'): a
         .form-group.b-l.m-l-lg.padder
           button.btn.btn-sm.btn-success(type='submit' ng-disabled='follower.$invalid') Add
 
+script(type='text/ng-template' id='userTemplate.html'): a
+  span(ng-bind-html='match.label | uibTypeaheadHighlight:query')
+  span.text-black-lter
+    | &nbsp; &lt;
+    span(ng-bind-html='match.model.email_id | uibTypeaheadHighlight:query')
+    | &gt;

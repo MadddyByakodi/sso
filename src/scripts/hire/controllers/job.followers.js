@@ -47,6 +47,13 @@ angular.module('qui.hire')
         Users.getAll({ q: '' }).then(r => (vm.Users.all = r.data.items));
       };
 
+      vm.invite = function invite(model) {
+        const field = /\S+@\S+\.\S+/.test(model) ? 'email_id' : 'name';
+        vm.inviteUserData = { follower_access_id: 2 };
+        vm.inviteUserData[field] = model;
+        vm.showInviteUser = true;
+      };
+
       vm.inviteUser = function inviteUser() {
         Users.create(vm.inviteUserData).then(res => {
           vm.data = {
