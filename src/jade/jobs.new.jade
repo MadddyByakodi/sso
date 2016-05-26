@@ -19,7 +19,7 @@ div(ng-if='App.$state.params.jobId')
     span(ng-if='!App.$state.params.jobId') Add New
     span(ng-if='App.$state.params.jobId') Update
     | &nbsp;Position
-form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
+form.form-horizontal.form-validation.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
   .panel.panel-primary.no-border
     .panel-heading.font-thin.h4
       | Job Description
@@ -34,8 +34,19 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
           label.col-xs-11.input-group
             | Location
             span.text-danger *
-            input.form-control(type='text' ng-model='Job.Regions.model' placeholder='Job Location' uib-typeahead='region.name for region in Job.Regions.get($viewValue)' typeahead-loading='Job.Regions.loadingRegions' typeahead-no-results='Job.Regions.noResults' typeahead-on-select='Job.Regions.select($item)' required ng-change='Job.data.region_id = ""')
+
+            input.form-control(
+              type='text' name='location'
+              ng-model='Job.Regions.model'
+              placeholder='Job Location'
+              uib-typeahead='region.name for region in Job.Regions.get($viewValue)'
+              typeahead-loading='Job.Regions.loadingRegions'
+              typeahead-no-results='Job.Regions.noResults'
+              typeahead-on-select='Job.Regions.select($item)'
+              required ng-change='Job.data.region_id = ""; form.location.$setValidity("required", false)'
+            )
             input(type='hidden' ng-model='Job.data.region_id' required)
+
             i.fa.fa-refresh.fa-spin(ng-show='Job.Regions.loadingRegions')
             div(ng-show='Job.Regions.noResults')
               i.fa.fa-remove
@@ -45,27 +56,49 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
             | Vacancies
             span.text-danger *
             input.form.form-control(type='number' ng-model='Job.data.vacancy' min='1' required)
+
       .line.line-dashed.b-b.line-lg.pull-in
+
       .col-sm-6.no-padder
         label.w-full.input-group
           .col-xs-12.no-padder
             | CTC Offered (Lakhs)
             span.text-danger *
+
           .col-xs-5.no-padder
-            input.form.form-control(type='number' placeholder='Minimum Annual CTC in Lakhs' min='0' step='0.01' ng-model='Job.data.min_sal' required)
+            input.form.form-control(
+              type='number' name='min_sal' min='0' max='{{Job.data.max_sal}}' step='0.01'
+              placeholder='Minimum Annual CTC in Lakhs'
+              ng-model='Job.data.min_sal' required
+            )
           .col-sm-1.col-xs-2.no-padder: span.btn.w-full to
           .col-xs-5.no-padder
-            input.form.form-control(type='number' placeholder='Maximum Annual CTC in Lakhs' min='0' step='0.01' ng-model='Job.data.max_sal' required)
+            input.form.form-control(
+              type='number' name='max_sal' min='{{Job.data.min_sal}}' step='0.01'
+              placeholder='Maximum Annual CTC in Lakhs'
+              ng-model='Job.data.max_sal' required
+            )
       .col-sm-6.no-padder
         label.w-full.input-group
           .col-xs-12.no-padder
             | Experience (Years)
             span.text-danger *
+
           .col-xs-5.no-padder
-            input.form.form-control(type='number' placeholder='Minimum Experience (In Years)' min='0' ng-model='Job.data.min_exp' required)
+            input.form.form-control(
+              type='number' min='0' max='{{Job.data.max_exp}}'
+              placeholder='Minimum Experience (In Years)'
+              ng-model='Job.data.min_exp' required
+            )
+
           .col-xs-2.no-padder: span.btn.w-full to
+
           .col-xs-5.no-padder
-            input.form.form-control(type='number' placeholder='Maximum Experience (In Years)' min='0' ng-model='Job.data.max_exp' required)
+            input.form.form-control(
+              type='number' min='{{Job.data.min_exp}}'
+              placeholder='Maximum Experience (In Years)'
+              ng-model='Job.data.max_exp' required
+            )
       .line.line-dashed.b-b.line-lg.pull-in
       label.w-full.input-group
         .col-xs-12.no-padder
@@ -189,7 +222,13 @@ form.form-horizontal.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
             | Job Functional Area
             span.text-danger *
           .col-sm-12.no-padder
-            select.form-control.m-b(name='functional_area' ng-model='Job.data.func_id' ng-options='func.id*1 as func.name for func in  Job.Funcs | orderBy:"name"' id='func_id' required)
+            select.form-control.m-b(
+              ng-class='{"b-danger": form.func_id.$invalid}'
+              name='func_id'
+              ng-model='Job.data.func_id'
+              ng-options='func.id*1 as func.name for func in  Job.Funcs | orderBy:"name"'
+              required
+            )
       .line.line-dashed.b-b.line-lg.pull-in
       .col-sm-6.no-padder
         label.w-full.input-group
