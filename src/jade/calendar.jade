@@ -20,10 +20,10 @@ div(ng-controller='CalendarController as Calendar')
           | {{ Calendar.calendarTitle }}
           a.pull-right: i.fa.fa-chevron-right(mwl-date-modifier='', date='Calendar.calendarDay', increment='Calendar.calendarView')
         mwl-calendar(
-          events='Calendar.applicants'
           view='Calendar.calendarView'
+          view-date='Calendar.calendarDay'
+          events='Calendar.applicants'
           view-title='Calendar.calendarTitle'
-          current-day='Calendar.calendarDay'
           cell-is-open='Calendar.isCellOpen'
           day-view-start='06:00'
           day-view-end='22:00'

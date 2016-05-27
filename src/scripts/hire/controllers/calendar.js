@@ -1,4 +1,11 @@
 angular.module('qui.hire')
+  .config([
+    'calendarConfig',
+    function configureCalendar(calendarConfig) {
+      const conf = calendarConfig;
+      conf.showTimesOnWeekView = true;
+    },
+  ])
   .controller('CalendarController', [
     'Page',
     '$scope',
