@@ -58,24 +58,18 @@ angular.module('qui.hire')
             angular.forEach(result, applicant => {
               vm.applicants.push({
                 title: `
-                  <a href="${
+                  <a class="text-info-dk" href="${
                     $state.href('app.jobs.manage', { jobId: applicant[root].id })
-                  }" target="_blank">
-                    <span class="text-${vm.colors[applicant.interview_type]}-dker">${
-                      applicant[root].role
-                    }</span>
-                  </a> –
-                  <a href="${
+                  }" target="_blank">${applicant[root].role}</a> –
+                  <a class="text-info-dk" href="${
                     $state.href('app.applicant.view', { applicantId: applicant.id })
-                  }" target="_blank">
-                    <span class="text-${
-                      vm.colors[applicant.interview_type]
-                    }-dker">${applicant.name}</span>
-                  </a> &nbsp;
-                  <span class="h6 b-a b-${
+                  }" target="_blank">${applicant.name}</a> &nbsp;
+                  <div class="inline h6 b-a text-${
+                    vm.colors[applicant.interview_type]
+                  } b-${
                     vm.colors[applicant.interview_type]
                   }">&nbsp; ${applicant.state_name} &nbsp;
-                  </span> &nbsp;
+                  </div> &nbsp;
                 `,
                 type: vm.colors[applicant.interview_type],
                 startsAt: moment(applicant.interview_time).toDate(),

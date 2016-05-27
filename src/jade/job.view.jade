@@ -42,12 +42,12 @@ div.bg-white-only(ng-controller='JobViewController as Job')
               span(title='Job position') {{Job.data.role}}
               span.text-muted(title='Job location') &nbsp;– {{Job.data.job_location}}
 
-          .wrapper-xs.h4(title='Salary range')
+          .wrapper-xs.h4(title='Salary range' ng-if='Job.data.min_sal || Job.data.max_sal')
               i.fa.fa-lg.fa-inr
-              | &nbsp; {{Job.data.min_sal}} – {{Job.data.max_sal}} Lakhs
+              span &nbsp; {{Job.data.min_sal}} – {{Job.data.max_sal}} Lakhs
           .wrapper-xs.h4(title='Functional area')
             i.fa.fa-md.fa-briefcase
-            | &nbsp;{{Job.data.functional_area}}
+            span &nbsp;{{Job.data.functional_area}}
 
           .m-t-sm(title='Job status')
             span.b-a.rounded.text-danger.b-danger.lt(ng-if='(Job.data.job_status === "Closed")')
@@ -56,10 +56,10 @@ div.bg-white-only(ng-controller='JobViewController as Job')
               span.padder.h5 Open
 
       .wrapper-xs
-        .hbox.wrapper-xs(ng-if='Job.data.min_exp && Job.data.max_exp')
+        .hbox.wrapper-xs(ng-if='Job.data.min_exp || Job.data.max_exp')
           .col.thumb-lg: .h4.text-muted Experience
           .col.v-middle {{Job.data.min_exp}} – {{Job.data.max_exp}} Years
-        .hbox.wrapper-xs(ng-if='Job.data.min_exp && Job.data.max_exp')
+        .hbox.wrapper-xs(ng-if='Job.data.vacancy')
           .col.thumb-lg: .h4.text-muted Vacancy
           .col.v-middle {{Job.data.vacancy}}
 
@@ -89,10 +89,9 @@ div.bg-white-only(ng-controller='JobViewController as Job')
       .wrapper-xs
         .wrapper-xs.h4.text-muted About Us
         .wrapper-xs
-          .h4.text-light-dker
-            | {{Job.data.client_name}}
-            i.text-muted(ng-if='Job.data._root_.min_emp && Job.data._root_.max_emp')
-              | &nbsp; ({{Job.data._root_.min_emp}} - {{Job.data._root_.max_emp}} Employees)
+          .h4.text-light-dker {{Job.data.client_name}}
+            em.m-l-xs.text-muted(ng-if='Job.data._root_.min_emp || Job.data._root_.max_emp')
+              | ({{Job.data._root_.min_emp}} - {{Job.data._root_.max_emp}} Employees)
           .m-t-xs
           p {{Job.data._root_.description}}
           p.text-muted(ng-if='Job.data._root_.website') Website: {{Job.data._root_.website}}
@@ -138,9 +137,11 @@ div.bg-white-only(ng-controller='JobViewController as Job')
         .wrapper-xs: .wrapper-xs.b-b
 
 
-      .h4.wrapper-xs(ng-if='Job.data.days_per_week && Job.data.start_work_time && Job.data.end_work_time')
+      .h4.wrapper-xs(ng-if='Job.data.days_per_week || Job.data.start_work_time || Job.data.end_work_time')
         .wrapper-xs.h4.text-muted Working Days
-        .wrapper-xs.h5 {{Job.data.days_per_week}} Days a Week ({{Job.data.start_work_time}} to {{Job.data.end_work_time}})
+        .wrapper-xs.h5
+          span(ng-if='Job.data.days_per_week') {{Job.data.days_per_week}} Days a Week
+          span.m-l-xs(ng-if='Job.data.start_work_time && Job.data.end_work_time') ({{Job.data.start_work_time}} to {{Job.data.end_work_time}})
 
       .h4.wrapper-xs(ng-if='Job.data.job_nature')
         .wrapper-xs.h4.text-muted Job Nature
