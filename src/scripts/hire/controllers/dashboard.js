@@ -6,19 +6,24 @@ angular.module('qui.hire')
     'moment',
     function DashboardCtrl(Page, Summary, Applicants, moment) {
       const vm = this;
+      vm.aftime = { days: 0, hours: 0, raw: 0 }; // average feeback default values
       Page.setTitle('Dashboard');
       vm.getSummary = function getSummary() {
         Summary.get({ state_id: '1,5,8,9,17' })
-          .then(res => {
+          .then(({ aftime, states }) => {
             vm.summary = {
-              cv: res[1] || 0,
-              interview: res[9] || 0,
+              cv: states[1] || 0,
+              interview: states[9] || 0,
               await_interview: [
-                res[5] || 0,
-                res[8] || 0,
-                res[17] || 0,
+                states[5] || 0,
+                states[8] || 0,
+                states[17] || 0,
               ].reduce((a, b) => a + b),
             };
+
+            const days = Math.floor(aftime);
+            const hours = Math.round((aftime - days) * 24);
+            vm.aftime = { days, hours, raw: aftime };
 
             vm.chart = {
               labels: ['Awaiting Interviews', 'AF on CV', 'AF on Interview'],

@@ -37,6 +37,7 @@ form.form-horizontal.form-validation.col-lg-10.col-lg-offset-1.wrapper-md(name='
 
             input.form-control(
               type='text' name='location'
+              autocomplete='off'
               ng-model='Job.Regions.model'
               placeholder='Job Location'
               uib-typeahead='region.name for region in Job.Regions.get($viewValue)'

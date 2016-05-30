@@ -59,7 +59,15 @@ div(ng-controller='DashboardController as Dash')
                     | Awaiting Feedback on Interview
 
         .col-sm-4.no-padder
-          .m-xs.hide IN FUTURE
+          .m-xs.b-a.bg-white-only
+            .h4.text-black-lter.wrapper-sm.b-b: span.m-l-n-sm &nbsp; Average Feedback Time
+            .hbox.wrapper-xs
+              .col.v-middle
+                .wrapper-lg.text-center
+                  span.h1.fa-4x(ng-bind='Dash.aftime.days')
+                  span Days
+                  span.m-l-xs.h1.fa-4x(ng-bind='Dash.aftime.hours')
+                  span Hours
       .col-xs-12.no-padder
         .m-xs.b-a.bg-white-only
           .h4.text-black-lter.wrapper-sm.b-b: span.m-l-n-sm &nbsp; Upcoming Interviews
