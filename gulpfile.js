@@ -191,7 +191,7 @@ gulp.task(
   'build:copy',
   ['build:copy:sourcesanspro', 'build:copy:fontawesome'],
   () => gulp
-    .src(['dist/images/**', 'dist/fonts/**', '*.js', '*.json'], { base: 'dist' })
+    .src(['dist/images/**', 'dist/fonts/**', 'dist/*.js', 'dist/*.json'], { base: 'dist' })
     .pipe(gulp.dest('assets'))
 );
 
