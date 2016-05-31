@@ -1,0 +1,12 @@
+{
+  "name": "Quezx Hire",
+  "short_name": "qnotify",
+  "icons": [{
+        "src": "/images/logo.svg",
+        "sizes": "192x192"
+      }],
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "689513674253",
+  "gcm_user_visible_only": true
+}

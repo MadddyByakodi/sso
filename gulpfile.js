@@ -33,6 +33,12 @@ gulp.task('html', () => gulp
     message: 'all jade files compiled',
   })));
 
+// json assets direct copy
+gulp.task('copy', () => gulp
+  .src('src/*.json')
+  .pipe(gulp.dest('dist'))
+);
+
 // Fonts
 gulp.task('fonts', () => gulp
   .src('bower_components/bootstrap-sass/assets/fonts/**')
@@ -90,20 +96,26 @@ gulp.task('styles', () => gulp
       }))
       .pipe(plugin.sourcemaps.write('.'))
       .pipe(gulp.dest('dist/scripts'))
-      .pipe(plugin.rename({ suffix: '.min' }))
-      .pipe(plugin.sourcemaps.write('.'))
-      .pipe(gulp.dest('dist/scripts'))
-      .pipe(plugin.notify({
-        onLast: true,
-        title: 'Scripts Compilation',
-        message: 'script build completed',
-      }))
     );
 
     return task;
   });
 
-  gulp.task('scripts', scriptTasks);
+  gulp.task('scripts:src', () => gulp
+    .src('src/*.js')
+    .pipe(plugin.sourcemaps.init())
+    .pipe(plugin.babel({
+      presets: ['es2015'],
+    }))
+    .on('error', plugin.notify.onError({
+      message: 'Babel Error: <%= error.message %>',
+    }))
+    .pipe(plugin.uglify())
+    .pipe(plugin.sourcemaps.write('.'))
+    .pipe(gulp.dest('dist'))
+  );
+
+  gulp.task('scripts', ['scripts:src'].concat(scriptTasks));
 }());
 
 // lint Scripts
@@ -144,8 +156,11 @@ gulp.task('watch', () => {
   // Watch frontend .js files
   scriptsFolders.map(f => gulp.watch(`src/scripts/${f}/**/*.js`, [`scripts:${f}`]));
 
+  // Watch js files just inside src
+  gulp.watch(['src/*.js'], ['scripts:src']);
+
   // Watch node server files
-  gulp.watch(['app/**/*.js', '*.js', 'src/scripts/**/*.js'], ['lint']);
+  gulp.watch(['app/**/*.js', 'src/*.js', '*.js', 'src/scripts/**/*.js'], ['lint']);
 
   // Create LiveReload server
   plugin.livereload.listen();
@@ -156,7 +171,7 @@ gulp.task('watch', () => {
 
 gulp.task('build:dev', cb => runSequence(
   'lint', 'clean',
-  ['styles', 'scripts', 'images', 'fonts'],
+  ['styles', 'scripts', 'images', 'fonts', 'copy'],
   'html', cb
 ));
 
@@ -176,7 +191,7 @@ gulp.task(
   'build:copy',
   ['build:copy:sourcesanspro', 'build:copy:fontawesome'],
   () => gulp
-    .src(['dist/images/**', 'dist/fonts/**'], { base: 'dist' })
+    .src(['dist/images/**', 'dist/fonts/**', '*.js', '*.json'], { base: 'dist' })
     .pipe(gulp.dest('assets'))
 );
 
