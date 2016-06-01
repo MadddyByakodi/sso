@@ -14,11 +14,11 @@ div(ng-controller='DashboardController as Dash')
             .col
               i.fa.fa-file-text-o.fa-lg
               span.h4 &nbsp;CVs
-              .fa-4x.h1 {{Dash.summary.cv}}
+              .fa-4x.h1(ng-bind='Dash.summary.cv || 0')
             .col.b-l.wrapper-xs
               i.fa.fa-user-secret.fa-lg
               span.h4 &nbsp;Interviews
-              .fa-4x.h1 {{Dash.summary.interview}}
+              .fa-4x.h1(ng-bind='Dash.summary.interview || 0')
       .col-xs-12.no-padder
         .b-a.m-xs.bg-white
           .h4.text-black-lter.wrapper-sm.b-b: span.m-l-n-sm &nbsp; Actions Required
@@ -36,7 +36,7 @@ div(ng-controller='DashboardController as Dash')
               div.wrapper-xs(ng-if='Dash.pipeUI.loading')
                 i.fa.fa-spin.fa-circle-o-notch.btn.btn-default.wrapper-xs.rounded(title='Loading')
               div.wrapper-xs(ng-if='Dash.pipeUI.lazyLoad')
-                i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded(title='Load More' ng-click='Dash.getPipeline()')
+                i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded(title='Load more' ng-click='Dash.getPipeline()')
   .col-sm-8.no-padder
     .m-xs
       .col-xs-12.no-padder
@@ -88,7 +88,7 @@ div(ng-controller='DashboardController as Dash')
               div.wrapper-xs(ng-if='Dash.interviewsUI.loading')
                 i.fa.fa-spin.fa-circle-o-notch.btn.btn-default.wrapper-xs.rounded(title='Loading')
               div.wrapper-xs(ng-if='Dash.interviewsUI.lazyLoad')
-                i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded(title='Load More' ng-click='Dash.getInterviews()')
+                i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded(title='Load more' ng-click='Dash.getInterviews()')
       .col-xs-12.no-padder.hide
         .m-xs.wrapper-xs.bg-white-only
           .h4.text-black-lter.wrapper-xs.b-b &nbsp; Upcoming Joinees

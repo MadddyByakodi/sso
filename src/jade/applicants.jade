@@ -19,8 +19,7 @@
           a(ui-sref='app.jobs.manage({jobId: applicant._root_.id, bucket: "All" })') {{applicant._root_.role}}
         td.v-middle(ng-if='applicant.interview_type && applicant.interview_time')
           i.fa(class='text-{{App.interviewUI[applicant.interview_type].color}}-dker fa-{{App.interviewUI[applicant.interview_type].icon}}')
-          |  {{App.states[applicant.interview_type].name}},
-          |  {{applicant.interview_time | date : 'd MMM, h:mm a'}}
+          span {{App.states[applicant.interview_type].name}}, {{applicant.interview_time | date : 'd MMM, h:mm a'}}
         td.v-middle: .w-full(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
           button.btn(class='btn-{{App.states[applicant.state_id].config.color}}' uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;' ng-disabled='App.states[applicant.state_id].Actions.length===0')
             | {{applicant.state_name}}&nbsp;
@@ -28,15 +27,10 @@
           ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
             li(role='menuitem' ng-repeat='state in App.states[applicant.state_id].Actions')
               a(href='' ng-click='App.changeState(applicant, state.state_id, applicant._root_.id)') {{App.states[state.state_id].name}}
-    tfoot
-      tr
-        td
-        td
-          button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
-            i.fa.fa-circle-o-notch.fa-spin
-            strong &nbsp;Loading
-          button.pull-left.btn.btn-primary.m-t-xs(ng-if="Applicant.ui.lazyLoad" ng-click="Applicant.loadApplicants()")
-            i.fa.fa-plus-circle
-            strong &nbsp;Load More
-        td
+  .text-center.m-t-md
+    span(title='Loading ...' ng-if='Applicant.ui.loading')
+      i.fa.fa-spin.fa-circle-o-notch.btn.btn-default.wrapper-xs.rounded
+    span(title='Load more' ng-if='Applicant.ui.lazyLoad' ng-click='Applicant.loadApplicants()')
+      i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded
+
   h1.m-t-xxl.text-center.text-muted(ng-if='!Applicant.applicants.length') No Applicants

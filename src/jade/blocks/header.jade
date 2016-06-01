@@ -39,12 +39,12 @@
 
       //- dropdown
       ul.dropdown-menu.animated.fadeInRight.w
-        li.hide
-          a(ui-sref='app.help')
+        li
+          a(href='http://hire-updates.quezx.com' target='_blank')
             span.label.bg-info.pull-right new
             | Help
-        li.hide.divider
         li
           a(ng-href='{{App.app.settings.changePassword}}') Change Password
+        li.divider
         li(ng-controller='LogoutController as logout')
           a(ng-click='logout.init()') Logout

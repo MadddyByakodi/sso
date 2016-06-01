@@ -9,7 +9,10 @@
     span.font-thin Upload JD
   .m-l-md.font-thin.h3 Positions
 .col-lg-10.col-lg-offset-1.wrapper-md
-  table.table.m-b-none(ng-controller='JobsController as Job' ng-init="color={'High Priority':'success','Open': 'info', 'Hold': 'warning', 'Closed': 'danger'}" before-bottom='Job.loadJobs()')
+  table.table.m-b-none(
+    ng-controller='JobsController as Job'
+    ng-init="color={'High Priority':'success','Open': 'info', 'Hold': 'warning', 'Closed': 'danger'}" before-bottom='Job.loadJobs()'
+  )
     thead
       tr
         th Positions
@@ -23,14 +26,9 @@
         td.wrapper-md(class='text-danger-dker' ng-if='job.job_status_id === 4') Closed
         td.wrapper-md(class='text-primary-dker' ng-if='!(job.job_status_id === 4)') Open
         td.wrapper-md {{job.count}}
-    tfoot
-      tr
-        td
-          button.pull-right.btn.active.m-t-xs(ng-if="Job.ui.loading")
-            i.fa.fa-circle-o-notch.fa-spin
-            strong &nbsp;Loading
-          button.pull-right.btn.btn-primary.m-t-xs(ng-if="Job.ui.lazyLoad" ng-click="Job.loadJobs()")
-            i.fa.fa-plus-circle
-            strong &nbsp;Load More
-        td
-        td
+
+  .text-center.m-t-md
+    span(title='Loading ...' ng-if="Job.ui.loading")
+      i.fa.fa-spin.fa-circle-o-notch.btn.btn-default.wrapper-xs.rounded
+    span(title='Load more' ng-if="Job.ui.lazyLoad" ng-click="Job.loadJobs()")
+      i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded

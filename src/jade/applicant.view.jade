@@ -1,79 +1,91 @@
 div(ng-controller='ApplicantViewController as Applicant')
-  .col-md-3.no-padder.fixed-applicant-details
+  .col-md-3.no-padder.fixed-applicant-details.bg-white
     div(style='position: relative; height: 100%; width: 100%; top: 0; overflow-x: hidden; overflow-wrap: break-word;')
       //- Applicant top cover container
-      .wrapper-xs.bg-gd-applicant.dker.m-b-xs
-        .hbox.m-t-xs.text-white
-          .col.thumb-lg
-            .fa-stack.fa-3x.text-info-dker
-              i.fa.fa-circle.fa-stack-2x.fa-inverse
-              i.fa.fa-user.fa-stack-1x.m-t-xs(style='font-size: 1.5em;margin-top: 0.14em;color: #104465;')
-          .col.v-middle
-            .h4.text-ellipsis(title='{{Applicant.data.name}}') {{Applicant.data.name}}
-            .h5.m-t-xs.text-ellipsis(title='Job position: {{Applicant.job.role}}' ng-if='Applicant.job.role')
+      .wrapper-xs.m-b-xs
+        .hbox.m-t-xs
+          .col.wrapper-xs.v-middle
+            .h3.wrapper-xs.text-ellipsis.text-dark(title='{{Applicant.data.name}}' ng-bind='Applicant.data.name')
+            .h4.wrapper-xs.text-ellipsis(title='Job position: {{Applicant.job.role}}' ng-if='Applicant.job.role')
               i.fa.fa-briefcase.m-r-xs
               span(ng-bind='Applicant.job.role')
-          .col.v-middle.thumb-xs(title='System generated alogrithmic Score'): .font-thin.h3 {{Applicant.data.applicant_score}}
-        .m-b-xs
+          .col(href='' style='width: 2em;'): a.text-muted.pull-right: i.m-t-sm.wrapper-xs.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
+        .wrapper-xs
           .hbox(uib-dropdown='' uib-keyboard-nav='' dropdown-append-to-body)
-            button.btn.rounded(class='btn-{{App.states[Applicant.data.state_id].config.color}}' uib-dropdown-toggle='' ng-disabled='App.states[Applicant.data.state_id].Actions.length===0')
-              | {{Applicant.data.state_name}}&nbsp;
+            button.btn.rounded(
+              class='btn-{{App.states[Applicant.data.state_id].config.color}}'
+              uib-dropdown-toggle='' style='text-align:left;padding: 2px 8px;'
+              ng-disabled='App.states[Applicant.data.state_id].Actions.length===0'
+            )
+              span {{Applicant.data.state_name}}&nbsp;
               span(ng-if='App.states[Applicant.data.state_id].Actions.length>0').caret
-            a.col.v-middle(href='' style='width: 2em;'): i.b-a.b-2x.b-success.wrapper-xs.text-success.fa.fa-download(ng-click='App.downloadApplicant([Applicant.data.id])' title='Download CV')
+
+            .col.v-middle.thumb-xs(title='System generated alogrithmic Score')
+              .font-thin.h3.pull-right {{Applicant.data.applicant_score}}
             ul.uib-dropdown-menu(role='menu' aria-labelledby='simple-btn-keyboard-nav')
               li(role='menuitem' ng-repeat='state in App.states[Applicant.data.state_id].Actions')
                 a(href='' ng-click='App.changeState(Applicant.data, state.state_id, Applicant.data._root_)') {{App.states[state.state_id].name}}
 
       //- Applicant Details
+      .wrapper-xs.b-t
+        .wrapper-xs.h4.text-muted Contact details
+
+        .wrapper-xs.h4.m-t-xs
+          i.fa.fa-lg.fa-phone.text-success-dker
+          span.m-l-sm(ng-bind='Applicant.data.mobile')
+        .wrapper-xs.h4.m-t-xs
+          i.fa.fa-lg.fa-envelope.text-info-dker
+          span.m-l-sm(ng-bind='Applicant.data.email')
 
       //- Applicant Employee Information
-      .panel.panel-default.no-border
-        .panel-heading.bg-dark.lter.h4
-          .h4.text-white Employee Information
-        .panel-body
-          .h4.m-l-xs
-            .text-info-dker Designation
-            .font-thin {{Applicant.data.exp_designation}}
-          .h4.m-l-xs.m-t-sm
-            .text-info-dker Current Company
-            .font-thin {{Applicant.data.exp_employer}}
-          .h4.m-l-xs.m-t-sm
-            .text-info-dker Qualification
-            .font-thin {{Applicant.data.edu_degree}}
-          .h4.m-l-xs.m-t-sm
-            .text-info-dker Location
-            .font-thin {{Applicant.data.exp_location}}
-          .h4.m-l-xs.m-t-sm
-            .text-info-dker Current CTC
-            .font-thin {{Applicant.data.exp_salary}} Lakhs
-          .h4.m-l-xs.m-t-sm
-            .text-info-dker Expected CTC
-            .font-thin {{Applicant.data.expected_ctc}} Lakhs
-          .h4.m-l-xs.m-t-sm
-            .text-info-dker Work Experience
-            .font-thin {{Applicant.data.total_exp | number: 0}} Years
-          .h4.m-l-xs.m-t-sm
-            .text-info-dker Notice Period
-            .font-thin {{Applicant.data.notice_period}} Days
+      .wrapper-xs.b-t
+        .wrapper-xs.h4.text-muted Employee Information
 
-      //- Applicant Contact Details
-      .panel.panel-default.no-border
-        .panel-heading.bg-dark.lter.h4
-          .h4.text-white Contact Details
-        .panel-body
-          .h4.m-xs
-            i.fa.fa-lg.fa-phone.text-success-dker.wrapper-xs
-            | &nbsp; {{Applicant.data.mobile}}
-          .h4.m-xs
-            i.fa.fa-lg.fa-envelope.text-info-dker.wrapper-xs
-            | &nbsp; {{Applicant.data.email}}
+        .wrapper-xs.h4
+          .text-light Designation
+          .font-thin(ng-bind='Applicant.data.exp_designation')
+
+        .wrapper-xs.h4
+          .text-light Current company
+          .font-thin(ng-bind='Applicant.data.exp_employer')
+
+        .wrapper-xs.h4
+          .text-light Qualification
+          .font-thin(ng-bind='Applicant.data.edu_degree')
+
+        .wrapper-xs.h4
+          .text-light Location
+          .font-thin(ng-bind='Applicant.data.exp_location')
+
+        .wrapper-xs.h4
+          .text-light Current CTC
+          .font-thin
+            span(ng-bind='Applicant.data.exp_salary')
+            span &nbsp; Lakhs
+
+        .wrapper-xs.h4
+          .text-light Expected CTC
+          .font-thin
+            span(ng-bind='Applicant.data.expected_ctc')
+            span &nbsp; Lakhs
+
+        .wrapper-xs.h4
+          .text-light Work experience
+          .font-thin
+            span(ng-bind='Applicant.data.total_exp | number: 0')
+            span &nbsp; Years
+
+        .wrapper-xs.h4
+          .text-light Notice period
+          .font-thin
+            span(ng-bind='Applicant.data.notice_period')
+            span &nbsp; Days
 
       //- Applicant Skills
-      .panel.panel-default.no-border
-        .panel-heading.bg-dark.lter.h4
-          .h4.text-white Skills
-        .panel-body
-          .h6.clear
+      .wrapper-xs.b-t(ng-if='Applicant.data.skills && Applicant.data.skills.length')
+        .wrapper-xs.h4.text-muted Skills
+
+        .wrapper-xs.h6.clear
             .wrapper-xs.pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='value in Applicant.data.skills') &nbsp;{{value}}&nbsp;
 
     //- Resume container
@@ -82,54 +94,54 @@ div(ng-controller='ApplicantViewController as Applicant')
       iframe.h-full.b-a.b-light.w-full(ng-src='{{Applicant.trustSrc(Applicant.resumeSrc)}}')
 
   .col-md-3.nav-comment.no-padder(ng-controller='ApplicantCommentsController as Comments')
-    .col-xs-12(style='position: relative; height: 100%; width: 100%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
-      .col
-        .hbox.b-b.padder-v(ng-repeat='comment in Comments.data | orderBy: ["created_at", "id"]')
-          .col.text-center.thumb-sm
-            .fa-stack.fa-2x.text-primary
-              i.fa.fa-circle.fa-stack-2x
-              span.fa.fa-stack-1x.h3.fa-inverse {{comment.user.name[0].toUpperCase()}}
-          .col.clearfix
-            .col-xs-12
-              .text-info-dker {{comment.user.name}}
-              .text-danger-dker {{App.states[comment.state_id].name}}
-              .text-success-dker(ng-if='comment.scheduled_on')
-                //- Interviews
-                span(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1') Scheduled
-                //- Make an offer
-                span(ng-if='comment.state_id === 10') Offer
-                //-  Offer Accepted
-                span(ng-if='comment.state_id === 20') Offer Accepted
-                //-  Offer Rejected
-                span(ng-if='comment.state_id === 28') Offer Rejected
-                //- Backout after Joining
-                span(ng-if='comment.state_id === 29') Post-Joining Backout
-                //- Candidate Joined
-                span(ng-if='comment.state_id === 30') Joining
-                //- Backout before Joining
-                span(ng-if='comment.state_id === 31') Pre-Joining Backout
-                span &nbsp;Date -
-                strong &nbsp;{{comment.scheduled_on | date: 'MMM d, yyyy'}}
+    div(style='position: relative; height: 100%; width: 100%; top: 0; bottom: 50px; overflow-x: hidden; background-color: #fff; overflow-wrap: break-word;' scroll-to-bottom='Comments.ui.scrollToBottom')
+      ul.list-group.no-bg.pull-in
+        li.list-group-item(ng-repeat='comment in Comments.data | orderBy: ["created_at", "id"]')
+          a.pull-left.thumb-sm.m-r-md(href=''): .fa-stack.fa-2x.text-primary
+            i.fa.fa-circle.fa-stack-2x
+            span.fa.fa-stack-1x.h3.fa-inverse {{comment.user.name[0].toUpperCase()}}
 
-                //- only show time for interview
-                strong(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1') &nbsp;{{comment.scheduled_on | date: 'h:mm a'}}
-
-              //- Make an Offer
-              .text-success-dker(ng-if='comment.suggested_join_date && comment.state_id === 10')
-                //- Make an offer
-                span Suggested Joining Date -
-                strong &nbsp;{{comment.suggested_join_date | date: 'MMM d, yyyy'}}
-              .text-success-dker(ng-if='comment.offered_ctc && comment.state_id === 10')
-                span Offered CTC -
-                strong &nbsp;{{comment.currency}} {{comment.offered_ctc}} Lacs
-
+          .clear
+            .text-info-dker {{comment.user.name}}
+            .text-danger-dker {{App.states[comment.state_id].name}}
+            .text-success-dker(ng-if='comment.scheduled_on')
+              //- Interviews
+              span(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1') Scheduled
+              //- Make an offer
+              span(ng-if='comment.state_id === 10') Offer
+              //-  Offer Accepted
+              span(ng-if='comment.state_id === 20') Offer Accepted
+              //-  Offer Rejected
+              span(ng-if='comment.state_id === 28') Offer Rejected
+              //- Backout after Joining
+              span(ng-if='comment.state_id === 29') Post-Joining Backout
               //- Candidate Joined
-              .text-success-dker(ng-if='comment.final_ctc && comment.state_id === 30')
-                span Final CTC -
-                strong &nbsp;{{comment.currency}} {{comment.final_ctc}} Lacs
-              p {{comment.body}}
-              .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
-        .hbox(style='height: 40px;')
+              span(ng-if='comment.state_id === 30') Joining
+              //- Backout before Joining
+              span(ng-if='comment.state_id === 31') Pre-Joining Backout
+              span &nbsp;Date -
+              strong &nbsp;{{comment.scheduled_on | date: 'MMM d, yyyy'}}
+
+              //- only show time for interview
+              strong(ng-if='[5, 8 ,17].indexOf(comment.state_id) > -1') &nbsp;{{comment.scheduled_on | date: 'h:mm a'}}
+
+            //- Make an Offer
+            .text-success-dker(ng-if='comment.suggested_join_date && comment.state_id === 10')
+              //- Make an offer
+              span Suggested Joining Date -
+              strong &nbsp;{{comment.suggested_join_date | date: 'MMM d, yyyy'}}
+            .text-success-dker(ng-if='comment.offered_ctc && comment.state_id === 10')
+              span Offered CTC -
+              strong &nbsp;{{comment.currency}} {{comment.offered_ctc}} Lacs
+
+            //- Candidate Joined
+            .text-success-dker(ng-if='comment.final_ctc && comment.state_id === 30')
+              span Final CTC -
+              strong &nbsp;{{comment.currency}} {{comment.final_ctc}} Lacs
+            p {{comment.body}}
+            .text-muted.pull-right(title='{{comment.created_on | date: "medium"}}') {{comment.created_at | date: 'd MMM, h:mm a'}}
+
+      div(style='height: 20px;')
     form.form.form-validation.col-xs-12.wrapper-xs.bg-white.col-xs-12(style='position: relative; height: 50px; width: 100%; bottom: 40px; background-color: #fff;' ng-submit='Comments.insert()' name='commentForm')
       .input-group
         input.form-control(type='text' name='comment' placeholder='enter to comment' ng-model='Comments.post.comment' required)

@@ -99,10 +99,8 @@
               .clearfix.m-t-xs
                 i.btn.pull-right.text-success-dker.fa.fa-lg.fa-download(ng-click='App.downloadApplicant([applicant.id])')
                 span.item.text-light-dk.h3.pull-right.padder.b-l.b-r.b-light.font-thin(title='System generated algorithmic score')  {{applicant.applicant_score}}
-    .col-xs-2.col-xs-offset-5
-      button.pull-left.btn.active.m-t-xs(ng-if="Applicant.ui.loading")
-        i.fa.fa-circle-o-notch.fa-spin
-        strong &nbsp;Loading
-      button.pull-left.btn.btn-primary.m-t-xs(ng-if="Applicant.ui.lazyLoad" ng-click="Applicant.loadApplicants()")
-        i.fa.fa-plus-circle
-        strong &nbsp;Load More
+    .text-center.m-t-md
+      span(title='Loading ...' ng-if="Applicant.ui.loading")
+        i.fa.fa-spin.fa-circle-o-notch.btn.btn-default.wrapper-xs.rounded
+      span(title='Load more' ng-if="Applicant.ui.lazyLoad" ng-click="Applicant.loadApplicants()")
+        i.fa.fa-arrow-down.btn.btn-default.wrapper-xs.rounded

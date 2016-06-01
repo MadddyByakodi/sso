@@ -1,7 +1,3 @@
-.bg-gd-applicant{
-  background: linear-gradient(#176a99, #0b2a41);
-}
-
 .bg-gd{
   @include gradient-vertical(rgba(40,50,60,0), rgba(40,50,60,0.075), 0, 100%);
   filter:none;
