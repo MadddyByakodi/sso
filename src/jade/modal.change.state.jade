@@ -23,7 +23,7 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on')
       strong {{ChangeState.states[ChangeState.stateId].config.scheduled_on}}
       .input-group
-        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.exData.scheduled_on_date' ng-change='ChangeState.setScheduledOn()' is-open='ChangeState.ui.scheduledOn' close-text='Close' ng-click='ChangeState.ui.scheduledOn = true' min-date='ChangeState.today' required)
+        input.form.form-control(type='text' uib-datepicker-popup='dd-MMMM-yyyy' ng-model='ChangeState.exData.scheduled_on_date' ng-change='ChangeState.setScheduledOn()' is-open='ChangeState.ui.scheduledOn' close-text='Close' ng-click='ChangeState.ui.scheduledOn = true' required)
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on' ng-show='ChangeState.stateId === 12')
       strong Time
       .input-group

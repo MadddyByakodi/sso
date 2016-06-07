@@ -9,7 +9,20 @@ angular.module('qui.hire')
       Page.setTitle('Notifications');
       vm.notes = []; // collection of notifications
       vm.ui = { lazyLoad: true, loading: false }; // ui states
-      vm.params = { offset: 0, limit: 15 };
+      vm.params = { offset: 0, limit: 20 };
+      const mongoId = '_id';
+
+      vm.read = (note) => Notify.read(note[mongoId]).then(() => {
+        const notification = note;
+        notification.read = true;
+        vm.count--;
+      });
+
+      vm.unread = (note) => Notify.unread(note[mongoId]).then(() => {
+        const notification = note;
+        notification.read = false;
+        vm.count++;
+      });
 
       vm.readAll = () => Notify.readAll().then(() => $state.reload());
 

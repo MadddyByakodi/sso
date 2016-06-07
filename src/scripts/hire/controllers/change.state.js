@@ -19,7 +19,6 @@ angular.module('qui.hire')
       vm.applicant = applicant;
       vm.stateId = stateId;
       vm.currency = CURRENCY;
-      vm.today = new Date();
       vm.exData = {
         scheduled_on_time: moment()
           .startOf('day')

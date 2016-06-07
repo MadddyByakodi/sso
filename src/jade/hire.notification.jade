@@ -1,19 +1,33 @@
 .wrapper-sm.h4.font-bold.b-b.m-t-xs(before-bottom='Notify.load()') Your Notifications
 .text-center.h5.m-t-sm(ng-if='Notify.notes.length === 0') You have no notifications.
-.m-t-sm.w-full(style='margin: 0 auto; max-width: 900px;' ng-if='Notify.notes.length > 0')
+.m-t-sm.wrapper-xs.w-full(style='margin: 0 auto; max-width: 900px;' ng-if='Notify.notes.length > 0')
   .m-t-xs.m-b-xs.clear
     .btn-group.pull-left
-      button.btn.btn-primary All
-      button.btn.btn-default Unread
+      button.btn.btn-default(
+        ng-click='Notify.searchText = {}; Notify.showUnread = false'
+        ng-class='{active: !Notify.showUnread}'
+      ) All
+
+      button.btn.btn-default(
+        ng-click='Notify.searchText = {read: false}; Notify.showUnread = true'
+        ng-class='{active: Notify.showUnread}'
+      ) Unread
     .pull-right
       button.btn(ng-if='Notify.count > 0' ng-click='Notify.readAll()')
         span Mark all as read
         span.badge.bg-white.m-l-xs(ng-bind='Notify.count')
 
-  .list-group
-    a.media.list-group-item(ng-repeat='note in Notify.notes' href='{{note.payload.link}}')
+  .list-group: div.clear(ng-repeat='note in Notify.notes | filter: Notify.searchText')
+    a.media.list-group-item(
+      target='_blank'
+      href='{{note.payload.link}}'
+      ng-class='{"bg-light dk": !note.read}'
+      ng-click='!note.read && Notify.read(note)'
+    )
       span.media-body
         .h4(ng-bind='note.payload.title')
         .text-muted(ng-bind='note.timeago')
         .h5(ng-bind='note.payload.body')
-      .pull-right.m-t-n-lg yo
+    a.pos-rlt.pull-right.m-t-n-lg
+      i.wrapper-sm.m-t-n-xs.fa.fa-circle(title='Mark as read' ng-click='Notify.read(note)' ng-if='!note.read')
+      i.wrapper-sm.m-t-n-xs.fa.fa-circle-o(title='Mark as unread' ng-click='Notify.unread(note)' ng-if='note.read')
