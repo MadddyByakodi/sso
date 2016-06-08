@@ -83,7 +83,7 @@ angular.module('qui.hire')
       vm.notify = {
         data: { count: 0, recent_count: 0 },
         load() {
-          if (!vm.userinfo.id) return;
+          if (!(vm.userinfo && vm.userinfo.id)) return;
           Notify.count().then(r => (vm.notify.data = r.data));
         },
       };

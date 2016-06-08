@@ -15,13 +15,16 @@ angular.module('qui.accounts')
             vm.match = (confirmPassword) => confirmPassword
               .$setValidity('match', vm.data.password === vm.confirm_password);
 
-            vm.change = () => (vm.success = vm.error = '') || $http
+            vm.change = () => {
+              vm.success = vm.error = '';
+              $http
               .put(`${APP.apiServer}/user/password`, vm.data)
               .then(() => {
                 vm.success = 'Password update was successful.';
                 vm.data.old_password = vm.data.password = vm.confirm_password = '';
               })
               .catch(res => (vm.error = res.data.error_description));
+            };
           },
         ],
       };
