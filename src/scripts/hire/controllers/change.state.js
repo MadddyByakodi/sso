@@ -26,6 +26,23 @@ angular.module('qui.hire')
           .toDate(),
       };
 
+      vm.placeholder = function placeholder(selectedStateId) {
+        switch (selectedStateId) {
+          case 2:
+            return 'Please provide reason for rejection';
+          case 10:
+            return 'Please provide CTC details and joining date in the above fields';
+          case 19:
+            return 'Please provide Interview type (TI/PI/VI) & suggested times';
+          case 5:
+          case 8:
+          case 17:
+            return 'Please call the candidate once if you are directly scheduling for interview';
+          default:
+            return 'Please Comment something ...';
+        }
+      };
+
       vm.JobFollowers = {
         all: '',
         getAll: () => JobFollowers.getAll(jobId)

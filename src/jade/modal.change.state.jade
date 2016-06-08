@@ -11,13 +11,13 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
         option(ng-repeat='state in ChangeState.states[ChangeState.stateId].Childs' ng-value='state.state_id' ng-selected='$first') {{ChangeState.states[state.state_id].name}}
       //- Customized Selction of states for Interview Confirm
       div: .btn-group.text-center(ng-init="ChangeState.data.state_id = 5" ng-if='ChangeState.stateId === 12')
-        label.w-xs.btn.btn-sm.btn-success(ng-model='ChangeState.data.state_id', btn-radio="5")
+        label.w-xs.btn.btn-sm.btn-success(ng-model='ChangeState.data.state_id', uib-btn-radio="5")
           i.fa.fa-check.text-active
           | Telephonic
-        label.w-xs.btn.btn-sm.btn-primary(ng-model='ChangeState.data.state_id', btn-radio="8")
+        label.w-xs.btn.btn-sm.btn-primary(ng-model='ChangeState.data.state_id', uib-btn-radio="8")
           i.fa.fa-check.text-active
           | Personal
-        label.w-xs.btn.btn-sm.btn-info(ng-model='ChangeState.data.state_id', btn-radio="17")
+        label.w-xs.btn.btn-sm.btn-info(ng-model='ChangeState.data.state_id', uib-btn-radio="17")
           i.fa.fa-check.text-active
           | Video
     label.input-group(ng-if='ChangeState.states[ChangeState.stateId].config.scheduled_on')
@@ -89,7 +89,7 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
     label.input-group
       strong Instructions and Comments
       br
-      textarea.form.form-control(name='textarea' placeholder='{{ChangeState.states[ChangeState.stateId].config.comments}}' rows='7' cols='50' ng-model='ChangeState.data.comments')
+      textarea.form.form-control(name='textarea' placeholder='{{ChangeState.placeholder(ChangeState.data.state_id)}}' rows='7' cols='50' ng-model='ChangeState.data.comments')
 
   .modal-footer
     button.btn.btn-primary(type='submit' ng-disabled='form.$invalid') Submit
