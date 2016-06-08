@@ -26,8 +26,9 @@
     )
       span.media-body
         .h4(ng-bind='note.payload.title')
-        .text-muted(ng-bind='note.timeago')
+        .m-t-xs
         .h5(ng-bind='note.payload.body')
+        .text-muted(ng-bind='note.timeago')
     a.pos-rlt.pull-right.m-t-n-lg
       i.wrapper-sm.m-t-n-xs.fa.fa-circle(title='Mark as read' ng-click='Notify.read(note)' ng-if='!note.read')
       i.wrapper-sm.m-t-n-xs.fa.fa-circle-o(title='Mark as unread' ng-click='Notify.unread(note)' ng-if='note.read')

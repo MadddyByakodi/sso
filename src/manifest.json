@@ -1,10 +1,11 @@
 {
   "name": "Quezx Hire",
-  "short_name": "qnotify",
+  "short_name": "QHire",
   "icons": [{
-        "src": "/images/logo.svg",
-        "sizes": "192x192"
-      }],
+    "src": "images/logo.svg",
+    "sizes": "192x192",
+    "type": "image/svg+xml"
+  }],
   "start_url": "/",
   "display": "standalone",
   "gcm_sender_id": "689513674253",

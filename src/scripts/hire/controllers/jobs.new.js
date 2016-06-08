@@ -252,10 +252,15 @@ angular.module('qui.hire')
       $q.all([
         Funcs.get({ q: '', rows: 20 }),
         Industries.get({ q: '', rows: 30 }),
+        Jobs.payment(),
       ])
-      .then(result => {
-        vm.Funcs = result[0].items;
-        vm.Industries.list = result[1].items;
+      .then(([func, industry, payment]) => {
+        if (payment.status === 204) vm.agreementExpired = true;
+        vm.Funcs = func.items;
+        vm.Industries.list = industry.items;
+        vm.Payment = payment.data;
+        vm.Payment.min = Math.min(...(vm.Payment.items || []).map(x => x.start_range)) || 0;
+        vm.Payment.max = Math.max(...(vm.Payment.items || []).map(x => x.end_range)) || 10000;
 
         // Load Data to edit JD
         if ($state.params.jobId) {

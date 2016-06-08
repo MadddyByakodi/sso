@@ -19,16 +19,31 @@ div(ng-if='App.$state.params.jobId')
     span(ng-if='!App.$state.params.jobId') Add New
     span(ng-if='App.$state.params.jobId') Update
     | &nbsp;Position
-form.form-horizontal.form-validation.col-lg-10.col-lg-offset-1.wrapper-md(name='form')
+
+.b-a.r.w-xxl.bg-white.text-center(ng-if='Job.agreementExpired' style='margin: 5em auto')
+  i.m-t-md.fa.fa-4x.fa-times-circle-o.text-danger-lter
+  h1.m-t-md.m-b-md Oops..
+  .m-b-md.h4.text-muted Agreement has been expired. Please contact Quezx Team for agreement renewal
+
+form.form-horizontal.form-validation.col-lg-10.col-lg-offset-1.wrapper-md(name='form' ng-if='!Job.agreementExpired')
   .panel.panel-primary.no-border
     .panel-heading.font-thin.h4
       | Job Description
     .panel-body
-      .col-sm-8.no-padder
-        label.col-xs-12.col-sm-11.input-group
+      .no-padder(class='col-sm-{{Job.Payment.type ? 5 : 8}}')
+        label.w-full.input-group
           | What role would you like to hire?
           span.text-danger *
           input.form.form-control(type='text' placeholder='eg. Software Engineer' ng-model='Job.data.role' required)
+      .col-sm-3.no-padder(ng-if='Job.Payment.type')
+        label.padder-xs.w-full.input-group Designation wise Payment Model
+          select.form-control.m-b(
+            ng-class='{"b-danger": form.payment.$invalid}'
+            name='payment'
+            ng-model='Job.data.client_payment_designation_id'
+            ng-options='pay.id*1 as pay.designation for pay in  Job.Payment.items | orderBy:"range_order"'
+            required
+          )
       .col-sm-4.no-padder
         .col-xs-8.no-padder
           label.col-xs-11.input-group
@@ -68,14 +83,16 @@ form.form-horizontal.form-validation.col-lg-10.col-lg-offset-1.wrapper-md(name='
 
           .col-xs-5.no-padder
             input.form.form-control(
-              type='number' name='min_sal' min='0' max='{{Job.data.max_sal}}' step='0.01'
+              type='number' name='min_sal' step='0.01'
+              min='{{Job.Payment.min}}' max='{{Job.data.max_sal}}'
               placeholder='Minimum Annual CTC in Lakhs'
               ng-model='Job.data.min_sal' required
             )
           .col-sm-1.col-xs-2.no-padder: span.btn.w-full to
           .col-xs-5.no-padder
             input.form.form-control(
-              type='number' name='max_sal' min='{{Job.data.min_sal}}' step='0.01'
+              type='number' name='max_sal' step='0.01'
+              min='{{Job.data.min_sal}}' max='{{Job.Payment.max}}'
               placeholder='Maximum Annual CTC in Lakhs'
               ng-model='Job.data.max_sal' required
             )

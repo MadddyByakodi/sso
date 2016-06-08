@@ -45,6 +45,8 @@ angular.module('qui.hire')
           .put(url, data);
       };
 
+      jobsService.payment = () => $http.get(`${APP.apiServer}/user/payment`);
+
       return jobsService;
     },
   ]);
