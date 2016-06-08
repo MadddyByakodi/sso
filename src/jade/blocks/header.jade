@@ -29,7 +29,16 @@
         button.btn.btn-sm.bg-light.rounded(type='submit')
           i.fa.fa-search
   ul.nav.navbar-nav.navbar-right
-    li: a(ui-sref='app.notifications' title='Notifications'): i.fa.fa-lg.fa-bell-o
+    li: a(ui-sref='app.notifications' title='Notifications')
+      i.fa.fa-lg.fa-bell-o
+      span.visible-xs-inline &nbsp; Notifications
+      i.badge.badge-sm.up.bg-danger.lter.pull-right-xs(
+        ng-if='App.notify.data.recent_count' ng-bind='App.notify.data.recent_count'
+      )
+      i.badge.badge-sm.up.bg-light.pull-right-xs(
+        ng-if='!App.notify.data.recent_count && App.notify.data.count'
+        ng-bind='App.notify.data.count'
+      )
 
     li.dropdown(uib-dropdown='')
       a.dropdown-toggle.clear(href='', uib-dropdown-toggle='')

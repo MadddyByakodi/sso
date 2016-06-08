@@ -10,23 +10,22 @@ angular.module('qui.hire')
       vm.notes = []; // collection of notifications
       vm.ui = { lazyLoad: true, loading: false }; // ui states
       vm.params = { offset: 0, limit: 20 };
-      const mongoId = '_id';
 
-      vm.read = (note) => Notify.read(note[mongoId]).then(() => {
+      vm.read = (note, appNotifyData) => Notify.read(note._id).then(() => {
         const notification = note;
+        const notifyData = appNotifyData;
         notification.read = true;
-        vm.count--;
+        notifyData.count--;
       });
 
-      vm.unread = (note) => Notify.unread(note[mongoId]).then(() => {
+      vm.unread = (note, appNotifyData) => Notify.unread(note._id).then(() => {
         const notification = note;
+        const notifyData = appNotifyData;
         notification.read = false;
-        vm.count++;
+        notifyData.count++;
       });
 
       vm.readAll = () => Notify.readAll().then(() => $state.reload());
-
-      Notify.count().then(res => (vm.count = res.data.count));
 
       vm.load = function load() {
         if (!vm.ui.lazyLoad) return; // if no more jobs to get

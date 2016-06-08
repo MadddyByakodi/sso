@@ -6,10 +6,13 @@ angular.module('qui.hire')
     'User',
     'Applicants',
     'Page',
+    'Notify',
     '$state',
     '$rootScope',
     'APP',
-    function AppCtrl($window, $uibModal, Session, User, Applicants, Page, $state, $rootScope, APP) {
+    function AppCtrl(
+      $window, $uibModal, Session, User, Applicants, Page, Notify, $state, $rootScope, APP
+    ) {
       const vm = this;
 
       // config
@@ -75,6 +78,17 @@ angular.module('qui.hire')
 
       vm.userinfo = User.userinfo;
       vm.states = User.states;
+
+      // Notification count
+      vm.notify = {
+        data: { count: 0, recent_count: 0 },
+        load() {
+          if (!vm.userinfo.id) return;
+          Notify.count().then(r => (vm.notify.data = r.data));
+        },
+      };
+
+      vm.notify.load();
 
       vm.showNavJobs = function showNavJobs() {
         return $state.is('app.jobs.applicants') ||

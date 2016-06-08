@@ -1,4 +1,4 @@
-.wrapper-sm.h4.font-bold.b-b.m-t-xs(before-bottom='Notify.load()') Your Notifications
+.wrapper-sm.h4.font-bold.b-b.m-t-xs(before-bottom='Notify.load()' ng-init='App.notify.load()') Your Notifications
 .text-center.h5.m-t-sm(ng-if='Notify.notes.length === 0') You have no notifications.
 .m-t-sm.wrapper-xs.w-full(style='margin: 0 auto; max-width: 900px;' ng-if='Notify.notes.length > 0')
   .m-t-xs.m-b-xs.clear
@@ -13,9 +13,9 @@
         ng-class='{active: Notify.showUnread}'
       ) Unread
     .pull-right
-      button.btn(ng-if='Notify.count > 0' ng-click='Notify.readAll()')
+      button.btn(ng-if='App.notify.data.count > 0' ng-click='Notify.readAll()')
         span Mark all as read
-        span.badge.bg-white.m-l-xs(ng-bind='Notify.count')
+        span.badge.bg-white.m-l-xs(ng-bind='App.notify.data.count')
 
   .list-group: div.clear(ng-repeat='note in Notify.notes | filter: Notify.searchText')
     a.media.list-group-item(
@@ -30,5 +30,5 @@
         .h5(ng-bind='note.payload.body')
         .text-muted(ng-bind='note.timeago')
     a.pos-rlt.pull-right.m-t-n-lg
-      i.wrapper-sm.m-t-n-xs.fa.fa-circle(title='Mark as read' ng-click='Notify.read(note)' ng-if='!note.read')
-      i.wrapper-sm.m-t-n-xs.fa.fa-circle-o(title='Mark as unread' ng-click='Notify.unread(note)' ng-if='note.read')
+      i.wrapper-sm.m-t-n-xs.fa.fa-circle(title='Mark as read' ng-click='Notify.read(note, App.notify.data)' ng-if='!note.read')
+      i.wrapper-sm.m-t-n-xs.fa.fa-circle-o(title='Mark as unread' ng-click='Notify.unread(note, App.notify.data)' ng-if='note.read')
