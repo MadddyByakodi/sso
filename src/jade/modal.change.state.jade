@@ -63,6 +63,8 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
         strong {{ChangeState.states[ChangeState.stateId].config.final_ctc}}
         br
         input.form.form-control(readonly='' ng-model='ChangeState.data.final_ctc')
+
+    //- Keep it private checkbox for hiding ctc
     .input-group(ng-if='ChangeState.states[ChangeState.stateId].config.is_visible' ng-init='ChangeState.data.is_visible=true')
       .inline.m-l-n-sm.wrapper-sm: label.i-checks.m-b-none
         input(
@@ -84,6 +86,18 @@ form.form-validation(name="form" ng-submit='ChangeState.ok()')
             a(uib-btn-checkbox='' ng-model='ChangeState.JobFollowers.all[$index].checkbox')
               i.fa.fa-check.text-active
               span {{follower.user.name}}
+
+    //- File upload related to state change (ex. offer letter/resignation letter)
+    .input-group(ng-if='ChangeState.states[ChangeState.stateId].config.state_file')
+      label
+        strong {{ChangeState.states[ChangeState.stateId].config.state_file}}
+        br
+        input.form.form-control(
+          type='file' accept='.doc, .docx, .pdf, .rtf, .txt'
+          name='state_file' maxsize='5000' base-sixty-four-input
+          ng-model='ChangeState.data.state_file'
+        )
+      .text-danger(ng-show='form.state_file.$error.maxsize') File must not exceed 5MB
 
 
     label.input-group

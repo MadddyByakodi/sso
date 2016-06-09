@@ -6,4 +6,5 @@ angular.module('qui.hire', [
   'mwl.calendar',
   'chart.js',
   'textAngular',
+  'naif.base64',
 ]);

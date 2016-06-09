@@ -36,6 +36,7 @@
     "font-awesome": "fontawesome#~4.5.0",
     "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release",
     "angular-http-auth": "~1.2.3",
-    "textAngular": "^1.5.0"
+    "textAngular": "^1.5.0",
+    "angular-base64-upload": "^0.1.19"
   }
 }
