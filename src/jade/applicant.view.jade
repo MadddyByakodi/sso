@@ -28,79 +28,79 @@ div(ng-controller='ApplicantViewController as Applicant')
 
       //- Applicant Details
       .wrapper-xs.m-l-sm.m-t-sm
-        .wrapper-xs.h4
+        .clear.wrapper-xs.h4
           a.text-center.m-r-xs.pull-left.thumb-xs.no-border
             i.fa.fa-lg.fa-phone.text-muted
-          .clear
+          div
             span(ng-bind='Applicant.data.mobile')
-        .wrapper-xs.h4.m-t-sm
+        .wrapper-xs.h4.m-t-s.clearm
 
           a.text-center.m-r-xs.pull-left.thumb-xs.no-border
             i.fa.fa-lg.fa-envelope.text-muted
-          .clear
+          div
             span(ng-bind='Applicant.data.email')
 
       //- Applicant Employee Information
       .wrapper-xs.m-l-sm.m-t-sm.b-t
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-briefcase.text-muted.fa-lg
-          .clear
+          div
             a.text-muted.font-thin Designation
             div(ng-bind='Applicant.data.exp_designation')
 
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-users.text-muted.fa-lg
-          .clear
+          div
             a.text-muted.font-thin Current company
             div(ng-bind='Applicant.data.exp_employer')
 
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-graduation-cap.text-muted.fa-lg
-          .clear
+          div
             a.text-muted.font-thin Qualification
             div(ng-bind='Applicant.data.edu_degree')
 
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-map-marker.text-muted.fa-lg
-          .clear
+          div
             a.text-muted.font-thin Location
             div(ng-bind='Applicant.data.exp_location')
 
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-inr.text-muted.fa-lg
-          .clear
+          div
             a.text-muted.font-thin Current CTC
             div
               span(ng-bind='Applicant.data.exp_salary')
               span &nbsp; Lakhs
 
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-inr.text-muted.fa-lg
-          .clear
+          div
             a.text-muted.font-thin Expected CTC
             div
               span(ng-bind='Applicant.data.expected_ctc')
               span &nbsp; Lakhs
 
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-line-chart.text-muted.fa-lg
-          .clear
+          div
             a.text-muted.font-thin Work experience
             div
               span(ng-bind='Applicant.data.total_exp | number: 0')
               span &nbsp; Years
 
-        .wrapper-xs.h4
-          a.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
+        .clear.wrapper-xs
+          a.h4.text-center.m-r-xs.pull-left.thumb-xs.no-border.m-t-sm
             i.fa.fa-clock-o.text-muted.fa-lg.pull
-          .clear
+          div
             a.text-muted.font-thin Notice period
             div
               span(ng-bind='Applicant.data.notice_period')
@@ -111,8 +111,12 @@ div(ng-controller='ApplicantViewController as Applicant')
         .wrapper-xs.h4.text-muted Skills
 
         .wrapper-xs.h6.clear
-            .wrapper-xs.pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(ng-repeat='value in Applicant.data.skills') &nbsp;{{value}}&nbsp;
-
+          .wrapper-xs.pull-left.text-info-dker.b-a.b-info.r.m-t-xs.m-r-xs(
+            ng-repeat='value in Applicant.data.skills'
+            ng-if='Applicant.showmore || $index < 8'
+          ) &nbsp;{{value}}&nbsp;
+        a.wrapper-xs.pull-left.font-bold.h5(ng-if='Applicant.showmore' ng-click='Applicant.showmore = false'): span.text-info-dker - show less
+        a.wrapper-xs.pull-left.font-bold.h5(ng-if='!Applicant.showmore' ng-click='Applicant.showmore = true'): span.text-info-dker + show more
     //- Resume container
   .col-md-6.no-padder.fixed-resume
     div(style='position: relative; height: 100%; width: 100%; top: 0; overflow: hidden;')

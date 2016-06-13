@@ -20,9 +20,11 @@ angular.module('qui.hire')
         Auth.login({ code: query.code }).then(() => {
           Auth.setSessionData().then(() => {
             const location = $window.location;
-            location.href = $state.href(
-              'app.jobs.applicants', { bucket: 'Pending Feedback' }, { absolute: true }
-            );
+            location.href = query.state
+              ? `${location.origin}${query.state}`
+              : $state.href(
+                'app.jobs.applicants', { bucket: 'Pending Feedback' }, { absolute: true }
+              );
           });
         });
 

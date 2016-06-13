@@ -19,7 +19,7 @@ angular.module('qui.hire')
       $rootScope.$on('$stateChangeStart', (event, next) => {
         if (!Session.isAuthenticated() && (next.name.split('.')[0] !== 'access')) {
           event.preventDefault();
-          location.href = APP.hireLogin;
+          location.href = `${APP.hireLogin}&state=${location.pathname}`;
           $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
         }
       });
@@ -44,7 +44,7 @@ angular.module('qui.hire')
                 templateUrl: 'html/modal.reauth.html',
                 controller: function reauth() {
                   const vm = this;
-                  vm.href = APP.accountsServer;
+                  vm.href = `${APP.hireLogin}&state=${location.pathname}`;
                 },
 
                 controllerAs: 'ReAuth',

@@ -1,9 +1,9 @@
 - var apiServer = prefix + 'api.' + domain;
 - var accountsServer = prefix + 'accounts.' + domain;
 - var partnerServer = prefix + 'partner.' + domain;
-- var hireLogin = accountsServer + '/authorise?client_id=' + hire.client + '&response_type=code&redirect_uri=' + hire.redirect_uri + '&state=yo';
-- var partnerLogin = accountsServer+ '/authorise?client_id=' + partner.client + '&response_type=code&redirect_uri=' + partner.redirect_uri + '&state=yo';
-- var manageLogin = accountsServer+ '/authorise?client_id=' + manage.client + '&response_type=code&redirect_uri=' + manage.redirect_uri + '&state=yo';
+- var hireLogin = accountsServer + '/authorise?client_id=' + hire.client + '&response_type=code&redirect_uri=' + hire.redirect_uri;
+- var partnerLogin = accountsServer+ '/authorise?client_id=' + partner.client + '&response_type=code&redirect_uri=' + partner.redirect_uri;
+- var manageLogin = accountsServer+ '/authorise?client_id=' + manage.client + '&response_type=code&redirect_uri=' + manage.redirect_uri;
 - var APP = { apiServer: apiServer, accountsServer: accountsServer, hireLogin: hireLogin, partnerLogin: partnerLogin, manageLogin: manageLogin, qnotifyServer: 'https://qnotify.quezx.com/api' };
 
 script.
