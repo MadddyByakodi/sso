@@ -6,4 +6,10 @@ if (domain === 'quezx.com' && prefix === 'https://')
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', '#{gaid}', 'auto');
+    if(localStorage && localStorage.userinfo) {
+      (function(){var userId; // Handle user based analytics
+        try {userId = JSON.parse(localStorage.userinfo);} catch (e) {console.log(e);}
+        ga('set', 'userId', userId);
+      }());
+    }
     ga('send', 'pageview');

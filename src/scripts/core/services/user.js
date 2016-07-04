@@ -1,4 +1,3 @@
-/* globals ga:false */
 angular.module('qui.core')
   .factory('User', [
     'Session',
@@ -7,11 +6,6 @@ angular.module('qui.core')
         userinfo: Session.read('userinfo'),
         states: Session.read('states'),
       };
-
-      // User based google analytics for authenticated user
-      if (angular.isFunction(ga) && Session.isAuthenticated() && userService.userinfo.id) {
-        ga('set', 'userId', userService.userinfo.id);
-      }
 
       return userService;
     },
