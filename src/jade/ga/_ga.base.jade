@@ -8,7 +8,7 @@ if (domain === 'quezx.com' && prefix === 'https://')
     ga('create', '#{gaid}', 'auto');
     if(localStorage && localStorage.userinfo) {
       (function(){var userId; // Handle user based analytics
-        try {userId = JSON.parse(localStorage.userinfo);} catch (e) {console.log(e);}
+        try {userId = JSON.parse(localStorage.userinfo).id;} catch (e) {console.log(e);}
         ga('set', 'userId', userId);
       }());
     }
