@@ -12,13 +12,14 @@ angular.module('qui.accounts')
       const location = $window.location;
 
       const apps = {
-        2: ['partnerquezx', 'partnerwordpress'],
-        4: ['managequezx'],
-        5: ['hirequezx'],
+        2: ['partnerquezx', 'partnerwordpress', 'chatquezx'],
+        4: ['managequezx', 'chatquezx'],
+        5: ['hirequezx', 'chatquezx'],
+        8: ['managequezx', 'chatquezx'],
       };
 
       // Handle redirect for internal user from hire and partner app
-      if (user.group_id === 4 && params.client_id !== 'managequezx') {
+      if (~[4, 8].indexOf(user.group_id) && params.client_id !== 'managequezx') {
         location.href = `${APP.manageServer}${params.state}`;
         return;
       }
