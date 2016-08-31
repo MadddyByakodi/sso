@@ -16,10 +16,11 @@ angular.module('qui.accounts')
         4: ['managequezx', 'chatquezx'],
         5: ['hirequezx', 'chatquezx'],
         8: ['managequezx', 'chatquezx'],
+        9: ['managequezx', 'chatquezx'],
       };
 
       // Handle redirect for internal user from hire and partner app
-      if (~[4, 8].indexOf(user.group_id) && params.client_id !== 'managequezx') {
+      if (~[4, 8, 9].indexOf(user.group_id) && (params.client_id !== 'managequezx')) {
         location.href = `${APP.manageServer}${params.state}`;
         return;
       }

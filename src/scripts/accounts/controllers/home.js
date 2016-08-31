@@ -11,6 +11,8 @@ angular.module('qui.accounts')
           location.href = APP.partnerLogin;
           break;
         case 4:
+        case 8:
+        case 9:
           location.href = APP.manageLogin;
           break;
         case 5:
