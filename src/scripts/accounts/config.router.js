@@ -31,7 +31,7 @@ angular.module('qui.accounts')
           templateUrl: 'html/accounts.app.html',
         })
         .state('app.logout', {
-          url: '/logout',
+          url: '/logout?continue',
           templateUrl: 'html/accounts.logout.html',
         })
         .state('app.authorise', {

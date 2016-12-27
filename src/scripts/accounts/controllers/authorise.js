@@ -12,7 +12,7 @@ angular.module('qui.accounts')
       const location = $window.location;
 
       const apps = {
-        2: ['partnerquezx', 'partnerwordpress', 'chatquezx'],
+        2: ['partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop'],
         4: ['managequezx', 'chatquezx'],
         5: ['hirequezx', 'chatquezx'],
         8: ['managequezx', 'chatquezx'],
