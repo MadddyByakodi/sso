@@ -35,7 +35,7 @@ gulp.task('html', () => gulp
 
 // json assets direct copy
 gulp.task('copy', () => gulp
-  .src('src/*.json')
+  .src(['src/*.json', 'src/*.html'])
   .pipe(gulp.dest('dist'))
 );
 

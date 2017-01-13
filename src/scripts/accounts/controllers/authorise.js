@@ -12,11 +12,11 @@ angular.module('qui.accounts')
       const location = $window.location;
 
       const apps = {
-        2: ['partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop'],
-        4: ['managequezx', 'chatquezx'],
-        5: ['hirequezx', 'chatquezx'],
-        8: ['managequezx', 'chatquezx'],
-        9: ['managequezx', 'chatquezx'],
+        2: ['partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop', 'searchquezx'],
+        4: ['managequezx', 'chatquezx', 'searchquezx'],
+        5: ['hirequezx', 'chatquezx', 'searchquezx'],
+        8: ['managequezx', 'chatquezx', 'searchquezx'],
+        9: ['managequezx', 'chatquezx', 'searchquezx'],
       };
 
       // Handle redirect for internal user from hire and partner app
