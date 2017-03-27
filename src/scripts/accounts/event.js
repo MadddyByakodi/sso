@@ -10,7 +10,7 @@ angular.module('qui.accounts')
     function handleEvents($rootScope, Auth, authService, AUTH_EVENTS, Session, $state, $location) {
       /* eslint angular/on-watch: 0 */
 
-      const encodedContinue = encodeURIComponent($location.url());
+      const encodedContinue = encodeURIComponent($location.url().replace('/logout', '/home'));
 
       // In Future: assign to variable to destroy during the $destroy event
       $rootScope.$on('$stateChangeStart', (event, next) => {

@@ -3,7 +3,33 @@ angular.module('qui.accounts')
     '$stateProvider',
     '$urlRouterProvider',
     function quiStateConfig($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/home');
+      $urlRouterProvider.otherwise(($injector, $location) => {
+        const url = $location.url();
+        if (!['/', '/home'].includes(url)) {
+          const user = $injector.get('Session').read('userinfo');
+          const location = $injector.get('$window').location;
+          const APP = $injector.get('APP');
+          if (!user) return $location.url(`/signin?continue=${encodeURIComponent(url)}`);
+          switch (user.group_id) {
+            case 2:
+              location.href = `${APP.partnerServer}${url}`;
+              break;
+            case 4:
+            case 8:
+            case 9:
+              location.href = `${APP.manageServer}${url}`;
+              break;
+            case 5:
+              location.href = `${APP.hireServer}${url}`;
+              break;
+            default:
+              break;
+          }
+        }
+
+        return $location.url('/home');
+      });
+
       $stateProvider
         .state('oauth', {
           url: '',
