@@ -13,17 +13,17 @@ angular.module('qui.accounts')
           switch (user.group_id) {
             case 2:
               location.href = `${APP.partnerServer}${url}`;
-              break;
+              return null;
             case 4:
             case 8:
             case 9:
               location.href = `${APP.manageServer}${url}`;
-              break;
+              return null;
             case 5:
               location.href = `${APP.hireServer}${url}`;
-              break;
+              return null;
             default:
-              break;
+              return $location.url('/home');
           }
         }
 
