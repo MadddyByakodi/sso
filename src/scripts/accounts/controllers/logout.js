@@ -15,33 +15,19 @@ angular.module('qui.accounts')
         Auth.logout()
           .then(
             () => {
-              $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-              if ($stateParams.continue) {
-                let continueUrl = $stateParams.continue;
-                if (continueUrl[0] === '/') {
-                  continueUrl = location.hostname + $stateParams.continue;
-                }
-
-                location.href = continueUrl;
-                return;
-              }
-
-              location.href = `${location.hostname}/home`;
+              const next = $stateParams.continue || '/home';
+              location.href = next[0] === '/'
+                ? `${location.origin}${next}`
+                : next;
+              return $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
             },
 
             () => {
-              $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-              if ($stateParams.continue) {
-                let continueUrl = $stateParams.continue;
-                if (continueUrl[0] === '/') {
-                  continueUrl = location.hostname + $stateParams.continue;
-                }
-
-                location.href = continueUrl;
-                return;
-              }
-
-              location.href = `${location.hostname}/home`;
+              const next = $stateParams.continue || '/home';
+              location.href = next[0] === '/'
+                ? `${location.origin}${next}`
+                : next;
+              return $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
             }
           );
       };
