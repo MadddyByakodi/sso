@@ -30,10 +30,10 @@ class AuthoriseController {
       return null;
     }
 
-    if (!(apps[user.group_id] || []).includes(params.client_id)) {
-      this.error = 'Access Denied!';
-      return null;
-    }
+    if (
+      !(apps[user.group_id] || []).includes(params.client_id) ||
+      (!user.admin_flag && (params.client_id === 'adminquezx'))
+    ) return (this.error = 'Access Denied!');
 
     const url = `${this.urls.API_SERVER}/authorise`;
     return this
