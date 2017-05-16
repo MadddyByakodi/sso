@@ -1,0 +1,30 @@
+include profile-popover.pug
+.app-header.navbar
+  //- navbar header
+  .navbar-header(class='{{$ctrl.settings.navbarHeaderColor}}')
+    button.pull-right.visible-xs(ng-click='$ctrl.settings.mobileHeader = !$ctrl.settings.mobileHeader')
+      i.fa.fa-cog
+    //- brand
+    a.navbar-brand.no-padder(ui-sref='home')
+      img.w-sm(src='/assets/images/logo.svg', alt='{{$ctrl.name}}')
+
+  //- navbar collapse
+  .collapse.pos-rlt.navbar-collapse.box-shadow(
+    class='{{$ctrl.settings.navbarCollapseColor}}'
+    ng-class="{\
+      'show': $ctrl.settings.mobileHeader,\
+    }"
+  )
+
+    ul.nav.navbar-nav.navbar-right: li
+      a.no-hv(
+        uib-popover-template='"navbar-profile-template.html"'
+        popover-trigger='"outsideClick"'
+        popover-is-open='$ctrl.isProfPopOpen'
+        popover-placement='bottom-right'
+        style='padding: 10px;'
+      )
+        .bg-light.b-info.b-a.text-center(style='height: 30px;width: 30px;border-radius: 50%;')
+          span.text-md(
+            style='font-size: 18px !important;color: #4675b6;line-height: 1.6em;'
+            ng-bind='$ctrl.user.name.substr(0, 1)')

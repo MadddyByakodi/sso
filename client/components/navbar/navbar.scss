@@ -1,0 +1,14 @@
+navbar {
+  .popover {
+    top: 40px !important;
+    right: 2px;
+    > .arrow {
+      right: 10px !important;
+    }
+  }
+
+  .popover-content {
+    padding-left: 12px;
+    padding-right: 0;
+  }
+}

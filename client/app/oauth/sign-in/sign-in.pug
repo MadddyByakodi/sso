@@ -1,0 +1,26 @@
+.container.w-xxl.w-auto-xs(ng-init='App.app.settings.container = false;')
+  a.navbar-brand.block.m-t(href='')
+    img(src='/assets/images/logo.svg' alt='{{App.app.name}}')
+  .wrapper.text-center: strong Sign in
+
+  form.form-validation(name='form' ng-submit='$ctrl.signin()')
+    .text-danger.wrapper.text-center(ng-show='$ctrl.error' ng-bind='$ctrl.error')
+
+    .list-group.list-group-sm.m-b-md
+      .list-group-item: input.form-control.no-border(
+        type='text'
+        placeholder='Email or username'
+        ng-model='$ctrl.user.username'
+        autofocus='true'
+        required)
+      .list-group-item: input.form-control.no-border(
+        type='password'
+        placeholder='Password'
+        ng-model='$ctrl.user.password'
+        required)
+
+    button.btn.btn-lg.btn-primary.btn-block(type='submit') Log in
+
+  .wrapper-md.text-center: a.text-info(ui-sref='oauth.password-reset') Forgot password?
+
+  footer

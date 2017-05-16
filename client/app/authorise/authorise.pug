@@ -1,0 +1,7 @@
+//-Authorise OAuth Apps
+.container.w-xxl.w-auto-xs(ng-init='App.app.settings.container = false;')
+  h3.text-danger.wrapper(ng-if='$ctrl.error') {{$ctrl.error}}
+  div(ng-if='!$ctrl.error')
+    .text-center.text-muted
+      i.fa-4x.fa.fa-circle-o-notch.fa-spin
+      .m-t-xs &nbsp;Loading...

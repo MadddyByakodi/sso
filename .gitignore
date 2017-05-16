@@ -1,36 +1,12 @@
-# Compiled source #
-###################
-*.so
-
-# Packages
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# Logs and databases
-*.log
-*.sql
-*.sqlite
-
-# OS generated files
-.DS_Store
-.DS_Store?
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Dependency directory
+client/assets/fonts
 node_modules
-
-# Bower dependency
-bower_components
-
-# build related directory
+public
+.tmp
+.sass-cache
+.idea
+client/bower_components
+client/index.html
 dist
-assets
+/server/config/local.env.js
+npm-debug.log
+coverage

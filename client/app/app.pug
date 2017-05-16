@@ -1,0 +1,6 @@
+.app(ng-class='$ctrl.appClass')
+  //- navigation bar
+  navbar(settings='$ctrl.app.settings' ng-if='!$ctrl.$state.includes("oauth")')
+  .content
+    a.off-screen-toggle.hide(href='')
+    .app-content-body(ui-view='')
