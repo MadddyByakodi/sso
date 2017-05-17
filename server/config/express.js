@@ -38,7 +38,7 @@ export default function expressConfig(app) {
       open: false,
       logFileChanges: false,
       proxy: `localhost:${config.port}`,
-      ws: true,
+      ws: false,
       middleware: [
         webpackDevMiddleware(compiler, {
           noInfo: false,

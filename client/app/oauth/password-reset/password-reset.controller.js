@@ -13,7 +13,9 @@ class PasswordResetController {
   reset() {
     this.success = this.error = '';
     this.$http
-    .post(`${this.urls.API_SERVER}/password_reset`, this.data)
+    .post(`${this.urls.API_SERVER}/password_reset`, this.data, {
+      ignoreAuthModule: true,
+    })
     .then(() => {
       this.success = `Password reset mail sent to ${this.data.email_id}`;
       this.data.email_id = '';

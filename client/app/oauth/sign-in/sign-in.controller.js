@@ -27,9 +27,9 @@ class SignInController {
           if ($location.search().continue) return $location.url($location.search().continue);
           return $location.path($state.href('home'));
         });
-      }, (err) => {
+      }, ({ data }) => {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginFailed);
-        this.error = err.error_description;
+        this.error = data.error_description;
       });
   }
 }
