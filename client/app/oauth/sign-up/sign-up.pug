@@ -1,0 +1,43 @@
+.hbox
+  .col.bg-primary.w-xxl.h-full.b-r.text-center(
+    style='position:absolute;top: 0;left: 0;display: flex;align-items: center;justify-content: center;'
+  )
+    div
+      span.h4.text-u-c Welcome to
+      .h4.inline.font-bold.m-l-xs QUEZX
+      .w-sm.text-center
+        img.m-t-md.w.img-responsive(src='assets/images/quezx-logo-white.svg')
+  .col.wrapper-xl(style='position:absolute;left: 360px;top: 0;')
+    form.form.form-validation(ng-submit="$ctrl.signup()")
+      h3.text-primary.padder.padder-v Sign up
+      .col-xs-6
+        .form-group
+          label Name
+          span.text-danger *
+          input.form-control(type='text' ng-model='$ctrl.data.firstname' placeholder='First Name' autofocus required)
+      .col-xs-6
+        .form-group
+          label(style='visibility: hidden;') Last Name
+          input.form-control(type='text' ng-model='$ctrl.data.lastname' placeholder='Last Name' required)
+      .col-xs-12
+        .form-group
+          label Company Name:
+          span.text-danger *
+          input.form-control(type='text' ng-model='$ctrl.data.Client.name' placeholder='Company Name' required)
+      .col-xs-12
+        .form-group
+          label Mobile Number:
+          span.text-danger *
+          input.form-control(type='text' ng-model='$ctrl.data.number' placeholder='Mobile Number' required)
+      .col-xs-12
+        .form-group
+          label Password:
+          span.text-danger *
+          input.form-control(type='password' ng-model='$ctrl.data.password' placeholder='xxxxxxxxxxx' required)
+      .col-xs-12(ng-if='$ctrl.$stateParams.email')
+        .form-group
+          label Email:
+          span.text-danger *
+          input.form-control(type='text' ng-model='$ctrl.$stateParams.email' placeholder='Email' ng-disabled='$ctrl.$stateParams.signup_code')
+      .col-xs-12.padder-v
+        button.btn.btn-success(type='submit') Signup
