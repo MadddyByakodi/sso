@@ -13,15 +13,23 @@ class SignUpController {
 
   $onInit() {
     this.data = {};
+    this.ui = {
+      loading: false,
+    };
   }
 
   signup() {
+    this.ui.loading = true;
     return this.$http
       .post('/users/signup', this.data, {
         ignoreAuthModule: true,
         params: this.$stateParams,
       })
-      .then(() => this.signin());
+      .then(() => {
+        this.ui.loading = false;
+        this.signin();
+      })
+      .catch(() => (this.ui.loading = false));
   }
 
   signin() {
