@@ -1,0 +1,45 @@
+.bg-white-only.w-full(style='position: absolute;height: 100%;top: 0;')
+  div.m-t-xl(style='height: 1px;')
+  .w-full.bg-light.no-select(style='height: 150px;position:relative;')
+    img.img-responsive.m-l-xxl(
+      src='/assets/images/contact-us.svg'
+      style='width: 130px;position: absolute;bottom: -50px;'
+    )
+    .inline.h2.m-l-xxl.text-primary(style='position: absolute;bottom: 16px;left: 150px;') Contact Us
+  .col-xs-12.m-t-xxl
+
+    .col-xs-11.m-t-xxl
+      .col-xs-12.m-b-xs.no-select
+        .h4.text-primary.wrapper-xs Your Engagement Manager
+      .col-xs-5
+        .text-md.text-black.wrapper-xs.no-select Name
+        .text-sm.text-gray.wrapper-xs(ng-bind='$ctrl.EM.name')
+      .col-xs-6
+        .col-xs-6
+          .text-md.text-black.wrapper-xs.no-select Email
+          .text-sm.text-gray.wrapper-xs
+            a(
+              ng-bind='$ctrl.EM.email_id'
+              target='_blank'
+              href='mailto: {{$ctrl.EM.email_id}}'
+            )
+        .col-xs-6
+          .text-md.text-black.wrapper-xs.no-select Contact Number
+          .text-sm.text-gray.wrapper-xs(ng-bind='$ctrl.EM.number')
+
+    .col-xs-11.m-t-xxl
+      .col-xs-12.m-b-xs
+        .h4.text-primary.wrapper-xs.no-select Corporate Details
+      .col-xs-5
+        .text-md.text-black.wrapper-xs Address
+        .text-sm.text-gray.wrapper-xs
+          div A-202, Kailas Industrial Complex, Hiranandani Link Road,
+          div Vikhroli (W), Mumbai – 400079.
+      .col-xs-6
+        .col-xs-6
+          .text-md.text-black.wrapper-xs Website
+          .text-sm.text-gray.wrapper-xs
+            a(href='https://www.quezx.com' target='_blank') www.quezx.com
+        .col-xs-6
+          .text-md.text-black.wrapper-xs Contact Number
+          .text-sm.text-gray.wrapper-xs 022 - 25186445

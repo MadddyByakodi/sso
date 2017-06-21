@@ -24,12 +24,13 @@ import Home from './home';
 import Authorise from './authorise';
 import PasswordChange from './password-change';
 import Logout from './logout';
+import Support from './support';
 
 setupGAnalytics('UA-52116787-5');  // Google Analytics
 angular
   .module('accountsApp', [
     uiRouter, uiBootstrap, Navbar, Footer, constants, Auth, UpdateTitle,
-    OAuth, Home, Authorise, PasswordChange, Logout,
+    OAuth, Home, Authorise, PasswordChange, Logout, Support,
   ])
   .component('accountsApp', AppComponent)
   .config(routeConfig)
