@@ -25,7 +25,7 @@ script(type='text/ng-template' id='navbar-profile-template.html')
           ng-click='$ctrl.isProfPopOpen =!$ctrl.isProfPopOpen;') Change Password
     .hbox
       .w-full.m-t-sm
-        .w-full.wrapper-xs: a.text-sm.m-l-sm(href='' style='color: #888;' ui-sref='support' ng-click='$ctrl.isProfPopOpen = !$ctrl.isProfPopOpen') Support
+        .w-full.wrapper-xs: a.text-sm.m-l-sm(ng-if='[2, 5].includes($ctrl.user.group_id)' href='/dashboard' style='color: #888;' ng-click='$ctrl.isProfPopOpen = !$ctrl.isProfPopOpen') Dashboard
       .col.w-full
         .w-full: a.m-t-sm.pull-right.btn.btn-sm.bg-gray.b-a.b-gray(
           ui-sref='logout'

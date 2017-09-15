@@ -5,8 +5,13 @@ include profile-popover.pug
     button.pull-right.visible-xs(ng-click='$ctrl.settings.mobileHeader = !$ctrl.settings.mobileHeader')
       i.fa.fa-cog
     //- brand
-    a.navbar-brand.no-padder(ui-sref='home')
-      img.w-sm(src='/assets/images/quezx-logo-blue.svg', alt='{{$ctrl.name}}')
+    a.navbar-brand.text-lt(style='line-height: 44px;width: 258px;background: #4173A9;' href='/dashboard')
+      img(style='width: 24px;margin-top: -28px;' src='assets/images/quezx-logo-white.svg', alt='{{App.app.name}}')
+      .inline(
+        style='margin-left: 10px;margin-top: -11px;font-weight: 400;font-size: 18px;position: absolute;'
+        title='{{$ctrl.user.group_id === 2 ? "PARTNER" : "HIRE"}}'
+        ng-bind='$ctrl.user.group_id === 2 ? "PARTNER" : "HIRE"'
+      )
 
   //- navbar collapse
   .collapse.pos-rlt.navbar-collapse.box-shadow(

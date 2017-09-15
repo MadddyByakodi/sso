@@ -8,8 +8,8 @@ class AppController {
       version: '1.0.0',
       settings: {
         themeID: 1,
-        navbarHeaderColor: 'bg-white',
-        navbarCollapseColor: 'bg-white-only',
+        navbarHeaderColor: 'bg-primary',
+        navbarCollapseColor: 'bg-info',
         asideColor: 'bg-black',
         headerFixed: true,
         asideFixed: true,
