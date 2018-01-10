@@ -9,7 +9,7 @@ class AuthoriseController {
   }
 
   $onInit() {
-    const user = this.Session.read('userinfo');
+    const user = this.Session.read('userinfo') || {};
     const params = this.$location.search();
     const { location } = this.$window;
     const { client_id: clientId } = params;
@@ -17,7 +17,7 @@ class AuthoriseController {
     const VALID_APP = {
       2: [
         'partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop',
-        'searchquezx', 'adminquezx', 'accessquezx', 'qdesklive',
+        'searchquezx', 'adminquezx', 'accessquezx', 'qdesklive', 'huntquezx',
       ],
       4: ['managequezx', 'chatquezx', 'searchquezx', 'adminquezx', 'qdesklive'],
       5: ['hirequezx', 'chatquezx', 'searchquezx', 'adminquezx', 'qdesklive'],

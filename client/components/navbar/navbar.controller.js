@@ -9,6 +9,10 @@ class NavbarController {
 
   $onInit() {
     this.user = this.Session.read('userinfo');
+    const { whatBlocked = [] } = this.user || {};
+    const [state] = whatBlocked.map((x) => x.state);
+
+    this.pageName = state === 'password-change' ? '/password_change' : '/dashboard';
   }
 
   logout() {
