@@ -113,8 +113,8 @@
               option(value="") Select Employee Range
         .w-full.m-b-sm.wrapper-xs.m-b-sm
           .col-xs-12.no-padder.m-t
-            span Company Address
-            span.text-danger(ng-if='$ctrl.type === 1') *
+            span Company Corporate Address
+            span.font-bold.text-danger(ng-if='$ctrl.type === 1') *
           textarea.form.form-control(
             ng-model='$ctrl.data.address'
             name='address'
