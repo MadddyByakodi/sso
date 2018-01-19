@@ -1,6 +1,6 @@
 .wrapper.w-full.text-center.bg-white-only(style='position:fixed;top:0;left: 0;z-index: 100;')
   img(src='/assets/images/quezx-logo.svg' style='height: 35px;')
-.container
+.container(ng-if='!$ctrl.ui.success')
   .h2.wrapper-sm.text-center.text-primary.m-t-n-xl
     span(ng-if='$ctrl.type === 1') Partner&nbsp;
     span Sign Up
@@ -146,3 +146,8 @@
             i.fa.fa-spin.fa-circle-o-notch(ng-if='$ctrl.ui.loading')
             span(ng-if='$ctrl.ui.loading') Signing Up...
             span(ng-if='!$ctrl.ui.loading') Sign Up
+
+.container(ng-if='$ctrl.ui.success')
+  .wrapper.text-center
+    img(src='/assets/images/thumbs_up.svg' style='height: 80px;width: 80px;')
+    h3.text-info(ng-bind='$ctrl.ui.success')

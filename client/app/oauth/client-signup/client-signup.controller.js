@@ -36,11 +36,11 @@ class ClientSignupController {
 
   message(type = '', err = {}) {
     this.ui[type] = (type === 'success')
-      ? 'You have been successfully registered to Quezx.com'
-      : (err.msg || 'An error occured please contact Quezx.com');
-    if (type === 'success') this.resetData();
+      ? 'Your request has been submitted. We will contact you shortly'
+      : (err.msg || 'An error occured please contact QuezX.com');
+    if (type === 'success') return this.resetData();
     this.$timeout(() => (this.ui[type] = ''), 5000);
-    this.ui.loading = false;
+    return (this.ui.loading = false);
   }
 
   create(form) {
