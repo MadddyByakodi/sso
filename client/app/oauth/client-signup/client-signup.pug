@@ -2,12 +2,12 @@
   img(src='/assets/images/quezx-logo.svg' style='height: 35px;')
 .container
   .h2.wrapper-sm.text-center.text-primary.m-t-n-xl
-    span(ng-if='$ctrl.$stateParams.type') Partner&nbsp;
+    span(ng-if='$ctrl.type === 1') Partner&nbsp;
     span Sign Up
   form.form-horizontal.form-validation.m-t-xs.m-b-xs(
     name='signupForm'
     novalidate
-    ng-submit='$ctrl.create()'
+    ng-submit='$ctrl.create(signupForm)'
   )
     .panel.panel-default.no-border.m-b-none
       .panel-body.padder-lg
@@ -114,15 +114,15 @@
         .w-full.m-b-sm.wrapper-xs.m-b-sm
           .col-xs-12.no-padder.m-t
             span Company Address
-            span.text-danger(ng-if='$ctrl.$stateParams.type') *
+            span.text-danger(ng-if='$ctrl.type === 1') *
           textarea.form.form-control(
             ng-model='$ctrl.data.address'
             name='address'
             style='resize: none;'
             rows="3"
-            ng-required='$ctrl.$stateParams.type'
+            ng-required='$ctrl.$stateParams.type === 1'
           )
-        .w-full.m-b-sm.wrapper-xs.m-b-sm(ng-if='!$ctrl.$stateParams.type')
+        .w-full.m-b-sm.wrapper-xs.m-b-sm(ng-if='$ctrl.type === 2')
           .col-xs-12.no-padder
             span About Company
           textarea.form.form-control(

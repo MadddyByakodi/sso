@@ -9,6 +9,7 @@ class ClientSignupController {
 
   $onInit() {
     this.ui = { loading: false, success: false, error: false };
+    this.type = this.$stateParams.type;
     this.resetData();
     this.EmployeeRange = [
       { name: '1', value: '1' },
@@ -28,7 +29,7 @@ class ClientSignupController {
       signup_source_id: 1,
       allocate: {
         mgr_id: atob(this.$stateParams.userId),
-        type: this.$stateParams.type,
+        type: this.type,
       },
     };
   }
@@ -42,10 +43,10 @@ class ClientSignupController {
     this.ui.loading = false;
   }
 
-  create() {
+  create(form) {
     this.ui.loading = true;
     const { firstname, lastname, email, mobno, companyname } = this.data;
-    const obj = this.$stateParams.type
+    const obj = this.type === 1
       ? { name: `${firstname} ${lastname}` }
       : {
         fullname: `${firstname} ${lastname}`,
@@ -58,7 +59,10 @@ class ClientSignupController {
     .post(`${this.urls.API_SERVER}/api/signUps`, this.data, {
       ignoreAuthModule: true,
     })
-    .then(() => this.message('success'))
+    .then(() => {
+      form.$setPristine();
+      this.message('success');
+    })
     .catch(({ data }) => this.message('error', data));
   }
 }
