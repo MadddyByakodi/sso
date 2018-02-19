@@ -250,7 +250,7 @@ gulp.task('lint:scripts:serverTest', () => gulp
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], { dot: true }));
 
 gulp.task('start:client', cb => whenServerReady(() => {
-  open('http://accounts.quezx.dev');
+  open('http://accounts.quezx.test');
   cb();
 }));
 

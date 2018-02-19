@@ -10,6 +10,9 @@ class ClientSignupController {
   $onInit() {
     this.ui = { loading: false, success: false, error: false };
     this.type = this.$stateParams.type;
+    this.src = (this.$stateParams && this.$stateParams.src)
+      ? this.$stateParams.src
+      : 1;
     this.resetData();
     this.EmployeeRange = [
       { name: '1', value: '1' },
@@ -26,7 +29,7 @@ class ClientSignupController {
 
   resetData() {
     this.data = {
-      signup_source_id: 1,
+      signup_source_id: this.src,
       allocate: {
         mgr_id: atob(this.$stateParams.userId),
         type: this.type,
