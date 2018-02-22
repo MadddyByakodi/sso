@@ -39,7 +39,7 @@ module.exports = function makeWebpackConfig(options) {
     config.entry = {
       app: './client/app/app.js',
 
-      // polyfills: './client/polyfills.js',
+      polyfills: './client/polyfills.js',
       vendor: [
         'angular',
         'angular-animate',
