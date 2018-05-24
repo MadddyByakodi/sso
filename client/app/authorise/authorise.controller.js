@@ -25,14 +25,9 @@ class AuthoriseController {
       9: ['managequezx', 'chatquezx', 'searchquezx', 'adminquezx', 'qdesklive'],
     }[user.group_id];
 
-    const ADMIN_BLOCKED = (clientId === 'adminquezx') && !user.admin_flag;
-
     switch (true) {
       case !VALID_APP:
         return (this.error = 'Invalid user group');
-
-      case ADMIN_BLOCKED:
-        return (this.error = 'Access Denied');
 
       case !VALID_APP.includes(clientId): {
         const APP_NAME = VALID_APP[0].replace('quezx', '_app').toUpperCase();
