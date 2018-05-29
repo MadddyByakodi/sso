@@ -1,0 +1,16 @@
+div.w-full.bg-white.lter.page-profile(style='position: absolute;top:50px;')
+  .container.hbox.hbox-auto-xs
+    .col-md-8.col
+      .wrapper.text-center
+        h3.text-dark Notifications Settings
+
+      .vbox
+        .list-group.list-group-lg.list-group-sp
+          .list-group-item.clearfix(ng-repeat="data in $ctrl.preference")
+            .col-md-8
+              span(style='font-size: 16px;color: #403e3e;') {{data.description}}
+              small.text-muted.clear.text-ellipsis {{data.name}}
+            .col-md-4.text-center
+              .btn-group(role="group" aria-label="Basic example")
+                a.btn.btn-sm(ng-click='$ctrl.stateChanged(data, false)' style='color: white;' ng-class='{ "btn-default": data.enabled , "btn-info": !data.enabled }') OFF
+                a.btn.btn-sm(ng-click='$ctrl.stateChanged(data, true)' style='color: white;' ng-class='{ "btn-default": !data.enabled , "btn-info": data.enabled }') ON
