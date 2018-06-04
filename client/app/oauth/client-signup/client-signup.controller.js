@@ -1,10 +1,11 @@
 class ClientSignupController {
   /* @ngInject */
-  constructor($http, $stateParams, $timeout, urls) {
+  constructor($http, $stateParams, $timeout, urls, $location) {
     this.$http = $http;
     this.$stateParams = $stateParams;
     this.$timeout = $timeout;
     this.urls = urls;
+    this.$location = $location;
   }
 
   $onInit() {
@@ -25,6 +26,7 @@ class ClientSignupController {
       { name: '5001-10000', value: '5001-10000' },
       { name: '10000+', value: '10001-100000' },
     ];
+    this.url = this.$location.search();
   }
 
   resetData() {
@@ -57,6 +59,7 @@ class ClientSignupController {
         contact_no: mobno,
         company_name: companyname,
       };
+    Object.assign(obj, this.url);
     Object.assign(this.data, obj);
     this.$http
     .post(`${this.urls.API_SERVER}/api/signUps`, this.data, {
