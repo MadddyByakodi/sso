@@ -17,12 +17,12 @@ class AuthoriseController {
     const VALID_APP = {
       2: [
         'partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop',
-        'searchquezx', 'adminquezx', 'teamquezx', 'accessquezx', 'qdesklive', 'huntquezx',
+        'searchquezx', 'teamquezx', 'accessquezx', 'qdesklive', 'huntquezx',
       ],
-      4: ['managequezx', 'chatquezx', 'searchquezx', 'adminquezx', 'teamquezx', 'qdesklive'],
-      5: ['hirequezx', 'chatquezx', 'searchquezx', 'adminquezx', 'teamquezx', 'qdesklive'],
-      8: ['managequezx', 'chatquezx', 'searchquezx', 'adminquezx', 'teamquezx', 'qdesklive'],
-      9: ['managequezx', 'chatquezx', 'searchquezx', 'adminquezx', 'teamquezx', 'qdesklive'],
+      4: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
+      5: ['hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
+      8: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
+      9: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
     }[user.group_id];
 
     switch (true) {
