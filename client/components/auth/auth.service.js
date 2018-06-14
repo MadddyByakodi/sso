@@ -5,6 +5,7 @@ class AuthService {
     this.$q = $q;
     this.$log = $log;
     this.$http = $http;
+    this.urls = urls;
     this.authService = authService;
     this.Session = Session;
     this.apiUrl = `${urls.API_SERVER}/api`;
@@ -14,7 +15,16 @@ class AuthService {
   login(credential) {
     return this
       .$http
-      .post(`${this.authUrl}/login`, credential, { ignoreAuthModule: true })
+      .post(`${this.urls.API_SERVER}/oauth/token`, credential, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        transformRequest(obj) {
+          return Object
+            .keys(obj)
+            .map(p => `${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`)
+            .join('&');
+        },
+        ignoreAuthModule: true,
+      })
       .then(res => this.Session.create('oauth', res.data))
       .catch(res => {
         this.Session.destroy();

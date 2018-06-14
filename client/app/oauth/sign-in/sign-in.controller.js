@@ -1,10 +1,11 @@
 class SignInController {
   /* @ngInject */
-  constructor($state, $location, $rootScope, Auth, AUTH_EVENTS, Session) {
+  constructor($state, $location, $rootScope, Auth, AUTH_EVENTS, Session, urls) {
     this.$state = $state;
     this.$location = $location;
     this.$rootScope = $rootScope;
     this.Auth = Auth;
+    this.urls = urls;
     this.AUTH_EVENTS = AUTH_EVENTS;
     this.Session = Session;
   }
@@ -12,15 +13,18 @@ class SignInController {
   $onInit() {
     this.user = { username: '', password: '' };
     this.error = null;
+    if (this.$state.params.code) return this.signin(this.$state.params.code);
+    this.show = true;
+    return null;
   }
 
-  signin() {
+  signin(code) {
     this.error = null;
     const { username, password } = this.user;
 
     // Try to login
     this.Auth
-      .login({ username, password })
+      .login(code ? { grant_type: 'google', code } : { username, password })
       .then(() => {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
         this.Auth.setSessionData().then(() => {

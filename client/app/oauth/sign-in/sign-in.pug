@@ -1,9 +1,14 @@
 .container.w-xxl.w-auto-xs
   a.text-center.navbar-brand.block.m-t(href='')
     img(src='/assets/images/quezx-logo-blue.svg' alt='QuezX Accounts')
-  .wrapper.text-center: strong Sign in
-
-  form.form-validation(name='form' ng-submit='$ctrl.signin()')
+  .wrapper.text-center(ng-if='!$ctrl.show')
+    strong Loading...
+  .wrapper.text-center(ng-if='$ctrl.show')
+    strong Sign in
+    br
+    a(href="{{$ctrl.urls.API_SERVER}}/oauth/google")
+      img(width="200" src='https://developers.google.com/accounts/images/sign-in-with-google.png')
+  form.form-validation(name='form' ng-submit='$ctrl.signin()' ng-if='$ctrl.show')
     .text-danger.wrapper.text-center(ng-show='$ctrl.error' ng-bind='$ctrl.error')
 
     .list-group.list-group-sm.m-b-md
