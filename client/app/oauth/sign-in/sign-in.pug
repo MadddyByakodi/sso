@@ -6,7 +6,7 @@
   .wrapper.text-center(ng-if='$ctrl.show')
     strong Sign in
     br
-    a(href="{{$ctrl.urls.API_SERVER}}/oauth/google")
+    a(href="{{$ctrl.urls.API_SERVER}}/oauth/google?scope=calendar")
       img(width="200" src='https://developers.google.com/accounts/images/sign-in-with-google.png')
   form.form-validation(name='form' ng-submit='$ctrl.signin()' ng-if='$ctrl.show')
     .text-danger.wrapper.text-center(ng-show='$ctrl.error' ng-bind='$ctrl.error')
