@@ -37,6 +37,7 @@ class SignInController {
           return $location.path($state.href('home'));
         });
       }, ({ data }) => {
+        this.show = true;
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginFailed);
         this.error = data.error_description;
       });
