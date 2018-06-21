@@ -13,16 +13,15 @@ class AuthoriseController {
     const params = this.$location.search();
     const { location } = this.$window;
     const { client_id: clientId } = params;
-
     const VALID_APP = {
       2: [
         'partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop',
-        'searchquezx', 'teamquezx', 'accessquezx', 'qdesklive', 'huntquezx',
+        'searchquezx', 'teamquezx', 'accessquezx', 'qdesklive', 'huntquezx', 'billingquezx',
       ],
-      4: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
-      5: ['hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
-      8: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
-      9: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive'],
+      4: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
+      5: ['hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
+      8: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
+      9: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
     }[user.group_id];
 
     switch (true) {

@@ -24,7 +24,7 @@ class NotificationController {
       email_template_id: data.id,
       enabled,
     };
-    data.enabled = !data.enabled;
+    Object.assign(data, { enabled: !data.enabled });
     this.success = this.error = '';
     this.$http
        .post('/emailPreferences/', this.data)
@@ -32,7 +32,7 @@ class NotificationController {
          this.success = 'Email Preference update was successful.';
        })
        .catch(({ err }) => {
-         data.enabled = !data.enabled;
+         Object.assign(data, { enabled: !data.enabled });
          this.error = err.error_description;
        });
   }
