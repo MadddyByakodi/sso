@@ -26,14 +26,14 @@
     button.btn.btn-lg.btn-primary.btn-block(type='submit') Log in
 
   .wrapper-md.text-center: a.text-info(ui-sref='oauth.password-reset') Forgot password?
-.row
+.row(ng-if='$ctrl.show')
   .col-md-3(style="margin-left: 23%;")
     hr(style="border-width: 2px;margin-top: 4%;")
   strong(style="width: auto;").col-md-1 or
   .col-md-3
     hr(style="border-width: 2px;margin-top: 4%;")
 
-.text-center
+.text-center(ng-if='$ctrl.show')
   a.btn.btn-lg(href="{{$ctrl.urls.API_SERVER}}/oauth/google?scope=calendar&continue={{$ctrl.$location.search().continue}}")
     img(src='assets/images/btn_google_signin_light_normal_web.png')
 
