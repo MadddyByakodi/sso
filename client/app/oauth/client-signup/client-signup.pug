@@ -78,7 +78,7 @@
             )
           .col-sm-6.wrapper-xs
             span Your Mobile Number
-            span.text-danger.font-bold *
+            span(ng-if="$ctrl.type===1").text-danger.font-bold *
             .input-group
               .input-group-addon +91
               input.form.form-control(
@@ -86,7 +86,7 @@
                 name='mobno'
                 ng-pattern='/^[1-9]\\d{9}$/'
                 ng-model='$ctrl.data.mobno'
-                required
+                ng-required="$ctrl.type===1"
               )
             span.text-xs.text-danger(ng-show='$ctrl.forms.mobno.$dirty && $ctrl.forms.mobno.$invalid') Invalid mobile number
         .w-full.col.m-b-sm
