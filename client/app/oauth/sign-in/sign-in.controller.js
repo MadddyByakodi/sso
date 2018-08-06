@@ -1,6 +1,7 @@
+
 class SignInController {
   /* @ngInject */
-  constructor($state, $location, $rootScope, Auth, AUTH_EVENTS, Session, urls) {
+  constructor($state, $location, $rootScope, Auth, AUTH_EVENTS, Session, urls, ResetLoginModal) {
     this.$state = $state;
     this.$location = $location;
     this.$rootScope = $rootScope;
@@ -8,6 +9,7 @@ class SignInController {
     this.urls = urls;
     this.AUTH_EVENTS = AUTH_EVENTS;
     this.Session = Session;
+    this.ResetLoginModalService = ResetLoginModal;
   }
 
   $onInit() {
@@ -18,13 +20,13 @@ class SignInController {
     return null;
   }
 
-  signin(code) {
+  signin(code, forceLogin = false) {
     this.error = null;
     const { username, password } = this.user;
 
     // Try to login
     this.Auth
-      .login(code ? { grant_type: 'google', code } : { username, password })
+      .login(code ? { grant_type: 'google', code } : { username, password, forceLogin })
       .then(() => {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
         this.Auth.setSessionData().then(() => {
@@ -36,10 +38,14 @@ class SignInController {
           if ($location.search().continue) return $location.url($location.search().continue);
           return $location.path($state.href('home'));
         });
-      }, ({ data }) => {
+      }, ({ data, status }) => {
         this.show = true;
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginFailed);
         this.error = data.error_description;
+        if (status === 409) {
+          this.ResetLoginModalService.open(data)
+            .then(() => this.signin(undefined, true));
+        }
       });
   }
 }

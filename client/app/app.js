@@ -18,6 +18,7 @@ import Auth from '../components/auth';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import UpdateTitle from '../components/update-title';
+import ResetLoginModal from '../components/reset-login-modal';
 
 import OAuth from './oauth';
 import Home from './home';
@@ -31,7 +32,7 @@ setupGAnalytics('UA-52116787-5');  // Google Analytics
 angular
   .module('accountsApp', [
     uiRouter, uiBootstrap, Navbar, Footer, constants, Auth, UpdateTitle,
-    OAuth, Home, Authorise, PasswordChange, Logout, Support, Notification,
+    OAuth, Home, Authorise, PasswordChange, Logout, Support, Notification, ResetLoginModal,
   ])
   .component('accountsApp', AppComponent)
   .config(routeConfig)

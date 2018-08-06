@@ -13,9 +13,12 @@ class AuthService {
   }
 
   login(credential) {
+    const loginCredentials = credential;
+    loginCredentials.singleSession = true;
+    if (loginCredentials.forceLogin) loginCredentials.force = true;
     return this
       .$http
-      .post(`${this.urls.API_SERVER}/oauth/token`, credential, {
+      .post(`${this.urls.API_SERVER}/oauth/token`, loginCredentials, {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         transformRequest(obj) {
           return Object
