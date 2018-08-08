@@ -24,4 +24,4 @@
 
 .modal-footer.m-t-md.b-t
   a.btn.btn-light(ng-click='$ctrl.$uibModalInstance.dismiss("cancel")') Cancel
-  a.btn.btn-success(ng-click='$ctrl.$uibModalInstance.close()') Reset Login
+  a.btn.btn-success(ng-click='$ctrl.GoogleAnalytics.sendEvent("login", "reset_login", "account_login");$ctrl.$uibModalInstance.close();') Reset Login

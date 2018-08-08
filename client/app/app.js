@@ -19,6 +19,7 @@ import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 import UpdateTitle from '../components/update-title';
 import ResetLoginModal from '../components/reset-login-modal';
+import GoogleAnalytics from '../components/google-analytics';
 
 import OAuth from './oauth';
 import Home from './home';
@@ -33,6 +34,7 @@ angular
   .module('accountsApp', [
     uiRouter, uiBootstrap, Navbar, Footer, constants, Auth, UpdateTitle,
     OAuth, Home, Authorise, PasswordChange, Logout, Support, Notification, ResetLoginModal,
+    GoogleAnalytics,
   ])
   .component('accountsApp', AppComponent)
   .config(routeConfig)
