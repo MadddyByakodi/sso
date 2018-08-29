@@ -12,7 +12,7 @@ class NavbarController {
     const { whatBlocked = [] } = this.user || {};
     const [state] = whatBlocked.map((x) => x.state);
 
-    this.pageName = state === 'password-change' ? '/password_change' : '/dashboard';
+    this.pageName = state === 'password-change' ? '/settings/password_change' : '/dashboard';
   }
 
   logout() {

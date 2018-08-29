@@ -20,21 +20,23 @@ import Footer from '../components/footer';
 import UpdateTitle from '../components/update-title';
 import ResetLoginModal from '../components/reset-login-modal';
 import GoogleAnalytics from '../components/google-analytics';
+import BaseSixtyFourInput from '../components/angular-base64-upload';
 
 import OAuth from './oauth';
 import Home from './home';
 import Authorise from './authorise';
-import PasswordChange from './password-change';
-import Notification from './notifications';
+import PasswordChange from './settings/password-change';
+import Notification from './settings/preferences/email-preferences';
 import Logout from './logout';
-import Support from './support';
+import Support from './settings/support';
+import Settings from './settings';
 
 setupGAnalytics('UA-52116787-5');  // Google Analytics
 angular
   .module('accountsApp', [
     uiRouter, uiBootstrap, Navbar, Footer, constants, Auth, UpdateTitle,
     OAuth, Home, Authorise, PasswordChange, Logout, Support, Notification, ResetLoginModal,
-    GoogleAnalytics,
+    GoogleAnalytics, Settings, BaseSixtyFourInput,
   ])
   .component('accountsApp', AppComponent)
   .config(routeConfig)

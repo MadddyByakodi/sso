@@ -6,7 +6,7 @@ function events($rootScope, $location, $state, Auth, AUTH_EVENTS, Session) {
   const { whatBlocked = [] } = user || {};
   const [state] = whatBlocked.map((x) => x.state);
 
-  if (state === 'password-change') $state.go('password-change');
+  if (state === 'password-change') $state.go('settings.password-change');
 
   // eslint-disable-next-line angular/on-watch
   $rootScope.$on(AUTH_EVENTS.loginRequired, () => Auth

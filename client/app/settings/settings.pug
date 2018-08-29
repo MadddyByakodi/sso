@@ -1,0 +1,28 @@
+.w-md.bg-white-only.b-r.pos-fix(style='height: 100%;z-index: 10;')
+  ul.nav
+    li.n-hv(style='padding-bottom: 5px')
+      ul.nav.dk
+        li(ui-sref-active='active' ng-click='$ctrl.openCollapse()')
+          a(ui-sref='settings.password-change')
+            span Change Password
+        li
+          a(ng-click='$ctrl.openCollapse("prefs")')
+            span Preference
+            i.fa.pull-right.fa-chevron-up(ng-class='{"fa-chevron-down": !$ctrl.collapse.prefs}')
+          ul.nav(data-tag='subMenuPrefs' uib-collapse='!$ctrl.collapse.prefs')
+            li
+              a.m-l-xs(ui-sref='settings.preferences.email-preferences')
+                span Email Preference
+        li(ui-sref-active='active' ng-if='$ctrl.showConfig')
+          a(ng-click='$ctrl.openCollapse("config")')
+            span Configuration
+            i.fa.pull-right.fa-chevron-up(ng-class='{"fa-chevron-down": !$ctrl.collapse.config}')
+          ul.nav(data-tag='subMenuConfig' uib-collapse='!$ctrl.collapse.config')
+            li
+              a.m-l-sm(ui-sref='settings.configuration.duplicate-check({status: false})')
+                span Duplicate Check
+        li(ui-sref-active='active' ng-click='$ctrl.openCollapse()')
+          a(ui-sref='settings.support')
+            span Support
+.bg-white-only.pos-abt(style='width: 100%;')
+  div(ui-view="")

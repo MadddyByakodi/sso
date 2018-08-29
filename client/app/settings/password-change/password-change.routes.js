@@ -1,9 +1,9 @@
 /* @ngInject */
 export default function routes($stateProvider) {
   $stateProvider
-    .state('password-change', {
-      url: '/password_change',
+    .state('settings.password-change', {
+      url: '/password-change',
       template: '<password-change></password-change>',
-      data: { pageTitle: 'Change password' },
+      data: { pageTitle: 'Settings - Change password' },
     });
 }

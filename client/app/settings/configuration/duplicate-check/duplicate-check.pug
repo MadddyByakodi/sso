@@ -1,0 +1,95 @@
+.bg-white.pos-abt(style='height: 93vh; margin-left: 240px;')
+  .col-xs-7.wrapper-lg(ng-if='$ctrl.$stateParams.status === "false"')
+    .col-xs-12.no-padder
+      .h4.inline.text-dark-dker.m-b-lg Duplicate Check
+    .col-sm-12.hbox.no-padder
+      .col.col-xs-8.no-padder.v-middle
+        p.text-md If you wish to avoid duplication of all candidates that you already have in your database
+      .col.col-xs-4
+        .b-a.wrapper-xs.text-center
+          .text-info.text-bold(style='font-size: 30px;' ng-bind='$ctrl.duplicateCount')
+          .text-black.text-bold.text-lg Total Entries
+          a.text-muted.text-md.pointer.text-info(ui-sref='settings.configuration.duplicate-check({status: true})' ng-if='$ctrl.duplicateCount') View
+    .col-sm-12.m-t-lg.no-padder
+      .h4.inline.text-bold.m-b-lg(style='padding-right: 10px; z-index: 2; background: #fff')
+        .inline Upload
+      .m-t-n-xl.b-b.m-t-n-sm.w-full(style='border: 1px solid #ccc;')
+    .col-xs-12.m-t-md.no-padder
+      .wrapper.b-a(style='height: 110px;')
+        .col-xs-3.b-r
+          .h2.m-t-md.m-b-md STEP 1
+        .col-xs-9
+          p If you wish to avoid duplication of all candidates that you already have in your database
+          .pull-right
+            a.b-a.btn-success.inline.wrapper-xs(
+              href='https://cdn.quezx.com/documents/candidate-duplication-check/check_template.xlsx'
+              target='_blank'
+            )
+              span.text-white Download Excel Template
+
+      ul.m-b-none
+        li
+        li
+        li
+
+      .wrapper.b-a(style='height: 110px;')
+        .col-xs-3.b-r
+          .h2.m-t-md.m-b-md STEP 2
+        .col-xs-9
+          p If you wish to avoid duplication of all candidates that you already have in your database
+            .pull-right
+              .input-group
+                input.col-sm-12.jobLink.form-control.ng-pristine.ng-valid.ng-touched(
+                  style='height: 36px;'
+                  type='file'
+                  accept = ".xls,.xlsx"
+                  ng-model = '$ctrl.data.file'
+                  base-sixty-four-input
+                )
+                a.btn.btn-xs.bg-success.text-white.input-group-addon.ng-isolate-scope(
+                  type='button' ng-click='$ctrl.uploadExcel();' ng-disabled='!$ctrl.data.file'
+                )
+                  span.text-white Upload Excel Data
+
+      .inline.wrapper-xs.pull-left.text-danger(ng-if='$ctrl.file.url')
+        span(ng-if='$ctrl.file.failed > 0')
+          span(ng-bind=' $ctrl.file.failed + "/" + $ctrl.file.total')
+          span &nbsp;records failed,&nbsp;
+          a.text-primary.text-u-l( ng-href='{{$ctrl.file.url}}' target='_blank') Click Here
+          span &nbsp;to download the error report.
+
+        span.text-success(ng-if='!$ctrl.file.failed') Your excelsheet successfully uploaded.
+      .inline.wrapper-xs.pull-left.text-danger(ng-if='$ctrl.error' ng-bind='$ctrl.error')
+
+  .container.hbox.hbox-auto-xs.no-padder(ng-if='$ctrl.$stateParams.status === "true"')
+    .col-xs-12.wrapper-lg
+      .h4.inline.text-bold.m-b-md(style='padding-left: 0 !important')
+        a.text-info.pointer.text-u-l(ui-sref='settings.configuration.duplicate-check({status: false})') Duplicate Check
+        i.m-l-sm.m-r-sm.fa.fa-chevron-right(style='font-size: 13px;')
+        span.pointer View Entries
+      .col-sm-12.m-t-xs.no-padder
+        div.no-padder.col-md-12
+          .panel.panel-default.card-height
+            .panel-body.responsive-table.no-padder(style='overflow: auto;overflow-x:hidden')
+              div.m-t-md.m-b-sm.wrapper-lg.lter(ng-if='!$ctrl.list.length', style='color: #aaa')
+                div.text-center
+                  i.fa.fa-smile-o.fa-3x
+                h5.text-center You have no candidates currently.
+              table.table.m-b-none.text-gray(ng-if='$ctrl.list.length')
+                thead
+                  tr
+                    th.col-xs-4 Name
+                    th.col-xs-4 Email
+                    th.col-xs-4 Contact Number
+                tbody
+                  tr(ng-class="$last ?'':'b-b'" ng-repeat='applicant in $ctrl.list')
+                    td: .w-full.text-ellipsis(ng-bind="applicant.name")
+                    td: .w-full.text-ellipsis(ng-bind='applicant.email')
+                    td: .w-full.text-ellipsis(ng-bind='applicant.number')
+              .col-xs-12.text-center.m-b-sm.m-t-sm
+                a.btn.active.m-t-xs(ng-if="$ctrl.ui.loading")
+                  i.fa.fa-circle-o-notch.fa-spin
+                  strong &nbsp;Loading
+                a.btn.btn-default.m-t-xs(ng-if="$ctrl.ui.lazyLoad" ng-click="$ctrl.getTableData(false)")
+                  i.fa.fa-plus-circle
+                  strong &nbsp;Load More

@@ -20,7 +20,7 @@ script(type='text/ng-template' id='navbar-profile-template.html')
           title='{{::$ctrl.user.email_id}}'
           ng-click='$ctrl.isProfPopOpen =!$ctrl.isProfPopOpen;')
         .w-full.m-t-xs: a.text-xs(
-          ui-sref='password-change'
+          ui-sref='settings.password-change'
           style='color: #4173a9'
           ng-click='$ctrl.isProfPopOpen =!$ctrl.isProfPopOpen;') Change Password
     .hbox

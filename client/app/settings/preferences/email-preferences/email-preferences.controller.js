@@ -1,4 +1,4 @@
-class NotificationController {
+class EmailPreferencesController {
   /* @ngInject */
   constructor($http, $state, Session, Auth) {
     this.$http = $http;
@@ -38,4 +38,4 @@ class NotificationController {
   }
 }
 
-export default NotificationController;
+export default EmailPreferencesController;
