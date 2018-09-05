@@ -16,6 +16,7 @@ class SignUpController {
     this.ui = { loading: false };
     this.disableSignup = false;
     const encCid = this.$stateParams.cid;
+    const code = +this.$stateParams.signup_code;
     if (encCid) {
       this
         .$http
@@ -24,7 +25,7 @@ class SignUpController {
           ignoreAuthModule: true,
         })
         .then(({ data }) => {
-          if (data) location.href = `${this.urls.PARTNER_APP}/accept-invite/${encCid}`;
+          if (data) location.href = `${this.urls.PARTNER_APP}/accept-invite/${encCid}/${code}`;
         })
         .catch(() => (this.disableSignup = true));
     }
