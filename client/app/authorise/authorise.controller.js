@@ -17,11 +17,24 @@ class AuthoriseController {
       2: [
         'partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop',
         'searchquezx', 'teamquezx', 'accessquezx', 'qdesklive', 'huntquezx', 'billingquezx',
+        'vendorquezx',
       ],
-      4: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
-      5: ['hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
-      8: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
-      9: ['managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx'],
+      4: [
+        'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
+        'vendorquezx',
+      ],
+      5: [
+        'hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
+        'vendorquezx',
+      ],
+      8: [
+        'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
+        'vendorquezx',
+      ],
+      9: [
+        'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
+        'vendorquezx',
+      ],
     }[user.group_id];
 
     switch (true) {

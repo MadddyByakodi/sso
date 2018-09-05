@@ -101,6 +101,6 @@
             ng-disabled='$ctrl.$stateParams.signup_code'
           )
       .col-xs-12.padder-v
-        button.btn.btn-success(type='submit' ng-disabled='signupForm.$invalid || $ctrl.ui.loading')
+        button.btn.btn-success(type='submit' ng-disabled='signupForm.$invalid || $ctrl.ui.loading || $ctrl.disableSignup')
          i.fa.fa-circle-o-notch.fa-spin.m-r-xs(ng-if='$ctrl.ui.loading')
          span Signup
