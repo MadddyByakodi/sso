@@ -13,9 +13,16 @@ class SignInController {
   }
 
   $onInit() {
-    this.user = { username: '', password: '' };
     this.error = null;
-    if (this.$state.params.code) return this.signin(this.$state.params.code);
+    this.user = {
+      username: this.$state.params.username || '',
+      password: this.$state.params.password || '',
+    };
+
+    if (this.$state.params.code || (this.$state.params.username && this.$state.params.username)) {
+      return this.signin(this.$state.params.code);
+    }
+
     this.show = true;
     return null;
   }
