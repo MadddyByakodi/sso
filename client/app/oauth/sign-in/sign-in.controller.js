@@ -31,9 +31,16 @@ class SignInController {
     this.error = null;
     const { username, password } = this.user;
 
+    const IS_QDESKTOP = this.$location.search().continue.includes('qdesktop');
+
+    const options = { username, password, forceLogin };
+
+    if (!IS_QDESKTOP) options.singleSession = true;
+    if (forceLogin) options.force = true;
+
     // Try to login
     this.Auth
-      .login(code ? { grant_type: 'google', code } : { username, password, forceLogin })
+      .login(code ? { grant_type: 'google', code } : options)
       .then(() => {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
         this.Auth.setSessionData().then(() => {

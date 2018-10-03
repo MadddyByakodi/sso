@@ -14,8 +14,7 @@ class AuthService {
 
   login(credential) {
     const loginCredentials = credential;
-    loginCredentials.singleSession = true;
-    if (loginCredentials.forceLogin) loginCredentials.force = true;
+
     return this
       .$http
       .post(`${this.urls.API_SERVER}/oauth/token`, loginCredentials, {
