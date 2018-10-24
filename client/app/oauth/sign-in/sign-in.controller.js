@@ -31,7 +31,7 @@ class SignInController {
     this.error = null;
     const { username, password } = this.user;
 
-    const IS_QDESKTOP = (this.$location.search().continue || '').includes('qdesktop');
+    const IS_QDESKTOP = (this.$location.search().continue || '').includes('qdesktop') || window.innnerWidth === 400;
 
     const options = { username, password, forceLogin };
 
