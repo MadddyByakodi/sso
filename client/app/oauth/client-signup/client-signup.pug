@@ -60,6 +60,8 @@
             name='companyname'
             ng-model='$ctrl.data.companyname'
             placeholder='Enter Company Name'
+            uib-typeahead='employer for employer in $ctrl.getEmployer($viewValue)'
+            ng-model-options="{ debounce: 300 }"
             autofocus
             required
           )

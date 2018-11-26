@@ -29,6 +29,14 @@ class ClientSignupController {
     this.url = this.$location.search();
   }
 
+  getEmployer(search) {
+    return this.$http
+      .get(`https://autocomplete.clearbit.com/v1/companies/suggest?query=${search}`, {
+        ignoreAuthModule: true,
+      })
+      .then(({ data }) => data.map(x => x.name));
+  }
+
   resetData() {
     this.data = {
       signup_source_id: this.src,
