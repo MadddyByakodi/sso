@@ -6,6 +6,7 @@ const { MASTER_TOKEN } = require('../../config/environment');
 const salt = 'DYhG93b0fIxfs2guVoUubasdfajfkljasdjfaklsdjflakrfWwvniR2G0FgaC9mi';
 
 module.exports = (sequelize, DataTypes) => {
+<<<<<<< HEAD
   const User = sequelize.define('User', Object
     .assign(properties(DataTypes), {
       name: {
@@ -45,6 +46,35 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     });
+=======
+  const User = sequelize.define('User', properties(DataTypes), {
+    tableName: 'users',
+    timestamps: false,
+    underscored: true,
+    paranoid: true,
+    hooks: {
+      beforeCreate: function beforeCreate(instance) {
+        if (instance.changed('password')) {
+          instance
+            .set('password', crypto
+              .createHash('md5')
+              .update(salt + instance.password)
+              .digest('hex'));
+        }
+      },
+
+      beforeUpdate: function beforeUpdate(instance) {
+        if (instance.changed('password')) {
+          instance
+            .set('password', crypto
+              .createHash('md5')
+              .update(salt + instance.password)
+              .digest('hex'));
+        }
+      },
+    },
+  });
+>>>>>>> auth api
 
 
   User.associate = (db) => {
