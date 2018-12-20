@@ -1,3 +1,6 @@
+const moment = require('moment');
+const { URLS_AUTH } = require('../../config/environment');
+
 const request = require('supertest');
 const app = require('../../app');
 
