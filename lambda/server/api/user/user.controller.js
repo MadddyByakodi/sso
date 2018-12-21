@@ -22,6 +22,7 @@ exports.magiclink = async (req, res, next) => {
 
     return res.sendStatus(201);
   } catch (err) {
+    console.log(err);
     return next(err);
   }
 };

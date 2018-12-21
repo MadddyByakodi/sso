@@ -22,6 +22,35 @@ exports.index = async (req, res, next) => {
         where: {
           $or: {
             first_name: {
+              $like: wild
+            },
+            last_name: {
+              $like: wild
+            },
+            email: {
+              $like: wild
+            },
+          }
+
+        }
+      });
+    return res.json(users);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.index = async (req, res, next) => {
+  try {
+    const wild = `%${req.query.q}%`;
+    const users = await User
+      .findAll({
+        attributes: ['id', 'first_name', 'last_name', 'name', 'email'],
+        limit: 10,
+        offset: Number(req.query.offset) || 0,
+        where: {
+          $or: {
+            first_name: {
               $like: wild,
             },
             last_name: {

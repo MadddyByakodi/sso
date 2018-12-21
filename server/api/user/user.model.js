@@ -47,7 +47,19 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
 =======
-  const User = sequelize.define('User', properties(DataTypes), {
+  const User = sequelize.define('User', Object
+    .assign(properties(DataTypes), {
+      name: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          const title = this.getDataValue('title');
+          const firstName = this.getDataValue('first_name');
+          const lastName = this.getDataValue('last_name');
+          // 'this' allows you to access attributes of the instance
+          return `${title} ${firstName} ${lastName}`;
+        },
+      },
+  }), {
     tableName: 'users',
     timestamps: false,
     underscored: true,
@@ -74,7 +86,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
->>>>>>> auth api
 
 
   User.associate = (db) => {
