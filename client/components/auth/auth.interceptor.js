@@ -6,6 +6,7 @@ function AuthInterceptor($window, Session, urls) {
 
       // handle url request without domain to api server
       if (conf.url[0] === '/') conf.url = `${urls.API_SERVER}/api${conf.url}`;
+      if (conf.url[0] === '#') conf.url = `${urls.ACCOUNTS_APP}/api${conf.url.substr(1)}`;
 
       if (!!conf.ignoreAuthModule) return conf; // don't need token
 

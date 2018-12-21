@@ -1,29 +1,40 @@
+const fs = require('fs');
 const path = require('path');
-const development = require('./development');
-const production = require('./production');
-const _ = require('lodash');
+const dotenv = require('dotenv');
 
-// All configurations will extend these options
-// ============================================
-const all = {
-  env: process.env.NODE_ENV,
+const root = path.normalize(`${__dirname}/../../..`);
 
-  // Root path of server
-  root: path.normalize(`${__dirname}/../../..`),
+if (!fs.existsSync(path.join(root, '.env'))) {
+  fs.writeFileSync(path.join(root, '.env'), fs.readFileSync(path.join(root, '.env.sample')));
+}
 
-  // Browser-sync port
-  browserSyncPort: process.env.BROWSER_SYNC_PORT || 3001,
+const env = dotenv.config({ path: path.join(root, '.env') });
+const { PREFIX, DOMAIN } = env.parsed;
+const config = {
+  all: {
+    env: process.env.NODE_ENV,
+    // Server port
+    port: process.env.PORT || 4000,
+    ip: process.env.IP || '0.0.0.0',
+    root,
+    URLS_ACCOUNTS: `${PREFIX}accounts.${DOMAIN}`,
+    // Browser-sync port
+    browserSyncPort: process.env.BROWSER_SYNC_PORT || 3001,
+  },
+  development: {
 
-  // Server port
-  port: process.env.PORT || 3301,
+  },
 
-  // Server IP
-  ip: process.env.IP || '0.0.0.0',
+  staging: {
+
+  },
+
+  production: {
+
+  },
 };
 
-// Export the config object
-// ==============================================
-module.exports = {
-  development: _.merge(all, development),
-  production: _.merge(all, production),
-}[process.env.NODE_ENV || 'development'];
+const conf = Object.assign(env.parsed, config.all, config[process.env.NODE_ENV || 'development']);
+
+module.exports = conf;
+

@@ -2,23 +2,70 @@
  * Express configuration
  */
 
-import express from 'express';
-import bodyParser from 'body-parser';
-import errorHandler from 'errorhandler';
-import path from 'path';
-import config from './environment';
+const favicon = require('serve-favicon');
+const errorHandler = require('errorhandler');
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
+const responseTime = require('response-time');
 
-export default function expressConfig(app) {
+const db = require('../conn/sqldb');
+const routes = require('../routes');
+const config = require('./environment');
+const rateLimit = require('./ratelimit');
+const logger = require('../components/logger');
+const oauthComponent = require('./../components/oauth/express');
+const { activityLogger, apiLogger } = require('../components/log');
+const required = require;
+
+module.exports = (app) => {
   const env = app.get('env');
+  app.use((req, res, next) => {
+    res.on('finish', () => activityLogger({ db })(req, res, next));
+    next();
+  });
+  app.use(morgan('dev'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(cors());
+  app.enable('trust proxy');
+  app.use(responseTime());
+  app.use(apiLogger(db));
+  app.use(helmet());
+  app.use(rateLimit('api', db));
+  app.use(logger.transports.sentry.raven.requestHandler(true));
+  app.set('view engine', 'jade');
+  app.set('views', `${config.root}/server/app`);
+  app.set('appPath', path.join(config.root, 'client'));
+  if (env === 'production') {
+    app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
+    app.use(express.static(app.get('appPath')));
+    app.use(morgan('dev'));
+  }
+
+  if (env === 'development') {
+    app.use(required('connect-livereload')({
+      ignore: [
+        /^\/api\/(.*)/,
+        /\.js(\?.*)?$/, /\.css(\?.*)?$/, /\.svg(\?.*)?$/, /\.ico(\?.*)?$/, /\.woff(\?.*)?$/,
+        /\.png(\?.*)?$/, /\.jpg(\?.*)?$/, /\.jpeg(\?.*)?$/, /\.gif(\?.*)?$/, /\.pdf(\?.*)?$/,
+      ],
+    }));
+  }
+
+  if (env === 'development' || env === 'test') {
+    app.use(express.static(path.join(config.root, '.tmp')));
+    app.use(express.static(app.get('appPath')));
+    app.use(morgan('dev'));
+    app.use(errorHandler()); // Error handler - has to be last
+  }
 
   if (env === 'development' || env === 'test') {
     app.use(express.static(path.join(config.root, '.tmp')));
   }
-
-  app.set('appPath', path.join(config.root, 'client'));
-  app.use(express.static(app.get('appPath')));
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(bodyParser.json());
 
 
   if (env === 'development') {
@@ -69,4 +116,6 @@ export default function expressConfig(app) {
   if (env === 'development' || env === 'test') {
     app.use(errorHandler()); // Error handler - has to be last
   }
-}
+
+  oauthComponent(app, routes, rateLimit('auth', db));
+};

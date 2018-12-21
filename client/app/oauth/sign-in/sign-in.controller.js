@@ -1,7 +1,10 @@
 
 class SignInController {
   /* @ngInject */
-  constructor($state, $location, $rootScope, Auth, AUTH_EVENTS, Session, urls, ResetLoginModal) {
+  constructor(
+    $window, $state, $location, $rootScope, Auth, AUTH_EVENTS, Session, urls, ResetLoginModal
+  ) {
+    this.$window = $window;
     this.$state = $state;
     this.$location = $location;
     this.$rootScope = $rootScope;
@@ -31,7 +34,8 @@ class SignInController {
     this.error = null;
     const { username, password } = this.user;
 
-    const IS_QDESKTOP = (this.$location.search().continue || '').includes('qdesktop') || window.innnerWidth === 400;
+    const IS_QDESKTOP = (this.$location.search().continue || '').includes('qdesktop')
+      || this.$window.innnerWidth === 400;
 
     const options = { username, password, forceLogin };
 
