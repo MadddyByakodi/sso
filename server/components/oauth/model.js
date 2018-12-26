@@ -58,7 +58,7 @@ const oAuthModel = {
         if (!token) return callback(null, false);
 
         return User
-          .findById(token.user_id, {
+          .findByPk(token.user_id, {
             attributes,
             raw: true,
           })

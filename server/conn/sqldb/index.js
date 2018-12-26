@@ -3,11 +3,12 @@ const Sequelize = require('sequelize');
 
 const config = require('../../config/environment');
 const oauthComponent = require('../../components/oauth/sequelize');
+const { log } = console;
 
 const sqlDefaults = {
   dialect: 'mysql',
   timezone: '+05:30',
-  logging: console.log,
+  logging: config.NODE_ENV === 'development' ? log : false,
   define: {
     charset: 'utf8',
     dialectOptions: {

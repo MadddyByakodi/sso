@@ -5,7 +5,7 @@ const { MASTER_TOKEN } = require('../../config/environment');
 const authoriser = require('../../components/oauth/authorise');
 const jwt = require('../../components/jwt');
 
-const { User, sequelize, Sequelize } = require('../../conn/sqldb');
+const { User } = require('../../conn/sqldb');
 const hookshot = require('./user.hookshot');
 const service = require('./user.service');
 
@@ -22,17 +22,16 @@ exports.index = async (req, res, next) => {
         where: {
           $or: {
             first_name: {
-              $like: wild
+              $like: wild,
             },
             last_name: {
-              $like: wild
+              $like: wild,
             },
             email: {
-              $like: wild
+              $like: wild,
             },
-          }
-
-        }
+          },
+        },
       });
     return res.json(users);
   } catch (err) {
@@ -87,27 +86,26 @@ exports.authorise = async (req, res, next) => {
   }
 };
 
-exports.autoIncrementValue = async (req, res, next) => {
-  try {
-    const query = 'SELECT `AUTO_INCREMENT` FROM INFORMATION_SCHEMA.TABLES ' +
-      "WHERE TABLE_SCHEMA = 'gloryque_auth' AND TABLE_NAME = 'users'";
-
-    const result = await sequelize
-      .query(query, { type: Sequelize.QueryTypes.SELECT });
-
-    return res
-      .json(result[0].AUTO_INCREMENT);
-  } catch (err) {
-    return next(err);
-  }
-};
-
 const messagesMap = {
   201: 'Your account created in MarQ',
   409: 'Duplicate',
 };
 
 exports.create = async (req, res, next) => {
+  try {
+    log('register', req.body);
+
+    const status = await service
+      .signup({ body: req.body });
+
+    return res
+      .json({ message: messagesMap[status.code], id: status.id });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.invite = async (req, res, next) => {
   try {
     log('register', req.body);
 

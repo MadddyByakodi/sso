@@ -1,5 +1,7 @@
 module.exports = {
-  GROUPS: {
-    USER: 1,
+  APPS: {
+    ACCOUNTS: 1,
+    ASPIRE: 2,
+    ANALYTICS: 3,
   },
 };
