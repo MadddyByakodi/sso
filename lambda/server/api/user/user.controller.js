@@ -3,7 +3,6 @@ const ses = require('../../conn/email/ses');
 
 exports.magiclink = async (req, res, next) => {
   try {
-    console.log('asdhagsdjgh')
     const { user: { email }, otp, ENV } = req.body;
 
     const magicLink = `${ENV.URLS_ACCOUNTS}/api/users/authorise?otp=${otp}`;
@@ -22,7 +21,6 @@ exports.magiclink = async (req, res, next) => {
 
     return res.sendStatus(201);
   } catch (err) {
-    console.log(err);
     return next(err);
   }
 };

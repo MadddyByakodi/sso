@@ -13,6 +13,9 @@ export function routeConfig($urlRouterProvider, $locationProvider) {
         case 2:
           location.href = `${urls.PARTNER_APP}${url}`;
           return null;
+        case 3: // analytise app
+          location.href = `${urls.ANALYTICS_APP}${url}`;
+          return null;
 
         case 4:
         case 8:

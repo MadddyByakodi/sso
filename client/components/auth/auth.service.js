@@ -34,6 +34,29 @@ class AuthService {
       });
   }
 
+  authLogin(credential) {
+    const loginCredentials = credential;
+    console.log('loginCredentials');
+
+    return this
+      .$http
+      .post(`${this.urls.ACCOUNTS_APP}/oauth/token`, loginCredentials, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        transformRequest(obj) {
+          return Object
+            .keys(obj)
+            .map(p => `${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`)
+            .join('&');
+        },
+        ignoreAuthModule: true,
+      })
+      .then(res => this.Session.create('oauth', res.data))
+      .catch(res => {
+        this.Session.destroy();
+        return this.$q.reject(res);
+      });
+  }
+
   refreshToken() {
     // To Save Multiple Async RefreshToken Request
     if (this.refreshingToken) {
@@ -90,6 +113,19 @@ class AuthService {
         this
           .$http
           .get(`${this.apiUrl}/users/me`)
+          .then(res => this.Session.create('userinfo', res.data)),
+
+        // User states not required
+      ]);
+  }
+
+  setAuthSessionData() {
+    return this
+      .$q
+      .all([
+        this
+          .$http
+          .get(`${this.urls.ACCOUNTS_APP}/api/users/me`)
           .then(res => this.Session.create('userinfo', res.data)),
 
         // User states not required
