@@ -135,6 +135,30 @@ exports.invite = async (req, res, next) => {
   }
 };
 
+exports.productSignup = async (req, res, next) => {
+  try {
+    log('productSignup', req.body);
+
+    const user = await User
+      .findByPk(req.params.id, {
+        attributes: ['id', 'title', 'first_name', 'last_name', 'email', 'mobile'],
+        raw: true,
+      });
+
+    const status = await service
+      .informToRelatedApps({
+        appId: req.user.app_id,
+        user,
+      });
+
+    return res
+      .json({ message: messagesMap[status.code], id: status.id });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+
 exports.magiclink = async (req, res, next) => {
   try {
     const { email } = req.body;

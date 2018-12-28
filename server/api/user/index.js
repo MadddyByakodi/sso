@@ -12,5 +12,6 @@ router.get('/authorise', controller.authorise);
 router.post('/', cronAuthenticate(), controller.create);
 router.post('/magiclink', controller.magiclink);
 router.post('/invite', authenticate(), controller.invite);
+router.post('/:id/productSignup', authenticate(), controller.productSignup);
 
 module.exports = router;
