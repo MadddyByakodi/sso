@@ -2,7 +2,6 @@ const express = require('express');
 const controller = require('./user.controller');
 const authenticate = require('./../../components/oauth/authenticate');
 const cronAuthenticate = require('./../../components/cronAuth');
-const authenticate = require('./../../components/oauth/authenticate');
 
 const router = express.Router();
 
