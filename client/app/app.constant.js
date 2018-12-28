@@ -19,7 +19,7 @@ const constants = angular
   .module('accountsApp.constants', [])
   .constant('moment', moment)
   .constant('urls', {
-    API_SERVER, HIRE_APP, PARTNER_APP, MANAGE_APP, ACCOUNTS_APP, ANALYTICS_APP
+    API_SERVER, HIRE_APP, PARTNER_APP, MANAGE_APP, ACCOUNTS_APP, ANALYTICS_APP,
   });
 
 export default constants.name;

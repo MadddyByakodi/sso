@@ -82,3 +82,14 @@ describe('POST /api/users/invite', () => {
       .then(() => done());
   });
 });
+
+describe('GET /api/users/1/signupStatus', () => {
+  it('Checking User Status', (done) => {
+    request(app)
+      .get('/api/users/1/signupStatus?app_id=3')
+      .set('Authorization', `Bearer ${auth.access_token}`)
+      .expect(200)
+      .then(() => done());
+  });
+});
+

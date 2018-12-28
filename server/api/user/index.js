@@ -6,6 +6,7 @@ const cronAuthenticate = require('./../../components/cronAuth');
 const router = express.Router();
 
 router.get('/', controller.index);
+router.get('/:id/signupStatus', authenticate(), controller.signupStatus);
 router.get('/me', authenticate(), controller.me);
 router.get('/authorise', controller.authorise);
 router.post('/', cronAuthenticate(), controller.create);

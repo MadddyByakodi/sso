@@ -4,7 +4,6 @@ const oAuth = require('./../');
 const directLogin = require('./directLogin');
 const loginAs = require('./loginAs');
 const db = require('./../../../conn/sqldb');
-const cronAuth = require('../../cronAuth');
 
 module.exports = (a, routes, rateLimit) => {
   const app = a;
@@ -26,13 +25,7 @@ module.exports = (a, routes, rateLimit) => {
       .catch(next);
   });
 
-  app.post('/api/authorise', rateLimit, loginAs, authenticate(), app.oauth
-    .authCodeGrant((req, callback) => {
-      if (req.body.allow !== 'true') return callback(null, false);
-      return callback(null, true, req.user);
-    }));
-
-  app.post('/authorise', rateLimit, loginAs, cronAuth(), authenticate(), app.oauth
+  app.post('/authorise', rateLimit, loginAs, authenticate(), app.oauth
     .authCodeGrant((req, callback) => {
       if (req.body.allow !== 'true') return callback(null, false);
       return callback(null, true, req.user);

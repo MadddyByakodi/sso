@@ -5,7 +5,7 @@ const { MASTER_TOKEN } = require('../../config/environment');
 const authoriser = require('../../components/oauth/authorise');
 const jwt = require('../../components/jwt');
 
-const { User } = require('../../conn/sqldb');
+const { User, AccessToken } = require('../../conn/sqldb');
 const hookshot = require('./user.hookshot');
 const service = require('./user.service');
 
@@ -16,7 +16,7 @@ exports.index = async (req, res, next) => {
     const wild = `%${req.query.q}%`;
     const users = await User
       .findAll({
-        attributes: ['id', 'first_name', 'last_name', 'name', 'email'],
+        attributes: ['id', 'first_name', 'last_name', 'name', 'email', 'group_id'],
         limit: 10,
         offset: Number(req.query.offset) || 0,
         where: {
@@ -33,6 +33,7 @@ exports.index = async (req, res, next) => {
           },
         },
       });
+
     return res.json(users);
   } catch (err) {
     return next(err);
@@ -62,6 +63,21 @@ exports.index = async (req, res, next) => {
         },
       });
     return res.json(users);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.signupStatus = async (req, res, next) => {
+  try {
+    const count = await AccessToken.count({
+      where: {
+        app_id: req.user.app_id,
+        user_id: req.params.id,
+      },
+    });
+
+    return res.json(!!count);
   } catch (err) {
     return next(err);
   }
