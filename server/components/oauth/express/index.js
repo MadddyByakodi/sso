@@ -1,5 +1,4 @@
 
-const authorise = require('./authorise');
 const authenticate = require('./../authenticate');
 const oAuth = require('./../');
 const directLogin = require('./directLogin');
@@ -32,8 +31,6 @@ module.exports = (a, routes, rateLimit) => {
       if (req.body.allow !== 'true') return callback(null, false);
       return callback(null, true, req.user);
     }));
-  // OAuth Authorise from Third party applications
-  app.get('/authorise', rateLimit, authorise);
 
   app.post('/authorise', rateLimit, loginAs, cronAuth(), authenticate(), app.oauth
     .authCodeGrant((req, callback) => {

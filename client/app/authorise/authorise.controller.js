@@ -19,6 +19,7 @@ class AuthoriseController {
         'searchquezx', 'teamquezx', 'accessquezx', 'qdesklive', 'huntquezx', 'billingquezx',
         'vendorquezx',
       ],
+      3: ['analyticsquezx'],
       4: [
         'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
         'vendorquezx',
@@ -50,7 +51,9 @@ class AuthoriseController {
       }
 
       default: {
-        const url = `${this.urls.API_SERVER}/authorise`;
+        const IS_AUTH = clientId === 'analyticsquezx';
+        const url = `${this
+          .urls[IS_AUTH ? 'ACCOUNTS_APP' : 'API_SERVER']}/authorise`;
         return this
           .$http
           .post(url, Object.assign(params, { allow: 'true' }), { params })
