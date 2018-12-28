@@ -18,33 +18,33 @@ module.exports = (sequelize, DataTypes) => {
           return `${title} ${firstName} ${lastName}`;
         },
       },
-  }), {
-    tableName: 'users',
-    timestamps: false,
-    underscored: true,
-    paranoid: true,
-    hooks: {
-      beforeCreate: function beforeCreate(instance) {
-        if (instance.changed('password')) {
-          instance
-            .set('password', crypto
-              .createHash('md5')
-              .update(salt + instance.password)
-              .digest('hex'));
-        }
-      },
+    }), {
+      tableName: 'users',
+      timestamps: false,
+      underscored: true,
+      paranoid: true,
+      hooks: {
+        beforeCreate: function beforeCreate(instance) {
+          if (instance.changed('password')) {
+            instance
+              .set('password', crypto
+                .createHash('md5')
+                .update(salt + instance.password)
+                .digest('hex'));
+          }
+        },
 
-      beforeUpdate: function beforeUpdate(instance) {
-        if (instance.changed('password')) {
-          instance
-            .set('password', crypto
-              .createHash('md5')
-              .update(salt + instance.password)
-              .digest('hex'));
-        }
+        beforeUpdate: function beforeUpdate(instance) {
+          if (instance.changed('password')) {
+            instance
+              .set('password', crypto
+                .createHash('md5')
+                .update(salt + instance.password)
+                .digest('hex'));
+          }
+        },
       },
-    },
-  });
+    });
 
 
   User.associate = (db) => {

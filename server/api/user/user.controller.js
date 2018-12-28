@@ -22,22 +22,25 @@ exports.index = async (req, res, next) => {
         where: {
           $or: {
             first_name: {
-              $like: wild
+              $like: wild,
             },
             last_name: {
-              $like: wild
+              $like: wild,
             },
             email: {
-              $like: wild
+              $like: wild,
             },
-          }
-
-        }
+          },
+        },
       });
     return res.json(users);
   } catch (err) {
     return next(err);
   }
+};
+
+exports.me = (req, res) => {
+  return res.json(req.user);
 };
 
 exports.authorise = async (req, res, next) => {

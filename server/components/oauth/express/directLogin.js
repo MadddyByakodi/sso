@@ -1,6 +1,6 @@
 
 const {
-  App, User, AuthCode, RefreshToken,
+  App, AuthCode, RefreshToken,
 } = require('./../../../conn/sqldb');
 
 module.exports = (r, res, next) => {
@@ -28,21 +28,13 @@ module.exports = (r, res, next) => {
     });
   } else {
     grantType = 'password';
-    promise = User
-      .find({
-        attributes: ['group_id'],
-        where: {
-          email: req.body.username,
-        },
-        raw: true,
-      })
-      .then(user => ({
-        attributes: ['client_id', 'client_secret'],
-        where: {
-          group_id: (user && user.group_id) || 1,
-        },
-        raw: true,
-      }));
+    promise = Promise.resolve({
+      attributes: ['client_id', 'client_secret'],
+      where: {
+        id: 3,
+      },
+      raw: true,
+    });
   }
 
   return promise

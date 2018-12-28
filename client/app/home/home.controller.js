@@ -10,13 +10,14 @@ class HomeController {
   $onInit() {
     const user = this.Session.read('userinfo');
     const { location } = this.$window;
-    const { HIRE_APP, MANAGE_APP, PARTNER_APP } = this.urls;
+    const { HIRE_APP, MANAGE_APP, PARTNER_APP, ANALYTICS_APP } = this.urls;
     if (!user) return {};
 
     switch (user.group_id) {
       case 2:
         return (location.href = this.href('partnerquezx', PARTNER_APP));
-
+      case 3:
+        return (location.href = this.href('analyticsquezx', ANALYTICS_APP));
       case 4:
       case 8:
       case 9:
