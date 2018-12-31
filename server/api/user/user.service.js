@@ -60,6 +60,7 @@ exports.signup = async ({ body }) => {
       first_name: firstName,
       last_name: lastName,
       email,
+      ...body.payload
     };
 
     // - Saving User Details
@@ -68,7 +69,7 @@ exports.signup = async ({ body }) => {
       .create(user);
 
     // informing to concenrned app
-    if (appId === APPS.ANALYTICS) await informToRelatedApps({ appId, user });
+    if (appId === APPS.ANALYTICS) await informToRelatedApps({ appId, user: { ...user, id: saved.id } });
 
     return { code: 201, id: saved.id };
   } catch (err) {

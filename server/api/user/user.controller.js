@@ -77,7 +77,7 @@ exports.signupStatus = async (req, res, next) => {
       },
     });
 
-    return res.json(!!count);
+    return res.json({ data: !!count });
   } catch (err) {
     return next(err);
   }
@@ -139,11 +139,13 @@ exports.productSignup = async (req, res, next) => {
   try {
     log('productSignup', req.body);
 
-    const user = await User
+    let user = await User
       .findByPk(req.params.id, {
         attributes: ['id', 'title', 'first_name', 'last_name', 'email', 'mobile'],
         raw: true,
       });
+
+    user = { ...user , ...req.body.payload };
 
     const status = await service
       .informToRelatedApps({

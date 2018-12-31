@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           const firstName = this.getDataValue('first_name');
           const lastName = this.getDataValue('last_name');
           // 'this' allows you to access attributes of the instance
-          return `${title} ${firstName} ${lastName}`;
+          return `${firstName} ${lastName}`;
         },
       },
     }), {
