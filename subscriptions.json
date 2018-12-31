@@ -1,3 +1,4 @@
 {
-  "user:magiclink": ["http://localhost:2002/api/users/magiclink"]
+  "user:magiclink": ["http://localhost:2002/api/users/magiclink"],
+  "user:loginPassword": ["http://localhost:2002/api/users/loginPassword"]
 }

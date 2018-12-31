@@ -4,6 +4,7 @@ const rp = require('request-promise');
 const { User, App } = require('../../conn/sqldb');
 const { APPS } = require('../../config/constants');
 const { MASTER_TOKEN } = require('../../config/environment');
+const hookshot = require('./user.hookshot');
 
 const log = debug('user.service');
 
@@ -30,6 +31,7 @@ const informToRelatedApps = ({ appId, user }) => {
       json: true,
     }));
 };
+
 exports.informToRelatedApps = informToRelatedApps;
 
 // - this method currently called from quarc only
@@ -40,6 +42,7 @@ exports.signup = async ({ body }) => {
       first_name: firstName,
       last_name: lastName,
       source_app_id: appId,
+      password,
     } = body;
 
     const e = body.email_id || body.email;
@@ -60,8 +63,19 @@ exports.signup = async ({ body }) => {
       first_name: firstName,
       last_name: lastName,
       email,
+      password,
       ...body.payload
     };
+
+    let passString = '';
+
+    if (!user.password) {
+      await User.generateRandomPassword()
+        .then((pass) => {
+          passString = pass;
+          Object.assign(user, { password: pass });
+        });
+    }
 
     // - Saving User Details
     // Todo: known issue hooks for password
@@ -69,7 +83,14 @@ exports.signup = async ({ body }) => {
       .create(user);
 
     // informing to concenrned app
-    if (appId === APPS.ANALYTICS) await informToRelatedApps({ appId, user: { ...user, id: saved.id } });
+    if (appId === APPS.ANALYTICS) {
+      await informToRelatedApps({ appId, user: { ...user, id: saved.id } });
+      hookshot.loginPassword({
+        email: user.email,
+        password: passString,
+        name: `${user.first_name} ${user.last_name}`,
+      });
+    }
 
     return { code: 201, id: saved.id };
   } catch (err) {

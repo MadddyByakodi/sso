@@ -24,3 +24,26 @@ exports.magiclink = async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.loginPassword = async (req, res, next) => {
+  try {
+    const { user: { email, password, name } } = req.body;
+
+    await ses.sendTemplatedEmailAsync({
+      Source: `"QuezX.com" <${SMTP_USER}>`,
+      Destination: {
+        ToAddresses: [email],
+        BccAddresses: [BCC_EMAIL],
+      },
+      Template: 'trans-new_u-analytics-password',
+      TemplateData: JSON.stringify({
+        password,
+        name,
+      }),
+    });
+
+    return res.sendStatus(201);
+  } catch (err) {
+    return next(err);
+  }
+};

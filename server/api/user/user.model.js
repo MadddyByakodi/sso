@@ -53,6 +53,17 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(db.Session);
   };
 
+  User.generateRandomPassword = () => (
+    new Promise((resolve, reject) => crypto
+      .randomBytes(6, (err, buf) => {
+        if (err) return reject(err);
+        return resolve(buf.toString('base64')
+          .replace(/\+/g, 'h')
+          .replace(/\//g, 'Y')
+          .replace(/=/g, ''));
+      }))
+  );
+
   User.prototype.verifyPassword = function verifyPassword(password, cb) {
     const hashedPass = crypto
       .createHash('md5')

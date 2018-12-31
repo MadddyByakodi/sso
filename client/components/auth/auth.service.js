@@ -36,7 +36,6 @@ class AuthService {
 
   authLogin(credential) {
     const loginCredentials = credential;
-    console.log('loginCredentials');
 
     return this
       .$http

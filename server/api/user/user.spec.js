@@ -55,15 +55,30 @@ const auth = require('./../../../logs/credentials');
 //   });
 // });
 
-describe('POST /api/users/magiclink', () => {
-  it('should send magiclink', (done) => {
+// describe('POST /api/users/magiclink', () => {
+//   it('should send magiclink', (done) => {
+//     request(app)
+//       .post('/api/users/magiclink')
+//       .send({
+//         email: 'manjeshpv@gmail.com',
+//       })
+//       .expect(201)
+//       .then(() => done());
+//   });
+// });
+
+describe('PUT /api/users/:id', () => {
+  it('Update user info', (done) => {
     request(app)
-      .post('/api/users/magiclink')
+      .put('/api/users/6')
       .send({
-        email: 'manjeshpv@gmail.com',
+        last_name: 'ABCD',
+        password: 'newpassword1',
       })
-      .expect(201)
-      .then(() => done());
+      .expect(200)
+      .then(() => {
+        done();
+      });
   });
 });
 

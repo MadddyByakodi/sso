@@ -83,9 +83,7 @@ exports.signupStatus = async (req, res, next) => {
   }
 };
 
-exports.me = (req, res) => {
-  return res.json(req.user);
-};
+exports.me = (req, res) => res.json(req.user);
 
 exports.authorise = async (req, res, next) => {
   log('authorise');
@@ -165,11 +163,33 @@ exports.magiclink = async (req, res, next) => {
   try {
     const { email } = req.body;
 
+    const userCount = await User.count({
+      where: {
+        email: email.trim(),
+      },
+    });
+
+    if (userCount !== 1) return res.sendStatus(403);
+
     const userJWT = await jwt.sign({ email });
 
     hookshot.magiclink({ email, otp: userJWT });
 
     return res.status(201).end();
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    await User.update(req.body, {
+      where: { id },
+    });
+
+    return res.sendStatus(200);
   } catch (err) {
     return next(err);
   }

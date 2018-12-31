@@ -14,4 +14,6 @@ router.post('/magiclink', controller.magiclink);
 router.post('/invite', authenticate(), controller.invite);
 router.post('/:id/productSignup', authenticate(), controller.productSignup);
 
+router.put('/:id', controller.update);
+
 module.exports = router;
