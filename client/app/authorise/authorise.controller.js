@@ -53,7 +53,7 @@ class AuthoriseController {
       default: {
         const IS_AUTH = clientId === 'analyticsquezx';
         const url = `${this
-          .urls[IS_AUTH ? 'ACCOUNTS_APP' : 'API_SERVER']}/authorise`;
+          .urls[IS_AUTH ? 'ACCOUNTS_APP' : 'API_SERVER']}${IS_AUTH ? '/api' : ''}/authorise`;
         return this
           .$http
           .post(url, Object.assign(params, { allow: 'true' }), { params })
