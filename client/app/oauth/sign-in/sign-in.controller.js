@@ -23,7 +23,7 @@ class SignInController {
       password: this.$state.params.password || '',
     };
 
-    this.GOOGLE_LOGIN_BUTTON = this.$state.params.client_id === '';
+    this.SHOW_GOOGLE_LOGIN_BUTTON = this.$location.search().client_id !== 'analyticsquezx';
 
     if (this.$state.params.code || (this.$state.params.username && this.$state.params.username)) {
       return this.signin(this.$state.params.code);
@@ -45,12 +45,18 @@ class SignInController {
     if (!IS_QDESKTOP) options.singleSession = true;
     if (forceLogin) options.force = true;
 
+    const IS_USERNAME = !username.includes('@');
+
     // Try to login
     this.$q.all([
       this.Auth
-        .authLogin(code ? { grant_type: 'google', code } : options),
-      this.Auth
-        .login(code ? { grant_type: 'google', code } : options),
+          .login(code ? { grant_type: 'google', code } : options),
+      !IS_USERNAME
+        ? this
+          .Auth
+          .authLogin(code ? { grant_type: 'google', code } : options)
+        : Promise.resolve(),
+
     ])
       .then(() => {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
