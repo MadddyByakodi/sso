@@ -2,7 +2,7 @@ const debug = require('debug');
 const rp = require('request-promise');
 
 const {
-  App, User,
+  App,
 } = require('./../../../conn/sqldb');
 const { ip, port, MASTER_TOKEN } = require('../../../config/environment');
 
@@ -10,21 +10,10 @@ const log = debug('server-components-oauth-express-loginAs');
 
 const getClientByUsername = (username) => {
   log('getClientByUsername', username);
-  return User
-    .find({
-      attributes: ['group_id'],
-      where: {
-        email: username,
-      },
-      raw: true,
-    })
-    .then(user => App.find({
-      attributes: ['client_id', 'client_secret', 'redirect_uri'],
-      where: {
-        group_id: (user && user.group_id) || 1,
-      },
-      raw: true,
-    }));
+  return App.findOne({
+    attributes: ['client_id', 'client_secret', 'redirect_uri'],
+    raw: true,
+  });
 };
 
 module.exports = (req, res, next) => {

@@ -13,20 +13,24 @@ class AuthoriseController {
     const params = this.$location.search();
     const { location } = this.$window;
     const { client_id: clientId } = params;
+
+    // - Central Login
+    const IS_AUTH = clientId === 'analyticsquezx';
+
+    // Quarc Login
     const VALID_APP = {
       2: [
         'partnerquezx', 'partnerwordpress', 'chatquezx', 'qdesktop',
         'searchquezx', 'teamquezx', 'accessquezx', 'qdesklive', 'huntquezx', 'billingquezx',
         'vendorquezx',
       ],
-      3: ['analyticsquezx'],
       4: [
         'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
         'vendorquezx',
       ],
       5: [
         'hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
-        'vendorquezx',
+        'vendorquezx', 'analyticsquezx',
       ],
       8: [
         'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
@@ -51,7 +55,6 @@ class AuthoriseController {
       }
 
       default: {
-        const IS_AUTH = clientId === 'analyticsquezx';
         const url = `${this
           .urls[IS_AUTH ? 'ACCOUNTS_APP' : 'API_SERVER']}${IS_AUTH ? '/api' : ''}/authorise`;
         return this

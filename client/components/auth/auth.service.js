@@ -49,7 +49,7 @@ class AuthService {
         },
         ignoreAuthModule: true,
       })
-      .then(res => this.Session.create('oauth', res.data))
+      .then(res => this.Session.create('auth-oauth', res.data))
       .catch(res => {
         this.Session.destroy();
         return this.$q.reject(res);
@@ -107,28 +107,16 @@ class AuthService {
 
   setSessionData() {
     return this
-      .$q
-      .all([
-        this
-          .$http
-          .get(`${this.apiUrl}/users/me`)
-          .then(res => this.Session.create('userinfo', res.data)),
-
-        // User states not required
-      ]);
+      .$http
+      .get(`${this.apiUrl}/users/me`)
+      .then(res => this.Session.create('userinfo', res.data));
   }
 
   setAuthSessionData() {
     return this
-      .$q
-      .all([
-        this
-          .$http
-          .get(`${this.urls.ACCOUNTS_APP}/api/users/me`)
-          .then(res => this.Session.create('userinfo', res.data)),
-
-        // User states not required
-      ]);
+      .$http
+      .get(`${this.urls.ACCOUNTS_APP}/api/users/me`)
+      .then(res => this.Session.create('auth-userinfo', res.data));
   }
 }
 

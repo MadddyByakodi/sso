@@ -1,10 +1,11 @@
 class HomeController {
   /* @ngInject */
-  constructor($window, $location, Session, urls) {
+  constructor($window, $location, $stateParams, Session, urls) {
     this.$window = $window;
     this.$location = $location;
     this.Session = Session;
     this.urls = urls;
+    this.$stateParams = $stateParams;
   }
 
   $onInit() {
@@ -13,11 +14,15 @@ class HomeController {
     const { HIRE_APP, MANAGE_APP, PARTNER_APP, ANALYTICS_APP } = this.urls;
     if (!user) return {};
 
+    const IS_AUTH = this.$stateParams.client_id === 'analyticsquezx';
+
+    // Central OAuth
+    if (IS_AUTH) return (location.href = this.href('analyticsquezx', ANALYTICS_APP));
+
+    // Quarc OAuth
     switch (user.group_id) {
       case 2:
         return (location.href = this.href('partnerquezx', PARTNER_APP));
-      case 3:
-        return (location.href = this.href('analyticsquezx', ANALYTICS_APP));
       case 4:
       case 8:
       case 9:

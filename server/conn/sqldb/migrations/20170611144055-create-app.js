@@ -21,7 +21,6 @@ module.exports = {
       redirect_uri: DataTypes.STRING,
     }, {
       user_id: keys('users'),
-      group_id: keys('groups'),
     }, timestamps(3, DataTypes)), engine);
   },
   down(queryInterface) {

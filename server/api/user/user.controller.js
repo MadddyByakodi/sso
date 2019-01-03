@@ -16,7 +16,7 @@ exports.index = async (req, res, next) => {
     const wild = `%${req.query.q}%`;
     const users = await User
       .findAll({
-        attributes: ['id', 'first_name', 'last_name', 'name', 'email', 'group_id'],
+        attributes: ['id', 'first_name', 'last_name', 'name', 'email'],
         limit: 10,
         offset: Number(req.query.offset) || 0,
         where: {

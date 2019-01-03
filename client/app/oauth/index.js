@@ -9,13 +9,12 @@ import Success from './success';
 import FourOFour from './four-o-four';
 import Feedback from './feedback';
 import ClientSignup from './client-signup';
-import AuthSignIn from './auth-signin';
 import routing from './oauth.routes';
 
 export default angular
   .module('accountsApp.oauth', [
     uiRouter, SignIn, SignUp, Success, Login, PasswordReset, FourOFour, Feedback, ClientSignup,
-    Auth, AuthSignIn,
+    Auth,
   ])
   .config(routing)
   .name;

@@ -20,8 +20,13 @@ function AuthInterceptor($window, Session, urls) {
         return null;
       }
 
+      const IS_AUTH = conf.url.startsWith(urls.ACCOUNTS_APP);
+
       // Attach accessToken to api requests
-      conf.headers.Authorization = `Bearer ${Session.accessToken}`;
+      conf.headers.Authorization = `Bearer ${IS_AUTH
+        ? Session.read('auth-oauth').access_token
+        : Session.accessToken}`;
+
       return conf;
     },
   };
