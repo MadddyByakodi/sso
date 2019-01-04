@@ -23,7 +23,9 @@ class SignInController {
       password: this.$state.params.password || '',
     };
 
-    this.SHOW_GOOGLE_LOGIN_BUTTON = this.$location.search().client_id !== 'analyticsquezx';
+    this.IS_AUTH = this.$location.search().client_id !== 'analyticsquezx';
+
+    this.SHOW_GOOGLE_LOGIN_BUTTON = this.IS_AUTH;
 
     if (this.$state.params.code || (this.$state.params.username && this.$state.params.username)) {
       return this.signin(this.$state.params.code);
@@ -50,7 +52,7 @@ class SignInController {
     // Try to login
     this.$q.all([
       this.Auth
-          .login(code ? { grant_type: 'google', code } : options),
+          .login(code ? { grant_type: 'google', code } : options, this.IS_AUTH),
       !IS_USERNAME
         ? this
           .Auth
@@ -58,9 +60,12 @@ class SignInController {
         : Promise.resolve(),
 
     ])
-      .then(() => {
+      .then(([IS_USER_NOT_EXIST_IN_QUARC]) => {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
-        this.Auth.setSessionData().then(() => {
+        this.$q.all([
+          IS_USER_NOT_EXIST_IN_QUARC === true ? Promise.resolve() : this.Auth.setSessionData(),
+          this.Auth.setAuthSessionData(),
+        ]).then(() => {
           const { $location, $state } = this;
           const { whatBlocked = [] } = this.Session.read('userinfo') || {};
           const [state] = whatBlocked.map((x) => x.state);

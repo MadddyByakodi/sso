@@ -9,7 +9,7 @@ class AuthoriseController {
   }
 
   $onInit() {
-    const user = this.Session.read('userinfo') || {};
+    const user = this.Session.read('userinfo') || this.Session.read('auth-userinfo') || {};
     const params = this.$location.search();
     const { location } = this.$window;
     const { client_id: clientId } = params;
@@ -43,10 +43,10 @@ class AuthoriseController {
     }[user.group_id];
 
     switch (true) {
-      case !VALID_APP:
+      case !VALID_APP && !IS_AUTH:
         return (this.error = 'Invalid user group');
 
-      case !VALID_APP.includes(clientId): {
+      case VALID_APP && !VALID_APP.includes(clientId): {
         const APP_NAME = VALID_APP[0].replace('quezx', '_app').toUpperCase();
         const FALLBACK_APP = `${this.urls[APP_NAME]}`;
         if (!FALLBACK_APP) return (this.error = 'FALLBACK_APP not found');

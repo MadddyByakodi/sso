@@ -9,12 +9,15 @@ class HomeController {
   }
 
   $onInit() {
-    const user = this.Session.read('userinfo');
+    const quarcUser = this.Session.read('userinfo');
+    const accountsUser = this.Session.read('auth-userinfo');
+    const user = quarcUser || accountsUser;
     const { location } = this.$window;
     const { HIRE_APP, MANAGE_APP, PARTNER_APP, ANALYTICS_APP } = this.urls;
     if (!user) return {};
 
-    const IS_AUTH = this.$stateParams.client_id === 'analyticsquezx';
+    const onlyAuthLoginFound = (!quarcUser && accountsUser);
+    const IS_AUTH = this.$stateParams.client_id === 'analyticsquezx' || onlyAuthLoginFound;
 
     // Central OAuth
     if (IS_AUTH) return (location.href = this.href('analyticsquezx', ANALYTICS_APP));
