@@ -24,7 +24,7 @@ module.exports = (a, routes, rateLimit) => {
       .then(s => res.json(s))
       .catch(next);
   });
-  
+
   app.post('/api/authorise', rateLimit, loginAs, authenticate(), app.oauth
     .authCodeGrant((req, callback) => {
       if (req.body.allow !== 'true') return callback(null, false);

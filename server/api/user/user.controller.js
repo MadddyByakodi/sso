@@ -143,7 +143,7 @@ exports.productSignup = async (req, res, next) => {
         raw: true,
       });
 
-    user = { ...user , ...req.body.payload };
+    user = Object.assign(user, req.body.payload);
 
     const status = await service
       .informToRelatedApps({

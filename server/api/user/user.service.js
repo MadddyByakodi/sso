@@ -4,6 +4,7 @@ const rp = require('request-promise');
 const { User, App } = require('../../conn/sqldb');
 const { APPS } = require('../../config/constants');
 const { MASTER_TOKEN } = require('../../config/environment');
+const config = require('../../config/environment/index');
 const hookshot = require('./user.hookshot');
 
 const log = debug('user.service');
@@ -58,14 +59,15 @@ exports.signup = async ({ body }) => {
       };
     }
 
-    const user = {
+    const user = Object.assign({
       title,
       first_name: firstName,
       last_name: lastName,
       email,
       password,
-      ...body.payload
-    };
+    },
+      body.payload || {},
+    );
 
     let passString = '';
 
@@ -84,11 +86,13 @@ exports.signup = async ({ body }) => {
 
     // informing to concenrned app
     if (appId === APPS.ANALYTICS) {
-      await informToRelatedApps({ appId, user: { ...user, id: saved.id } });
+      await informToRelatedApps({ appId, user: Object.assign(user, { id: saved.id }) });
       hookshot.loginPassword({
         email: user.email,
         password: passString,
         name: `${user.first_name} ${user.last_name}`,
+        inviter: body.payload.inviter,
+        loginLink: `${config.PREFIX}analytics.${config.DOMAIN}`,
       });
     }
 

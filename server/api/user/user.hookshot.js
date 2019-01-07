@@ -13,7 +13,7 @@ exports.magiclink = ({ email, otp }) => {
   });
 };
 
-exports.loginPassword = ({ email, password, name }) => {
+exports.loginPassword = ({ email, password, name, inviter, loginLink }) => {
   hookshot.trigger('user:loginPassword', {
     object: 'user',
     event: 'loginPassword',
@@ -21,6 +21,8 @@ exports.loginPassword = ({ email, password, name }) => {
       email,
       password,
       name,
+      inviter,
+      loginLink,
     },
   });
 };

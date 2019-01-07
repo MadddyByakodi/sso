@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.VIRTUAL,
         get() {
-          const title = this.getDataValue('title');
           const firstName = this.getDataValue('first_name');
           const lastName = this.getDataValue('last_name');
           // 'this' allows you to access attributes of the instance
