@@ -64,7 +64,9 @@ class SignInController {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
         this.$q.all([
           IS_USER_NOT_EXIST_IN_QUARC === true ? Promise.resolve() : this.Auth.setSessionData(),
-          this.Auth.setAuthSessionData(),
+          !IS_USERNAME
+            ? this.Auth.setAuthSessionData()
+            : Promise.resolve(),
         ]).then(() => {
           const { $location, $state } = this;
           const { whatBlocked = [] } = this.Session.read('userinfo') || {};
