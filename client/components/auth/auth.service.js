@@ -12,7 +12,7 @@ class AuthService {
     this.authUrl = `${urls.API_SERVER}/applications/accounts/api`;
   }
 
-  login(credential, IS_CENTRAL) {
+  login(credential) {
     const loginCredentials = credential;
 
     return this
@@ -29,9 +29,9 @@ class AuthService {
       })
       .then(res => this.Session.create('oauth', res.data))
       .catch(res => {
-        if (IS_CENTRAL) {
-          const IS_USER_NOT_EXIST_IN_QUARC = true;
-          return Promise.resolve(IS_USER_NOT_EXIST_IN_QUARC);
+        const IS_SSO = this.Session.read('auth-oauth');
+        if (IS_SSO && res.status !== 409) {
+          return Promise.resolve(!!IS_SSO);
         }
 
         this.Session.destroy();

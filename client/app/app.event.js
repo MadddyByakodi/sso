@@ -24,7 +24,7 @@ function events($rootScope, $location, $state, Auth, AUTH_EVENTS, Session) {
       $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
     }
 
-    if (Session.isLoggedIn && ['oauth.sign-in', 'oauth.auth-sign-in'].includes(next.name)) {
+    if (Session.isLoggedIn && ['oauth.sign-in'].includes(next.name)) {
       event.preventDefault();
       $state.go('home', $location.search());
     }

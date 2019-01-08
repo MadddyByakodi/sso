@@ -47,26 +47,23 @@ class SignInController {
     if (!IS_QDESKTOP) options.singleSession = true;
     if (forceLogin) options.force = true;
 
-    const IS_USERNAME = !username.includes('@');
+    const IS_SSO = username.includes('@');
 
     // Try to login
-    this.$q.all([
-      this.Auth
-          .login(code ? { grant_type: 'google', code } : options, this.IS_AUTH),
-      !IS_USERNAME
-        ? this
-          .Auth
-          .authLogin(code ? { grant_type: 'google', code } : options)
-        : Promise.resolve(),
+    const authLogin = (IS_SSO
+      ? this
+        .Auth
+        .authLogin(code ? { grant_type: 'google', code } : options)
+      : Promise.resolve());
 
-    ])
-      .then(([IS_USER_NOT_EXIST_IN_QUARC]) => {
+    authLogin
+      .then(() => this.Auth
+        .login(code ? { grant_type: 'google', code } : options))
+      .then((IS_USER_NOT_EXIST_IN_QUARC) => {
         this.$rootScope.$broadcast(this.AUTH_EVENTS.loginSuccess);
         this.$q.all([
           IS_USER_NOT_EXIST_IN_QUARC === true ? Promise.resolve() : this.Auth.setSessionData(),
-          !IS_USERNAME
-            ? this.Auth.setAuthSessionData()
-            : Promise.resolve(),
+          IS_SSO ? this.Auth.setAuthSessionData() : Promise.resolve(),
         ]).then(() => {
           const { $location, $state } = this;
           const { whatBlocked = [] } = this.Session.read('userinfo') || {};
