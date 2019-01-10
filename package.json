@@ -159,9 +159,10 @@
     "test": "gulp test",
     "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update",
     "start": "node server",
-    "start-api": "nodemon server/app",
     "login": "NODE_ENV=test mocha --opts .mocharc server/components/oauth/express/express.spec.js --exit",
     "build": "gulp build",
+    "migrate": "DEBUG=s.*  sequelize db:migrate;",
+    "seed": " DEBUG=s.*  sequelize db:seed:all",
     "lint": "gulp lint:scripts --fail",
     "validate": "npm ls"
   },
