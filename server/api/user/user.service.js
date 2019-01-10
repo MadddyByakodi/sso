@@ -44,6 +44,7 @@ exports.signup = async ({ body }) => {
       last_name: lastName,
       source_app_id: appId,
       password,
+      name,
     } = body;
 
     const e = body.email_id || body.email;
@@ -61,7 +62,7 @@ exports.signup = async ({ body }) => {
 
     const user = Object.assign({
       title,
-      first_name: firstName,
+      first_name: firstName || name,
       last_name: lastName,
       email,
       password,
