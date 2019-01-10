@@ -13,7 +13,7 @@ const {
 const log = debug('components/oauth');
 
 const attributes = [
-  'id', 'email', 'first_name', 'last_name', 'mobile', 'title', 'recent_applicant_id',
+  'id', 'email', 'first_name', 'last_name', 'mobile', 'title',
 ];
 
 const oAuthModel = {
