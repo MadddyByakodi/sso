@@ -30,7 +30,7 @@ class AuthoriseController {
       ],
       5: [
         'hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
-        'vendorquezx', 'analyticsquezx',
+        'vendorquezx', 'analyticsquezx', 'clientquezx'
       ],
       8: [
         'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
