@@ -1,11 +1,12 @@
 class AuthoriseController {
   /* @ngInject */
-  constructor($window, $location, $http, Session, urls) {
+  constructor($window, $location, $http, Session, urls, SSO_APPS) {
     this.$window = $window;
     this.$location = $location;
     this.$http = $http;
     this.Session = Session;
     this.urls = urls;
+    this.SSO_APPS = SSO_APPS;
   }
 
   $onInit() {
@@ -15,7 +16,7 @@ class AuthoriseController {
     const { client_id: clientId } = params;
 
     // - Central Login
-    const IS_AUTH = clientId === 'analyticsquezx';
+    const IS_SSO = this.SSO_APPS.includes(clientId);
 
     // Quarc Login
     const VALID_APP = {
@@ -30,7 +31,7 @@ class AuthoriseController {
       ],
       5: [
         'hirequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
-        'vendorquezx', 'analyticsquezx', 'clientquezx'
+        'vendorquezx', 'analyticsquezx', 'clientquezx',
       ],
       8: [
         'managequezx', 'chatquezx', 'searchquezx', 'teamquezx', 'qdesklive', 'billingquezx',
@@ -43,7 +44,7 @@ class AuthoriseController {
     }[user.group_id];
 
     switch (true) {
-      case !VALID_APP && !IS_AUTH:
+      case !VALID_APP && !IS_SSO:
         return (this.error = 'Invalid user group');
 
       case VALID_APP && !VALID_APP.includes(clientId): {
@@ -56,7 +57,7 @@ class AuthoriseController {
 
       default: {
         const url = `${this
-          .urls[IS_AUTH ? 'ACCOUNTS_APP' : 'API_SERVER']}${IS_AUTH ? '/api' : ''}/authorise`;
+          .urls[IS_SSO ? 'ACCOUNTS_APP' : 'API_SERVER']}${IS_SSO ? '/api' : ''}/authorise`;
         return this
           .$http
           .post(url, Object.assign(params, { allow: 'true' }), { params })

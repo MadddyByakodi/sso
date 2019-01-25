@@ -1,11 +1,12 @@
 class HomeController {
   /* @ngInject */
-  constructor($window, $location, $stateParams, Session, urls) {
+  constructor($window, $location, $stateParams, Session, urls, SSO_APPS) {
     this.$window = $window;
     this.$location = $location;
     this.Session = Session;
     this.urls = urls;
     this.$stateParams = $stateParams;
+    this.SSO_APPS = SSO_APPS;
   }
 
   $onInit() {
@@ -13,14 +14,18 @@ class HomeController {
     const accountsUser = this.Session.read('auth-userinfo');
     const user = quarcUser || accountsUser;
     const { location } = this.$window;
-    const { HIRE_APP, MANAGE_APP, PARTNER_APP, ANALYTICS_APP } = this.urls;
+    const { HIRE_APP, MANAGE_APP, PARTNER_APP } = this.urls;
     if (!user) return {};
 
     const onlyAuthLoginFound = (!quarcUser && accountsUser);
-    const IS_AUTH = this.$stateParams.client_id === 'analyticsquezx' || onlyAuthLoginFound;
+    const IS_SSO = this.SSO_APPS
+      .includes(this.$stateParams.client_id) || onlyAuthLoginFound;
 
     // Central OAuth
-    if (IS_AUTH) return (location.href = this.href('analyticsquezx', ANALYTICS_APP));
+    if (IS_SSO) {
+      const APP_NAME = this.$stateParams.client_id.replace('quezx', '_app').toUpperCase();
+      return (location.href = this.href(this.$stateParams.client_id, this.urls[APP_NAME]));
+    }
 
     // Quarc OAuth
     switch (user.group_id) {

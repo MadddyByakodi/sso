@@ -2,7 +2,8 @@
 class SignInController {
   /* @ngInject */
   constructor(
-    $window, $state, $location, $q, $rootScope, Auth, AUTH_EVENTS, Session, urls, ResetLoginModal
+    $window, $state, $location, $q, $rootScope, Auth, AUTH_EVENTS,
+    Session, urls, ResetLoginModal, SSO_APPS
   ) {
     this.$window = $window;
     this.$state = $state;
@@ -14,6 +15,7 @@ class SignInController {
     this.AUTH_EVENTS = AUTH_EVENTS;
     this.Session = Session;
     this.ResetLoginModalService = ResetLoginModal;
+    this.SSO_APPS = SSO_APPS;
   }
 
   $onInit() {
@@ -23,9 +25,9 @@ class SignInController {
       password: this.$state.params.password || '',
     };
 
-    this.IS_AUTH = this.$location.search().client_id !== 'analyticsquezx';
+    this.IS_SSO = this.SSO_APPS.includes(this.$location.search().client_id);
 
-    this.SHOW_GOOGLE_LOGIN_BUTTON = this.IS_AUTH;
+    this.SHOW_GOOGLE_LOGIN_BUTTON = this.IS_SSO;
 
     if (this.$state.params.code || (this.$state.params.username && this.$state.params.username)) {
       return this.signin(this.$state.params.code);

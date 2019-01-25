@@ -14,12 +14,20 @@ const PARTNER_APP = `${PREFIX}partner.${DOMAIN}`;
 const MANAGE_APP = `${PREFIX}manage.${DOMAIN}`;
 const ACCOUNTS_APP = `${PREFIX}accounts.${DOMAIN}`;
 const ANALYTICS_APP = `${PREFIX}analytics.${DOMAIN}`;
+const BILLING_APP = `${PREFIX}billing.${DOMAIN}`;
 
 const constants = angular
   .module('accountsApp.constants', [])
   .constant('moment', moment)
   .constant('urls', {
-    API_SERVER, HIRE_APP, PARTNER_APP, MANAGE_APP, ACCOUNTS_APP, ANALYTICS_APP,
-  });
+    API_SERVER,
+    HIRE_APP,
+    PARTNER_APP,
+    MANAGE_APP,
+    ACCOUNTS_APP,
+    ANALYTICS_APP,
+    BILLING_APP,
+  })
+  .constant('SSO_APPS', ['analyticsquezx', 'billingquezx']);
 
 export default constants.name;
