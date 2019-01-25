@@ -11,10 +11,11 @@ class HomeController {
   $onInit() {
     const user = this.Session.read('userinfo');
     const { location } = this.$window;
+    const { client_id: clientId = 'analyticsquezx' } = this.$stateParams;
     if (!user) return {};
 
-    const APP_NAME = this.$stateParams.client_id.replace('quezx', '_app').toUpperCase();
-    return (location.href = this.href(this.$stateParams.client_id, this.urls[APP_NAME]));
+    const APP_NAME = clientId.replace('quezx', '_app').toUpperCase();
+    return (location.href = this.href(clientId, this.urls[APP_NAME]));
   }
 
   href(clientId, baseUrl) {
