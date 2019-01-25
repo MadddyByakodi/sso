@@ -17,7 +17,7 @@ const config = {
     port: process.env.PORT || 4000,
     ip: process.env.IP || '0.0.0.0',
     root,
-    URLS_ACCOUNTS: `${PREFIX}accounts.${DOMAIN}`,
+    URLS_ACCOUNTS: `${PREFIX}sso.${DOMAIN}`,
     // Browser-sync port
     browserSyncPort: process.env.BROWSER_SYNC_PORT || 3001,
   },
