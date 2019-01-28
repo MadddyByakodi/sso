@@ -42,7 +42,7 @@ const config = {
   },
 };
 
-const conf = Object.assign(env.parsed, config.all, config[process.env.NODE_ENV || 'development']);
+const conf = Object.assign(env, config.all, config[process.env.NODE_ENV || 'development']);
 
 module.exports = conf;
 
