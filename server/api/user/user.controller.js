@@ -83,7 +83,16 @@ exports.signupStatus = async (req, res, next) => {
   }
 };
 
-exports.me = (req, res) => res.json(req.user);
+exports.me = async (req, res) => {
+  const user = await User.findByPk(req.user.id, { attributes: ['password_valid_till'], raw: true });
+  const whatBlocked = [];
+  if (req.oauth.bearerToken.app_id === 1 && !moment().isBefore(user.get('password_valid_till'))) {
+    whatBlocked.push({ priority: 0, state: 'password-change' });
+  }
+  res.json(Object.assign({
+    whatBlocked,
+  }, req.user));
+};
 
 exports.authorise = async (req, res, next) => {
   log('authorise');

@@ -70,7 +70,7 @@ class ClientSignupController {
     Object.assign(obj, this.url);
     Object.assign(this.data, obj);
     this.$http
-    .post(`${this.urls.API_SERVER}/api/signUps`, this.data, {
+    .post(`${this.urls.SSO_APP}/api/signUps`, this.data, {
       ignoreAuthModule: true,
     })
     .then(() => {
