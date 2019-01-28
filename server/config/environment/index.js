@@ -7,9 +7,9 @@ const root = path.normalize(`${__dirname}/../../..`);
 if (!fs.existsSync(path.join(root, '.env'))) {
   fs.writeFileSync(path.join(root, '.env'), fs.readFileSync(path.join(root, '.env.sample')));
 }
-
-const env = dotenv.config({ path: path.join(root, '.env') });
-const { PREFIX, DOMAIN } = env.parsed;
+const env = dotenv.config({ path: path.join(root, '.env') }).parsed;
+const IS_DEV = env.NODE_ENV === 'development';
+const { PREFIX, DOMAIN } = env;
 const config = {
   all: {
     env: process.env.NODE_ENV,
@@ -20,6 +20,14 @@ const config = {
     URLS_SSO: `${PREFIX}sso.${DOMAIN}`,
     // Browser-sync port
     browserSyncPort: process.env.BROWSER_SYNC_PORT || 2001,
+    auth: {
+      google: {
+        // scope: 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar',
+        redirect_uri: IS_DEV ? 'http://localhost:3001/signin' : `${env.PREFIX}accounts.${env.DOMAIN}/signin`,
+        client_id: env.GOOGLE_CLIENT_ID,
+        client_secret: env.GOOGLE_SECRET,
+      },
+    },
   },
   development: {
 
@@ -34,7 +42,7 @@ const config = {
   },
 };
 
-const conf = Object.assign(env.parsed, config.all, config[process.env.NODE_ENV || 'development']);
+const conf = Object.assign(env, config.all, config[process.env.NODE_ENV || 'development']);
 
 module.exports = conf;
 
