@@ -14,12 +14,12 @@ const config = {
   all: {
     env: process.env.NODE_ENV,
     // Server port
-    port: process.env.PORT || 4000,
+    port: process.env.PORT || 2000,
     ip: process.env.IP || '0.0.0.0',
     root,
-    URLS_ACCOUNTS: `${PREFIX}accounts.${DOMAIN}`,
+    URLS_SSO: `${PREFIX}sso.${DOMAIN}`,
     // Browser-sync port
-    browserSyncPort: process.env.BROWSER_SYNC_PORT || 3001,
+    browserSyncPort: process.env.BROWSER_SYNC_PORT || 2001,
   },
   development: {
 
