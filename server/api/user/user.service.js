@@ -3,7 +3,7 @@ const rp = require('request-promise');
 
 const { User, App } = require('../../conn/sqldb');
 const { APPS } = require('../../config/constants');
-const { MASTER_TOKEN } = require('../../config/environment');
+const { MASTER_TOKEN, URLS_QUARC } = require('../../config/environment');
 const config = require('../../config/environment/index');
 const hookshot = require('./user.hookshot');
 
@@ -102,3 +102,11 @@ exports.signup = async ({ body }) => {
     return err;
   }
 };
+
+exports.changePasswordNotify = (body) => rp({
+  method: 'POST',
+  uri: `${URLS_QUARC}/api/queuedTasks/changePasswordNotify?token=${MASTER_TOKEN}`,
+  body,
+  json: true,
+  headers: { 'User-Agent': 'Request-Promise' },
+});
