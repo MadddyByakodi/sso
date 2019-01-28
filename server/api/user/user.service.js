@@ -47,7 +47,7 @@ exports.signup = async ({ body }) => {
       name,
     } = body;
 
-    const e = body.email_id || body.email;
+    const e = body.email;
     const email = e.trim();
     // - Todo: Email Validation
     const found = await checkDuplicate(email);

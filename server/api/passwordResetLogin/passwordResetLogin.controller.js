@@ -1,12 +1,12 @@
-import moment from 'moment';
-import crypto from 'crypto';
+const moment = require('moment');
+const crypto = require('crypto');
 
-import { User, PasswordResetLogin } from '../../sqldb';
+const { User, PasswordResetLogin } = require('../../conn/sqldb');
 
 const hookshot = require('./passwordResetLogin.hookshot');
 
 
-export async function getUser(req, res, next) {
+exports.getUser = async (req, res, next) => {
   if (!req.query.token) return next();
 
   try {
@@ -22,7 +22,7 @@ export async function getUser(req, res, next) {
     }
 
     const user = await User.findOne({
-      attributes: ['email_id'],
+      attributes: ['email'],
       where: { id: req.params.id },
     });
 
@@ -30,13 +30,14 @@ export async function getUser(req, res, next) {
   } catch (ex) {
     return next(ex);
   }
-}
+};
 
-export async function create(req, res, next) {
+exports.create = async (req, res, next) => {
   try {
     const user = await User.findOne({
-      attributes: ['id', 'name', 'email_id'],
-      where: { email_id: req.body.email_id },
+      attributes: ['id', 'name', 'email'],
+      where: { email: req.body.email },
+      raw: true,
     });
 
     if (!user) {
@@ -48,7 +49,7 @@ export async function create(req, res, next) {
 
     const token = crypto
       .createHash('md5')
-      .update(moment() + req.body.email_id)
+      .update(moment() + req.body.email)
       .digest('hex');
 
     await PasswordResetLogin.destroy({
@@ -66,16 +67,31 @@ export async function create(req, res, next) {
   } catch (ex) {
     return next(ex);
   }
-}
+};
 
-export async function resetPassword(req, res, next) {
+exports.resetPassword = async (req, res, next) => {
   try {
     const validTill = moment().add(3, 'months');
+    const passwordResetLogin = await PasswordResetLogin
+      .findOne({
+        attributes: ['id', 'expires', 'user_id'],
+        where: { token: req.body.token },
+        order: [['id', 'DESC']],
+        raw: true,
+      });
 
-    await User.updateAttributes({ password: req.body.password, password_valid_till: validTill });
+    if (!passwordResetLogin) return res.status(400).json({ message: 'token not found' });
 
-    return res.json(User);
+    const user = await User
+      .findByPk(passwordResetLogin.user_id, { attributes: ['id'] });
+
+    await user.update({
+      password: req.body.password,
+      password_valid_till: validTill,
+    });
+
+    return res.end();
   } catch (ex) {
     return next(ex);
   }
-}
+};

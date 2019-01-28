@@ -9,6 +9,13 @@ const salt = 'DYhG93b0fIxfs2guVoUubasdfajfkljasdjfaklsdjflakrfWwvniR2G0FgaC9mi';
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', Object
     .assign(properties(DataTypes), {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+        unique: true,
+      },
       name: {
         type: DataTypes.VIRTUAL,
         get() {
